@@ -1,0 +1,13 @@
+{
+  "hostname": "SW-BROKEN",
+  "vlans": [
+    { "id": 10, "name": "Staff", "users": true },
+    { "id": 1003, "name": "Reserved" }
+  ],
+  "ports": [
+    { "interfaces": "Gi1/0/1-4", "description": "PCs", "vlan": 10 },
+    { "interfaces": "Gi1/0/4-6", "description": "Printers", "vlan": 50 },
+    { "interfaces": "Gi1/0/24", "description": "Uplink", "mode": "trunk", "native": 10, "allowed": [10, 20] }
+  ],
+  "management": { "vlan": 99, "ip": "10.0.0.5/24", "gateway": "10.0.1.1" }
+}

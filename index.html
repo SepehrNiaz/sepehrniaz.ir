@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sepehr Niaz (سپهر نیاز) · IT Technician & Network Security · Shiraz</title>
+  <meta name="description" content="Sepehr Niaz (سپهر نیاز), IT technician at Rose Grand Hotel in Shiraz, Iran, and computer engineering student at Islamic Azad University. Trained in CCNA, Network+, Security+, F5 and CEH. Contact me for IT, network and security work.">
+  <meta name="keywords" content="Sepehr Niaz, سپهر نیاز, IT technician Shiraz, network, cyber security, CCNA, Security+, F5, CEH, Shiraz, شیراز, پشتیبانی شبکه">
+  <meta name="author" content="Sepehr Niaz">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sepehrniaz.ir/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/photo.jpg">
+
+  <!-- How the site looks when the link is shared (WhatsApp, Telegram, LinkedIn…) -->
+  <meta property="og:type" content="profile">
+  <meta property="og:url" content="https://sepehrniaz.ir/">
+  <meta property="og:site_name" content="Sepehr Niaz">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="fa_IR">
+  <meta property="og:title" content="Sepehr Niaz · IT Technician & Network Security">
+  <meta property="og:description" content="IT technician in Shiraz, trained in CCNA, Security+, F5 and CEH. View my CV and get in touch.">
+  <meta property="og:image" content="https://sepehrniaz.ir/assets/og-card.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Sepehr Niaz — IT Technician · Network & Security · Shiraz">
+  <meta property="profile:first_name" content="Sepehr">
+  <meta property="profile:last_name" content="Niaz">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Tells Google who this page is about -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Sepehr Niaz",
+    "alternateName": "سپهر نیاز",
+    "jobTitle": "IT Technician",
+    "worksFor": { "@type": "Organization", "name": "Rose Grand Hotel" },
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Islamic Azad University, Shiraz Branch" },
+    "address": { "@type": "PostalAddress", "addressLocality": "Shiraz", "addressCountry": "IR" },
+    "email": "mailto:niazsepehr7@gmail.com",
+    "telephone": "+989177886291",
+    "url": "https://sepehrniaz.ir/",
+    "image": "https://sepehrniaz.ir/assets/photo.jpg",
+    "knowsAbout": ["Computer networking", "Network security", "Penetration testing", "Cisco CCNA", "F5 BIG-IP", "IT support"],
+    "knowsLanguage": ["fa", "en"],
+    "sameAs": ["https://github.com/sepehrniaz"]
+  }
+  </script>
+  <meta name="theme-color" content="#070b14">
+  <link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/?lang=en">
+  <link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/?lang=fa">
+  <link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/">
+  <script>
+    // Apply the saved theme and language before first paint to avoid a flash
+    (function () {
+      var d = document.documentElement, q = new URLSearchParams(location.search).get("lang"), l = null;
+      try { var t = localStorage.getItem("theme"); if (t) d.dataset.theme = t; l = localStorage.getItem("lang"); } catch (e) {}
+      l = q === "fa" || q === "en" ? q : l || ((navigator.language || "").toLowerCase().indexOf("fa") === 0 ? "fa" : "en");
+      d.lang = l; d.dir = l === "fa" ? "rtl" : "ltr";
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="#top" class="logo" id="logo"></a>
+      <div class="nav-links">
+        <a href="#about" data-i18n="navAbout"></a>
+        <a href="#experience" data-i18n="navExperience"></a>
+        <a href="#certifications" data-i18n="navCerts"></a>
+        <a href="#skills" data-i18n="navSkills"></a>
+        <a href="#portfolio" data-i18n="navPortfolio"></a>
+        <a href="#library" data-i18n="navLibrary"></a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn lang-btn" id="lang-toggle"></button>
+        <button class="icon-btn" id="theme-toggle"></button>
+        <a href="#contact" class="btn primary sm" data-i18n="navContact"></a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <canvas id="network" aria-hidden="true"></canvas>
+    <div class="wrap hero-inner">
+      <div class="hero-text">
+        <span class="status" id="status"><span class="dot"></span><span id="status-text"></span></span>
+        <h1><span class="hi" data-i18n="hi"></span> <span class="gradient-text" id="name"></span></h1>
+        <p class="typed"><span class="prompt">&gt;</span> <span id="typed"></span><span class="caret"></span></p>
+        <p class="lead" id="lead"></p>
+        <div class="actions" id="actions"></div>
+        <div class="quick-links" id="quick-links"></div>
+      </div>
+      <div class="hero-photo">
+        <div class="ring"></div>
+        <div class="avatar" id="avatar"></div>
+        <div id="badges"></div>
+      </div>
+    </div>
+    <a href="#stats" class="scroll-hint" data-i18n-label="scrollDown"><span></span></a>
+  </header>
+
+  <main>
+    <section class="wrap stats" id="stats"></section>
+
+    <section class="wrap section" id="about">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="aboutEyebrow"></span>
+        <h2 data-i18n="aboutTitle"></h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p id="summary"></p>
+          <div class="about-cards" id="about-cards"></div>
+        </div>
+        <div class="terminal reveal" dir="ltr">
+          <div class="terminal-bar"><span></span><span></span><span></span><em>sepehr@shiraz: ~</em></div>
+          <pre id="terminal"></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="experience">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="expEyebrow"></span>
+        <h2 data-i18n="expTitle"></h2>
+      </div>
+      <div id="experience-list"></div>
+    </section>
+
+    <section class="wrap section" id="education">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="eduEyebrow"></span>
+        <h2 data-i18n="eduTitle"></h2>
+      </div>
+      <div class="edu-grid">
+        <div id="education-list" class="edu-list"></div>
+        <div id="languages" class="lang-list"></div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="certifications">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="certEyebrow"></span>
+        <h2 data-i18n="certTitle"></h2>
+      </div>
+      <div id="cert-list" class="cert-grid"></div>
+    </section>
+
+    <section class="wrap section" id="skills">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="skillEyebrow"></span>
+        <h2 data-i18n="skillTitle"></h2>
+      </div>
+      <div id="skill-list" class="skill-grid"></div>
+    </section>
+
+    <section class="wrap section" id="portfolio">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="portEyebrow"></span>
+        <h2 data-i18n="portTitle"></h2>
+        <p class="muted section-intro" data-i18n="portIntro"></p>
+      </div>
+      <div class="port-filters reveal" id="port-filters" role="tablist"></div>
+      <div id="portfolio-list" class="port-list"></div>
+    </section>
+
+
+    <section class="wrap section" id="library">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="libEyebrow"></span>
+        <h2 data-i18n="libTitle"></h2>
+        <p class="muted section-intro" data-i18n="libIntro"></p>
+      </div>
+      <div id="library-list" class="lib-grid"></div>
+    </section>
+
+    <section class="wrap section" id="contact">
+      <div class="contact-panel reveal">
+        <div class="contact-info">
+          <span class="eyebrow" data-i18n="contactEyebrow"></span>
+          <h2 data-i18n="contactTitle"></h2>
+          <p class="muted" data-i18n="contactText"></p>
+          <div class="contact-links" id="contact-links"></div>
+        </div>
+
+        <form id="contact-form" class="contact-form" novalidate>
+          <div class="row">
+            <div class="field"><input id="f-name" name="name" required autocomplete="name" placeholder=" "><label for="f-name" data-i18n="fName"></label></div>
+            <div class="field"><input id="f-email" name="email" type="email" required autocomplete="email" placeholder=" " dir="ltr"><label for="f-email" data-i18n="fEmail"></label></div>
+          </div>
+          <div class="field"><input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder=" " dir="ltr"><label for="f-phone" data-i18n="fPhone"></label></div>
+          <div class="field"><textarea id="f-message" name="message" rows="5" required placeholder=" " dir="auto"></textarea><label for="f-message" data-i18n="fMessage"></label></div>
+          <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button type="submit" class="btn primary" id="send-btn"></button>
+          <p id="form-status" class="form-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    <span>© <span id="year"></span> <span id="footer-name"></span></span>
+    <a href="#top" data-i18n="backTop"></a>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+  <script src="bot/nlu.js"></script>
+  <script src="bot/knowledge.js"></script>
+  <script src="bot/engine.js"></script>
+  <script src="assistant.js"></script>
+</body>
+</html>
