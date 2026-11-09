@@ -1,0 +1,11 @@
+name,host,type,port,location
+Core switch,192.168.1.1,switch,,Server room
+Firewall,192.168.1.254,firewall,443,Server room
+Reception AP,192.168.1.21,access-point,,Lobby
+Restaurant AP,192.168.1.22,access-point,,Restaurant
+NVR (cameras),192.168.30.10,nvr,37777,Server room
+Lobby camera,192.168.30.21,camera,554,Lobby
+Parking camera,192.168.30.22,camera,554,Parking
+Front desk printer,192.168.1.50,printer,9100,Reception
+Hotel PMS server,192.168.1.10,server,3389,Server room
+File server,192.168.1.11,server,445,Server room

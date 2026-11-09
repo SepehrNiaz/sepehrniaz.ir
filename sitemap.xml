@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://sepehrniaz.ir/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/?lang=fa"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/"/>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/?lang=fa</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/?lang=fa"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/"/>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/vision/</loc>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/resume.html</loc>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/fa/linux-first-steps/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/linux-first-steps/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/linux-first-steps/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/linux-first-steps/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/en/linux-first-steps/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/linux-first-steps/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/linux-first-steps/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/linux-first-steps/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/fa/linux-files/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/linux-files/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/linux-files/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/linux-files/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/en/linux-files/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/linux-files/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/linux-files/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/linux-files/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/fa/linux-permissions/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/linux-permissions/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/linux-permissions/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/linux-permissions/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/en/linux-permissions/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/linux-permissions/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/linux-permissions/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/linux-permissions/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/fa/python-10-minutes/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/python-10-minutes/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/python-10-minutes/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/python-10-minutes/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/en/python-10-minutes/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/python-10-minutes/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/python-10-minutes/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/python-10-minutes/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/fa/javascript-basics/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/javascript-basics/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/javascript-basics/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/javascript-basics/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/en/javascript-basics/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/javascript-basics/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/javascript-basics/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/javascript-basics/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/fa/bash-scripting/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/bash-scripting/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/bash-scripting/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/bash-scripting/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/en/bash-scripting/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/bash-scripting/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/bash-scripting/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/bash-scripting/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/fa/what-is-ip/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/what-is-ip/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/what-is-ip/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/what-is-ip/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/en/what-is-ip/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/what-is-ip/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/what-is-ip/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/what-is-ip/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/fa/security-mindset/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/security-mindset/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/security-mindset/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/security-mindset/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/en/security-mindset/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/security-mindset/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/security-mindset/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/security-mindset/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>

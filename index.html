@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sepehr Niaz — Learn networking, security &amp; Linux</title>
+  <meta name="description" content="Free, hands-on lessons in networking, security, Linux and programming, in English and Persian — step-by-step articles, a free book, and real open tools. By Sepehr Niaz (سپهر نیاز), IT technician in Shiraz.">
+  <meta name="keywords" content="learn Linux, networking tutorial, security basics, Python, Bash, CCNA, آموزش لینوکس, آموزش شبکه, امنیت شبکه, سپهر نیاز, Sepehr Niaz">
+  <meta name="author" content="Sepehr Niaz">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sepehrniaz.ir/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/photo.jpg">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sepehrniaz.ir/">
+  <meta property="og:site_name" content="Sepehr Niaz">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="fa_IR">
+  <meta property="og:title" content="Learn networking, security &amp; Linux — free">
+  <meta property="og:description" content="Step-by-step lessons, a free book, and real tools, in English and Persian.">
+  <meta property="og:image" content="https://sepehrniaz.ir/assets/og-card.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Sepehr Niaz — Learn networking, security & Linux",
+    "url": "https://sepehrniaz.ir/",
+    "inLanguage": ["en", "fa"],
+    "author": { "@type": "Person", "name": "Sepehr Niaz", "alternateName": "سپهر نیاز", "url": "https://sepehrniaz.ir/resume" }
+  }
+  </script>
+  <meta name="theme-color" content="#070b14">
+  <link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/?lang=en">
+  <link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/?lang=fa">
+  <link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/">
+  <script>
+    (function () {
+      var d = document.documentElement, q = new URLSearchParams(location.search).get("lang"), l = null;
+      try { var t = localStorage.getItem("theme"); if (t) d.dataset.theme = t; l = localStorage.getItem("lang"); } catch (e) {}
+      l = q === "fa" || q === "en" ? q : l || ((navigator.language || "").toLowerCase().indexOf("fa") === 0 ? "fa" : "en");
+      d.lang = l; d.dir = l === "fa" ? "rtl" : "ltr";
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Vazirmatn:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body data-page="hub">
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="#top" class="logo" id="logo"></a>
+      <div class="nav-links">
+        <a href="#tracks" data-i18n="navTracks">Tracks</a>
+        <a href="#articles" data-i18n="navArticles">Articles</a>
+        <a href="vision/" data-i18n="navLab">Lab</a>
+        <a href="#library" data-i18n="navBooks">Books</a>
+        <a href="#portfolio" data-i18n="navTools">Tools</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn lang-btn" id="lang-toggle">فا</button>
+        <button class="icon-btn" id="theme-toggle"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></button>
+        <a href="resume.html" class="btn primary sm" data-i18n="navResume">Résumé</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero hero-learn" id="top">
+    <canvas id="network" aria-hidden="true"></canvas>
+    <div class="wrap hero-inner">
+      <div class="hero-text">
+        <span class="kicker"><span class="dot"></span><span data-i18n="heroKicker">Free · open to everyone</span></span>
+        <h1 class="gradient-text" data-i18n="heroLearnTitle">Learn networking, security &amp; Linux</h1>
+        <p class="lead" data-i18n="heroLearnLead">Practical, hands-on lessons, a free book, and real tools — written in plain language, in English and Persian.</p>
+        <div class="actions">
+          <a href="#tracks" class="btn primary" data-i18n="heroStart">Start learning</a>
+          <a href="#library" class="btn" data-i18n="heroBook">Read the book</a>
+          <a href="resume.html" class="btn" data-i18n="heroResume">See my résumé</a>
+        </div>
+      </div>
+    </div>
+    <a href="#tracks" class="scroll-hint" data-i18n-label="scrollDown" aria-label="Scroll down"><span></span></a>
+  </header>
+
+  <main>
+    <section class="wrap section" id="tracks">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="tracksEyebrow">01 · Learning tracks</span>
+        <h2 data-i18n="tracksTitle">Where do you want to start?</h2>
+      </div>
+      <div class="track-grid" id="track-list"><button type="button" class="card hover track reveal" style="--d:0s" data-track="linux">
+        <span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" x2="20" y1="19" y2="19"></line></svg></span>
+        <h3>Linux</h3>
+        <p>The command line, step by step — on a real Linux system.</p>
+        <span class="track-count">3 articles</span>
+      </button><button type="button" class="card hover track reveal" style="--d:0.06s" data-track="programming">
+        <span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></span>
+        <h3>Programming</h3>
+        <p>Friendly first steps in the languages that matter.</p>
+        <span class="track-count">3 articles</span>
+      </button><button type="button" class="card hover track reveal" style="--d:0.12s" data-track="network">
+        <span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="16" y="16" width="6" height="6" rx="1"></rect><rect x="2" y="16" width="6" height="6" rx="1"></rect><rect x="9" y="2" width="6" height="6" rx="1"></rect><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"></path><path d="M12 12V8"></path></svg></span>
+        <h3>Networking</h3>
+        <p>How networks really work, from IP to the tools.</p>
+        <span class="track-count">1 articles</span>
+      </button><button type="button" class="card hover track reveal" style="--d:0.18s" data-track="security">
+        <span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg></span>
+        <h3>Security</h3>
+        <p>Defend first. Understand attacks to stop them.</p>
+        <span class="track-count">1 articles</span>
+      </button></div>
+    </section>
+
+    <section class="wrap section" id="articles">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="artEyebrow">02 · Articles &amp; tutorials</span>
+        <h2 data-i18n="artTitle">Step-by-step lessons</h2>
+        <p class="muted section-intro" data-i18n="artIntro">Short, practical reads you can follow along with. New ones added over time.</p>
+      </div>
+      <div class="port-filters reveal" id="art-filters" role="tablist"><button type="button" role="tab" data-art="all" aria-selected="true" class="on">All<span>8</span></button><button type="button" role="tab" data-art="linux" aria-selected="false" class="">Linux<span>3</span></button><button type="button" role="tab" data-art="programming" aria-selected="false" class="">Programming<span>3</span></button><button type="button" role="tab" data-art="network" aria-selected="false" class="">Networking<span>1</span></button><button type="button" role="tab" data-art="security" aria-selected="false" class="">Security<span>1</span></button></div>
+      <div class="article-grid" id="article-list"><a class="card hover art reveal" href="en/linux-first-steps/" data-cat="linux" style="--d:0s">
+        <div class="art-top"><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" x2="20" y1="19" y2="19"></line></svg></span>
+          <div class="art-badges"><span class="pill">Linux</span><span class="art-meta">Beginner · 8 min read</span></div></div>
+        <h3>Your first steps in the Linux terminal</h3>
+        <p>Open a terminal, find out where you are, and run your first real commands — with the exact output from a live Ubuntu system.</p>
+        <span class="art-read">Read <svg class="icon flip" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></span>
+      </a><a class="card hover art reveal" href="en/linux-files/" data-cat="linux" style="--d:0.06s">
+        <div class="art-top"><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2Z"></path></svg></span>
+          <div class="art-badges"><span class="pill">Linux</span><span class="art-meta">Beginner · 9 min read</span></div></div>
+        <h3>Files and folders on the command line</h3>
+        <p>List, create, move and delete files without a mouse — the handful of commands you'll use every single day.</p>
+        <span class="art-read">Read <svg class="icon flip" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></span>
+      </a><a class="card hover art reveal" href="en/linux-permissions/" data-cat="linux" style="--d:0.12s">
+        <div class="art-top"><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg></span>
+          <div class="art-badges"><span class="pill">Linux</span><span class="art-meta">Intermediate · 10 min read</span></div></div>
+        <h3>Understanding file permissions</h3>
+        <p>That rwxr-xr-x string next to every file isn't noise — it's who can read, write and run it. Learn to read and change it.</p>
+        <span class="art-read">Read <svg class="icon flip" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></span>
+      </a><a class="card hover art reveal" href="en/python-10-minutes/" data-cat="programming" style="--d:0s">
+        <div class="art-top"><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></span>
+          <div class="art-badges"><span class="pill">Programming</span><span class="art-meta">Beginner · 10 min read</span></div></div>
+        <h3>Python in ten minutes</h3>
+        <p>Variables, text, decisions and loops — the core of Python, with tiny examples you can run as you read.</p>
+        <span class="art-read">Read <svg class="icon flip" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></span>
+      </a><a class="card hover art reveal" href="en/javascript-basics/" data-cat="programming" style="--d:0.06s">
+        <div class="art-top"><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></span>
+          <div class="art-badges"><span class="pill">Programming</span><span class="art-meta">Beginner · 9 min read</span></div></div>
+        <h3>JavaScript basics for the web</h3>
+        <p>The language that runs in every browser — including this site. Variables, functions, and making a page react.</p>
+        <span class="art-read">Read <svg class="icon flip" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></span>
+      </a><a class="card hover art reveal" href="en/bash-scripting/" data-cat="programming" style="--d:0.12s">
+        <div class="art-top"><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" x2="20" y1="19" y2="19"></line></svg></span>
+          <div class="art-badges"><span class="pill">Programming</span><span class="art-meta">Intermediate · 9 min read</span></div></div>
+        <h3>Automate with Bash scripts</h3>
+        <p>Turn a sequence of commands you type every day into one script you run with a single word.</p>
+        <span class="art-read">Read <svg class="icon flip" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></span>
+      </a><a class="card hover art reveal" href="en/what-is-ip/" data-cat="network" style="--d:0s">
+        <div class="art-top"><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="16" y="16" width="6" height="6" rx="1"></rect><rect x="2" y="16" width="6" height="6" rx="1"></rect><rect x="9" y="2" width="6" height="6" rx="1"></rect><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"></path><path d="M12 12V8"></path></svg></span>
+          <div class="art-badges"><span class="pill">Networking</span><span class="art-meta">Beginner · 7 min read</span></div></div>
+        <h3>What is an IP address?</h3>
+        <p>Every device on a network has a number so others can find it. Here's how those numbers work, in plain language.</p>
+        <span class="art-read">Read <svg class="icon flip" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></span>
+      </a><a class="card hover art reveal" href="en/security-mindset/" data-cat="security" style="--d:0.06s">
+        <div class="art-top"><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg></span>
+          <div class="art-badges"><span class="pill">Security</span><span class="art-meta">Beginner · 7 min read</span></div></div>
+        <h3>The security mindset</h3>
+        <p>Before any tool, security is a way of thinking. The few habits that stop the vast majority of real attacks.</p>
+        <span class="art-read">Read <svg class="icon flip" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></span>
+      </a></div>
+    </section>
+
+    <section class="wrap section" id="lab">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="labEyebrow">03 · Lab</span>
+        <h2 data-i18n="labTitle">Try it in your browser</h2>
+        <p class="muted section-intro" data-i18n="labIntro">Interactive tools that run on your own device — nothing is uploaded.</p>
+      </div>
+      <a class="card hover lab-card reveal" href="vision/">
+        <div class="lab-art" aria-hidden="true">
+          <span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><path d="M9 9h.01M15 9h.01"></path></svg></span><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg></span>
+          <span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-4 0"></path><path d="M14 10V4a2 2 0 0 0-4 0v2"></path><path d="M10 10.5V6a2 2 0 0 0-4 0v8"></path><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-6-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"></path></svg></span><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"></circle><path d="M12 7v7M8 22l4-8 4 8M5 10.5h14"></path></svg></span>
+        </div>
+        <div class="lab-text">
+          <span class="pill" data-i18n="labBadge">New</span>
+          <h3 data-i18n="labCardTitle">Face, hand &amp; body detection</h3>
+          <p data-i18n="labCardText">Turn on your camera or upload a photo: it maps 478 points on your face, follows your eyes, estimates your eye colour, reads expressions, counts fingers, recognises hand gestures and tracks your body — live.</p>
+          <span class="btn primary lab-cta"><span data-i18n="labOpen">Open the tool</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></span>
+        </div>
+      </a>
+    </section>
+
+    <section class="wrap section" id="library">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="libEyebrow2">04 · Library</span>
+        <h2 data-i18n="libTitle">Articles &amp; books</h2>
+        <p class="muted section-intro" data-i18n="libIntro">My writing, free to read online.</p>
+      </div>
+      <div id="library-list" class="lib-grid">
+      <a class="card hover lib-card reveal" href="#book/hacking-network-security-en" style="--d:0s" aria-label="Hacking &amp; Network Security">
+        <span class="lib-cover"><img src="assets/library/hacking-network-security-en-cover.jpg" alt="Hacking &amp; Network Security" loading="lazy" decoding="async"></span>
+        <span class="lib-info">
+          <span class="pill">Book</span>
+          <h3>Hacking &amp; Network Security</h3>
+          <p>The complete practical handbook — from the Linux command line to penetration testing</p>
+          <span class="lib-meta">152 pages · English · Free</span>
+          <span class="lib-cta">Start reading <svg class="icon flip" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></span>
+        </span>
+      </a></div>
+    </section>
+
+    <section class="wrap section" id="portfolio">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="toolsEyebrow">05 · Tools</span>
+        <h2 data-i18n="portTitle">Projects &amp; tools</h2>
+        <p class="muted section-intro" data-i18n="portIntro">Working tools I wrote for real problems in network, security and IT support. Each one comes with its source code, documentation and automated tests.</p>
+      </div>
+      <div class="port-filters reveal" id="port-filters" role="tablist"><button type="button" role="tab" data-filter="all" aria-selected="true" class="on">
+        All<span>8</span></button><button type="button" role="tab" data-filter="network" aria-selected="false" class="">
+        Networking<span>3</span></button><button type="button" role="tab" data-filter="security" aria-selected="false" class="">
+        Security<span>2</span></button><button type="button" role="tab" data-filter="support" aria-selected="false" class="">
+        IT support<span>1</span></button><button type="button" role="tab" data-filter="writing" aria-selected="false" class="">
+        Writing &amp; reports<span>2</span></button></div>
+      <div id="portfolio-list" class="port-list"><article class="card hover port reveal is-detailed" style="--d:0s" data-cat="network" data-port="0">
+        <div class="port-thumb is-img"><img src="projects/network-uptime-monitor/docs/dashboard.png" alt="Network Uptime Monitor" loading="lazy" decoding="async"></div>
+        <div class="port-body">
+          <div class="port-head"><span class="pill">Networking</span></div>
+          <h3>Network Uptime Monitor</h3>
+          <p>Know a camera or access point is down before anyone complains.</p>
+          <ul class="chips port-tech"><li><bdi>Python</bdi></li><li><bdi>SQLite</bdi></li><li><bdi>ICMP / TCP</bdi></li><li><bdi>HTML / CSS</bdi></li></ul>
+          <div class="port-foot">
+            <button type="button" class="btn sm port-more" data-port="0">Details</button>
+            <a class="port-code" href="https://github.com/SepehrNiaz/sepehrniaz.ir/tree/main/projects/network-uptime-monitor" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>View code</a>
+          </div>
+        </div>
+      </article><article class="card hover port reveal is-detailed" style="--d:0.06s" data-cat="network" data-port="1">
+        <div class="port-thumb"><div class="terminal port-term" dir="ltr"><div class="terminal-bar"><span></span><span></span><span></span><em>cisco-config-generator</em></div>
+        <pre><span class="p">$</span> <span class="k">python3 genconfig.py examples/broken.json --check</span>
+examples/broken.json: 7 problem(s)
+  - VLAN 1003 is reserved or out of range
+  - Gi1/0/4 used by both 'PCs' and 'Printers'
+  - Gi1/0/4-6: access VLAN 50 is not defined
+  - Gi1/0/24: trunk allows undefined VLAN 20
+  - Gi1/0/24: native VLAN carries user traffic (VLAN hopping risk)
+  - management VLAN 99 is not defined</pre></div></div>
+        <div class="port-body">
+          <div class="port-head"><span class="pill">Networking</span></div>
+          <h3>Cisco Switch Config Generator</h3>
+          <p>Describe a switch once, get a complete hardened IOS config.</p>
+          <ul class="chips port-tech"><li><bdi>Python</bdi></li><li><bdi>Cisco IOS</bdi></li><li><bdi>VLAN / 802.1Q</bdi></li><li><bdi>Layer 2 security</bdi></li></ul>
+          <div class="port-foot">
+            <button type="button" class="btn sm port-more" data-port="1">Details</button>
+            <a class="port-code" href="https://github.com/SepehrNiaz/sepehrniaz.ir/tree/main/projects/cisco-config-generator" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>View code</a>
+          </div>
+        </div>
+      </article><article class="card hover port reveal is-detailed" style="--d:0.12s" data-cat="security" data-port="2">
+        <div class="port-thumb"><div class="terminal port-term" dir="ltr"><div class="terminal-bar"><span></span><span></span><span></span><em>ssh-log-analyzer</em></div>
+        <pre><span class="p">$</span> <span class="k">python3 log_analyzer.py sample/auth.log --block cisco</span>
+Failed logins: 69   Successful logins: 9   Source IPs: 5
+Flagged (5+ failures within 300s, or a login after them): 2
+
+IP                 Fails  Burst  Invalid  Top usernames
+198.51.100.77         18     18        0  admin
+203.0.113.45          46     46        9  ftpuser, pi, guest, ubuntu
+</pre></div></div>
+        <div class="port-body">
+          <div class="port-head"><span class="pill">Security</span></div>
+          <h3>SSH Log Analyzer</h3>
+          <p>Find brute-force attacks in Linux logs, and whether anyone got in.</p>
+          <ul class="chips port-tech"><li><bdi>Python</bdi></li><li><bdi>Linux</bdi></li><li><bdi>Regex</bdi></li><li><bdi>iptables / ufw</bdi></li></ul>
+          <div class="port-foot">
+            <button type="button" class="btn sm port-more" data-port="2">Details</button>
+            <a class="port-code" href="https://github.com/SepehrNiaz/sepehrniaz.ir/tree/main/projects/ssh-log-analyzer" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>View code</a>
+          </div>
+        </div>
+      </article><article class="card hover port reveal is-detailed" style="--d:0s" data-cat="security" data-port="3">
+        <div class="port-thumb"><div class="terminal port-term" dir="ltr"><div class="terminal-bar"><span></span><span></span><span></span><em>port-scanner</em></div>
+        <pre><span class="p">$</span> <span class="k">python3 portscan.py 192.168.1.0/28 --banner</span>
+Scanning 14 host(s), 26 port(s)...
+
+192.168.1.1
+     22/tcp  open  ssh          SSH-2.0-Cisco-1.25
+     80/tcp  open  http         Server: lighttpd
+
+192.168.1.8</pre></div></div>
+        <div class="port-body">
+          <div class="port-head"><span class="pill">Security</span></div>
+          <h3>Port Scanner</h3>
+          <p>See which services every device exposes, and which ones shouldn't be open.</p>
+          <ul class="chips port-tech"><li><bdi>Python</bdi></li><li><bdi>TCP/IP</bdi></li><li><bdi>Sockets</bdi></li><li><bdi>Threading</bdi></li></ul>
+          <div class="port-foot">
+            <button type="button" class="btn sm port-more" data-port="3">Details</button>
+            <a class="port-code" href="https://github.com/SepehrNiaz/sepehrniaz.ir/tree/main/projects/port-scanner" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>View code</a>
+          </div>
+        </div>
+      </article><article class="card hover port reveal is-detailed" style="--d:0.06s" data-cat="network" data-port="4">
+        <div class="port-thumb"><div class="terminal port-term" dir="ltr"><div class="terminal-bar"><span></span><span></span><span></span><em>subnet-calculator</em></div>
+        <pre><span class="p">$</span> <span class="k">python3 subnet_calc.py vlsm 172.16.0.0/22 Reception=120 Rooms=300 Cameras=60 Office=25</span>
+Name       Need  Subnet           Mask             Fits
+--------------------------------------------------------
+Rooms      300   172.16.0.0/23    255.255.254.0    510
+Reception  120   172.16.2.0/25    255.255.255.128  126
+Cameras    60    172.16.2.128/26  255.255.255.192  62
+Office     25    172.16.2.192/27  255.255.255.224  30</pre></div></div>
+        <div class="port-body">
+          <div class="port-head"><span class="pill">Networking</span></div>
+          <h3>Subnet &amp; VLSM Calculator</h3>
+          <p>Plan IP addressing for every department without wasting addresses.</p>
+          <ul class="chips port-tech"><li><bdi>Python</bdi></li><li><bdi>IPv4</bdi></li><li><bdi>VLSM / CIDR</bdi></li><li><bdi>CCNA</bdi></li></ul>
+          <div class="port-foot">
+            <button type="button" class="btn sm port-more" data-port="4">Details</button>
+            <a class="port-code" href="https://github.com/SepehrNiaz/sepehrniaz.ir/tree/main/projects/subnet-calculator" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>View code</a>
+          </div>
+        </div>
+      </article><article class="card hover port reveal is-detailed" style="--d:0.12s" data-cat="support" data-port="5">
+        <div class="port-thumb is-img"><img src="projects/helpdesk-tracker/docs/report.png" alt="IT Helpdesk Tracker" loading="lazy" decoding="async"></div>
+        <div class="port-body">
+          <div class="port-head"><span class="pill">IT support</span></div>
+          <h3>IT Helpdesk Tracker</h3>
+          <p>Log every IT job and show management where the time goes.</p>
+          <ul class="chips port-tech"><li><bdi>Python</bdi></li><li><bdi>SQLite</bdi></li><li><bdi>CLI</bdi></li><li><bdi>HTML reports</bdi></li></ul>
+          <div class="port-foot">
+            <button type="button" class="btn sm port-more" data-port="5">Details</button>
+            <a class="port-code" href="https://github.com/SepehrNiaz/sepehrniaz.ir/tree/main/projects/helpdesk-tracker" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>View code</a>
+          </div>
+        </div>
+      </article><article class="card hover port reveal" style="--d:0s" data-cat="writing" data-port="6">
+        <div class="port-thumb"><div class="port-art"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"></path><path d="m19 9-5 5-4-4-3 3"></path></svg></div></div>
+        <div class="port-body">
+          <div class="port-head"><span class="pill">Writing &amp; reports</span></div>
+          <h3>Rose Hotel Instagram analysis</h3>
+          <p>A year-long report on the hotel's Instagram views, reach and engagement, with recommendations to turn views into bookings.</p>
+          
+          <div class="port-foot">
+            
+            
+          </div>
+        </div>
+      </article><article class="card hover port reveal" style="--d:0.06s" data-cat="writing" data-port="7">
+        <div class="port-thumb"><div class="port-art"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="8" x2="16" y1="13" y2="13"></line><line x1="8" x2="13" y1="17" y2="17"></line></svg></div></div>
+        <div class="port-body">
+          <div class="port-head"><span class="pill">Writing &amp; reports</span></div>
+          <h3>IT work report, Rose Hotel</h3>
+          <p>A 10-month report breaking down 179 IT tasks by month and area across the hotel.</p>
+          
+          <div class="port-foot">
+            
+            
+          </div>
+        </div>
+      </article></div>
+    </section>
+
+    <section class="wrap section" id="author">
+      <div class="author-strip reveal">
+        <div>
+          <h3 data-i18n="authorStripTitle">Who's behind this?</h3>
+          <p data-i18n="authorStripText">I'm Sepehr Niaz, an IT technician in Shiraz working in networking and security. This site is where I share what I learn.</p>
+        </div>
+        <a href="resume.html" class="btn primary" data-i18n="authorStripBtn">See my résumé</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="site-footer"><div class="wrap">
+      <div class="foot-grid"><nav class="foot-col"><h4>Quick links</h4><ul><li><a href="#tracks"><bdi>Tracks</bdi></a></li><li><a href="#articles"><bdi>Articles</bdi></a></li><li><a href="#library"><bdi>Books</bdi></a></li><li><a href="#portfolio"><bdi>Tools</bdi></a></li><li><a href="vision/"><bdi>Lab</bdi></a></li><li><a href="resume.html"><bdi>Résumé</bdi></a></li><li><a href="resume.html#contact"><bdi>Contact</bdi></a></li></ul></nav><nav class="foot-col"><h4>Learning topics</h4><ul><li><a href="#topic/linux"><bdi>Linux</bdi></a></li><li><a href="#topic/programming"><bdi>Programming</bdi></a></li><li><a href="#topic/network"><bdi>Networking</bdi></a></li><li><a href="#topic/security"><bdi>Security</bdi></a></li></ul></nav><nav class="foot-col"><h4>Latest articles</h4><ul><li><a href="en/security-mindset/"><bdi>The security mindset</bdi></a></li><li><a href="en/what-is-ip/"><bdi>What is an IP address?</bdi></a></li><li><a href="en/bash-scripting/"><bdi>Automate with Bash scripts</bdi></a></li><li><a href="en/javascript-basics/"><bdi>JavaScript basics for the web</bdi></a></li></ul></nav><nav class="foot-col"><h4>Certificates</h4><ul><li><a href="resume.html#certifications"><bdi>Cyber Security Pack</bdi></a></li><li><a href="resume.html#certifications"><bdi>F5 Package</bdi></a></li><li><a href="resume.html#certifications"><bdi>Security+</bdi></a></li><li><a href="resume.html#certifications"><bdi>Cisco CCNA 200-301</bdi></a></li><li><a href="resume.html#certifications"><bdi>Duolingo English Test</bdi></a></li></ul></nav></div>
+      <div class="foot-card">
+        <a class="foot-id" href="resume.html">
+          <span class="foot-badge"><img src="assets/photo.jpg" alt="Sepehr Niaz" loading="lazy"></span>
+          <span class="foot-name"><b>Sepehr Niaz</b><small>IT Technician · Network &amp; Security</small></span>
+        </a>
+        <p class="foot-tag">IT technician in Shiraz. I write free, practical lessons on networking, security and Linux — and I'm available for IT and network work.</p>
+        <div class="foot-social"><a href="mailto:niazsepehr7@gmail.com" aria-label="Email" title="Email"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 5L2 7"></path></svg></a><a href="tel:+989177886291" aria-label="Call" title="Call"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a><a href="https://wa.me/989177886291" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg></a><a href="https://github.com/sepehrniaz" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a></div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 Sepehr Niaz · Shiraz, Iran</span>
+        <a href="tel:+989177886291">Phone: <bdi dir="ltr">0917 788 6291</bdi></a>
+      </div>
+    </div></footer>
+
+  <script src="config.js"></script>
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+  <script src="bot/nlu.js"></script>
+  <script src="bot/knowledge.js"></script>
+  <script src="bot/engine.js"></script>
+  <script src="assistant.js"></script>
+</body></html>

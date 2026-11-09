@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="fa" dir="rtl"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="../../">
+  <title>فایل‌ها و پوشه‌ها در خط فرمان — سپهر نیاز</title>
+  <meta name="description" content="فهرست‌گرفتن، ساختن، جابه‌جا کردن و حذف فایل‌ها بدون ماوس — همان چند دستوری که هر روز استفاده می‌کنی.">
+  <meta name="author" content="Sepehr Niaz">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sepehrniaz.ir/fa/linux-files/">
+  <link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/linux-files/">
+  <link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/linux-files/">
+  <link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/linux-files/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/photo.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://sepehrniaz.ir/fa/linux-files/">
+  <meta property="og:site_name" content="Sepehr Niaz">
+  <meta property="og:locale" content="fa_IR">
+  <meta property="og:title" content="فایل‌ها و پوشه‌ها در خط فرمان">
+  <meta property="og:description" content="فهرست‌گرفتن، ساختن، جابه‌جا کردن و حذف فایل‌ها بدون ماوس — همان چند دستوری که هر روز استفاده می‌کنی.">
+  <meta property="og:image" content="https://sepehrniaz.ir/assets/og-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#070b14">
+  <script type="application/ld+json">[{"@context":"https://schema.org","@type":"TechArticle","headline":"فایل‌ها و پوشه‌ها در خط فرمان","description":"فهرست‌گرفتن، ساختن، جابه‌جا کردن و حذف فایل‌ها بدون ماوس — همان چند دستوری که هر روز استفاده می‌کنی.","inLanguage":"fa","url":"https://sepehrniaz.ir/fa/linux-files/","mainEntityOfPage":"https://sepehrniaz.ir/fa/linux-files/","image":"https://sepehrniaz.ir/assets/og-card.jpg","author":{"@type":"Person","name":"Sepehr Niaz","alternateName":"سپهر نیاز","url":"https://sepehrniaz.ir/resume"},"publisher":{"@type":"Person","name":"Sepehr Niaz","url":"https://sepehrniaz.ir/"},"datePublished":"2026-11-01","dateModified":"2026-11-01","timeRequired":"PT9M"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"آموزش","item":"https://sepehrniaz.ir/"},{"@type":"ListItem","position":2,"name":"لینوکس","item":"https://sepehrniaz.ir/#articles"},{"@type":"ListItem","position":3,"name":"فایل‌ها و پوشه‌ها در خط فرمان","item":"https://sepehrniaz.ir/fa/linux-files/"}]}]</script>
+  <script>
+    (function () {
+      var d = document.documentElement;
+      try { var t = localStorage.getItem("theme"); if (t) d.dataset.theme = t; localStorage.setItem("lang", d.lang); } catch (e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Vazirmatn:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body data-page="article" data-article="linux-files">
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="logo" id="logo"></a>
+      <div class="nav-links">
+        <a href="index.html#tracks" data-i18n="navTracks">مسیرها</a>
+        <a href="index.html#articles" data-i18n="navArticles">مقاله‌ها</a>
+        <a href="vision/" data-i18n="navLab">آزمایشگاه</a>
+        <a href="index.html#library" data-i18n="navBooks">کتاب‌ها</a>
+        <a href="index.html#portfolio" data-i18n="navTools">ابزارها</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn lang-btn" id="lang-toggle">EN</button>
+        <button class="icon-btn" id="theme-toggle"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></button>
+        <a href="resume.html" class="btn primary sm" data-i18n="navResume">رزومه</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="article-main">
+    <article class="wrap adoc-body adoc-page">
+      <nav class="crumbs" aria-label="breadcrumb">
+        <a href="index.html">آموزش</a><span aria-hidden="true">/</span>
+        <a href="index.html#topic/linux">لینوکس</a>
+      </nav>
+      <p class="adoc-kick">مبتدی · ۹ دقیقه مطالعه · به‌روزرسانی ۲۰۲۶-۱۱</p>
+      <h1>فایل‌ها و پوشه‌ها در خط فرمان</h1>
+      <p class="adoc-summary">فهرست‌گرفتن، ساختن، جابه‌جا کردن و حذف فایل‌ها بدون ماوس — همان چند دستوری که هر روز استفاده می‌کنی.</p>
+      <div class="adoc-content"><p>در لینوکس همه‌چیز یک فایل است، و بیشتر وقتت را صرف جابه‌جا شدن بین پوشه‌ها و دیدن محتوای آن‌ها می‌کنی. شش دستور تقریباً همه‌ی کار را پوشش می‌دهند: ls و cd و mkdir و touch و cp و mv و rm. بیا یک فضای کاری کوچک بسازیم و هرکدام را به کار ببریم.</p><h2>نگاه کردن: ls</h2><p>دستور ls محتوای پوشه‌ی فعلی را فهرست می‌کند. با افزودن -l یک فهرست کامل می‌گیری (مجوزها، مالک، اندازه، تاریخ) و شکل واقعی هر مورد را می‌بینی — خط تیره یعنی فایل، و d یعنی پوشه (directory).</p><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">ls -l</span>
+<span class="o">total 4</span>
+<span class="o">-rw-r--r-- 1 root root    0 Nov  2 11:56 notes.txt</span>
+<span class="o">drwxr-xr-x 2 root root 4096 Nov  2 11:56 projects</span>
+<span class="o">-rw-r--r-- 1 root root    0 Nov  2 11:56 report.pdf</span></pre></div><figcaption>دو فایل و یک پوشه (projects که با d مشخص شده).</figcaption></figure><h2>ساختن: mkdir و touch</h2><p>دستور mkdir یک پوشه‌ی جدید می‌سازد؛ touch یک فایل خالی می‌سازد (یا زمان آخرین تغییرش را به‌روز می‌کند). دستور cd تو را وارد یک پوشه می‌کند، و cd .. یک سطح به بالا برمی‌گرداند.</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">bash</span><button type="button" class="doc-copy" data-code="mkdir%20projects%0Acd%20projects%0Atouch%20app.py%20readme.md%0Acd%20.."><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code>mkdir projects
+cd projects
+touch app.py readme.md
+cd ..</code></pre><figcaption>یک پوشه بساز، برو داخلش، دو فایل بساز، و برگرد بیرون.</figcaption></figure><h2>کپی، انتقال، تغییر نام، حذف</h2><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>cp a.txt b.txt — کپی یک فایل</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>mv a.txt docs/ — انتقال آن به پوشه‌ای دیگر</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>mv old.txt new.txt — تغییر نام (انتقال روی یک نام جدید)</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>rm file.txt — حذف یک فایل</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>rm -r folder — حذف یک پوشه و هر چیزی که داخلش است</span></li></ul><div class="doc-note warn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><div>دستور rm برای همیشه حذف می‌کند — در خط فرمان سطل بازیافت وجود ندارد. قبل از زدن Enter خط را دو بار بخوان، مخصوصاً با rm -r.</div></div><h2>ترفندی که انگشت‌هایت را نجات می‌دهد</h2><p>شروع کن به تایپ نام یک فایل یا پوشه و بعد Tab را بزن. شل (پوسته) خودش آن را کامل می‌کند. دو بار Tab بزن تا همه‌ی گزینه‌های هم‌خوان را ببینی. این را هزاران بار استفاده خواهی کرد.</p></div>
+      <nav class="adoc-nav">
+        <a class="adoc-navbtn prev" href="fa/linux-first-steps/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span><small>قبلی</small><b>اولین قدم‌ها در ترمینال لینوکس</b></span></a>
+        <a class="adoc-navbtn next" href="fa/linux-permissions/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span><small>بعدی</small><b>درک مجوزهای فایل</b></span></a>
+      </nav>
+      <a class="btn adoc-back" href="index.html#articles"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span>همه‌ی مقاله‌ها</span></a>
+    </article>
+  </main>
+
+  <footer class="site-footer" id="site-footer"><div class="wrap">
+      <div class="foot-grid"><nav class="foot-col"><h4>دسترسی سریع</h4><ul><li><a href="index.html#tracks"><bdi>مسیرها</bdi></a></li><li><a href="index.html#articles"><bdi>مقاله‌ها</bdi></a></li><li><a href="index.html#library"><bdi>کتاب‌ها</bdi></a></li><li><a href="index.html#portfolio"><bdi>ابزارها</bdi></a></li><li><a href="vision/"><bdi>آزمایشگاه</bdi></a></li><li><a href="resume.html"><bdi>رزومه</bdi></a></li><li><a href="resume.html#contact"><bdi>تماس</bdi></a></li></ul></nav><nav class="foot-col"><h4>موضوعات آموزشی</h4><ul><li><a href="index.html#topic/linux"><bdi>لینوکس</bdi></a></li><li><a href="index.html#topic/programming"><bdi>برنامه‌نویسی</bdi></a></li><li><a href="index.html#topic/network"><bdi>شبکه</bdi></a></li><li><a href="index.html#topic/security"><bdi>امنیت</bdi></a></li></ul></nav><nav class="foot-col"><h4>تازه‌ترین مقاله‌ها</h4><ul><li><a href="fa/security-mindset/"><bdi>طرز فکر امنیتی</bdi></a></li><li><a href="fa/what-is-ip/"><bdi>آدرس IP چیست؟</bdi></a></li><li><a href="fa/bash-scripting/"><bdi>خودکارسازی با اسکریپت‌های Bash</bdi></a></li><li><a href="fa/javascript-basics/"><bdi>مبانی جاوااسکریپت برای وب</bdi></a></li></ul></nav><nav class="foot-col"><h4>گواهینامه‌ها</h4><ul><li><a href="resume.html#certifications"><bdi>پکیج امنیت سایبری</bdi></a></li><li><a href="resume.html#certifications"><bdi>پکیج F5</bdi></a></li><li><a href="resume.html#certifications"><bdi>Security+</bdi></a></li><li><a href="resume.html#certifications"><bdi>Cisco CCNA 200-301</bdi></a></li><li><a href="resume.html#certifications"><bdi>آزمون زبان دولینگو</bdi></a></li></ul></nav></div>
+      <div class="foot-card">
+        <a class="foot-id" href="resume.html">
+          <span class="foot-badge"><img src="assets/photo.jpg" alt="سپهر نیاز" loading="lazy"></span>
+          <span class="foot-name"><b>سپهر نیاز</b><small>تکنسین IT · شبکه و امنیت</small></span>
+        </a>
+        <p class="foot-tag">تکنسین IT در شیراز. اینجا درس‌های رایگان و عملی شبکه، امنیت و لینوکس می‌نویسم — و برای کارهای IT و شبکه در دسترسم.</p>
+        <div class="foot-social"><a href="mailto:niazsepehr7@gmail.com" aria-label="ایمیل" title="ایمیل"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 5L2 7"></path></svg></a><a href="tel:+989177886291" aria-label="تماس تلفنی" title="تماس تلفنی"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a><a href="https://wa.me/989177886291" target="_blank" rel="noopener" aria-label="واتساپ" title="واتساپ"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg></a><a href="https://github.com/sepehrniaz" target="_blank" rel="noopener" aria-label="گیت‌هاب" title="گیت‌هاب"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a></div>
+      </div>
+      <div class="foot-bottom">
+        <span>© ۲۰۲۶ سپهر نیاز · شیراز، ایران</span>
+        <a href="tel:+989177886291">شماره تماس: <bdi dir="ltr">۰۹۱۷ ۷۸۸ ۶۲۹۱</bdi></a>
+      </div>
+    </div></footer>
+
+  <script src="config.js"></script>
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+  <script src="bot/nlu.js"></script>
+  <script src="bot/knowledge.js"></script>
+  <script src="bot/engine.js"></script>
+  <script src="assistant.js"></script>
+</body></html>

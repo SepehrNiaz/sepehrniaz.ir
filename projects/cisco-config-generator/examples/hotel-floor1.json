@@ -1,0 +1,32 @@
+{
+  "hostname": "SW-FLOOR1",
+  "domain": "hotel.local",
+  "banner": "Authorized access only. All activity is logged.",
+  "switch_ports": "Gi1/0/1-24",
+  "unused_vlan": 999,
+  "vlans": [
+    { "id": 10, "name": "Staff",       "users": true },
+    { "id": 20, "name": "Guest WiFi",  "users": true },
+    { "id": 30, "name": "Cameras",     "users": true },
+    { "id": 40, "name": "Voice",       "users": true },
+    { "id": 99, "name": "Management" },
+    { "id": 100, "name": "Native unused" }
+  ],
+  "ports": [
+    { "interfaces": "Gi1/0/1-6",  "description": "Staff PCs + IP phones", "vlan": 10, "voice_vlan": 40,
+      "port_security": { "max": 3, "violation": "restrict" }, "storm_control": true },
+    { "interfaces": "Gi1/0/7-10", "description": "Corridor access points", "vlan": 20 },
+    { "interfaces": "Gi1/0/11-16", "description": "IP cameras", "vlan": 30,
+      "port_security": { "max": 1, "violation": "shutdown" } },
+    { "interfaces": "Gi1/0/24", "description": "Uplink to core", "mode": "trunk",
+      "native": 100, "allowed": [10, 20, 30, 40, 99] }
+  ],
+  "management": {
+    "vlan": 99,
+    "ip": "192.168.99.11/24",
+    "gateway": "192.168.99.1",
+    "allowed_admin_subnet": "192.168.99.0/24",
+    "ntp": ["192.168.99.1"],
+    "syslog": "192.168.99.20"
+  }
+}
