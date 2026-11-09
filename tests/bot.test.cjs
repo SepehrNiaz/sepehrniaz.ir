@@ -365,3 +365,21 @@ test("unanswerable questions about Sepehr are passed on in the email", () => {
   assert.match(text(r), /سؤالتان را در درخواست/);
   assert.deepEqual(bot.state.questions, ["سپهر وردپرس کار کرده؟"]);
 });
+
+test("offers WhatsApp and email-app links with the request when sending fails", () => {
+  const bot = newBot();
+  for (const m of ["سرورمون هک شده فایلا همه رمز شدن", "از دیشب پیغام باج اومده و پسوند فایل‌ها عوض شده", "نمیدونم", "حدود ۳۰ نفر", "حضوری", "توافقی", "رضا کریمی", "۰۹۱۷۱۲۳۴۵۶۷", "نه", "نه"]) bot.handle(m);
+  const done = bot.handle("آره بفرست");
+  assert.ok(done.lead, "a finished request");
+  const out = bot.afterSend(false, done.lead);
+  const all = out.flatMap((b) => b.chips || []);
+  const wa = all.find((c) => c.href && c.href.startsWith("https://wa.me/"));
+  const mail = all.find((c) => c.href && c.href.startsWith("mailto:"));
+  assert.ok(wa && mail, "both fallback links");
+  const waText = decodeURIComponent(wa.href);
+  assert.match(waText, /sepehrniaz\.ir/);
+  assert.match(waText, /رضا کریمی/);
+  assert.ok(waText.includes(done.lead.summary.slice(0, 20)), "WhatsApp text carries the summary");
+  assert.ok(all.some((c) => c.value && !c.href), "still offers a retry");
+  assert.equal(bot.state.phase, "confirm");
+});

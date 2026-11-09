@@ -153,6 +153,13 @@
     const row = document.createElement("div");
     row.className = "ai-chips";
     chips.forEach((c) => {
+      if (c.href) { // a link (WhatsApp / email app), not a reply
+        const l = document.createElement("a");
+        l.href = c.href; l.textContent = c.label; l.className = "link";
+        if (/^https?:/.test(c.href)) { l.target = "_blank"; l.rel = "noopener"; }
+        row.appendChild(l);
+        return;
+      }
       const b = document.createElement("button");
       b.type = "button";
       b.className = c.ghost ? "ghost" : "";
@@ -219,7 +226,7 @@
       const json = await res.json().catch(() => ({}));
       ok = res.ok && json.success !== "false" && json.success !== false;
     } catch (e) { ok = false; }
-    await play({ bubbles: engine.afterSend(ok), progress: ok ? 1 : engine.progress() });
+    await play({ bubbles: engine.afterSend(ok, lead), progress: ok ? 1 : engine.progress() });
   }
 
   async function send(value, label) {

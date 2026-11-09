@@ -715,7 +715,7 @@
     }
 
     // Called by the UI once the email has (or hasn't) gone out
-    function afterSend(ok) {
+    function afterSend(ok, lead) {
       state.sentOk = ok;
       if (ok) {
         const m = state.slots.contact_method ? state.slots.contact_method.v : state.slots.email ? "email" : "phone";
@@ -726,8 +726,9 @@
         return out;
       }
       state.phase = "confirm";
-      const c = cv.contact || {};
-      const out = [{ text: L() === "fa" ? `ارسال انجام نشد (احتمالاً مشکل اینترنت). دوباره امتحان کنید، یا مستقیم ایمیل بزنید: ${c.email || ""}` : `Sending failed (probably a connection problem). Try again, or email directly: ${c.email || ""}`, chips: [{ label: L() === "fa" ? "🔁 تلاش دوباره" : "🔁 Try again", value: cmd("confirm") }] }];
+      // Automatic sending failed: offer ready-made messages the visitor can send themselves
+      const chips = fallbackLinks(lead, L(), cv).concat([{ label: L() === "fa" ? "🔁 تلاش دوباره" : "🔁 Try again", value: cmd("confirm"), ghost: true }]);
+      const out = [{ text: L() === "fa" ? "ارسال خودکار انجام نشد. با یکی از دکمه‌های زیر همین درخواست، آماده و کامل، مستقیم برای سپهر فرستاده می‌شود:" : "Automatic sending didn't go through. Use one of the buttons below to send the same request, ready-written, straight to Sepehr:", chips }];
       record(out);
       return out;
     }
@@ -851,6 +852,33 @@
     };
   }
 
+  // Plain-text version of a request, for WhatsApp / email-app fallbacks
+  function leadText(lead) {
+    const pr = { high: "🔴 فوری", medium: "🟠 مهم", normal: "🟢 عادی" }[lead.priority.level];
+    const details = lead.fields.filter((f) => !["name", "email", "phone", "contact_method"].includes(f.id)).map((f) => `• ${f.label}: ${f.value}`);
+    return [
+      "درخواست از سایت sepehrniaz.ir",
+      `${lead.emoji} ${lead.categoryLabel.fa} · ${pr}`,
+      "",
+      lead.summary,
+      ...(details.length ? ["", ...details] : []),
+      "",
+      `نام: ${lead.contact.name || "—"}`,
+      lead.contact.phone ? `تلفن: ${lead.contact.phone}` : "",
+      lead.contact.email ? `ایمیل: ${lead.contact.email}` : ""
+    ].filter((x, i, a) => x !== "" || a[i - 1] !== "").join("\n").trim();
+  }
+  // Link "chips" that open WhatsApp or the visitor's email app with the request filled in
+  function fallbackLinks(lead, lang, cv) {
+    const c = (cv && cv.contact) || {};
+    const fa = lang === "fa", out = [];
+    const text = lead ? leadText(lead) : "";
+    const phone = (c.phone || "").replace(/[^\d]/g, "");
+    if (phone && c.whatsapp !== false) out.push({ label: fa ? "💬 ارسال با واتساپ" : "💬 Send on WhatsApp", href: `https://wa.me/${phone}?text=${encodeURIComponent(text)}` });
+    if (c.email) out.push({ label: fa ? "✉️ ارسال با برنامه‌ی ایمیل" : "✉️ Send with your email app", href: `mailto:${c.email}?subject=${encodeURIComponent(lead ? `[سایت] ${lead.categoryLabel.fa} | ${lead.contact.name || ""}` : "sepehrniaz.ir")}&body=${encodeURIComponent(text.slice(0, 1800))}` });
+    return out;
+  }
+
   // FormSubmit payload for a finished request (labels in Persian for Sepehr)
   function emailPayload(lead) {
     const pr = { high: "🔴 فوری", medium: "🟠 مهم", normal: "🟢 عادی" }[lead.priority.level];
@@ -880,4 +908,5 @@
 
   root.SepehrBot.createEngine = createEngine;
   root.SepehrBot.emailPayload = emailPayload;
+  root.SepehrBot.leadText = leadText;
 })(typeof window !== "undefined" ? window : globalThis);

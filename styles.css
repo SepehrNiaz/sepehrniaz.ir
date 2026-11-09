@@ -796,6 +796,11 @@ a { color: var(--c1); }
 }
 .ai-chips button:hover { background: color-mix(in srgb, var(--c1) 12%, transparent); transform: translateY(-1px); }
 .ai-chips button.ghost { border-style: dashed; color: var(--muted); border-color: var(--border); }
+.ai-chips a.link { padding: 8px 14px; border-radius: 999px; background: var(--grad); color: var(--on-accent); font: 600 13.5px Inter, Vazirmatn, sans-serif; text-decoration: none; box-shadow: 0 8px 20px -10px var(--c2); }
+.ai-chips a.link:hover { transform: translateY(-1px); }
+.form-status:has(.form-fallback) { flex-wrap: wrap; }
+.form-fallback { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; flex-basis: 100%; }
+.form-fallback a { padding: 9px 14px; border-radius: 999px; background: var(--grad); color: var(--on-accent); font-weight: 600; font-size: 14px; text-decoration: none; }
 
 .ai-card { align-self: stretch; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); overflow: hidden; animation: ai-pop .25s ease-out; }
 .ai-card dl { margin: 0; padding: 6px 0; }

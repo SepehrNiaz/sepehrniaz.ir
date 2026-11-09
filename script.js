@@ -1469,8 +1469,14 @@
       status.className = "form-status ok";
       status.innerHTML = `${icon("check")}${esc(ui("sent"))}`;
     } catch (err) {
+      // Automatic sending failed: offer the same message through WhatsApp or the visitor's email app
+      const fa = lang === "fa";
+      const text = [fa ? "پیام از سایت sepehrniaz.ir" : "Message from sepehrniaz.ir", "", data.message, "", `${fa ? "نام" : "Name"}: ${data.name}`, `${fa ? "ایمیل" : "Email"}: ${data.email}`, data.phone ? `${fa ? "تلفن" : "Phone"}: ${data.phone}` : ""].filter(Boolean).join("\n");
+      const phone = (c.phone || "").replace(/[^\d]/g, "");
+      const links = (phone && c.whatsapp !== false ? `<a href="https://wa.me/${phone}?text=${encodeURIComponent(text)}" target="_blank" rel="noopener">💬 ${fa ? "ارسال با واتساپ" : "Send on WhatsApp"}</a>` : "") +
+        (c.email ? `<a href="mailto:${esc(c.email)}?subject=${encodeURIComponent(ui("subject")(data.name))}&body=${encodeURIComponent(text.slice(0, 1800))}">✉️ ${fa ? "ارسال با برنامه‌ی ایمیل" : "Send with your email app"}</a>` : "");
       status.className = "form-status err";
-      status.innerHTML = `${icon("alert")}${esc(ui("failed"))}`;
+      status.innerHTML = `${icon("alert")}${esc(fa ? "ارسال خودکار انجام نشد. همین پیام را با یکی از این دکمه‌ها مستقیم بفرستید:" : "Automatic sending didn't go through. Send the same message directly with one of these:")}<span class="form-fallback">${links}</span>`;
     } finally {
       sendBtn.disabled = false;
       sendBtn.innerHTML = `${icon("send")}${esc(ui("send"))}`;
