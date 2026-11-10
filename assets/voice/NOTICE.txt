@@ -1,0 +1,4 @@
+ONNX Runtime Web 1.31 (Microsoft, MIT License): https://github.com/microsoft/onnxruntime
+Whisper base speech model (OpenAI, MIT License): https://github.com/openai/whisper
+ONNX export by the onnx-community (https://huggingface.co/onnx-community/whisper-base),
+int8-quantized; the decoder weights are split into several files so each stays small.
