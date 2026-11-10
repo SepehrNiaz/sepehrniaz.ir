@@ -60,7 +60,7 @@
       <div class="nav-links">
         <a href="#tracks" data-i18n="navTracks">Tracks</a>
         <a href="#articles" data-i18n="navArticles">Articles</a>
-        <a href="vision/" data-i18n="navLab">Lab</a>
+        <a href="#lab" data-i18n="navLab">Lab</a>
         <a href="#library" data-i18n="navBooks">Books</a>
         <a href="#portfolio" data-i18n="navTools">Tools</a>
       </div>
@@ -182,18 +182,32 @@
         <h2 data-i18n="labTitle">Try it in your browser</h2>
         <p class="muted section-intro" data-i18n="labIntro">Interactive tools that run on your own device — nothing is uploaded.</p>
       </div>
-      <a class="card hover lab-card reveal" href="vision/">
-        <div class="lab-art" aria-hidden="true">
-          <span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><path d="M9 9h.01M15 9h.01"></path></svg></span><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg></span>
-          <span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-4 0"></path><path d="M14 10V4a2 2 0 0 0-4 0v2"></path><path d="M10 10.5V6a2 2 0 0 0-4 0v8"></path><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-6-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"></path></svg></span><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"></circle><path d="M12 7v7M8 22l4-8 4 8M5 10.5h14"></path></svg></span>
-        </div>
-        <div class="lab-text">
-          <span class="pill" data-i18n="labBadge">New</span>
+      <div class="lab-grid">
+        <a class="card hover lab-tile reveal" href="vision/" style="--d:0s">
+          <span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><path d="M9 9h.01M15 9h.01"></path></svg></span>
           <h3 data-i18n="labCardTitle">Face, hand &amp; body detection</h3>
           <p data-i18n="labCardText">Turn on your camera or upload a photo: it maps 478 points on your face, follows your eyes, estimates your eye colour, reads expressions, counts fingers, recognises hand gestures and tracks your body — live.</p>
-          <span class="btn primary lab-cta"><span data-i18n="labOpen">Open the tool</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></span>
-        </div>
-      </a>
+          <span class="art-read"><span data-i18n="labOpen">Open the tool</span> <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></span>
+        </a>
+        <a class="card hover lab-tile reveal" href="objects/" style="--d:0.06s">
+          <span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"></path><rect x="7" y="7" width="10" height="10" rx="1"></rect></svg></span>
+          <h3 data-i18n="labObjTitle">Object detection with voice</h3>
+          <p data-i18n="labObjText">Point the camera at things around you: it finds 80 everyday objects and says their names out loud.</p>
+          <span class="art-read"><span data-i18n="labOpen">Open the tool</span> <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></span>
+        </a>
+        <a class="card hover lab-tile reveal" href="voice/" style="--d:0.12s">
+          <span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"></rect><path d="M5 10a7 7 0 0 0 14 0M12 17v5M8 22h8"></path></svg></span>
+          <h3 data-i18n="labVoiceTitle">Which language is this?</h3>
+          <p data-i18n="labVoiceText">Speak or upload a recording, and an AI model tells you which of 99 languages it is.</p>
+          <span class="art-read"><span data-i18n="labOpen">Open the tool</span> <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></span>
+        </a>
+        <a class="card hover lab-tile reveal" href="game/" style="--d:0.18s">
+          <span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-4 0"></path><path d="M14 10V4a2 2 0 0 0-4 0v2"></path><path d="M10 10.5V6a2 2 0 0 0-4 0v8"></path><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-6-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"></path></svg></span>
+          <h3 data-i18n="labGameTitle">Rock · Paper · Scissors</h3>
+          <p data-i18n="labGameText">Play against the computer with your real hand — the camera reads ✊ ✋ ✌️.</p>
+          <span class="art-read"><span data-i18n="labOpen">Open the tool</span> <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></span>
+        </a>
+      </div>
     </section>
 
     <section class="wrap section" id="library">
@@ -369,7 +383,7 @@ Office     25    172.16.2.192/27  255.255.255.224  30</pre></div></div>
   </main>
 
   <footer class="site-footer" id="site-footer"><div class="wrap">
-      <div class="foot-grid"><nav class="foot-col"><h4>Quick links</h4><ul><li><a href="#tracks"><bdi>Tracks</bdi></a></li><li><a href="#articles"><bdi>Articles</bdi></a></li><li><a href="#library"><bdi>Books</bdi></a></li><li><a href="#portfolio"><bdi>Tools</bdi></a></li><li><a href="vision/"><bdi>Lab</bdi></a></li><li><a href="resume.html"><bdi>Résumé</bdi></a></li><li><a href="resume.html#contact"><bdi>Contact</bdi></a></li></ul></nav><nav class="foot-col"><h4>Learning topics</h4><ul><li><a href="#topic/linux"><bdi>Linux</bdi></a></li><li><a href="#topic/programming"><bdi>Programming</bdi></a></li><li><a href="#topic/network"><bdi>Networking</bdi></a></li><li><a href="#topic/security"><bdi>Security</bdi></a></li></ul></nav><nav class="foot-col"><h4>Latest articles</h4><ul><li><a href="en/security-mindset/"><bdi>The security mindset</bdi></a></li><li><a href="en/what-is-ip/"><bdi>What is an IP address?</bdi></a></li><li><a href="en/bash-scripting/"><bdi>Automate with Bash scripts</bdi></a></li><li><a href="en/javascript-basics/"><bdi>JavaScript basics for the web</bdi></a></li></ul></nav><nav class="foot-col"><h4>Certificates</h4><ul><li><a href="resume.html#certifications"><bdi>Cyber Security Pack</bdi></a></li><li><a href="resume.html#certifications"><bdi>F5 Package</bdi></a></li><li><a href="resume.html#certifications"><bdi>Security+</bdi></a></li><li><a href="resume.html#certifications"><bdi>Cisco CCNA 200-301</bdi></a></li><li><a href="resume.html#certifications"><bdi>Duolingo English Test</bdi></a></li></ul></nav></div>
+      <div class="foot-grid"><nav class="foot-col"><h4>Quick links</h4><ul><li><a href="#tracks"><bdi>Tracks</bdi></a></li><li><a href="#articles"><bdi>Articles</bdi></a></li><li><a href="#library"><bdi>Books</bdi></a></li><li><a href="#portfolio"><bdi>Tools</bdi></a></li><li><a href="#lab"><bdi>Lab</bdi></a></li><li><a href="resume.html"><bdi>Résumé</bdi></a></li><li><a href="resume.html#contact"><bdi>Contact</bdi></a></li></ul></nav><nav class="foot-col"><h4>Learning topics</h4><ul><li><a href="#topic/linux"><bdi>Linux</bdi></a></li><li><a href="#topic/programming"><bdi>Programming</bdi></a></li><li><a href="#topic/network"><bdi>Networking</bdi></a></li><li><a href="#topic/security"><bdi>Security</bdi></a></li></ul></nav><nav class="foot-col"><h4>Latest articles</h4><ul><li><a href="en/security-mindset/"><bdi>The security mindset</bdi></a></li><li><a href="en/what-is-ip/"><bdi>What is an IP address?</bdi></a></li><li><a href="en/bash-scripting/"><bdi>Automate with Bash scripts</bdi></a></li><li><a href="en/javascript-basics/"><bdi>JavaScript basics for the web</bdi></a></li></ul></nav><nav class="foot-col"><h4>Certificates</h4><ul><li><a href="resume.html#certifications"><bdi>Cyber Security Pack</bdi></a></li><li><a href="resume.html#certifications"><bdi>F5 Package</bdi></a></li><li><a href="resume.html#certifications"><bdi>Security+</bdi></a></li><li><a href="resume.html#certifications"><bdi>Cisco CCNA 200-301</bdi></a></li><li><a href="resume.html#certifications"><bdi>Duolingo English Test</bdi></a></li></ul></nav></div>
       <div class="foot-card">
         <a class="foot-id" href="resume.html">
           <span class="foot-badge"><img src="assets/photo.jpg" alt="Sepehr Niaz" loading="lazy"></span>

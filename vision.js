@@ -68,14 +68,14 @@ const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&l
 
 const $ = (id) => document.getElementById(id);
 const video = $("vis-video"), img = $("vis-img"), canvas = $("vis-canvas"), ctx = canvas.getContext("2d");
-const view = $("vis-view"), status = $("vis-status"), empty = $("vis-empty"), fpsEl = $("vis-fps");
+const view = $("vis-view"), frameEl = $("vis-frame"), hudEl = $("vis-hud"), status = $("vis-status"), empty = $("vis-empty"), fpsEl = $("vis-fps");
 const camBtn = $("vis-cam"), fileIn = $("vis-file");
 const sample = document.createElement("canvas"), sctx = sample.getContext("2d", { willReadFrequently: true });
 
 const on = { face: true, hands: true, body: true };
 let mp = null, tasks = null, draw = null, loading = null;
 let mode = null, stream = null, raf = 0, lastTime = -1, frame = 0, last = {}, eyeCache = null;
-let fpsCount = 0, fpsStart = 0;
+let fpsCount = 0, fpsStart = 0, mediaW = 0, mediaH = 0;
 
 // ── Loading ────────────────────────────────────────────────
 function syncEmpty() { empty.hidden = !!mode || !status.hidden; }
@@ -140,7 +140,7 @@ async function startCamera() {
   await video.play();
   mode = "camera"; last = {}; eyeCache = null; frame = 0; lastTime = -1;
   img.hidden = true; video.hidden = false; empty.hidden = true; fpsEl.hidden = false;
-  view.classList.add("mirror", "live");
+  view.classList.add("mirror", "live", "active");
   fitView(video.videoWidth, video.videoHeight);
   camBtn.classList.remove("primary"); paintControls();
   fpsStart = performance.now(); fpsCount = 0;
@@ -150,20 +150,36 @@ function stopCamera() {
   cancelAnimationFrame(raf);
   if (stream) stream.getTracks().forEach((tr) => tr.stop());
   stream = null; video.srcObject = null;
-  if (mode === "camera") { mode = null; ctx.clearRect(0, 0, canvas.width, canvas.height); fpsEl.hidden = true; view.classList.remove("live"); renderPanel({}); say(""); }
+  if (mode === "camera") { mode = null; ctx.clearRect(0, 0, canvas.width, canvas.height); fpsEl.hidden = true; view.classList.remove("live", "active"); renderPanel({}); layout(); say(""); }
   camBtn.classList.add("primary"); paintControls();
 }
 function fitView(w, h) {
+  if (!w || !h) return;
   canvas.width = w; canvas.height = h;
-  view.style.aspectRatio = `${w} / ${h}`;
   sample.width = w; sample.height = h;
+  mediaW = w; mediaH = h;
+  layout();
 }
+// The view keeps the picture's shape (capped so the results stay in sight); the frame
+// inside it is sized exactly to the picture, so the drawing can never be stretched.
+function layout() {
+  if (!mode || !mediaW) { view.style.height = ""; frameEl.style.width = frameEl.style.height = ""; return; }
+  const vw = view.clientWidth, small = window.innerWidth < 960;
+  const maxH = Math.round(window.innerHeight * (small ? 0.5 : 0.74));
+  const vh = Math.min(Math.round((vw * mediaH) / mediaW), maxH);
+  view.style.height = vh + "px";
+  const k = Math.min(vw / mediaW, vh / mediaH);
+  frameEl.style.width = Math.round(mediaW * k) + "px";
+  frameEl.style.height = Math.round(mediaH * k) + "px";
+}
+window.addEventListener("resize", layout);
+window.addEventListener("orientationchange", () => setTimeout(layout, 300));
 function loop() {
   if (mode !== "camera") return;
   raf = requestAnimationFrame(loop);
   if (video.readyState < 2 || video.currentTime === lastTime) return;
   lastTime = video.currentTime;
-  if (canvas.width !== video.videoWidth) fitView(video.videoWidth, video.videoHeight);
+  if (canvas.width !== video.videoWidth || canvas.height !== video.videoHeight) fitView(video.videoWidth, video.videoHeight);
   const now = performance.now();
   frame++;
   const r = {};
@@ -189,7 +205,7 @@ async function analysePhoto(file) {
   try { await load(); } catch (e) { fail(t("errLoad")); return; }
   say(t("analysing"));
   await setRunning("IMAGE");
-  mode = "photo"; view.classList.remove("mirror", "live");
+  mode = "photo"; view.classList.remove("mirror", "live"); view.classList.add("active");
   video.hidden = true; img.hidden = false; empty.hidden = true; fpsEl.hidden = true;
   fitView(img.naturalWidth, img.naturalHeight);
   await new Promise((res) => setTimeout(res, 30));
@@ -211,8 +227,11 @@ function paint(r) {
   const s = Math.max(1, canvas.width / 640);
   const F = mp.FaceLandmarker;
   if (r.body) for (const lm of r.body.landmarks) {
-    draw.drawConnectors(lm, mp.PoseLandmarker.POSE_CONNECTIONS, { color: "rgba(52, 211, 153, .85)", lineWidth: 3 * s });
-    draw.drawLandmarks(lm.slice(11), { color: "#34d399", fillColor: "#0b1120", lineWidth: 1.5 * s, radius: 3 * s });
+    // skip the head points (the face mesh covers them) and anything off-screen or unsure
+    const ok = (i) => i >= 11 && (lm[i].visibility == null || lm[i].visibility > 0.6) && lm[i].x > -0.02 && lm[i].x < 1.02 && lm[i].y > -0.02 && lm[i].y < 1.02;
+    const lines = mp.PoseLandmarker.POSE_CONNECTIONS.filter((c) => ok(c.start) && ok(c.end));
+    draw.drawConnectors(lm, lines, { color: "rgba(52, 211, 153, .85)", lineWidth: 3 * s });
+    draw.drawLandmarks(lm.filter((p, i) => ok(i)), { color: "#34d399", fillColor: "#0b1120", lineWidth: 1.5 * s, radius: 3 * s });
   }
   if (r.face) for (const lm of r.face.faceLandmarks) {
     draw.drawConnectors(lm, F.FACE_LANDMARKS_TESSELATION, { color: "rgba(34, 211, 238, .22)", lineWidth: 0.7 * s });
@@ -334,6 +353,7 @@ const offCard = (title) => head(title) + `<p class="muted">${esc(t("off"))}</p>`
 
 function renderPanel(r) {
   const w = canvas.width, h = canvas.height, has = !!mode;
+  const hud = [];
   const fc = r.face && r.face.faceLandmarks.length ? r.face : null;
   // Face
   $("vis-c-face").innerHTML = !on.face ? offCard(t("pFace")) : head(t("pFace"), fc ? esc(t("faces")(fc.faceLandmarks.length)) : "") + (!has ? dash() : !fc ? `<p class="muted">${esc(t("noFace"))}</p>` : (() => {
@@ -355,6 +375,9 @@ function renderPanel(r) {
       if (e.closed) return `<div class="vis-eye"><span>${esc(label)}</span><em class="muted">${esc(t("lidsClosed"))}</em></div>`;
       return `<div class="vis-eye"><span>${esc(label)}</span><i style="background:rgb(${e.rgb.join(",")})"></i><b>${esc(t("colours")[e.name])}</b></div>`;
     };
+    const col = eyeCache && ((eyeCache.right && eyeCache.right.name) || (eyeCache.left && eyeCache.left.name));
+    if (col) hud.push(`👁 ${t("colours")[col]}`);
+    if (st !== t("open")) hud.push(st === t("closed") ? `😌 ${st}` : st);
     return row(t("state"), esc(st)) + row(t("gaze"), esc(look)) + `<p class="vis-sub">${esc(t("colour"))}</p>` + sw("right", t("eyeR")) + sw("left", t("eyeL"));
   })());
   // Expression
@@ -367,6 +390,7 @@ function renderPanel(r) {
     };
     const m = t("moods");
     const mood = v.puff > 0.45 ? m.puff : v.pucker > 0.6 ? m.kiss : v.jaw > 0.35 && v.brows > 0.35 ? m.surprise : v.smile > 0.6 && v.jaw > 0.2 ? m.laugh : v.smile > 0.4 ? m.smile : v.frown > 0.45 ? m.frown : m.neutral;
+    hud.push(mood);
     return head(t("pExpr"), esc(mood)) + ["smile", "jaw", "brows", "frown", "pucker", "puff"].map((k) => bar(t(k), Math.min(1, v[k]))).join("");
   })();
   // Hands
@@ -375,6 +399,7 @@ function renderPanel(r) {
     // checked on test photos: for normal (not mirrored) frames the model's label is the person's own hand
     const side = hr.handedness[i] && hr.handedness[i][0] && hr.handedness[i][0].categoryName === "Left" ? t("handL") : t("handR");
     const g = hr.gestures[i] && hr.gestures[i][0], gName = g && g.score > 0.5 ? t("gestures")[g.categoryName] || "" : "";
+    hud.push(gName || `✋ ${t("fingers")(fingers(lm, w, h))}`);
     return `<div class="vis-hand"><b>${esc(side)}</b><span>${esc(t("fingers")(fingers(lm, w, h)))}</span>${gName ? `<em>${esc(gName)}</em>` : ""}</div>`;
   }).join(""));
   // Body
@@ -385,10 +410,13 @@ function renderPanel(r) {
     const up = (wr, sh) => vis(wr) && vis(sh) && br[wr].y < br[sh].y; // MediaPipe pose uses the person's own left/right
     const L = up(15, 11), R = up(16, 12);
     const arms = L && R ? t("bothUp") : L ? t("leftUp") : R ? t("rightUp") : t("armsDown");
+    if (L || R) hud.push(arms);
     return row("✦", esc(t("points")(seen))) + row("⇡", esc(arms));
   })());
+  renderHud(hud);
 }
 const dash = () => `<p class="muted">—</p>`;
+function renderHud(items) { hudEl.innerHTML = mode ? items.map((x) => `<span>${esc(x)}</span>`).join("") : ""; }
 
 // ── Controls ───────────────────────────────────────────────
 function paintControls() {

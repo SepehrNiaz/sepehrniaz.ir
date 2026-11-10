@@ -54,7 +54,7 @@
       <div class="nav-links">
         <a href="index.html#tracks" data-i18n="navTracks">Tracks</a>
         <a href="index.html#articles" data-i18n="navArticles">Articles</a>
-        <a href="vision/" class="active" data-i18n="navLab">Lab</a>
+        <a href="index.html#lab" class="active" data-i18n="navLab">Lab</a>
         <a href="index.html#portfolio" data-i18n="navTools">Tools</a>
       </div>
       <div class="nav-actions">
@@ -67,6 +67,7 @@
 
   <main class="vis-main">
     <section class="wrap vis-head">
+      <nav class="lab-tabs" aria-label="Lab"><a href="vision/" aria-current="page" data-i18n="labFace">Face &amp; body</a><a href="objects/" data-i18n="labObjects">Objects</a><a href="voice/" data-i18n="labVoice">Language</a><a href="game/" data-i18n="labGame">Game</a></nav>
       <span class="eyebrow" data-i18n="visEyebrow">Lab · Computer vision</span>
       <h1 class="gradient-text" data-i18n="visTitle">Face, hand &amp; body detection</h1>
       <p class="lead" data-i18n="visLead">Live face mesh, eye tracking, eye colour, expressions, hand gestures and body pose — all running inside your browser.</p>
@@ -74,7 +75,6 @@
     </section>
 
     <section class="wrap vis-app">
-      <div class="vis-stage">
         <div class="vis-toolbar">
           <button type="button" class="btn primary" id="vis-cam"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m22 8-6 4 6 4V8Z"></path><rect width="14" height="12" x="2" y="6" rx="2"></rect></svg><span data-v="start">Start camera</span></button>
           <label class="btn" id="vis-photo-btn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"></path></svg><span data-v="photo">Upload a photo</span><input type="file" accept="image/*" id="vis-file" hidden=""></label>
@@ -85,9 +85,12 @@
           </div>
         </div>
         <div class="vis-view" id="vis-view">
-          <video id="vis-video" playsinline="" muted=""></video>
-          <img id="vis-img" alt="" hidden="">
-          <canvas id="vis-canvas"></canvas>
+          <div class="vis-frame" id="vis-frame">
+            <video id="vis-video" playsinline="" muted=""></video>
+            <img id="vis-img" alt="" hidden="">
+            <canvas id="vis-canvas"></canvas>
+          </div>
+          <div class="vis-hud" id="vis-hud" aria-hidden="true"></div>
           <div class="vis-empty" id="vis-empty">
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><path d="M9 9h.01M15 9h.01"></path></svg>
             <b data-v="emptyTitle">Start the camera or upload a photo</b>
@@ -96,7 +99,6 @@
           <div class="vis-status" id="vis-status" hidden=""></div>
           <span class="vis-fps" id="vis-fps" hidden=""></span>
         </div>
-      </div>
 
       <aside class="vis-panel" id="vis-panel" aria-live="polite">
         <div class="card vis-card" id="vis-c-face"><h3>Face</h3><p class="muted">—</p></div>
@@ -121,7 +123,7 @@
   </main>
 
   <footer class="site-footer" id="site-footer"><div class="wrap">
-      <div class="foot-grid"><nav class="foot-col"><h4>Quick links</h4><ul><li><a href="index.html#tracks"><bdi>Tracks</bdi></a></li><li><a href="index.html#articles"><bdi>Articles</bdi></a></li><li><a href="index.html#library"><bdi>Books</bdi></a></li><li><a href="index.html#portfolio"><bdi>Tools</bdi></a></li><li><a href="vision/"><bdi>Lab</bdi></a></li><li><a href="resume.html"><bdi>Résumé</bdi></a></li><li><a href="resume.html#contact"><bdi>Contact</bdi></a></li></ul></nav><nav class="foot-col"><h4>Learning topics</h4><ul><li><a href="index.html#topic/linux"><bdi>Linux</bdi></a></li><li><a href="index.html#topic/programming"><bdi>Programming</bdi></a></li><li><a href="index.html#topic/network"><bdi>Networking</bdi></a></li><li><a href="index.html#topic/security"><bdi>Security</bdi></a></li></ul></nav><nav class="foot-col"><h4>Latest articles</h4><ul><li><a href="en/security-mindset/"><bdi>The security mindset</bdi></a></li><li><a href="en/what-is-ip/"><bdi>What is an IP address?</bdi></a></li><li><a href="en/bash-scripting/"><bdi>Automate with Bash scripts</bdi></a></li><li><a href="en/javascript-basics/"><bdi>JavaScript basics for the web</bdi></a></li></ul></nav><nav class="foot-col"><h4>Certificates</h4><ul><li><a href="resume.html#certifications"><bdi>Cyber Security Pack</bdi></a></li><li><a href="resume.html#certifications"><bdi>F5 Package</bdi></a></li><li><a href="resume.html#certifications"><bdi>Security+</bdi></a></li><li><a href="resume.html#certifications"><bdi>Cisco CCNA 200-301</bdi></a></li><li><a href="resume.html#certifications"><bdi>Duolingo English Test</bdi></a></li></ul></nav></div>
+      <div class="foot-grid"><nav class="foot-col"><h4>Quick links</h4><ul><li><a href="index.html#tracks"><bdi>Tracks</bdi></a></li><li><a href="index.html#articles"><bdi>Articles</bdi></a></li><li><a href="index.html#library"><bdi>Books</bdi></a></li><li><a href="index.html#portfolio"><bdi>Tools</bdi></a></li><li><a href="index.html#lab"><bdi>Lab</bdi></a></li><li><a href="resume.html"><bdi>Résumé</bdi></a></li><li><a href="resume.html#contact"><bdi>Contact</bdi></a></li></ul></nav><nav class="foot-col"><h4>Learning topics</h4><ul><li><a href="index.html#topic/linux"><bdi>Linux</bdi></a></li><li><a href="index.html#topic/programming"><bdi>Programming</bdi></a></li><li><a href="index.html#topic/network"><bdi>Networking</bdi></a></li><li><a href="index.html#topic/security"><bdi>Security</bdi></a></li></ul></nav><nav class="foot-col"><h4>Latest articles</h4><ul><li><a href="en/security-mindset/"><bdi>The security mindset</bdi></a></li><li><a href="en/what-is-ip/"><bdi>What is an IP address?</bdi></a></li><li><a href="en/bash-scripting/"><bdi>Automate with Bash scripts</bdi></a></li><li><a href="en/javascript-basics/"><bdi>JavaScript basics for the web</bdi></a></li></ul></nav><nav class="foot-col"><h4>Certificates</h4><ul><li><a href="resume.html#certifications"><bdi>Cyber Security Pack</bdi></a></li><li><a href="resume.html#certifications"><bdi>F5 Package</bdi></a></li><li><a href="resume.html#certifications"><bdi>Security+</bdi></a></li><li><a href="resume.html#certifications"><bdi>Cisco CCNA 200-301</bdi></a></li><li><a href="resume.html#certifications"><bdi>Duolingo English Test</bdi></a></li></ul></nav></div>
       <div class="foot-card">
         <a class="foot-id" href="resume.html">
           <span class="foot-badge"><img src="assets/photo.jpg" alt="Sepehr Niaz" loading="lazy"></span>

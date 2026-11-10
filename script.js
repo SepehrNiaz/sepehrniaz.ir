@@ -95,6 +95,10 @@
       tracksEyebrow: "01 · Learning tracks", tracksTitle: "Where do you want to start?",
       artEyebrow: "02 · Articles & tutorials", artTitle: "Step-by-step lessons", artIntro: "Short, practical reads you can follow along with. New ones added over time.",
       libEyebrow2: "04 · Library", toolsEyebrow: "05 · Tools",
+      labFace: "Face & body", labObjects: "Objects", labVoice: "Language", labGame: "Game",
+      labObjTitle: "Object detection with voice", labObjText: "Point the camera at things around you: it finds 80 everyday objects and says their names out loud.",
+      labVoiceTitle: "Which language is this?", labVoiceText: "Speak or upload a recording, and an AI model tells you which of 99 languages it is.",
+      labGameTitle: "Rock · Paper · Scissors", labGameText: "Play against the computer with your real hand — the camera reads ✊ ✋ ✌️.",
       navLab: "Lab", labEyebrow: "03 · Lab", labTitle: "Try it in your browser", labIntro: "Interactive tools that run on your own device — nothing is uploaded.",
       labCardTitle: "Face, hand & body detection", labBadge: "New", labOpen: "Open the tool",
       labCardText: "Turn on your camera or upload a photo: it maps 478 points on your face, follows your eyes, estimates your eye colour, reads expressions, counts fingers, recognises hand gestures and tracks your body — live.",
@@ -147,6 +151,10 @@
       tracksEyebrow: "۰۱ · مسیرهای یادگیری", tracksTitle: "از کجا می‌خواهی شروع کنی؟",
       artEyebrow: "۰۲ · مقاله‌ها و آموزش‌ها", artTitle: "درس‌های گام‌به‌گام", artIntro: "خواندنی‌های کوتاه و عملی که می‌توانی هم‌زمان دنبالشان کنی. به‌مرور بیشتر می‌شوند.",
       libEyebrow2: "۰۴ · کتابخانه", toolsEyebrow: "۰۵ · ابزارها",
+      labFace: "صورت و بدن", labObjects: "اشیا", labVoice: "زبان", labGame: "بازی",
+      labObjTitle: "تشخیص اشیا با صدا", labObjText: "دوربین را رو به اطرافت بگیر: ۸۰ وسیله‌ی روزمره را پیدا می‌کند و اسمشان را بلند می‌گوید.",
+      labVoiceTitle: "این چه زبانی است؟", labVoiceText: "حرف بزن یا صدای ضبط‌شده بده؛ یک مدل هوش مصنوعی می‌گوید کدام زبان از ۹۹ زبان است.",
+      labGameTitle: "سنگ · کاغذ · قیچی", labGameText: "با دست واقعی‌ات با کامپیوتر بازی کن — دوربین ✊ ✋ ✌️ را می‌خواند.",
       navLab: "آزمایشگاه", labEyebrow: "۰۳ · آزمایشگاه", labTitle: "همین‌جا در مرورگرت امتحانش کن", labIntro: "ابزارهای تعاملی که روی دستگاه خودت اجرا می‌شوند — هیچ چیزی آپلود نمی‌شود.",
       labCardTitle: "تشخیص چهره، دست و بدن", labBadge: "جدید", labOpen: "باز کردن ابزار",
       labCardText: "دوربین را روشن کن یا عکس بده: ۴۷۸ نقطه روی صورتت پیدا می‌کند، حرکت چشم‌ها را دنبال می‌کند، رنگ چشمت را تخمین می‌زند، حالت صورت را می‌خواند، انگشت‌ها را می‌شمارد، حرکات دست را تشخیص می‌دهد و بدنت را دنبال می‌کند — به‌صورت زنده.",
@@ -214,7 +222,7 @@
     const cols = [
       col(ui("footQuick"), [
         link(`${H}#tracks`, ui("navTracks")), link(`${H}#articles`, ui("navArticles")),
-        link(`${H}#library`, ui("navBooks")), link(`${H}#portfolio`, ui("navTools")), link("vision/", ui("navLab")),
+        link(`${H}#library`, ui("navBooks")), link(`${H}#portfolio`, ui("navTools")), link(`${H}#lab`, ui("navLab")),
         link(R ? "resume.html" : "#top", ui("navResume")), link(`${R}#contact`, ui("navContact"))
       ]),
       col(ui("footTopics"), L.tracks.map((t) => link(`${H}#topic/${t.id}`, tr(t.title)))),

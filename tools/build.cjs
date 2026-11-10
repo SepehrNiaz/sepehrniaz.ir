@@ -118,7 +118,7 @@ function articlePage(L, a, alt) {
       <div class="nav-links">
         <a href="index.html#tracks" data-i18n="navTracks"></a>
         <a href="index.html#articles" data-i18n="navArticles"></a>
-        <a href="vision/" data-i18n="navLab"></a>
+        <a href="index.html#lab" data-i18n="navLab"></a>
         <a href="index.html#library" data-i18n="navBooks"></a>
         <a href="index.html#portfolio" data-i18n="navTools"></a>
       </div>
@@ -214,7 +214,7 @@ function sitemap(articles) {
   const out = [
     entry(`${SITE}/`, hubAlts, today, "weekly", "1.0"),
     entry(`${SITE}/?lang=fa`, hubAlts, today, "weekly", "0.9"),
-    entry(`${SITE}/vision/`, null, today, "monthly", "0.9"),
+    ...["vision", "objects", "voice", "game"].map((p) => entry(`${SITE}/${p}/`, null, today, "monthly", "0.9")),
     entry(`${SITE}/resume.html`, null, today, "monthly", "0.7")
   ];
   for (const a of articles) {
@@ -260,7 +260,7 @@ function sitemap(articles) {
 
   // 2. put the drawn text into the HTML
   await prerender(browser, "index.html", "?lang=en");
-  await prerender(browser, "vision/index.html", "?lang=en");
+  for (const p of ["vision", "objects", "voice", "game"]) await prerender(browser, `${p}/index.html`, "?lang=en");
   for (const rel of written) await prerender(browser, rel);
 
   // 3. sitemap
@@ -268,5 +268,5 @@ function sitemap(articles) {
 
   await browser.close();
   server.close();
-  console.log(`built ${written.length} article pages, index.html, vision/ and sitemap.xml (${ids.length * 2 + 4} URLs)`);
+  console.log(`built ${written.length} article pages, index.html, the 4 lab pages and sitemap.xml (${ids.length * 2 + 7} URLs)`);
 })().catch((e) => { console.error(e); process.exit(1); });
