@@ -1294,3 +1294,27 @@ body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-even
 @media (max-width: 960px) { .pr-layout { grid-template-columns: 1fr; } .pr-coach { position: static; order: -1; } .pr-screen { height: 280px; } }
 @media (max-width: 640px) { .lab-feature { grid-template-columns: auto minmax(0, 1fr); } .lab-feature .art-read { grid-column: 1 / -1; grid-row: auto; } .lab-feature p, .lab-langs { grid-column: 1 / -1; } .lab-feature .icon-tile { grid-row: auto; } .pr-screen { font-size: 12.5px; padding: 12px 12px 4px; } .pr-line { padding: 6px 12px 12px; } .pr-editor textarea { height: 200px; } }
 @media (max-width: 960px) { body[data-page="practice"]:has(.pr-work :focus) .ai-launcher, body[data-page="practice"]:has(.pr-work :focus) .ai-nudge { opacity: 0; pointer-events: none; } }
+
+/* ───────── Code walk-through ───────── */
+button.port-code { background: none; border: 0; padding: 0; cursor: pointer; font: inherit; font-size: 14px; }
+.port-codebox { margin-top: 24px; scroll-margin-top: 12px; }
+.code-steps { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 18px; }
+.code-note { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 8px; }
+.code-note > b { flex: none; width: 28px; height: 28px; border-radius: 9px; display: grid; place-items: center; background: var(--grad); color: var(--on-accent); font-size: 13px; }
+.code-note p { margin: 0; line-height: 1.85; font-size: 14.5px; color: var(--text); }
+.code-note code { display: inline-block; padding: 0 8px; border-radius: 7px; background: color-mix(in srgb, var(--c1) 16%, transparent); color: var(--c1); font: 600 13px "JetBrains Mono", monospace; }
+.code-snip { margin: 0; padding: 14px 16px; border-radius: 12px; background: #0a0f1c; border: 1px solid rgba(255, 255, 255, .09); color: #d7deea; font: 12.5px/1.7 "JetBrains Mono", ui-monospace, monospace; overflow-x: auto; text-align: left; tab-size: 4; max-height: 420px; }
+.code-snip i { font-style: normal; }
+.code-snip .k { color: #c4a7ff; } .code-snip .s { color: #86efac; } .code-snip .c { color: #7d8aa3; } .code-snip .n { color: #fbbf77; }
+.code-full { margin-top: 18px; }
+.code-full summary { cursor: pointer; color: var(--muted); font-size: 14px; padding: 8px 0; }
+.code-full summary:hover { color: var(--c1); }
+.code-full .code-snip { max-height: 520px; margin-top: 8px; }
+
+/* ───────── Copy protection ───────── */
+body { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+input, textarea, [contenteditable], .pr-work, .pr-work * { -webkit-user-select: text; user-select: text; }
+img, svg { -webkit-user-drag: none; }
+.shield { position: fixed; inset: 0; z-index: 2147483647; background: var(--bg); display: none; }
+.shield.on { display: block; }
+@media print { body > * { display: none !important; } body::after { content: "sepehrniaz.ir"; display: block; padding: 40px; font: 600 20px sans-serif; color: #000; } }

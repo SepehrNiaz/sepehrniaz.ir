@@ -144,8 +144,6 @@ window.CV = {
   // Portfolio: detailed showcases of tools I've built (code in projects/).
   // category: network | security | support
   // preview: { image: "path.png" } or { cmd: "command", output: "terminal text" }
-  // Where the code lives; each item's `path` is added to this
-  portfolioRepo: "https://github.com/SepehrNiaz/sepehrniaz.ir/tree/main/",
   portfolio: [
     {
       name: { en: "Network Uptime Monitor", fa: "مانیتورینگ تجهیزات شبکه" },
@@ -164,6 +162,16 @@ window.CV = {
       preview: { image: "projects/network-uptime-monitor/docs/dashboard.png" },
       learn: { en: "How ping and a TCP port check differ, how a program does many checks at once (threads), and how to keep history in a small database. Try it yourself: in the practice lab run ping 192.168.1.1 in the Linux terminal, then write a Python loop over a list of IP addresses.",
                fa: "تفاوت Ping با بررسی پورت TCP، اینکه یک برنامه چطور چند بررسی را هم‌زمان انجام می‌دهد (Thread) و چطور تاریخچه را در یک پایگاه‌داده‌ی کوچک نگه می‌دارد. خودت امتحان کن: در آزمایشگاه تمرین در ترمینال لینوکس ping 192.168.1.1 را بزن و بعد در پایتون یک حلقه روی فهرستی از IPها بنویس." },
+      code: { file: "monitor.py", steps: [
+        { fn: "tcp_check", en: "Is the device answering? This tries to open a TCP connection to one port and measures how long it took. If the connection fails, it returns None, which means 'down'.",
+          fa: "دستگاه جواب می‌دهد یا نه؟ این تابع سعی می‌کند به یک پورت اتصال TCP باز کند و زمانش را اندازه می‌گیرد. اگر اتصال برقرار نشود None برمی‌گرداند، یعنی «قطع»." },
+        { fn: "ping_check", en: "For devices without a port to test, it runs the system's own ping command once. Windows and Linux use different options (-n / -c), so the code picks the right ones.",
+          fa: "برای دستگاه‌هایی که پورتی برای آزمایش ندارند، همان دستور ping سیستم را یک بار اجرا می‌کند. گزینه‌های ویندوز و لینوکس فرق دارند (-n و -c)، پس کد نسخه‌ی درست را انتخاب می‌کند." },
+        { fn: "check_all", en: "Checking 50 devices one after another would be slow. A thread pool checks them all at the same time, so a full round takes about one second.",
+          fa: "بررسی ۵۰ دستگاه پشت‌سرهم کند است. یک Thread Pool همه را هم‌زمان بررسی می‌کند و یک دور کامل حدود یک ثانیه طول می‌کشد." },
+        { fn: "uptime", en: "Every result is saved in SQLite. One SQL query then gives the uptime of each device: the average of the 'up' column (0 or 1) times 100.",
+          fa: "هر نتیجه در SQLite ذخیره می‌شود. بعد یک کوئری SQL درصد در دسترس بودن هر دستگاه را می‌دهد: میانگین ستون up (صفر یا یک) ضرب در ۱۰۰." }
+      ] },
       path: "projects/network-uptime-monitor"
     },
     {
@@ -184,6 +192,14 @@ window.CV = {
         output: "examples/broken.json: 7 problem(s)\n  - VLAN 1003 is reserved or out of range\n  - Gi1/0/4 used by both 'PCs' and 'Printers'\n  - Gi1/0/4-6: access VLAN 50 is not defined\n  - Gi1/0/24: trunk allows undefined VLAN 20\n  - Gi1/0/24: native VLAN carries user traffic (VLAN hopping risk)\n  - management VLAN 99 is not defined\n  - gateway 10.0.1.1 is not in management subnet 10.0.0.0/24" },
       learn: { en: "What VLANs, access ports and trunks are, which Layer 2 protections a switch should always have, and how a program turns a short description (JSON) into a long, error-free text. Read the lesson on VLANs first, then open the code and follow one port from the JSON to the final config.",
                fa: "اینکه VLAN، پورت Access و ترانک چیست، یک سوئیچ همیشه چه محافظت‌های لایه‌ی ۲ باید داشته باشد و یک برنامه چطور یک توضیح کوتاه (JSON) را به متنی بلند و بی‌غلط تبدیل می‌کند. اول درس VLAN را بخوان، بعد کد را باز کن و مسیر یک پورت را از JSON تا کانفیگ نهایی دنبال کن." },
+      code: { file: "genconfig.py", steps: [
+        { fn: "expand_ports", en: "Turns a short port range like Gi1/0/1-3 into the full list of ports, and stops with a clear message if the range is written wrongly.",
+          fa: "یک بازه‌ی کوتاه مثل Gi1/0/1-3 را به فهرست کامل پورت‌ها تبدیل می‌کند و اگر بازه غلط نوشته شده باشد با پیام روشن متوقف می‌شود." },
+        { fn: "validate", en: "Before writing any config, the design is checked: are VLAN numbers valid, is a port used twice, does every port point to a VLAN that exists? It collects every problem instead of stopping at the first.",
+          fa: "قبل از نوشتن کانفیگ، طراحی بررسی می‌شود: شماره‌ی VLANها معتبر است؟ پورتی دو بار استفاده نشده؟ هر پورت به VLANی اشاره می‌کند که وجود دارد؟ به‌جای توقف در اولین خطا، همه‌ی مشکل‌ها را جمع می‌کند." },
+        { fn: "ios_range", en: "Cisco IOS wants ranges written with spaces (Gi1/0/1 - 6). One regular expression rewrites them in that form.",
+          fa: "IOS سیسکو بازه‌ها را با فاصله می‌خواهد (Gi1/0/1 - 6). یک عبارت باقاعده (Regex) آن‌ها را به همین شکل بازنویسی می‌کند." }
+      ] },
       path: "projects/cisco-config-generator"
     },
     {
@@ -204,6 +220,16 @@ window.CV = {
         output: "Failed logins: 69   Successful logins: 9   Source IPs: 5\nFlagged (5+ failures within 300s, or a login after them): 2\n\nIP                 Fails  Burst  Invalid  Top usernames\n198.51.100.77         18     18        0  admin\n203.0.113.45          46     46        9  ftpuser, pi, guest, ubuntu\n\n!! 198.51.100.77 logged in as 'admin' after 18 failures.\n\n# cisco rules\nip access-list extended BLOCK-SSH-ATTACKERS\n deny tcp host 198.51.100.77 any eq 22\n deny tcp host 203.0.113.45 any eq 22\n permit ip any any" },
       learn: { en: "How to read a Linux auth log, what a brute-force attack looks like, and how to pull facts out of text with patterns (regex). Try it yourself: in the practice lab's Linux terminal run grep Failed logs/auth.log | wc -l — that one line is the heart of this tool.",
                fa: "خواندن لاگ ورود لینوکس، اینکه حمله‌ی Brute-force چه شکلی است و چطور با الگو (Regex) از دل متن اطلاعات بیرون بکشی. خودت امتحان کن: در ترمینال لینوکسِ آزمایشگاه تمرین بزن grep Failed logs/auth.log | wc -l — همین یک خط قلب این ابزار است." },
+      code: { file: "log_analyzer.py", steps: [
+        { fn: "analyze", en: "Reads the log line by line. Regular expressions pick out three kinds of line: a failed password, an unknown username and a successful login. Everything is grouped by the attacker's IP address.",
+          fa: "لاگ را خط‌به‌خط می‌خواند. عبارت‌های باقاعده سه نوع خط را جدا می‌کنند: رمز اشتباه، نام کاربری ناشناخته و ورود موفق. همه‌چیز بر اساس IP مهاجم دسته‌بندی می‌شود." },
+        { fn: "max_burst", en: "The sliding window: it finds the largest number of failures that happened within a short time (for example 5 minutes). Many failures close together mean a robot, not a person who forgot a password.",
+          fa: "پنجره‌ی لغزان: بیشترین تعداد تلاش ناموفق را که در یک بازه‌ی کوتاه (مثلاً ۵ دقیقه) رخ داده پیدا می‌کند. تلاش‌های زیادِ پشت‌سرهم یعنی ربات، نه کسی که رمزش را فراموش کرده." },
+        { fn: "compromised", en: "The most important check: did this IP log in successfully after many failures? That may mean the password was guessed.",
+          fa: "مهم‌ترین بررسی: آیا این IP بعد از تعداد زیادی تلاش ناموفق، موفق به ورود شده؟ این می‌تواند یعنی رمز حدس زده شده است." },
+        { fn: "block_rules", en: "Writes ready-to-paste firewall rules for the attackers' addresses, for iptables, ufw or a Cisco access list.",
+          fa: "برای آدرس مهاجم‌ها قانون آماده‌ی فایروال می‌نویسد: برای iptables، ufw یا Access List سیسکو." }
+      ] },
       path: "projects/ssh-log-analyzer"
     },
     {
@@ -224,6 +250,16 @@ window.CV = {
         output: "Scanning 14 host(s), 26 port(s)...\n\n192.168.1.1\n     22/tcp  open  ssh          SSH-2.0-Cisco-1.25\n     80/tcp  open  http         Server: lighttpd\n\n192.168.1.8\n     23/tcp  open  telnet\n         ! Telnet sends passwords in clear text, use SSH\n  37777/tcp  open  dahua-dvr\n         ! DVR/NVR management port: never expose it to the guest or public network\n\nDone in 1.4s: 2 host(s) with open ports." },
       learn: { en: "What a port is, how a TCP connection opens, which services are risky to leave open (Telnet, RDP, SMB) and why. Only scan networks you own or have written permission to test.",
                fa: "اینکه پورت چیست، اتصال TCP چطور باز می‌شود و باز ماندن کدام سرویس‌ها خطرناک است (Telnet، RDP، SMB) و چرا. فقط شبکه‌ای را اسکن کن که مال خودت است یا اجازه‌ی کتبی برای آزمایشش داری." },
+      code: { file: "portscan.py", steps: [
+        { fn: "parse_ports", en: "Turns text like 22,80,8000-8010 into a clean, sorted list of port numbers and rejects anything outside 1–65535.",
+          fa: "متنی مثل 22,80,8000-8010 را به فهرست مرتب شماره‌ی پورت‌ها تبدیل می‌کند و هر چیزی خارج از ۱ تا ۶۵۵۳۵ را رد می‌کند." },
+        { fn: "expand_targets", en: "Accepts one address, a hostname or a whole range like 192.168.1.0/28. It refuses ranges larger than 1024 addresses, as a safety limit.",
+          fa: "یک آدرس، یک نام یا یک بازه‌ی کامل مثل 192.168.1.0/28 را می‌پذیرد. برای ایمنی، بازه‌های بزرگ‌تر از ۱۰۲۴ آدرس را قبول نمی‌کند." },
+        { fn: "scan_port", en: "The heart of the scanner: try to connect. If the connection opens, the port is open; if it fails, the port is closed or filtered.",
+          fa: "قلب اسکنر: تلاش برای اتصال. اگر اتصال باز شود پورت باز است و اگر نشود پورت بسته یا فیلتر شده است." },
+        { fn: "grab_banner", en: "Many services introduce themselves when you connect. This reads the first line (for example the SSH version), which tells you what is running there.",
+          fa: "خیلی از سرویس‌ها موقع اتصال خودشان را معرفی می‌کنند. این تابع خط اول را می‌خواند (مثلاً نسخه‌ی SSH) تا معلوم شود چه چیزی آنجا اجرا می‌شود." }
+      ] },
       path: "projects/port-scanner"
     },
     {
@@ -244,6 +280,14 @@ window.CV = {
         output: "Name       Need  Subnet           Mask             Fits\n--------------------------------------------------------\nRooms      300   172.16.0.0/23    255.255.254.0    510\nReception  120   172.16.2.0/25    255.255.255.128  126\nCameras    60    172.16.2.128/26  255.255.255.192  62\nOffice     25    172.16.2.192/27  255.255.255.224  30" },
       learn: { en: "How an IP address splits into network and host parts, what /24 or /26 means, and how to size a subnet for a number of devices. Work one example by hand first (how many hosts fit in a /26?), then check your answer with the tool.",
                fa: "اینکه آدرس IP چطور به بخش شبکه و میزبان تقسیم می‌شود، /24 یا /26 یعنی چه و برای تعداد مشخصی دستگاه چه اندازه زیرشبکه‌ای لازم است. اول یک مثال را دستی حل کن (در یک /26 چند دستگاه جا می‌شود؟) و بعد جوابت را با ابزار مقایسه کن." },
+      code: { file: "subnet_calc.py", steps: [
+        { fn: "prefix_for_hosts", en: "How big must a subnet be for N devices? Two addresses are reserved (network and broadcast), so it finds the smallest power of two that holds N + 2.",
+          fa: "برای N دستگاه زیرشبکه چقدر باید بزرگ باشد؟ دو آدرس رزرو است (شبکه و Broadcast)، پس کوچک‌ترین توان ۲ را که N + 2 در آن جا شود پیدا می‌کند." },
+        { fn: "vlsm", en: "Sorts the departments from largest to smallest and hands each one the next free block. Starting with the largest keeps the blocks aligned, so no addresses are wasted between them.",
+          fa: "بخش‌ها را از بزرگ به کوچک مرتب می‌کند و به هر کدام بلوک آزاد بعدی را می‌دهد. شروع از بزرگ‌ترین باعث می‌شود بلوک‌ها هم‌تراز بمانند و آدرسی بینشان هدر نرود." },
+        { fn: "split", en: "Cuts one network into equal smaller subnets, using Python's built-in ipaddress module.",
+          fa: "یک شبکه را با ماژول آماده‌ی ipaddress پایتون به زیرشبکه‌های مساوی کوچک‌تر تقسیم می‌کند." }
+      ] },
       path: "projects/subnet-calculator"
     },
     {
@@ -263,6 +307,14 @@ window.CV = {
       preview: { image: "projects/helpdesk-tracker/docs/report.png" },
       learn: { en: "How to design simple tables for real work, and how to turn rows into a report with SQL (COUNT, GROUP BY, averages). Try it yourself: the SQL tab of the practice lab has exercises with exactly these commands.",
                fa: "طراحی جدول‌های ساده برای کار واقعی و ساختن گزارش از ردیف‌ها با SQL (COUNT، GROUP BY و میانگین). خودت امتحان کن: زبانه‌ی SQL در آزمایشگاه تمرین دقیقاً با همین دستورها تمرین دارد." },
+      code: { file: "helpdesk.py", steps: [
+        { fn: "add", en: "Opening a ticket is one INSERT into the database. The area and priority are checked first, so reports stay clean.",
+          fa: "ثبت یک تیکت یعنی یک INSERT در پایگاه‌داده. حوزه و اولویت اول بررسی می‌شوند تا گزارش‌ها تمیز بمانند." },
+        { fn: "close", en: "Closing a ticket is an UPDATE that stores the time and what fixed it. The condition 'closed IS NULL' stops a ticket being closed twice.",
+          fa: "بستن تیکت یک UPDATE است که زمان و راه‌حل را ذخیره می‌کند. شرط closed IS NULL جلوی دوبار بسته‌شدن را می‌گیرد." },
+        { fn: "summarize", en: "Builds the monthly report: how many tickets, the average hours to fix, the percentage finished within the target time, and counts per area and department.",
+          fa: "گزارش ماهانه را می‌سازد: تعداد تیکت‌ها، میانگین ساعت رسیدگی، درصدی که در زمان هدف تمام شده و شمارش بر اساس حوزه و بخش." }
+      ] },
       path: "projects/helpdesk-tracker"
     }
   ],

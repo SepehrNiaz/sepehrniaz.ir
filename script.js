@@ -86,7 +86,7 @@
       portIntro: "Working tools I wrote for real problems in network, security and IT support. Each one comes with its source code, documentation and automated tests.",
       portAll: "All", portNetwork: "Networking", portSecurity: "Security", portSupport: "IT support",
       portProblem: "The problem", portSolution: "What I built", portFeatures: "Features", portTech: "Built with",
-      portCode: "View code", portPreview: "Open full size",
+      portCode: "Code, explained", codeTitle: "How the code works", codeFull: "The whole file", codeLoading: "Loading the code…", codeErr: "The code could not be loaded. Check your connection and try again.", codeLines: (n) => `${n} lines`, portPreview: "Open full size",
       projEyebrow: "07 · More work", projTitle: "Writing & reports",
       libEyebrow: "07 · Library", libTitle: "Articles & books", libIntro: "My writing, free to read online.", navLibrary: "Books", libRead: "Start reading", libContinue: "Continue from page", libDownload: "Download PDF", libPages: "pages", libFree: "Free", libContents: "Contents", libBack: "Back to the site", libPage: "Page", libOf: "of", libLoading: "Loading the book…", libFailed: "The book couldn't load. Please check your connection and try again.", libRetry: "Try again", navAsk: "How would you like to turn the pages?", navAskNote: "You can change this any time from the top bar.", navSwipe: "With your finger", navSwipeHint: "Swipe the page, or tap its edge", navButtons: "With buttons", navButtonsHint: "Use the arrow buttons under the book", navMode: "Page turning", libOpenPdf: "Open PDF", libZoomIn: "Zoom in", libZoomOut: "Zoom out", libBy: "By", libBook: "Book", libArticle: "Article", libToc: "Contents", libClose: "Close",
       navLearn: "Learn", navResume: "Résumé", navTracks: "Tracks", navArticles: "Articles", navTools: "Tools", navBooks: "Books",
@@ -144,7 +144,7 @@
       portIntro: "ابزارهای کاربردی که برای مشکلات واقعی شبکه، امنیت و پشتیبانی IT نوشته‌ام. هرکدام کد منبع، مستندات و تست خودکار دارد.",
       portAll: "همه", portNetwork: "شبکه", portSecurity: "امنیت", portSupport: "پشتیبانی IT",
       portProblem: "مشکل", portSolution: "راه‌حل من", portFeatures: "امکانات", portTech: "ابزار و فناوری",
-      portCode: "مشاهده‌ی کد", portPreview: "نمایش در اندازه‌ی کامل",
+      portCode: "کد با توضیح", codeTitle: "کد چطور کار می‌کند", codeFull: "کل فایل", codeLoading: "در حال بارگذاری کد…", codeErr: "کد بارگذاری نشد. اتصال را بررسی کن و دوباره امتحان کن.", codeLines: (n) => `${n} خط`, portPreview: "نمایش در اندازه‌ی کامل",
       projEyebrow: "۰۷ · کارهای دیگر", projTitle: "نوشته‌ها و گزارش‌ها",
       libEyebrow: "۰۷ · کتابخانه", libTitle: "مقالات و کتاب‌ها", libIntro: "نوشته‌های من؛ برای مطالعه‌ی آنلاین و رایگان.", navLibrary: "کتاب‌ها", libRead: "شروع مطالعه", libContinue: "ادامه از صفحه‌ی", libDownload: "دانلود PDF", libPages: "صفحه", libFree: "رایگان", libContents: "فهرست مطالب", libBack: "بازگشت به سایت", libPage: "صفحه", libOf: "از", libLoading: "در حال بارگذاری کتاب…", libFailed: "کتاب بارگذاری نشد. لطفاً اتصال اینترنت را بررسی کنید و دوباره امتحان کنید.", libRetry: "تلاش دوباره", navAsk: "دوست دارید صفحه‌ها را چطور ورق بزنید؟", navAskNote: "هر وقت خواستید می‌توانید از نوار بالا عوضش کنید.", navSwipe: "با انگشت", navSwipeHint: "صفحه را بکشید یا روی لبه‌اش بزنید", navButtons: "با دکمه‌ها", navButtonsHint: "با دکمه‌های فلش زیر کتاب", navMode: "روش ورق زدن", libOpenPdf: "باز کردن PDF", libZoomIn: "بزرگ‌نمایی", libZoomOut: "کوچک‌نمایی", libBy: "نوشته‌ی", libBook: "کتاب", libArticle: "مقاله", libToc: "فهرست", libClose: "بستن",
       navLearn: "آموزش", navResume: "رزومه", navTracks: "مسیرها", navArticles: "مقاله‌ها", navTools: "ابزارها", navBooks: "کتاب‌ها",
@@ -466,10 +466,9 @@
     $("port-filters").innerHTML = tabs.map(([k, label, n]) =>
       `<button type="button" role="tab" data-filter="${k}" aria-selected="${k === portFilter}" class="${k === portFilter ? "on" : ""}">
         ${esc(label)}<span>${num(n)}</span></button>`).join("");
-    const repo = cv.portfolioRepo || "";
     $("portfolio-list").innerHTML = items.map((x, i) => {
       const name = esc(tr(x.name));
-      const href = x.link || (x.path ? repo + x.path : "");
+      const href = x.link || "";
       const detailed = !!(x.problem || x.features);
       const hidden = portFilter !== "all" && x.category !== portFilter;
       return `<article class="card hover port reveal${detailed ? " is-detailed" : ""}" style="--d:${(i % 3) * 0.06}s" data-cat="${esc(x.category)}" data-port="${i}"${hidden ? " hidden" : ""}>
@@ -481,7 +480,7 @@
           ${(x.tech || []).length ? `<ul class="chips port-tech">${x.tech.slice(0, 4).map((t) => `<li><bdi>${esc(t)}</bdi></li>`).join("")}</ul>` : ""}
           <div class="port-foot">
             ${detailed ? `<button type="button" class="btn sm port-more" data-port="${i}">${esc(ui("portDetails"))}</button>` : ""}
-            ${href ? `<a class="port-code" href="${esc(href)}"${ext(href)}>${icon("github")}${esc(ui("portCode"))}</a>` : ""}
+            ${x.code ? `<button type="button" class="port-code" data-code="${i}">${icon("code")}${esc(ui("portCode"))}</button>` : href ? `<a class="port-code" href="${esc(href)}"${ext(href)}>${icon("arrow")}${esc(ui("profile"))}</a>` : ""}
           </div>
         </div>
       </article>`;
@@ -510,11 +509,9 @@
   pmodal.setAttribute("aria-modal", "true");
   document.body.appendChild(pmodal);
   let pmodalFocus = null;
-  function openProject(i) {
+  function openProject(i, withCode) {
     const x = portItems()[i];
     if (!x) return;
-    const repo = cv.portfolioRepo || "";
-    const href = x.link || (x.path ? repo + x.path : "");
     const name = esc(tr(x.name));
     pmodal.innerHTML = `<div class="pmodal-panel">
       <header class="pmodal-head">
@@ -529,7 +526,7 @@
         ${x.features ? `<h4>${esc(ui("portFeatures"))}</h4><ul class="points">${(tr(x.features) || []).map((f) => `<li>${icon("check")}<span>${esc(f)}</span></li>`).join("")}</ul>` : ""}
         ${x.learn ? `<div class="tool-learn"><b>${esc(ui("toolLearn"))}</b>${esc(tr(x.learn))}</div>` : ""}
         ${(x.tech || []).length ? `<h4>${esc(ui("portTech"))}</h4><ul class="chips port-tech">${x.tech.map((t) => `<li><bdi>${esc(t)}</bdi></li>`).join("")}</ul>` : ""}
-        ${href ? `<div class="port-actions"><a class="btn primary sm" href="${esc(href)}"${ext(href)}>${icon("github")}${esc(ui("portCode"))}</a></div>` : ""}
+        ${x.code ? `<div class="port-codebox"><button type="button" class="btn primary sm port-showcode">${icon("code")}${esc(ui("portCode"))}</button></div>` : ""}
       </div>
     </div>`;
     pmodal.setAttribute("aria-label", tr(x.name));
@@ -537,6 +534,56 @@
     pmodal.hidden = false;
     document.body.classList.add("no-scroll");
     pmodal.querySelector(".pmodal-close").focus();
+    const show = pmodal.querySelector(".port-showcode");
+    if (show) show.addEventListener("click", () => showCode(x));
+    if (show && withCode) showCode(x);
+  }
+
+  // The tool's own code, shown here with a plain-language note on each part
+  const PY_WORDS = /^(def|class|return|if|elif|else|for|while|in|not|and|or|import|from|as|with|try|except|raise|None|True|False|lambda|continue|break|pass|is|yield)$/;
+  function paintPy(src) {
+    return src.split("\n").map((line) => {
+      let out = "", m;
+      const re = /(#.*$)|("""[^]*?"""|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*')|([A-Za-z_][A-Za-z0-9_]*)|(\d+(?:\.\d+)?)|([^]#"'A-Za-z_0-9]+|[^])/g;
+      while ((m = re.exec(line))) {
+        if (m[1]) out += `<i class="c">${esc(m[1])}</i>`;
+        else if (m[2]) out += `<i class="s">${esc(m[2])}</i>`;
+        else if (m[3]) out += PY_WORDS.test(m[3]) ? `<i class="k">${m[3]}</i>` : m[3];
+        else if (m[4]) out += `<i class="n">${m[4]}</i>`;
+        else out += esc(m[5]);
+      }
+      return out;
+    }).join("\n");
+  }
+  // The lines of one function: from its "def" to the next line that is not indented deeper
+  function fnBlock(lines, name) {
+    const at = lines.findIndex((l) => new RegExp("^\\s*def " + name + "\\(").test(l));
+    if (at < 0) return null;
+    const indent = lines[at].match(/^\s*/)[0].length;
+    let from = at;
+    while (from > 0 && /^\s*@/.test(lines[from - 1])) from--;
+    let to = at + 1;
+    while (to < lines.length && (!lines[to].trim() || lines[to].match(/^\s*/)[0].length > indent)) to++;
+    while (to > at + 1 && !lines[to - 1].trim()) to--;
+    return { from, text: lines.slice(from, to).map((l) => l.slice(Math.min(indent, l.match(/^\s*/)[0].length))).join("\n") };
+  }
+  const codeCache = {};
+  function showCode(x) {
+    const box = pmodal.querySelector(".port-codebox");
+    if (!box || box.dataset.open) { if (box) box.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" }); return; }
+    box.dataset.open = "1";
+    box.innerHTML = `<p class="muted">${esc(ui("codeLoading"))}</p>`;
+    const url = `${x.path}/${x.code.file}`;
+    (codeCache[url] || (codeCache[url] = fetch(url).then((r) => { if (!r.ok) throw new Error(r.status); return r.text(); }))).then((src) => {
+      const lines = src.replace(/\r/g, "").split("\n");
+      const steps = x.code.steps.map((st, k) => {
+        const b = fnBlock(lines, st.fn);
+        return b ? `<li><div class="code-note"><b>${num(k + 1)}</b><p><code dir="ltr">${esc(st.fn)}()</code> ${esc(tr(st))}</p></div><pre class="code-snip" dir="ltr"><code>${paintPy(b.text)}</code></pre></li>` : "";
+      }).join("");
+      box.innerHTML = `<h4>${esc(ui("codeTitle"))}</h4><ol class="code-steps">${steps}</ol>
+        <details class="code-full"><summary>${esc(ui("codeFull"))} · <bdi dir="ltr">${esc(x.code.file)}</bdi> · ${esc(ui("codeLines")(num(lines.length)))}</summary><pre class="code-snip" dir="ltr"><code>${paintPy(src.replace(/\r/g, "").replace(/\n+$/, ""))}</code></pre></details>`;
+      box.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" });
+    }).catch(() => { delete codeCache[url]; delete box.dataset.open; box.innerHTML = `<p class="form-status err">${esc(ui("codeErr"))}</p><button type="button" class="btn sm port-showcode">${icon("code")}${esc(ui("portCode"))}</button>`; box.querySelector("button").addEventListener("click", () => showCode(x)); });
   }
   function closeProject() {
     pmodal.hidden = true;
@@ -547,7 +594,7 @@
     if (e.target.closest("a")) return;
     const card = e.target.closest("[data-port]");
     const x = card && portItems()[+card.dataset.port];
-    if (x && (x.problem || x.features)) openProject(+card.dataset.port);
+    if (x && (x.problem || x.features)) openProject(+card.dataset.port, !!e.target.closest("[data-code]"));
   });
   pmodal.addEventListener("click", (e) => { if (e.target === pmodal || e.target.closest(".pmodal-close")) closeProject(); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !pmodal.hidden) closeProject(); });
@@ -1177,7 +1224,7 @@
   }
   window.addEventListener("hashchange", articleRoute);
   document.addEventListener("keydown", (e) => { if (!adoc.hidden && e.key === "Escape") { closeArticle(false); const a = $("articles"); if (a.scrollIntoView) a.scrollIntoView(); } });
-  document.addEventListener("cv:langchange", () => { renderLearn(); if (!adoc.hidden && adocCur) openArticle(adocCur.id); });
+  document.addEventListener("cv:langchange", () => { renderLearn(); document.querySelectorAll(".reveal:not(.in)").forEach((el) => revealObs.observe(el)); if (!adoc.hidden && adocCur) openArticle(adocCur.id); });
 
 
   // Pieces of one article in the current language, used by tools/build.cjs
@@ -1353,6 +1400,36 @@
       revealObs.unobserve(e.target);
     });
   }, { threshold: 0.15 });
+
+  // ── Make copying the site harder ──────────────────────────
+  // A website can't stop a determined person, but this removes the easy ways:
+  // right-click, selecting and dragging, saving, printing and the usual shortcuts.
+  // Typing areas (forms, chat, the practice lab) keep working normally.
+  (function protect() {
+    const free = (t) => !!(t && t.closest && t.closest("input, textarea, [contenteditable], .pr-work"));
+    ["contextmenu", "dragstart", "selectstart", "copy", "cut"].forEach((type) =>
+      document.addEventListener(type, (e) => { if (!free(e.target)) e.preventDefault(); }));
+    const shield = document.createElement("div");
+    shield.className = "shield";
+    shield.setAttribute("aria-hidden", "true");
+    document.body.appendChild(shield);
+    let timer = 0;
+    const cover = (ms) => { shield.classList.add("on"); clearTimeout(timer); if (ms) timer = setTimeout(() => shield.classList.remove("on"), ms); };
+    document.addEventListener("keydown", (e) => {
+      const k = (e.key || "").toLowerCase(), mod = e.ctrlKey || e.metaKey;
+      if (k === "printscreen" || (e.metaKey && e.shiftKey && /^[345s]$/.test(k))) { cover(1500); return; }
+      if (k === "f12" || (mod && e.shiftKey && /^[ijck]$/.test(k)) || (mod && /^[sup]$/.test(k)) || (mod && !free(e.target) && /^[ac]$/.test(k))) e.preventDefault();
+    }, true);
+    document.addEventListener("keyup", (e) => {
+      if ((e.key || "").toLowerCase() !== "printscreen") return;
+      cover(1500);
+      try { navigator.clipboard.writeText("").catch(() => {}); } catch (err) {}
+    }, true);
+    // Hide the page while the window is not in front (capture tools take focus)
+    window.addEventListener("blur", () => { const a = document.activeElement; if (!a || a.tagName !== "IFRAME") cover(0); });
+    window.addEventListener("focus", () => { clearTimeout(timer); shield.classList.remove("on"); });
+    document.addEventListener("visibilitychange", () => { if (document.hidden) cover(0); else shield.classList.remove("on"); });
+  })();
 
   // ── Language toggle ───────────────────────────────────────
   const langBtn = $("lang-toggle");
