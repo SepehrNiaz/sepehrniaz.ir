@@ -1,0 +1,2 @@
+Pyodide 314.0.7 (Python in the browser, Mozilla Public License 2.0): https://pyodide.org
+sql.js 1.15.2 (SQLite in the browser, MIT License): https://github.com/sql-js/sql.js

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="../">
+  <title>Practice lab: Linux, Windows, Python, JS, HTML, SQL — Sepehr Niaz</title>
+  <meta name="description" content="Free practice lab in your browser: a Linux terminal, Windows command line, Python, JavaScript, HTML/CSS and SQL, with step-by-step exercises and a coach that checks your work and explains every command.">
+  <meta name="keywords" content="linux terminal online, cmd practice, python online, javascript playground, sql practice, learn commands, تمرین لینوکس, تمرین پایتون, ترمینال آنلاین, دستورات ویندوز, تمرین SQL, آموزش برنامه نویسی">
+  <meta name="author" content="Sepehr Niaz">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sepehrniaz.ir/practice/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sepehrniaz.ir/practice/">
+  <meta property="og:site_name" content="Sepehr Niaz">
+  <meta property="og:title" content="Practice lab — commands and code in your browser">
+  <meta property="og:description" content="Linux, Windows, Python, JavaScript, HTML and SQL with guided exercises. Runs on your device.">
+  <meta property="og:image" content="https://sepehrniaz.ir/assets/og-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#070b14">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Practice lab",
+    "url": "https://sepehrniaz.ir/practice/",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Any (web browser)",
+    "offers": { "@type": "Offer", "price": "0" },
+    "inLanguage": ["en", "fa"],
+    "author": { "@type": "Person", "name": "Sepehr Niaz", "url": "https://sepehrniaz.ir/resume" }
+  }
+  </script>
+  <script>
+    (function () {
+      var d = document.documentElement, q = new URLSearchParams(location.search).get("lang"), l = null;
+      try { var t = localStorage.getItem("theme"); if (t) d.dataset.theme = t; l = localStorage.getItem("lang"); } catch (e) {}
+      l = q === "fa" || q === "en" ? q : l || ((navigator.language || "").toLowerCase().indexOf("fa") === 0 ? "fa" : "en");
+      d.lang = l; d.dir = l === "fa" ? "rtl" : "ltr";
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Vazirmatn:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body data-page="practice">
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="logo" id="logo"></a>
+      <div class="nav-links">
+        <a href="index.html#tracks" data-i18n="navTracks">Tracks</a>
+        <a href="index.html#articles" data-i18n="navArticles">Articles</a>
+        <a href="index.html#lab" class="active" data-i18n="navLab">Lab</a>
+        <a href="index.html#portfolio" data-i18n="navTools">Tools</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn lang-btn" id="lang-toggle">فا</button>
+        <button class="icon-btn" id="theme-toggle"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></button>
+        <a href="resume.html" class="btn primary sm" data-i18n="navResume">Résumé</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="vis-main">
+    <section class="wrap vis-head">
+      <nav class="lab-tabs" aria-label="Lab"><a href="practice/" aria-current="page" data-i18n="labPractice">Practice</a><a href="vision/" data-i18n="labFace">Face &amp; body</a><a href="objects/" data-i18n="labObjects">Objects</a><a href="voice/" data-i18n="labVoice">Language</a><a href="game/" data-i18n="labGame">Game</a></nav>
+      <span class="eyebrow" data-v="eyebrow">Lab · Practice</span>
+      <h1 class="gradient-text" data-v="title">Practice lab</h1>
+      <p class="lead" data-v="lead">Type real commands and code, see what happens, and let the coach guide you — Linux, Windows, Python, JavaScript, HTML and SQL, all in your browser.</p>
+      <p class="vis-privacy"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg><span data-v="privacy">A safe sandbox: nothing here can change your real computer, and nothing is uploaded.</span></p>
+    </section>
+
+    <section class="wrap pr-app">
+      <div class="pr-tabs" role="tablist" id="pr-tabs"><button type="button" role="tab" data-env="linux" class="on" aria-selected="true">Linux terminal</button><button type="button" role="tab" data-env="windows" aria-selected="false">Windows CMD</button><button type="button" role="tab" data-env="python" aria-selected="false">Python</button><button type="button" role="tab" data-env="javascript" aria-selected="false">JavaScript</button><button type="button" role="tab" data-env="html" aria-selected="false">HTML &amp; CSS</button><button type="button" role="tab" data-env="sql" aria-selected="false">SQL</button></div>
+      <div class="pr-layout">
+        <div class="pr-work" id="pr-work"></div>
+        <aside class="card pr-coach" id="pr-coach"></aside>
+      </div>
+    </section>
+
+    <section class="wrap section vis-how">
+      <div class="section-head">
+        <h2 data-i18n="visHowTitle">How it works</h2>
+      </div>
+      <div class="vis-how-grid">
+        <div class="card"><h3 data-v="how1T">Simulated terminals</h3><p data-v="how1D">The Linux and Windows terminals are simulators with a small pretend disk. The commonest commands work like the real ones, so what you learn carries over.</p></div>
+        <div class="card"><h3 data-v="how2T">Real languages</h3><p data-v="how2D">Python, JavaScript, HTML and SQL are the real thing: Python runs through Pyodide and SQL through SQLite, compiled for the browser.</p></div>
+        <div class="card"><h3 data-v="how3T">The coach</h3><p data-v="how3D">The coach is a set of exercises and rules, not a chatbot: it checks your result, explains commands and the usual errors. Languages that need a compiler on a server (C, Java…) aren't here.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="site-footer"><div class="wrap">
+      <div class="foot-grid"><nav class="foot-col"><h4>Quick links</h4><ul><li><a href="index.html#tracks"><bdi>Tracks</bdi></a></li><li><a href="index.html#articles"><bdi>Articles</bdi></a></li><li><a href="index.html#library"><bdi>Books</bdi></a></li><li><a href="index.html#portfolio"><bdi>Tools</bdi></a></li><li><a href="index.html#lab"><bdi>Lab</bdi></a></li><li><a href="resume.html"><bdi>Résumé</bdi></a></li><li><a href="resume.html#contact"><bdi>Contact</bdi></a></li></ul></nav><nav class="foot-col"><h4>Learning topics</h4><ul><li><a href="index.html#topic/linux"><bdi>Linux</bdi></a></li><li><a href="index.html#topic/programming"><bdi>Programming</bdi></a></li><li><a href="index.html#topic/network"><bdi>Networking</bdi></a></li><li><a href="index.html#topic/security"><bdi>Security</bdi></a></li></ul></nav><nav class="foot-col"><h4>Latest articles</h4><ul><li><a href="en/security-mindset/"><bdi>The security mindset</bdi></a></li><li><a href="en/what-is-ip/"><bdi>What is an IP address?</bdi></a></li><li><a href="en/bash-scripting/"><bdi>Automate with Bash scripts</bdi></a></li><li><a href="en/javascript-basics/"><bdi>JavaScript basics for the web</bdi></a></li></ul></nav><nav class="foot-col"><h4>Certificates</h4><ul><li><a href="resume.html#certifications"><bdi>Cyber Security Pack</bdi></a></li><li><a href="resume.html#certifications"><bdi>F5 Package</bdi></a></li><li><a href="resume.html#certifications"><bdi>Security+</bdi></a></li><li><a href="resume.html#certifications"><bdi>Cisco CCNA 200-301</bdi></a></li><li><a href="resume.html#certifications"><bdi>Duolingo English Test</bdi></a></li></ul></nav></div>
+      <div class="foot-card">
+        <a class="foot-id" href="resume.html">
+          <span class="foot-badge"><img src="assets/photo.jpg" alt="Sepehr Niaz" loading="lazy"></span>
+          <span class="foot-name"><b>Sepehr Niaz</b><small>IT Technician · Network &amp; Security</small></span>
+        </a>
+        <p class="foot-tag">IT technician in Shiraz. I write free, practical lessons on networking, security and Linux — and I'm available for IT and network work.</p>
+        <div class="foot-social"><a href="mailto:niazsepehr7@gmail.com" aria-label="Email" title="Email"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 5L2 7"></path></svg></a><a href="tel:+989177886291" aria-label="Call" title="Call"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a><a href="https://wa.me/989177886291" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg></a><a href="https://github.com/sepehrniaz" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a></div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 Sepehr Niaz · Shiraz, Iran</span>
+        <a href="tel:+989177886291">Phone: <bdi dir="ltr">0917 788 6291</bdi></a>
+      </div>
+    </div></footer>
+
+  <script src="config.js"></script>
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+  <script src="bot/nlu.js"></script>
+  <script src="bot/knowledge.js"></script>
+  <script src="bot/teacher.js"></script>
+  <script src="bot/engine.js"></script>
+  <script src="bot/guide.js"></script>
+  <script src="assistant.js"></script>
+  <script type="module" src="practice.js"></script>
+</body></html>

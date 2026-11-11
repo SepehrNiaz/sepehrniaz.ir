@@ -95,6 +95,7 @@
       tracksEyebrow: "01 · Learning tracks", tracksTitle: "Where do you want to start?",
       artEyebrow: "02 · Articles & tutorials", artTitle: "Step-by-step lessons", artIntro: "Short, practical reads you can follow along with. New ones added over time.",
       libEyebrow2: "04 · Library", toolsEyebrow: "05 · Tools",
+      labPractice: "Practice", labPracTitle: "Practice lab with a coach", labPracOpen: "Start practising", labPracText: "Type real commands and code and see the result: a Linux terminal, Windows command line, Python, JavaScript, HTML and SQL. A coach gives you exercises, checks them and explains every step.", toolLearn: "What you learn from it",
       labFace: "Face & body", labObjects: "Objects", labVoice: "Language", labGame: "Game",
       labObjTitle: "Object detection with voice", labObjText: "Point the camera at things around you: it finds 80 everyday objects and says their names out loud.",
       labVoiceTitle: "Which language is this?", labVoiceText: "Speak or upload a recording, and an AI model tells you which of 99 languages it is.",
@@ -152,6 +153,7 @@
       tracksEyebrow: "۰۱ · مسیرهای یادگیری", tracksTitle: "از کجا می‌خواهی شروع کنی؟",
       artEyebrow: "۰۲ · مقاله‌ها و آموزش‌ها", artTitle: "درس‌های گام‌به‌گام", artIntro: "خواندنی‌های کوتاه و عملی که می‌توانی هم‌زمان دنبالشان کنی. به‌مرور بیشتر می‌شوند.",
       libEyebrow2: "۰۴ · کتابخانه", toolsEyebrow: "۰۵ · ابزارها",
+      labPractice: "تمرین", labPracTitle: "آزمایشگاه تمرین با مربی", labPracOpen: "شروع تمرین", labPracText: "دستور و کد واقعی تایپ کن و نتیجه را ببین: ترمینال لینوکس، خط فرمان ویندوز، پایتون، جاوااسکریپت، HTML و SQL. یک مربی به تو تمرین می‌دهد، جوابت را بررسی می‌کند و هر قدم را توضیح می‌دهد.", toolLearn: "از این ابزار چه یاد می‌گیری",
       labFace: "صورت و بدن", labObjects: "اشیا", labVoice: "زبان", labGame: "بازی",
       labObjTitle: "تشخیص اشیا با صدا", labObjText: "دوربین را رو به اطرافت بگیر: ۸۰ وسیله‌ی روزمره را پیدا می‌کند و اسمشان را بلند می‌گوید.",
       labVoiceTitle: "این چه زبانی است؟", labVoiceText: "حرف بزن یا صدای ضبط‌شده بده؛ یک مدل هوش مصنوعی می‌گوید کدام زبان از ۹۹ زبان است.",
@@ -525,6 +527,7 @@
         ${x.preview ? `<div class="pmodal-preview">${portPreview(x, false)}</div>` : ""}
         ${x.problem ? `<div class="port-ps"><div><h4>${esc(ui("portProblem"))}</h4><p>${esc(tr(x.problem))}</p></div><div><h4>${esc(ui("portSolution"))}</h4><p>${esc(tr(x.solution))}</p></div></div>` : ""}
         ${x.features ? `<h4>${esc(ui("portFeatures"))}</h4><ul class="points">${(tr(x.features) || []).map((f) => `<li>${icon("check")}<span>${esc(f)}</span></li>`).join("")}</ul>` : ""}
+        ${x.learn ? `<div class="tool-learn"><b>${esc(ui("toolLearn"))}</b>${esc(tr(x.learn))}</div>` : ""}
         ${(x.tech || []).length ? `<h4>${esc(ui("portTech"))}</h4><ul class="chips port-tech">${x.tech.map((t) => `<li><bdi>${esc(t)}</bdi></li>`).join("")}</ul>` : ""}
         ${href ? `<div class="port-actions"><a class="btn primary sm" href="${esc(href)}"${ext(href)}>${icon("github")}${esc(ui("portCode"))}</a></div>` : ""}
       </div>
@@ -1025,7 +1028,7 @@
     if (!LEARN.articles.length) return;
     // Numbers under the hero
     const hubStats = document.getElementById("hub-stats");
-    if (hubStats) hubStats.innerHTML = [[LEARN.articles.length, "statLessons", "book"], [(cv.library || []).length, "statBooks", "file"], [(cv.portfolio || []).length, "statTools", "code"], [4, "statLab", "spark"]]
+    if (hubStats) hubStats.innerHTML = [[LEARN.articles.length, "statLessons", "book"], [(cv.library || []).length, "statBooks", "file"], [(cv.portfolio || []).length, "statTools", "code"], [5, "statLab", "spark"]]
       .map(([n, k, ic]) => `<div class="hub-stat">${icon(ic)}<strong class="gradient-text">${num(n)}</strong><span>${esc(ui(k))}</span></div>`).join("");
     // Tracks
     $("track-list").innerHTML = LEARN.tracks.map((t, i) => {

@@ -123,7 +123,7 @@
     const teachChip = () => ({ label: L() === "fa" ? "🎓 می‌خواهم یاد بگیرم" : "🎓 I want to learn", value: cmd("teach") });
     const categoryChips = () => (teacher ? [teachChip()] : []).concat(K.CATEGORIES.map((c) => ({ label: tr(c.chip), value: cmd("cat:" + c.id) })));
     // Teacher mode: explains terms and commands, walks through lessons, gives quizzes
-    const teacher = root.SepehrBot.createTeacher ? root.SepehrBot.createTeacher({ learn: opts.learn, base: opts.base || "", lang: () => state.lang, cmd, state: () => (state.teach = state.teach || { active: false, mode: null }) }) : null;
+    const teacher = opts.teacher !== false && root.SepehrBot.createTeacher ? root.SepehrBot.createTeacher({ learn: opts.learn, base: opts.base || "", lang: () => state.lang, cmd, state: () => (state.teach = state.teach || { active: false, mode: null }) }) : null;
     const TEACH_EXIT = /(درخواست دارم|کار دارم|خروج از آموزش|خروج|i have a request|exit|stop teaching|leave lesson)/i;
     function teachReply(text, msg) {
       // returns bubbles when the teacher should answer this message, else null

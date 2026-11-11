@@ -162,6 +162,8 @@ window.CV = {
       },
       tech: ["Python", "SQLite", "ICMP / TCP", "HTML / CSS", "Multithreading"],
       preview: { image: "projects/network-uptime-monitor/docs/dashboard.png" },
+      learn: { en: "How ping and a TCP port check differ, how a program does many checks at once (threads), and how to keep history in a small database. Try it yourself: in the practice lab run ping 192.168.1.1 in the Linux terminal, then write a Python loop over a list of IP addresses.",
+               fa: "تفاوت Ping با بررسی پورت TCP، اینکه یک برنامه چطور چند بررسی را هم‌زمان انجام می‌دهد (Thread) و چطور تاریخچه را در یک پایگاه‌داده‌ی کوچک نگه می‌دارد. خودت امتحان کن: در آزمایشگاه تمرین در ترمینال لینوکس ping 192.168.1.1 را بزن و بعد در پایتون یک حلقه روی فهرستی از IPها بنویس." },
       path: "projects/network-uptime-monitor"
     },
     {
@@ -180,6 +182,8 @@ window.CV = {
       tech: ["Python", "Cisco IOS", "VLAN / 802.1Q", "Layer 2 security", "JSON"],
       preview: { cmd: "python3 genconfig.py examples/broken.json --check",
         output: "examples/broken.json: 7 problem(s)\n  - VLAN 1003 is reserved or out of range\n  - Gi1/0/4 used by both 'PCs' and 'Printers'\n  - Gi1/0/4-6: access VLAN 50 is not defined\n  - Gi1/0/24: trunk allows undefined VLAN 20\n  - Gi1/0/24: native VLAN carries user traffic (VLAN hopping risk)\n  - management VLAN 99 is not defined\n  - gateway 10.0.1.1 is not in management subnet 10.0.0.0/24" },
+      learn: { en: "What VLANs, access ports and trunks are, which Layer 2 protections a switch should always have, and how a program turns a short description (JSON) into a long, error-free text. Read the lesson on VLANs first, then open the code and follow one port from the JSON to the final config.",
+               fa: "اینکه VLAN، پورت Access و ترانک چیست، یک سوئیچ همیشه چه محافظت‌های لایه‌ی ۲ باید داشته باشد و یک برنامه چطور یک توضیح کوتاه (JSON) را به متنی بلند و بی‌غلط تبدیل می‌کند. اول درس VLAN را بخوان، بعد کد را باز کن و مسیر یک پورت را از JSON تا کانفیگ نهایی دنبال کن." },
       path: "projects/cisco-config-generator"
     },
     {
@@ -198,6 +202,8 @@ window.CV = {
       tech: ["Python", "Linux", "Regex", "iptables / ufw", "Cisco ACL"],
       preview: { cmd: "python3 log_analyzer.py sample/auth.log --block cisco",
         output: "Failed logins: 69   Successful logins: 9   Source IPs: 5\nFlagged (5+ failures within 300s, or a login after them): 2\n\nIP                 Fails  Burst  Invalid  Top usernames\n198.51.100.77         18     18        0  admin\n203.0.113.45          46     46        9  ftpuser, pi, guest, ubuntu\n\n!! 198.51.100.77 logged in as 'admin' after 18 failures.\n\n# cisco rules\nip access-list extended BLOCK-SSH-ATTACKERS\n deny tcp host 198.51.100.77 any eq 22\n deny tcp host 203.0.113.45 any eq 22\n permit ip any any" },
+      learn: { en: "How to read a Linux auth log, what a brute-force attack looks like, and how to pull facts out of text with patterns (regex). Try it yourself: in the practice lab's Linux terminal run grep Failed logs/auth.log | wc -l — that one line is the heart of this tool.",
+               fa: "خواندن لاگ ورود لینوکس، اینکه حمله‌ی Brute-force چه شکلی است و چطور با الگو (Regex) از دل متن اطلاعات بیرون بکشی. خودت امتحان کن: در ترمینال لینوکسِ آزمایشگاه تمرین بزن grep Failed logs/auth.log | wc -l — همین یک خط قلب این ابزار است." },
       path: "projects/ssh-log-analyzer"
     },
     {
@@ -216,6 +222,8 @@ window.CV = {
       tech: ["Python", "TCP/IP", "Sockets", "Threading", "Security audit"],
       preview: { cmd: "python3 portscan.py 192.168.1.0/28 --banner",
         output: "Scanning 14 host(s), 26 port(s)...\n\n192.168.1.1\n     22/tcp  open  ssh          SSH-2.0-Cisco-1.25\n     80/tcp  open  http         Server: lighttpd\n\n192.168.1.8\n     23/tcp  open  telnet\n         ! Telnet sends passwords in clear text, use SSH\n  37777/tcp  open  dahua-dvr\n         ! DVR/NVR management port: never expose it to the guest or public network\n\nDone in 1.4s: 2 host(s) with open ports." },
+      learn: { en: "What a port is, how a TCP connection opens, which services are risky to leave open (Telnet, RDP, SMB) and why. Only scan networks you own or have written permission to test.",
+               fa: "اینکه پورت چیست، اتصال TCP چطور باز می‌شود و باز ماندن کدام سرویس‌ها خطرناک است (Telnet، RDP، SMB) و چرا. فقط شبکه‌ای را اسکن کن که مال خودت است یا اجازه‌ی کتبی برای آزمایشش داری." },
       path: "projects/port-scanner"
     },
     {
@@ -234,6 +242,8 @@ window.CV = {
       tech: ["Python", "IPv4", "VLSM / CIDR", "CCNA"],
       preview: { cmd: "python3 subnet_calc.py vlsm 172.16.0.0/22 Reception=120 Rooms=300 Cameras=60 Office=25",
         output: "Name       Need  Subnet           Mask             Fits\n--------------------------------------------------------\nRooms      300   172.16.0.0/23    255.255.254.0    510\nReception  120   172.16.2.0/25    255.255.255.128  126\nCameras    60    172.16.2.128/26  255.255.255.192  62\nOffice     25    172.16.2.192/27  255.255.255.224  30" },
+      learn: { en: "How an IP address splits into network and host parts, what /24 or /26 means, and how to size a subnet for a number of devices. Work one example by hand first (how many hosts fit in a /26?), then check your answer with the tool.",
+               fa: "اینکه آدرس IP چطور به بخش شبکه و میزبان تقسیم می‌شود، /24 یا /26 یعنی چه و برای تعداد مشخصی دستگاه چه اندازه زیرشبکه‌ای لازم است. اول یک مثال را دستی حل کن (در یک /26 چند دستگاه جا می‌شود؟) و بعد جوابت را با ابزار مقایسه کن." },
       path: "projects/subnet-calculator"
     },
     {
@@ -251,6 +261,8 @@ window.CV = {
       },
       tech: ["Python", "SQLite", "CLI", "HTML reports", "CSV"],
       preview: { image: "projects/helpdesk-tracker/docs/report.png" },
+      learn: { en: "How to design simple tables for real work, and how to turn rows into a report with SQL (COUNT, GROUP BY, averages). Try it yourself: the SQL tab of the practice lab has exercises with exactly these commands.",
+               fa: "طراحی جدول‌های ساده برای کار واقعی و ساختن گزارش از ردیف‌ها با SQL (COUNT، GROUP BY و میانگین). خودت امتحان کن: زبانه‌ی SQL در آزمایشگاه تمرین دقیقاً با همین دستورها تمرین دارد." },
       path: "projects/helpdesk-tracker"
     }
   ],

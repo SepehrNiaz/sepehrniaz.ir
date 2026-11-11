@@ -10,12 +10,20 @@
 
   const root = document.documentElement;
   const pageLang = () => (root.lang === "fa" ? "fa" : "en");
-  const STORE = "assistant-chat-v2";
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const UI = {
-    en: { launcher: "Ask or learn", title: "Assistant & teacher", subtitle: "Online · replies instantly", placeholder: "Type your message…", send: "Send", close: "Close", restart: "Start over", note: "Automated assistant · your details go only to Sepehr", nudge: "Want to learn something, or have a job for Sepehr? I can help 👋", typing: "typing", edit: "Edit" },
-    fa: { launcher: "بپرس یا یاد بگیر", title: "دستیار و معلم", subtitle: "آنلاین · پاسخ فوری", placeholder: "پیامتان را بنویسید…", send: "ارسال", close: "بستن", restart: "شروع دوباره", note: "دستیار خودکار · اطلاعات شما فقط برای سپهر ارسال می‌شود", nudge: "می‌خواهی چیزی یاد بگیری یا برای سپهر کاری داری؟ من کمک می‌کنم 👋", typing: "در حال نوشتن", edit: "ویرایش" }
+  // Two helpers share this window: the learning guide (on the learning pages)
+  // and Sepehr's assistant, which takes work requests (on the résumé page).
+  const pageKind = document.body.dataset.page || "resume";
+  const MODE = pageKind === "resume" || !SB.createGuide ? "assistant" : "guide";
+  const pageId = pageKind === "article" ? (document.body.dataset.article || "") : (location.pathname.replace(/index\.html$/, "").split("/").filter(Boolean).pop() || "");
+  const STORE = MODE === "guide" ? "guide-chat-v1" : "assistant-chat-v2";
+  const UI = MODE === "guide" ? {
+    en: { launcher: "AI guide", title: "Your AI guide", subtitle: "Learn · practise · find your way", placeholder: "Ask anything, e.g. “what is DNS?”", send: "Send", close: "Close", restart: "Start over", note: "Automated guide · runs on your own device", nudge: "Hi! 👋 I'm the site's AI guide. Tap me for a tour, a lesson or a quiz.", typing: "typing", edit: "Edit" },
+    fa: { launcher: "راهنمای هوشمند", title: "راهنمای هوشمند سایت", subtitle: "یادگیری · تمرین · راهنمایی", placeholder: "هر چه می‌خواهی بپرس، مثلاً «DNS چیه؟»", send: "ارسال", close: "بستن", restart: "شروع دوباره", note: "راهنمای خودکار · روی دستگاه خودت اجرا می‌شود", nudge: "سلام! 👋 من راهنمای هوشمند سایتم. برای گشت سایت، درس یا آزمون روی من بزن.", typing: "در حال نوشتن", edit: "ویرایش" }
+  } : {
+    en: { launcher: "Chat with my assistant", title: "Sepehr's assistant", subtitle: "Online · replies instantly", placeholder: "Type your message…", send: "Send", close: "Close", restart: "Start over", note: "Automated assistant · your details go only to Sepehr", nudge: "Have a question or a job for Sepehr? I can help 👋", typing: "typing", edit: "Edit" },
+    fa: { launcher: "گفتگو با دستیار من", title: "دستیار سپهر", subtitle: "آنلاین · پاسخ فوری", placeholder: "پیامتان را بنویسید…", send: "ارسال", close: "بستن", restart: "شروع دوباره", note: "دستیار خودکار · اطلاعات شما فقط برای سپهر ارسال می‌شود", nudge: "سؤال یا کاری برای سپهر دارید؟ من کمکتان می‌کنم 👋", typing: "در حال نوشتن", edit: "ویرایش" }
   };
   const t = (k) => UI[pageLang()][k];
 
@@ -28,15 +36,18 @@
     pencil: svg('<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>')
   };
 
+  const makeEngine = () => (MODE === "guide"
+    ? SB.createGuide({ cv, lang: pageLang(), learn: window.LEARN, page: { kind: pageKind, id: pageId } })
+    : SB.createEngine({ cv, lang: pageLang(), teacher: false }));
   // ── Engine + saved session ───────────────────────────────────
-  let engine = SB.createEngine({ cv, lang: pageLang(), learn: window.LEARN });
+  let engine = makeEngine();
   // Rendered transcript: [{ role: "bot"|"user", text, card?, chips? }]
   let log = [];
   try {
     const saved = JSON.parse(sessionStorage.getItem(STORE) || "null");
-    if (saved && saved.engine && Array.isArray(saved.log)) { engine.load(saved.engine); log = saved.log; }
+    if (saved && saved.engine && Array.isArray(saved.log) && (MODE !== "guide" || saved.page === pageKind + ":" + pageId)) { engine.load(saved.engine); log = saved.log; }
   } catch (e) {}
-  const persist = () => { try { sessionStorage.setItem(STORE, JSON.stringify({ engine: engine.save(), log })); } catch (e) {} };
+  const persist = () => { try { sessionStorage.setItem(STORE, JSON.stringify({ engine: engine.save(), log, page: pageKind + ":" + pageId })); } catch (e) {} };
 
   // ── Build the widget ─────────────────────────────────────────
   const wrap = document.createElement("div");
@@ -48,7 +59,7 @@
     </button>
     <section class="ai-panel" role="dialog" aria-modal="false" hidden>
       <header class="ai-head">
-        <span class="ai-avatar">${cv.photo ? `<img src="${cv.photo}" alt="">` : "SN"}<i></i></span>
+        <span class="ai-avatar${MODE === "guide" ? " guide" : ""}">${MODE === "guide" ? svg('<path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>') : (cv.photo ? `<img src="${cv.photo}" alt="">` : "SN")}<i></i></span>
         <div><b class="ai-title"></b><small class="ai-subtitle"></small></div>
         <button class="ai-icon-btn ai-restart" type="button">${ICON.restart}</button>
         <button class="ai-icon-btn ai-close" type="button">${ICON.close}</button>
@@ -158,6 +169,7 @@
         const l = document.createElement("a");
         l.href = c.href; l.textContent = c.label; l.className = "link";
         if (/^https?:/.test(c.href)) { l.target = "_blank"; l.rel = "noopener"; }
+        l.addEventListener("click", () => { if (c.href.charAt(0) === "#" || innerWidth < 700) setTimeout(() => open(false), 50); });
         row.appendChild(l);
         return;
       }
@@ -259,7 +271,7 @@
 
   async function begin() {
     log = [];
-    engine = SB.createEngine({ cv, lang: pageLang(), learn: window.LEARN });
+    engine = makeEngine();
     body.innerHTML = "";
     setProgress(0);
     busy = true;
@@ -305,10 +317,12 @@
   paintLabels();
   setProgress(engine.progress());
 
-  // A gentle hint the first time someone visits
+  // First visit: the guide opens by itself on wide screens; on phones it says hello in a bubble
   let nudged = false;
   try { nudged = sessionStorage.getItem("assistant-nudged") === "1"; } catch (e) {}
-  if (!nudged && !log.length) setTimeout(() => {
+  const autoOpen = MODE === "guide" && pageKind === "hub" && innerWidth >= 1100 && !nudged && !log.length;
+  if (autoOpen) setTimeout(() => { if (panel.hidden) open(true); }, 1400);
+  else if (!nudged && !log.length) setTimeout(() => {
     if (!panel.hidden) return;
     nudge.hidden = false;
     // Don't leave it covering the page: it goes away on scroll or after a while
@@ -320,6 +334,6 @@
     const startY = window.scrollY;
     const onScroll = () => { if (Math.abs(window.scrollY - startY) > 80) hide(); };
     window.addEventListener("scroll", onScroll, { passive: true });
-    setTimeout(hide, 9000);
-  }, 7000);
+    setTimeout(hide, MODE === "guide" ? 14000 : 9000);
+  }, MODE === "guide" ? 1800 : 7000);
 })();
