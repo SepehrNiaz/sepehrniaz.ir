@@ -30,7 +30,7 @@
     let state = fresh(opts.lang || "fa");
 
     function fresh(lang) {
-      return { v: 2, lang, phase: "start", category: null, slots: {}, skipped: {}, pending: null, stack: [], fails: {}, unclear: 0, suggest: null, history: [], seed: (Date.now() % 100000) | 0, sentOk: null };
+      return { v: 2, lang, phase: "start", category: null, slots: {}, skipped: {}, pending: null, stack: [], fails: {}, unclear: 0, suggest: null, history: [], seed: (Date.now() % 100000) | 0, sentOk: null, teach: { active: false, mode: null } };
     }
 
     // ── Helpers ────────────────────────────────────────────────
@@ -120,7 +120,27 @@
     }
 
     // ── Chips ─────────────────────────────────────────────────
-    const categoryChips = () => K.CATEGORIES.map((c) => ({ label: tr(c.chip), value: cmd("cat:" + c.id) }));
+    const teachChip = () => ({ label: L() === "fa" ? "🎓 می‌خواهم یاد بگیرم" : "🎓 I want to learn", value: cmd("teach") });
+    const categoryChips = () => (teacher ? [teachChip()] : []).concat(K.CATEGORIES.map((c) => ({ label: tr(c.chip), value: cmd("cat:" + c.id) })));
+    // Teacher mode: explains terms and commands, walks through lessons, gives quizzes
+    const teacher = root.SepehrBot.createTeacher ? root.SepehrBot.createTeacher({ learn: opts.learn, base: opts.base || "", lang: () => state.lang, cmd, state: () => (state.teach = state.teach || { active: false, mode: null }) }) : null;
+    const TEACH_EXIT = /(درخواست دارم|کار دارم|خروج از آموزش|خروج|i have a request|exit|stop teaching|leave lesson)/i;
+    function teachReply(text, msg) {
+      // returns bubbles when the teacher should answer this message, else null
+      if (!teacher || !["start", "category", "done"].includes(state.phase)) return null;
+      const t = state.teach || (state.teach = { active: false, mode: null });
+      if (t.active) {
+        if (TEACH_EXIT.test(text)) { t.active = false; return state.phase === "done" ? restart() : intro(true); }
+        const cats = nlu.classify(msg, K.CATEGORIES);
+        const request = cats[0] && cats[0].score >= 3 && !teacher.wants(text) && t.mode !== "quiz";
+        if (!request) return teacher.handle(text);
+        t.active = false; return null;                      // a real request ("my printer is broken") leaves teacher mode
+      }
+      if (!teacher.wants(text)) return null;
+      t.active = true;
+      if (state.phase === "start") state.phase = "category";
+      return teacher.handle(text);
+    }
     function slotChips(s) {
       const chips = (s.chips || []).map((c) => ({ label: tr(c), value: cmd("opt:" + c.v) }));
       if (s.optional && !(s.chips || []).some((c) => c.v === "skip")) chips.push({ label: L() === "fa" ? "رد شدن ⏭" : "Skip ⏭", value: cmd("skip"), ghost: true });
@@ -767,6 +787,10 @@
       const msg = nlu.analyse(text);
       const ents = nlu.extractAll(text);
       const top = bestIntent(msg, ["restart", "back", "frustration", "edit"], 2.8);
+      if (!(top && (top.id === "restart" || top.id === "frustration"))) {
+        const lesson = teachReply(text, msg);
+        if (lesson) return result(lesson);
+      }
 
       if (state.phase === "done") {
         if (top && top.id === "restart") return result(restart());
@@ -824,6 +848,14 @@
         return chooseCategory(id, t || null);
       }
       if (c === "restart") return restart();
+      if (teacher && (c === "teach" || c.startsWith("t:"))) {
+        const t = state.teach || (state.teach = { active: false, mode: null });
+        if (c === "t:exit") { t.active = false; return ["slots", "confirm"].includes(state.phase) ? [] : (state.phase === "done" ? restart() : intro(true)); }
+        if (["slots", "confirm"].includes(state.phase)) { const s = slotDef(state.pending); return s ? [ask(s)] : advance(); }
+        t.active = true;
+        if (state.phase === "start") state.phase = "category";
+        return teacher.command(c);
+      }
       if (c === "confirm") return state.category ? finish() : intro(true);
       if (c === "edit?") return chooseEdit();
       if (c.startsWith("edit:")) return startEdit(c.slice(5));

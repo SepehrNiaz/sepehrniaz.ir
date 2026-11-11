@@ -11,6 +11,7 @@ vm.runInNewContext(fs.readFileSync(path.join(ROOT, "config.js"), "utf8"), sandbo
 const CV = sandbox.window.CV;
 require(path.join(ROOT, "bot/nlu.js"));
 require(path.join(ROOT, "bot/knowledge.js"));
+require(path.join(ROOT, "bot/teacher.js"));
 require(path.join(ROOT, "bot/engine.js"));
 const { nlu, knowledge: K, createEngine, emailPayload } = globalThis.SepehrBot;
 
@@ -382,4 +383,67 @@ test("offers WhatsApp and email-app links with the request when sending fails", 
   assert.ok(waText.includes(done.lead.summary.slice(0, 20)), "WhatsApp text carries the summary");
   assert.ok(all.some((c) => c.value && !c.href), "still offers a retry");
   assert.equal(bot.state.phase, "confirm");
+});
+
+// ── Teacher mode ─────────────────────────────────────────────
+const LEARN = (() => { const sb = { window: {} }; vm.runInNewContext(fs.readFileSync(path.join(ROOT, "content.js"), "utf8"), sb); return sb.window.LEARN; })();
+const newTeacherBot = (lang = "fa") => { const bot = createEngine({ cv: CV, lang, now: MORNING, learn: LEARN }); bot.start(); return bot; };
+
+test("teacher explains terms and commands in Persian and English", () => {
+  const bot = newTeacherBot("fa");
+  assert.match(text(bot.handle("DNS چیه؟")), /دفترچه‌تلفن/);
+  assert.match(text(bot.handle("دستور grep چیکار میکنه")), /grep/);
+  const r = bot.handle("فایروال یعنی چی");
+  assert.match(text(r), /فایروال/);
+  const en = newTeacherBot("en");
+  assert.match(text(en.handle("what is a subnet?")), /slice of a network/);
+  const c = en.handle("what does chmod do");
+  assert.match(text(c), /permissions/);
+  assert.ok(c.bubbles.some((b) => b.code && b.code.includes("chmod")), "shows an example command");
+});
+
+test("teacher walks through a lesson step by step and links the full article", () => {
+  const bot = newTeacherBot("en");
+  const menu = cmd(bot, "teach", "learn");
+  assert.ok(chips(menu).length >= 3);
+  const list = cmd(bot, "t:track:linux", "Linux");
+  assert.ok(chips(list).length >= 2, "lists the Linux lessons");
+  const s1 = cmd(bot, "t:lesson:linux-first-steps", "lesson");
+  assert.match(text(s1), /Step 1 of/);
+  const links = s1.bubbles.flatMap((b) => b.chips || []).filter((c) => c.href);
+  assert.equal(links[0].href, "en/linux-first-steps/");
+  let r = s1, guard = 0;
+  while (!/end of this lesson/.test(text(r)) && guard++ < 40) r = bot.handle("next");
+  assert.match(text(r), /end of this lesson/);
+});
+
+test("teacher quiz scores answers and a real request leaves teacher mode", () => {
+  const bot = newTeacherBot("fa");
+  let r = bot.handle("از شبکه آزمون بگیر");
+  assert.match(text(r), /سؤال ۱ از ۵/);
+  const { QUIZ } = globalThis.SepehrBot.teacherData;
+  for (let i = 0; i < 5; i++) { const q = QUIZ[bot.state.teach.quiz.order[bot.state.teach.quiz.i]]; r = cmd(bot, "t:ans:" + q.a, "x"); }
+  assert.match(text(r), /از ۵ سؤال، ۵ تا/);
+  assert.equal(bot.state.teach.active, true);
+  r = bot.handle("پرینتر دفترم خراب شده و کار نمیکنه");
+  assert.equal(bot.state.teach.active, false);
+  assert.equal(r.category, "it_support");
+});
+
+test("teacher data is complete in both languages", () => {
+  const { TERMS, COMMANDS, QUIZ } = globalThis.SepehrBot.teacherData;
+  assert.ok(TERMS.length >= 45 && COMMANDS.length >= 30 && QUIZ.length >= 24);
+  for (const t of TERMS) assert.ok(t[2].length && t[3].length > 30 && /[؀-ۿ]/.test(t[4]), t[0]);
+  for (const c of COMMANDS) assert.ok(c[2] && /[؀-ۿ]/.test(c[3]) && c[4].includes(c[0]), c[0]);
+  for (const q of QUIZ) { const o = Array.isArray(q.o) ? q.o : q.o.en; assert.ok(o.length === 4 && q.a >= 0 && q.a < 4 && q.q.fa && q.w.fa); if (!Array.isArray(q.o)) assert.equal(q.o.fa.length, 4); }
+  assert.equal(new Set(TERMS.map((t) => t[0])).size, TERMS.length);
+});
+
+test("staff-training and hiring messages still go to Sepehr, not the teacher", () => {
+  const bot = newTeacherBot("en");
+  const r = bot.handle("can you teach our staff network security");
+  assert.equal(bot.state.teach.active, false);
+  const fa = newTeacherBot("fa");
+  fa.handle("میخوام کارمندامون امنیت یاد بگیرن");
+  assert.equal(fa.state.teach.active, false);
 });

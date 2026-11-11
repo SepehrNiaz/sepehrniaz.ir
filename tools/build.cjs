@@ -155,6 +155,7 @@ function articlePage(L, a, alt) {
   <script src="script.js"></script>
   <script src="bot/nlu.js"></script>
   <script src="bot/knowledge.js"></script>
+  <script src="bot/teacher.js"></script>
   <script src="bot/engine.js"></script>
   <script src="assistant.js"></script>
 </body>

@@ -337,8 +337,8 @@
   const PHRASES = {
     greetHello: { fa: ["سلام{name}! 👋", "درود{name}! 👋"], en: ["Hi{name}! 👋", "Hello{name}! 👋"] },
     intro: {
-      fa: ["من دستیار سپهر هستم. بگویید به چه کمکی نیاز دارید: پیشنهاد کار، یک پروژه، پشتیبانی فنی یا هر چیز دیگر. چند سؤال کوتاه می‌پرسم و همه‌چیز را دسته‌بندی‌شده برای سپهر می‌فرستم."],
-      en: ["I'm Sepehr's assistant. Tell me what you need — a job offer, a project, tech support or anything else. I'll ask a few short questions and send everything to Sepehr, neatly organised."]
+      fa: ["من دستیار و معلمِ این سایت هستم. دو کار از من برمی‌آید: 🎓 آموزش شبکه، امنیت، لینوکس و برنامه‌نویسی (توضیح مفاهیم، درس گام‌به‌گام و آزمون) و 💼 رساندن درخواست شما به سپهر (پیشنهاد کار، پروژه یا پشتیبانی فنی)."],
+      en: ["I'm this site's assistant and teacher. I can do two things: 🎓 teach networking, security, Linux and programming (explain terms, step-by-step lessons and quizzes), and 💼 pass your request on to Sepehr (a job offer, a project or tech support)."]
     },
     askWhat: { fa: ["موضوعتان کدام است؟ می‌توانید بنویسید یا یکی از این‌ها را انتخاب کنید:", "در چه زمینه‌ای می‌توانم کمک کنم؟"], en: ["What's it about? Type it in your own words or pick one:", "What can I help you with?"] },
     unclear: { fa: ["مطمئن نیستم درست متوجه شدم. کمی بیشتر توضیح می‌دهید، یا یکی از این گزینه‌ها را انتخاب کنید؟", "می‌شود کمی واضح‌تر بگویید موضوع چیست؟ یا از گزینه‌های زیر انتخاب کنید:"], en: ["I'm not sure I got that. Could you say a bit more, or pick one of these?", "Could you tell me a little more about what you need? Or choose below:"] },

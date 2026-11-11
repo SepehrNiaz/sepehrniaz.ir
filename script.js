@@ -110,6 +110,7 @@
       visHow2T: "Hands & gestures", visHow2D: "21 points per hand, for up to two hands. The tool counts raised fingers and recognises gestures such as thumbs up, victory and open palm.",
       visHow3T: "Eye colour & body", visHow3D: "Eye colour is estimated from the pixels inside each iris, so lighting changes the result. A third model tracks 33 points on the body.",
       visCredit: "Built with Google's open-source MediaPipe models (Apache 2.0), hosted on this site.",
+      statLessons: "step-by-step lessons", statBooks: "free books", statTools: "open tools", statLab: "live AI tools",
       allTopics: "All", lvlBeginner: "Beginner", lvlIntermediate: "Intermediate", readMins: (n) => `${n} min read`, readArticle: "Read", artCount: (n) => `${n} articles`, emptyTrack: "Articles for this track are coming soon.",
       copyCode: "Copy", copied: "Copied", aOf: "of", aNext: "Next", aPrev: "Previous", aBackList: "All articles", updatedOn: "Updated",
       footQuick: "Quick links", footTopics: "Learning topics", footLatest: "Latest articles", footCerts: "Certificates", footPhone: "Phone",
@@ -166,6 +167,7 @@
       visHow2T: "دست و حرکات", visHow2D: "۲۱ نقطه برای هر دست، تا دو دست هم‌زمان. ابزار انگشت‌های باز را می‌شمارد و حرکاتی مثل لایک، علامت پیروزی و کف دست باز را تشخیص می‌دهد.",
       visHow3T: "رنگ چشم و بدن", visHow3D: "رنگ چشم از روی پیکسل‌های داخل عنبیه تخمین زده می‌شود، پس نور روی نتیجه اثر دارد. یک مدل سوم ۳۳ نقطه روی بدن را دنبال می‌کند.",
       visCredit: "ساخته‌شده با مدل‌های متن‌باز MediaPipe گوگل (Apache 2.0) که روی همین سایت میزبانی می‌شوند.",
+      statLessons: "درس گام‌به‌گام", statBooks: "کتاب رایگان", statTools: "ابزار متن‌باز", statLab: "ابزار هوش مصنوعیِ زنده",
       allTopics: "همه", lvlBeginner: "مبتدی", lvlIntermediate: "متوسط", readMins: (n) => `${n} دقیقه مطالعه`, readArticle: "خواندن", artCount: (n) => `${n} مقاله`, emptyTrack: "مقاله‌های این مسیر به‌زودی اضافه می‌شوند.",
       copyCode: "کپی", copied: "کپی شد", aOf: "از", aNext: "بعدی", aPrev: "قبلی", aBackList: "همه‌ی مقاله‌ها", updatedOn: "به‌روزرسانی",
       footQuick: "دسترسی سریع", footTopics: "موضوعات آموزشی", footLatest: "تازه‌ترین مقاله‌ها", footCerts: "گواهینامه‌ها", footPhone: "شماره تماس",
@@ -1021,6 +1023,10 @@
 
   function renderLearn() {
     if (!LEARN.articles.length) return;
+    // Numbers under the hero
+    const hubStats = document.getElementById("hub-stats");
+    if (hubStats) hubStats.innerHTML = [[LEARN.articles.length, "statLessons", "book"], [(cv.library || []).length, "statBooks", "file"], [(cv.portfolio || []).length, "statTools", "code"], [4, "statLab", "spark"]]
+      .map(([n, k, ic]) => `<div class="hub-stat">${icon(ic)}<strong class="gradient-text">${num(n)}</strong><span>${esc(ui(k))}</span></div>`).join("");
     // Tracks
     $("track-list").innerHTML = LEARN.tracks.map((t, i) => {
       const n = LEARN.articles.filter((a) => a.track === t.id).length;
@@ -1043,11 +1049,13 @@
       const t = trackById(a.track);
       const hidden = artFilter !== "all" && a.track !== artFilter;
       return `<a class="card hover art reveal" href="${lang}/${esc(a.id)}/" data-cat="${esc(a.track)}" style="--d:${(i % 3) * 0.06}s"${hidden ? " hidden" : ""}>
-        <div class="art-top"><span class="icon-tile">${icon(a.icon || (t && t.icon) || "code")}</span>
-          <div class="art-badges"><span class="pill">${esc(t ? tr(t.title) : "")}</span><span class="art-meta">${esc(ui(a.level === "intermediate" ? "lvlIntermediate" : "lvlBeginner"))} · ${esc(ui("readMins")(num(a.minutes || 5)))}</span></div></div>
-        <h3>${esc(tr(a.title))}</h3>
-        <p>${esc(tr(a.summary))}</p>
-        <span class="art-read">${esc(ui("readArticle"))} ${icon("arrow")}</span>
+        <div class="art-cover"><span class="pill">${esc(t ? tr(t.title) : "")}</span>${icon(a.icon || (t && t.icon) || "code")}</div>
+        <div class="art-body">
+          <span class="art-meta">${esc(ui(a.level === "intermediate" ? "lvlIntermediate" : "lvlBeginner"))} · ${esc(ui("readMins")(num(a.minutes || 5)))}</span>
+          <h3>${esc(tr(a.title))}</h3>
+          <p>${esc(tr(a.summary))}</p>
+          <span class="art-read">${esc(ui("readArticle"))} ${icon("arrow")}</span>
+        </div>
       </a>`;
     }).join("") || `<p class="muted">${esc(ui("emptyTrack"))}</p>`;
   }
@@ -1191,6 +1199,50 @@
     navigator.clipboard && navigator.clipboard.writeText(decodeURIComponent(copy.dataset.code || ""));
     const label = copy.querySelector("span"); if (label) { const old = label.textContent; label.textContent = ui("copied"); setTimeout(() => (label.textContent = old), 1400); }
   });
+
+  // ── Visual polish: scroll bar, card spotlight, hero terminal ──
+  const scrollBar = document.createElement("div");
+  scrollBar.className = "scroll-bar";
+  document.body.appendChild(scrollBar);
+  const paintScroll = () => { const m = document.documentElement.scrollHeight - innerHeight; scrollBar.style.transform = `scaleX(${m > 0 ? Math.min(1, scrollY / m) : 0})`; };
+  window.addEventListener("scroll", paintScroll, { passive: true }); paintScroll();
+  document.addEventListener("pointermove", (e) => {
+    const c = e.target.closest && e.target.closest(".card");
+    if (!c) return;
+    const r = c.getBoundingClientRect();
+    c.style.setProperty("--mx", `${e.clientX - r.left}px`); c.style.setProperty("--my", `${e.clientY - r.top}px`);
+  }, { passive: true });
+  const hvScreen = document.querySelector(".hv-screen");
+  if (hvScreen) {
+    const demos = [
+      ["ping -c 2 sepehrniaz.ir", ["64 bytes from 185.199.109.153: time=41.2 ms", "64 bytes from 185.199.109.153: time=39.8 ms", "2 packets transmitted, 2 received, 0% loss"]],
+      ["ls -l notes/", ["-rw-r--r-- 1 learn  412 linux-basics.md", "-rw-r--r-- 1 learn  958 subnetting.md", "-rwxr-xr-x 1 learn  230 backup.sh"]],
+      ["python3 -c \"print(2**10)\"", ["1024"]],
+      ["ip -br a", ["lo      UNKNOWN  127.0.0.1/8", "eth0    UP       192.168.1.24/24"]]
+    ];
+    const line = (cmdText, out, caret) => `<span class="p">$</span> <span class="k">${esc(cmdText)}</span>${caret ? '<i class="hv-caret"></i>' : ""}${out.map((o) => `\n<span class="o">${esc(o)}</span>`).join("")}`;
+    if (reduceMotion) hvScreen.innerHTML = demos.slice(0, 2).map(([c, o]) => line(c, o)).join("\n");
+    else {
+      let d = 0; const done = [];
+      const run = () => {
+        const [c, o] = demos[d % demos.length]; let i = 0;
+        const type = () => {
+          hvScreen.innerHTML = done.concat(line(c.slice(0, i), [], true)).join("\n");
+          if (i++ < c.length) return setTimeout(type, 55 + (i % 3) * 25);
+          let k = 0;
+          const print = () => {
+            hvScreen.innerHTML = done.concat(line(c, o.slice(0, k), k >= o.length)).join("\n");
+            if (k++ < o.length) return setTimeout(print, 260);
+            done.push(line(c, o)); while (done.length > 2) done.shift();
+            d++; setTimeout(run, 1900);
+          };
+          setTimeout(print, 350);
+        };
+        type();
+      };
+      run();
+    }
+  }
 
   // ── Certificate viewer ────────────────────────────────────
   const viewer = document.createElement("div");

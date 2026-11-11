@@ -14,8 +14,8 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const UI = {
-    en: { launcher: "Chat with my assistant", title: "Sepehr's assistant", subtitle: "Online · replies instantly", placeholder: "Type your message…", send: "Send", close: "Close", restart: "Start over", note: "Automated assistant · your details go only to Sepehr", nudge: "Have a question or a job for Sepehr? I can help 👋", typing: "typing", edit: "Edit" },
-    fa: { launcher: "گفتگو با دستیار من", title: "دستیار سپهر", subtitle: "آنلاین · پاسخ فوری", placeholder: "پیامتان را بنویسید…", send: "ارسال", close: "بستن", restart: "شروع دوباره", note: "دستیار خودکار · اطلاعات شما فقط برای سپهر ارسال می‌شود", nudge: "سؤال یا کاری برای سپهر دارید؟ من کمکتان می‌کنم 👋", typing: "در حال نوشتن", edit: "ویرایش" }
+    en: { launcher: "Ask or learn", title: "Assistant & teacher", subtitle: "Online · replies instantly", placeholder: "Type your message…", send: "Send", close: "Close", restart: "Start over", note: "Automated assistant · your details go only to Sepehr", nudge: "Want to learn something, or have a job for Sepehr? I can help 👋", typing: "typing", edit: "Edit" },
+    fa: { launcher: "بپرس یا یاد بگیر", title: "دستیار و معلم", subtitle: "آنلاین · پاسخ فوری", placeholder: "پیامتان را بنویسید…", send: "ارسال", close: "بستن", restart: "شروع دوباره", note: "دستیار خودکار · اطلاعات شما فقط برای سپهر ارسال می‌شود", nudge: "می‌خواهی چیزی یاد بگیری یا برای سپهر کاری داری؟ من کمک می‌کنم 👋", typing: "در حال نوشتن", edit: "ویرایش" }
   };
   const t = (k) => UI[pageLang()][k];
 
@@ -29,7 +29,7 @@
   };
 
   // ── Engine + saved session ───────────────────────────────────
-  let engine = SB.createEngine({ cv, lang: pageLang() });
+  let engine = SB.createEngine({ cv, lang: pageLang(), learn: window.LEARN });
   // Rendered transcript: [{ role: "bot"|"user", text, card?, chips? }]
   let log = [];
   try {
@@ -108,6 +108,7 @@
       if (el.dir === "rtl") fillLine(div, line); else div.textContent = line;
       el.appendChild(div);
     });
+    if (item.code) { const pre = document.createElement("pre"); pre.className = "ai-code"; pre.dir = "ltr"; pre.textContent = item.code; el.appendChild(pre); }
     body.appendChild(el);
     if (item.card) body.appendChild(renderCard(item.card, item));
     return el;
@@ -198,7 +199,7 @@
       const dots = typingBubble();
       await wait(Math.min(1500, 380 + (b.text || "").length * 9));
       dots.remove();
-      const item = { role: "bot", text: b.text, card: b.card || null, chips: b.chips || null };
+      const item = { role: "bot", text: b.text, card: b.card || null, chips: b.chips || null, code: b.code || null };
       log.push(item);
       // Only the newest card keeps working buttons
       body.querySelectorAll(".ai-card-actions, .ai-row-edit").forEach((x) => x.remove());
@@ -258,7 +259,7 @@
 
   async function begin() {
     log = [];
-    engine = SB.createEngine({ cv, lang: pageLang() });
+    engine = SB.createEngine({ cv, lang: pageLang(), learn: window.LEARN });
     body.innerHTML = "";
     setProgress(0);
     busy = true;
