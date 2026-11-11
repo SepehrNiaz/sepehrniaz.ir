@@ -20,7 +20,7 @@ const T = {
     errFramed: "The camera can't be used inside this embedded preview. Open the site directly to play.",
     errNoCam: "No camera was found.", errSecure: "The camera only works on a secure (https) page.",
     errLoad: "The AI model couldn't be loaded. Check your connection and try again.",
-    you: "You", cpu: "Computer", yourHand: "Your hand", none: "Show your hand",
+    you: "You", cpu: "Computer", yourHand: "Your hand", none: "Show your hand", noMove: "Make ✊ ✋ or ✌️",
     names: { rock: "Rock", paper: "Paper", scissors: "Scissors" },
     go: "Shoot!", win: "You win this round! 🎉", lose: "Computer wins this round", draw: "Draw — same move",
     missed: "I couldn't see your move. Keep your hand in view and try again.",
@@ -44,7 +44,7 @@ const T = {
     errFramed: "داخل این پیش‌نمایش نمی‌شود از دوربین استفاده کرد. برای بازی سایت را مستقیم باز کن.",
     errNoCam: "دوربینی پیدا نشد.", errSecure: "دوربین فقط روی صفحه‌ی امن (https) کار می‌کند.",
     errLoad: "مدل هوش مصنوعی بارگذاری نشد. اینترنت را بررسی کن و دوباره امتحان کن.",
-    you: "تو", cpu: "کامپیوتر", yourHand: "دست تو", none: "دستت را نشان بده",
+    you: "تو", cpu: "کامپیوتر", yourHand: "دست تو", none: "دستت را نشان بده", noMove: "✊ ✋ یا ✌️ نشان بده",
     names: { rock: "سنگ", paper: "کاغذ", scissors: "قیچی" },
     go: "حالا!", win: "این دست را بردی! 🎉", lose: "این دست را کامپیوتر برد", draw: "مساوی — حرکت یکسان",
     missed: "حرکتت را ندیدم. دستت را جلوی دوربین نگه دار و دوباره امتحان کن.",
@@ -71,6 +71,22 @@ const camBtn = $("gm-cam"), playBtn = $("gm-play"), resetBtn = $("gm-reset"), bo
 
 let mp = null, rec = null, drawer = null, loading = null, mode = null, stream = null, raf = 0, lastTime = -1, mediaW = 0, mediaH = 0;
 let current = null, sampling = null, busy = false;
+const recent = [];
+let handSeen = false;
+// Work the move out from the hand's own shape: a finger is "up" when its tip is
+// clearly farther from the wrist than its middle joint. This is steadier than
+// the model's gesture name, which often says nothing for a tilted hand.
+function moveFromHand(lm, named) {
+  const ar = mediaW && mediaH ? mediaW / mediaH : 1;
+  const d = (a, b) => Math.hypot((lm[a].x - lm[b].x) * ar, lm[a].y - lm[b].y);
+  const palm = d(0, 9) || 1e-6;
+  const up = [[8, 6, 5], [12, 10, 9], [16, 14, 13], [20, 18, 17]].map(([tip, pip, mcp]) => d(tip, 0) > d(pip, 0) * 1.12 && d(tip, mcp) > palm * 0.55);
+  const n = up.filter(Boolean).length;
+  if (up[0] && up[1] && !up[2] && !up[3]) return "scissors";
+  if (n >= 3) return "paper";
+  if (n === 0) return "rock";
+  return named || null;
+}
 const score = { you: 0, cpu: 0 };
 let lastRound = null; // { you, cpu, result } for repainting on language change
 
@@ -100,7 +116,7 @@ async function load() {
 function fit(w, h) { if (!w || !h) return; canvas.width = w; canvas.height = h; mediaW = w; mediaH = h; layout(); }
 function layout() {
   if (!mode || !mediaW) { view.style.height = ""; frameEl.style.width = frameEl.style.height = ""; return; }
-  const vw = view.clientWidth, maxH = Math.round(window.innerHeight * (window.innerWidth < 960 ? 0.48 : 0.7));
+  const vw = view.clientWidth, maxH = Math.round(window.innerHeight * (window.innerWidth < 960 ? 0.62 : 0.7));
   const vh = Math.min(Math.round((vw * mediaH) / mediaW), maxH);
   view.style.height = vh + "px";
   const k = Math.min(vw / mediaW, vh / mediaH);
@@ -122,14 +138,14 @@ async function startCamera() {
   mode = "camera"; lastTime = -1; view.classList.add("mirror", "active");
   fit(video.videoWidth, video.videoHeight); say("");
   camBtn.classList.remove("primary"); playBtn.disabled = false; msg.textContent = t("ready");
-  paint(); loop();
+  paint(); paintHand(); paintLive(); loop();
 }
 function stopCamera() {
   cancelAnimationFrame(raf);
   if (stream) stream.getTracks().forEach((tr) => tr.stop());
   stream = null; video.srcObject = null;
   if (mode) { mode = null; ctx.clearRect(0, 0, canvas.width, canvas.height); view.classList.remove("active"); layout(); say(""); }
-  camBtn.classList.add("primary"); playBtn.disabled = true; current = null; paintHand(); paint();
+  camBtn.classList.add("primary"); playBtn.disabled = true; current = null; handSeen = false; recent.length = 0; paintHand(); paintLive(); paint();
 }
 function loop() {
   if (mode !== "camera") return;
@@ -145,9 +161,16 @@ function loop() {
     drawer.drawLandmarks(lm, { color: "#22d3ee", fillColor: "#0b1120", lineWidth: 1.6 * s, radius: 3.4 * s });
   }
   const g = r.gestures[0] && r.gestures[0][0];
-  current = g && g.score > 0.55 ? FROM_GESTURE[g.categoryName] || null : null;
-  if (sampling) sampling.push(current);
-  paintHand();
+  const named = g && g.score > 0.55 ? FROM_GESTURE[g.categoryName] || null : null;
+  const now = r.landmarks[0] ? moveFromHand(r.landmarks[0], named) : null;
+  if (sampling) sampling.push(now);
+  // show the move that most of the last few frames agree on, so the label doesn't flicker
+  recent.push(now); if (recent.length > 5) recent.shift();
+  const votes = {}; for (const m of recent) votes[m] = (votes[m] || 0) + 1;
+  const top = Object.entries(votes).sort((a, b) => b[1] - a[1])[0];
+  const steady = top && top[1] >= 3 ? (top[0] === "null" ? null : top[0]) : current;
+  const seen = !!r.landmarks[0];
+  if (steady !== current || seen !== handSeen) { current = steady; handSeen = seen; paintHand(); }
 }
 
 // ── A round: 3 · 2 · 1 · Shoot! → read the hand for ~0.6 s → compare ─
@@ -159,13 +182,14 @@ function beep(freq, ms) {
 async function round() {
   if (busy || mode !== "camera") return;
   if (score.you >= WIN || score.cpu >= WIN) reset();
-  busy = true; playBtn.disabled = true; lastRound = null; board.classList.remove("show");
+  busy = true; playBtn.disabled = true; lastRound = null; board.classList.remove("show"); paintLive();
+  if (window.innerWidth < 960) view.scrollIntoView({ block: "nearest", behavior: "smooth" });
   for (const n of [3, 2, 1]) { big.textContent = num(n); big.className = "gm-big pop"; beep(520, 120); await wait(700); big.className = "gm-big"; await wait(60); }
   big.textContent = t("go"); big.className = "gm-big pop go"; beep(880, 220);
   sampling = []; await wait(650);
   const picks = sampling.filter(Boolean); sampling = null;
   big.className = "gm-big";
-  if (!picks.length) { msg.textContent = t("missed"); busy = false; playBtn.disabled = false; paint(); return; }
+  if (!picks.length) { msg.textContent = t("missed"); msg.className = "gm-msg"; busy = false; playBtn.disabled = false; paint(); paintLive(t("missed")); return; }
   const tally = {}; for (const p of picks) tally[p] = (tally[p] || 0) + 1;
   const you = Object.entries(tally).sort((a, b) => b[1] - a[1])[0][0];
   const cpu = ["rock", "paper", "scissors"][Math.floor(Math.random() * 3)];
@@ -175,11 +199,22 @@ async function round() {
   paintBoard(true);
   busy = false; playBtn.disabled = false; paint();
 }
-function reset() { score.you = 0; score.cpu = 0; lastRound = null; board.classList.remove("show"); msg.textContent = mode ? t("ready") : ""; paintScore(); paint(); }
+function reset() { score.you = 0; score.cpu = 0; lastRound = null; board.classList.remove("show"); msg.textContent = mode ? t("ready") : ""; msg.className = "gm-msg"; paintScore(); paint(); paintLive(); }
 
 // ── Painting ────────────────────────────────────────────────
-function paintHand() { hand.innerHTML = mode ? `<small>${esc(t("yourHand"))}</small><b>${current ? `${MOVES[current]} ${esc(t("names")[current])}` : esc(t("none"))}</b>` : ""; }
+function paintHand() { hand.innerHTML = mode ? `<small>${esc(t("yourHand"))}</small><b>${current ? `${MOVES[current]} ${esc(t("names")[current])}` : esc(t(handSeen ? "noMove" : "none"))}</b>` : ""; }
 function paintScore() { $("gm-you").textContent = num(score.you); $("gm-cpu").textContent = num(score.cpu); }
+// The same score and result, drawn on the picture so nothing has to be scrolled to
+function paintLive(note) {
+  const live = $("gm-live"), res = $("gm-result");
+  live.innerHTML = mode ? `<span>${esc(t("you"))} <b>${num(score.you)}</b></span><i>:</i><span><b>${num(score.cpu)}</b> ${esc(t("cpu"))}</span>` : "";
+  if (!mode || (!lastRound && !note)) { res.className = "gm-result"; res.innerHTML = ""; return; }
+  if (!lastRound) { res.className = "gm-result show"; res.innerHTML = `<p>${esc(note)}</p>`; return; }
+  const { you, cpu, result } = lastRound;
+  const over = score.you >= WIN ? t("gameWin") : score.cpu >= WIN ? t("gameLose") : "";
+  res.className = `gm-result show ${over ? (score.you >= WIN ? "win" : "lose") : result}`;
+  res.innerHTML = `<div class="gm-duel"><span><em>${MOVES[you]}</em><small>${esc(t("you"))} · ${esc(t("names")[you])}</small></span><i>VS</i><span><em>${MOVES[cpu]}</em><small>${esc(t("cpu"))} · ${esc(t("names")[cpu])}</small></span></div><p>${esc(over || t(result))}</p>`;
+}
 function paintBoard(animate) {
   paintScore();
   if (!lastRound) return;
@@ -191,6 +226,7 @@ function paintBoard(animate) {
   msg.className = `gm-msg ${over ? (score.you >= WIN ? "win" : "lose") : result}`;
   if (animate) { board.classList.remove("show"); void board.offsetWidth; }
   board.classList.add("show");
+  paintLive();
 }
 function paint() {
   document.querySelectorAll("[data-v]").forEach((el) => {
@@ -205,10 +241,12 @@ function paint() {
 camBtn.addEventListener("click", () => (mode ? stopCamera() : startCamera()));
 playBtn.addEventListener("click", round);
 resetBtn.addEventListener("click", reset);
-document.addEventListener("cv:langchange", () => { paint(); paintHand(); if (lastRound) paintBoard(false); else if (mode) msg.textContent = t("ready"); });
+document.addEventListener("cv:langchange", () => { paint(); paintHand(); if (lastRound) paintBoard(false); else if (mode) msg.textContent = t("ready"); paintLive(); });
 document.addEventListener("visibilitychange", () => { if (document.hidden && mode) stopCamera(); });
 document.addEventListener("keydown", (e) => { if (e.code === "Space" && mode && !busy && document.activeElement === document.body) { e.preventDefault(); round(); } });
 
 playBtn.disabled = true; paint(); paintScore();
+// For automated checks: read the move from a still picture
+window.__gameMove = async (src) => { await load(); const im = new Image(); im.src = src; await im.decode(); mediaW = im.naturalWidth; mediaH = im.naturalHeight; const r = rec.recognizeForVideo(im, performance.now()); const g = r.gestures[0] && r.gestures[0][0]; return { named: g && g.categoryName, move: r.landmarks[0] ? moveFromHand(r.landmarks[0], g && g.score > 0.55 ? FROM_GESTURE[g.categoryName] || null : null) : "no hand" }; };
 // For automated checks: feed a fixed move instead of the camera
 window.__gameRound = async (move) => { const prev = mode; mode = "camera"; const iv = setInterval(() => { if (sampling) sampling.push(move); }, 50); await round(); clearInterval(iv); mode = prev; return { lastRound, score: { ...score }, msg: msg.textContent }; };

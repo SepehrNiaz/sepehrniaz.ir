@@ -1352,3 +1352,26 @@ img, svg { -webkit-user-drag: none; }
 .path-method h3 { margin: 0 0 10px; font-size: 1.08rem; }
 .path-method ol { margin: 0 0 16px; padding-inline-start: 20px; display: grid; gap: 8px; color: var(--muted); line-height: 1.75; font-size: 14.5px; }
 @media (max-width: 960px) { .path-grid { grid-template-columns: 1fr; } .path-method { position: static; } }
+
+/* ───────── Lab fixes: tidy object labels, game result on the picture ───────── */
+.ob-tags span { transform: none; margin: 0; padding: 2px 8px; border-radius: 7px; font-size: 12px; line-height: 1.5; max-width: 70%; box-shadow: 0 2px 8px rgba(0, 0, 0, .35); }
+.ob-tags span i { font-style: normal; font-weight: 600; opacity: .7; font-size: 11px; }
+.gm-hand { padding: 5px 10px; border-radius: 10px; }
+.gm-hand small { font-size: 10.5px; line-height: 1.3; }
+.gm-hand b { font-size: 14px; }
+.gm-live { position: absolute; top: 12px; inset-inline-end: 12px; z-index: 2; display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 10px; background: rgba(5, 8, 15, .72); color: #cdd6e6; font-size: 12.5px; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.gm-live:empty { display: none; }
+.gm-live b { color: #fff; font: 800 17px "Space Grotesk", Vazirmatn, sans-serif; }
+.gm-live i { font-style: normal; color: #8d99b0; }
+.gm-result { position: absolute; left: 10px; right: 10px; bottom: 10px; z-index: 2; display: none; padding: 10px 14px; border-radius: 14px; background: rgba(5, 8, 15, .8); color: #f1f5ff; text-align: center; border: 1px solid rgba(255, 255, 255, .14); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.gm-result.show { display: block; animation: ai-pop .3s ease-out; }
+.gm-result p { margin: 0; font-weight: 700; font-size: 15px; }
+.gm-result.win { border-color: #34d399; } .gm-result.win p { color: #34d399; }
+.gm-result.lose { border-color: #fb7185; } .gm-result.lose p { color: #fb7185; }
+.gm-duel { display: flex; align-items: center; justify-content: center; gap: 18px; margin-bottom: 4px; }
+.gm-duel span { display: grid; justify-items: center; }
+.gm-duel em { font-style: normal; font-size: 2.3rem; line-height: 1.15; }
+.gm-duel small { color: #a9b4c8; font-size: 11.5px; }
+.gm-duel i { font: 700 13px "Space Grotesk", sans-serif; color: #8d99b0; font-style: normal; }
+@media (max-width: 960px) { .gm-app .gm-score, .gm-app .gm-board { display: none; } }
+@media (max-width: 960px) { body:has(.vis-view.active) .ai-launcher, body:has(.vis-view.active) .ai-nudge { opacity: 0; pointer-events: none; } }
