@@ -132,6 +132,17 @@
       </button></div>
     </section>
 
+    <section class="wrap section" id="path">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="pathEyebrow">Learning path</span>
+        <h2 data-i18n="pathTitle">From zero to professional</h2>
+        <p class="muted section-intro" data-i18n="pathIntro">Follow the stages in order. Each one builds on the one before.</p>
+      </div>
+      <div class="path-box" id="path-box"><div class="path-tabs" role="tablist"><button type="button" role="tab" data-path="linux" aria-selected="true" class="on"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" x2="20" y1="19" y2="19"></line></svg>Linux</button><button type="button" role="tab" data-path="programming" aria-selected="false" class=""><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Programming</button><button type="button" role="tab" data-path="network" aria-selected="false" class=""><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="16" y="16" width="6" height="6" rx="1"></rect><rect x="2" y="16" width="6" height="6" rx="1"></rect><rect x="9" y="2" width="6" height="6" rx="1"></rect><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"></path><path d="M12 12V8"></path></svg>Networking</button><button type="button" role="tab" data-path="security" aria-selected="false" class=""><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>Security</button></div>
+        <div class="path-grid"><ol class="path-steps"><li class="ready"><span class="path-n">1</span><div><small>Stage 1</small><h3>Meet the terminal</h3><p>Run commands, read their output, find out where you are.</p><a class="art-read" href="en/linux-first-steps/">Open the lesson: Your first steps in the Linux terminal <svg class="icon flip" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div></li><li class="ready"><span class="path-n">2</span><div><small>Stage 2</small><h3>Files and folders</h3><p>Create, copy, move and delete without a mouse.</p><a class="art-read" href="en/linux-files/">Open the lesson: Files and folders on the command line <svg class="icon flip" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div></li><li class="ready"><span class="path-n">3</span><div><small>Stage 3</small><h3>Permissions and users</h3><p>Who may read, change or run each file.</p><a class="art-read" href="en/linux-permissions/">Open the lesson: Understanding file permissions <svg class="icon flip" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div></li><li class="soon"><span class="path-n">4</span><div><small>Stage 4</small><h3>Text tools and pipes</h3><p>grep, sort, wc and joining commands with | to answer questions from logs.</p><span class="pill">Coming soon</span></div></li><li class="ready"><span class="path-n">5</span><div><small>Stage 5</small><h3>Automation with scripts</h3><p>Turn the commands you repeat into one script.</p><a class="art-read" href="en/bash-scripting/">Open the lesson: Automate with Bash scripts <svg class="icon flip" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div></li><li class="soon"><span class="path-n">6</span><div><small>Stage 6</small><h3>Running a server</h3><p>Packages, services (systemctl), SSH, logs and backups — the daily work of an administrator.</p><span class="pill">Coming soon</span></div></li></ol>
+        <aside class="card path-method"><h3>How to study here</h3><ol><li>Read one lesson slowly, start to finish.</li><li>Type every command yourself in the practice lab — don't just read it.</li><li>Do the exercises at the end before you open the answers.</li><li>Ask the guide for a quiz on the topic the next day.</li><li>Finish each stage by building something small of your own.</li></ol><a class="btn primary sm" href="practice/">Start practising</a></aside></div></div>
+    </section>
+
     <section class="wrap section" id="articles">
       <div class="section-head reveal">
         <span class="eyebrow" data-i18n="artEyebrow">02 · Articles &amp; tutorials</span>
@@ -287,7 +298,7 @@
           <ul class="chips port-tech"><li><bdi>Python</bdi></li><li><bdi>SQLite</bdi></li><li><bdi>ICMP / TCP</bdi></li><li><bdi>HTML / CSS</bdi></li></ul>
           <div class="port-foot">
             <button type="button" class="btn sm port-more" data-port="0">Details</button>
-            <button type="button" class="port-code" data-code="0"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Code, explained</button>
+            <button type="button" class="port-code" data-code="0"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Code &amp; how to build it</button>
           </div>
         </div>
       </article><article class="card hover port reveal is-detailed" style="--d:0.06s" data-cat="network" data-port="1">
@@ -307,7 +318,7 @@ examples/broken.json: 7 problem(s)
           <ul class="chips port-tech"><li><bdi>Python</bdi></li><li><bdi>Cisco IOS</bdi></li><li><bdi>VLAN / 802.1Q</bdi></li><li><bdi>Layer 2 security</bdi></li></ul>
           <div class="port-foot">
             <button type="button" class="btn sm port-more" data-port="1">Details</button>
-            <button type="button" class="port-code" data-code="1"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Code, explained</button>
+            <button type="button" class="port-code" data-code="1"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Code &amp; how to build it</button>
           </div>
         </div>
       </article><article class="card hover port reveal is-detailed" style="--d:0.12s" data-cat="security" data-port="2">
@@ -327,7 +338,7 @@ IP                 Fails  Burst  Invalid  Top usernames
           <ul class="chips port-tech"><li><bdi>Python</bdi></li><li><bdi>Linux</bdi></li><li><bdi>Regex</bdi></li><li><bdi>iptables / ufw</bdi></li></ul>
           <div class="port-foot">
             <button type="button" class="btn sm port-more" data-port="2">Details</button>
-            <button type="button" class="port-code" data-code="2"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Code, explained</button>
+            <button type="button" class="port-code" data-code="2"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Code &amp; how to build it</button>
           </div>
         </div>
       </article><article class="card hover port reveal is-detailed" style="--d:0s" data-cat="security" data-port="3">
@@ -347,7 +358,7 @@ Scanning 14 host(s), 26 port(s)...
           <ul class="chips port-tech"><li><bdi>Python</bdi></li><li><bdi>TCP/IP</bdi></li><li><bdi>Sockets</bdi></li><li><bdi>Threading</bdi></li></ul>
           <div class="port-foot">
             <button type="button" class="btn sm port-more" data-port="3">Details</button>
-            <button type="button" class="port-code" data-code="3"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Code, explained</button>
+            <button type="button" class="port-code" data-code="3"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Code &amp; how to build it</button>
           </div>
         </div>
       </article><article class="card hover port reveal is-detailed" style="--d:0.06s" data-cat="network" data-port="4">
@@ -366,7 +377,7 @@ Office     25    172.16.2.192/27  255.255.255.224  30</pre></div></div>
           <ul class="chips port-tech"><li><bdi>Python</bdi></li><li><bdi>IPv4</bdi></li><li><bdi>VLSM / CIDR</bdi></li><li><bdi>CCNA</bdi></li></ul>
           <div class="port-foot">
             <button type="button" class="btn sm port-more" data-port="4">Details</button>
-            <button type="button" class="port-code" data-code="4"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Code, explained</button>
+            <button type="button" class="port-code" data-code="4"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Code &amp; how to build it</button>
           </div>
         </div>
       </article><article class="card hover port reveal is-detailed" style="--d:0.12s" data-cat="support" data-port="5">
@@ -378,7 +389,7 @@ Office     25    172.16.2.192/27  255.255.255.224  30</pre></div></div>
           <ul class="chips port-tech"><li><bdi>Python</bdi></li><li><bdi>SQLite</bdi></li><li><bdi>CLI</bdi></li><li><bdi>HTML reports</bdi></li></ul>
           <div class="port-foot">
             <button type="button" class="btn sm port-more" data-port="5">Details</button>
-            <button type="button" class="port-code" data-code="5"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Code, explained</button>
+            <button type="button" class="port-code" data-code="5"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Code &amp; how to build it</button>
           </div>
         </div>
       </article><article class="card hover port reveal" style="--d:0s" data-cat="writing" data-port="6">

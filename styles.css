@@ -1318,3 +1318,37 @@ img, svg { -webkit-user-drag: none; }
 .shield { position: fixed; inset: 0; z-index: 2147483647; background: var(--bg); display: none; }
 .shield.on { display: block; }
 @media print { body > * { display: none !important; } body::after { content: "sepehrniaz.ir"; display: block; padding: 40px; font: 600 20px sans-serif; color: #000; } }
+
+/* ───────── Study guide & learning path ───────── */
+.study-box { margin: 26px 0 0; padding: 18px 20px; border-radius: 16px; border: 1px solid color-mix(in srgb, var(--c1) 35%, var(--border)); background: color-mix(in srgb, var(--c1) 6%, transparent); }
+.study-box > b { display: block; color: var(--c1); font-size: 14px; }
+.study-box .doc-list { margin-top: 10px; }
+.study-box.recap { border-color: color-mix(in srgb, var(--c3) 40%, var(--border)); background: color-mix(in srgb, var(--c3) 6%, transparent); }
+.study-box.recap > b { color: var(--c3); }
+.study-bad li .icon { color: var(--err); }
+.study-q { margin: 14px 0 22px; padding-inline-start: 22px; display: grid; gap: 14px; }
+.study-q li p { margin: 0 0 6px; }
+.study-q summary { cursor: pointer; color: var(--c1); font-size: 14px; font-weight: 600; }
+.study-q pre { margin: 8px 0 0; padding: 12px 14px; border-radius: 12px; background: #0a0f1c; color: #d7deea; border: 1px solid rgba(255, 255, 255, .09); font: 13px/1.7 "JetBrains Mono", Vazirmatn, monospace; white-space: pre-wrap; word-break: break-word; text-align: start; }
+.code-verb { font-weight: 700; color: var(--c1); }
+.port-codebox .doc-note { margin: 12px 0 0; }
+.port-codebox h4 { margin-top: 22px; }
+.path-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+.path-tabs button { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); font: 600 14px Inter, Vazirmatn, sans-serif; cursor: pointer; transition: all .2s; }
+.path-tabs button .icon { width: 17px; height: 17px; }
+.path-tabs button:hover { color: var(--text); border-color: var(--c1); }
+.path-tabs button.on { color: var(--on-accent); background: var(--grad); border-color: transparent; }
+.path-grid { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 22px; align-items: start; }
+.path-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; position: relative; }
+.path-steps li { display: flex; gap: 16px; align-items: flex-start; padding: 16px 18px; border-radius: 16px; border: 1px solid var(--border); background: var(--surface); }
+.path-steps li.soon { opacity: .72; border-style: dashed; }
+.path-n { flex: none; width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: var(--grad); color: var(--on-accent); font-weight: 700; }
+.path-steps li.soon .path-n { background: var(--surface-2); color: var(--muted); border: 1px solid var(--border); }
+.path-steps small { color: var(--c1); font-weight: 600; font-size: 12.5px; }
+.path-steps h3 { margin: 2px 0 4px; font-size: 1.08rem; }
+.path-steps p { margin: 0 0 8px; color: var(--muted); line-height: 1.75; font-size: 14.5px; }
+.path-steps .art-read { text-decoration: none; font-size: 14px; }
+.path-method { padding: 22px; position: sticky; top: 90px; }
+.path-method h3 { margin: 0 0 10px; font-size: 1.08rem; }
+.path-method ol { margin: 0 0 16px; padding-inline-start: 20px; display: grid; gap: 8px; color: var(--muted); line-height: 1.75; font-size: 14.5px; }
+@media (max-width: 960px) { .path-grid { grid-template-columns: 1fr; } .path-method { position: static; } }

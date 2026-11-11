@@ -332,3 +332,230 @@ window.LEARN = {
     }
   ]
 };
+
+// ─────────────────────────────────────────────────────────────
+//  Study guide. Every lesson gets: what you will be able to do,
+//  a deeper section, common mistakes, exercises with answers and
+//  a recap. `roadmap` is the order to learn each track in, from
+//  the first step to a professional level (lesson: null = not
+//  written yet). Edit freely — the site renders it automatically.
+// ─────────────────────────────────────────────────────────────
+window.LEARN.method = {
+  en: ["Read one lesson slowly, start to finish.", "Type every command yourself in the practice lab — don't just read it.", "Do the exercises at the end before you open the answers.", "Ask the guide for a quiz on the topic the next day.", "Finish each stage by building something small of your own."],
+  fa: ["یک درس را آرام و از اول تا آخر بخوان.", "هر دستور را خودت در آزمایشگاه تمرین تایپ کن — فقط نخوان.", "قبل از دیدن جواب‌ها، تمرین‌های آخر درس را حل کن.", "روز بعد از راهنما بخواه از همان مبحث آزمون بگیرد.", "هر مرحله را با ساختن یک چیز کوچک از خودت تمام کن."]
+};
+
+window.LEARN.roadmap = {
+  linux: [
+    { t: { en: "Meet the terminal", fa: "آشنایی با ترمینال" }, d: { en: "Run commands, read their output, find out where you are.", fa: "اجرای دستور، خواندن خروجی و فهمیدن اینکه کجا هستی." }, lesson: "linux-first-steps" },
+    { t: { en: "Files and folders", fa: "فایل‌ها و پوشه‌ها" }, d: { en: "Create, copy, move and delete without a mouse.", fa: "ساختن، کپی، جابه‌جایی و حذف بدون ماوس." }, lesson: "linux-files" },
+    { t: { en: "Permissions and users", fa: "مجوزها و کاربران" }, d: { en: "Who may read, change or run each file.", fa: "چه کسی اجازه‌ی خواندن، تغییر یا اجرای هر فایل را دارد." }, lesson: "linux-permissions" },
+    { t: { en: "Text tools and pipes", fa: "ابزارهای متن و پایپ" }, d: { en: "grep, sort, wc and joining commands with | to answer questions from logs.", fa: "grep، sort، wc و وصل‌کردن دستورها با | برای جواب‌گرفتن از لاگ‌ها." }, lesson: null },
+    { t: { en: "Automation with scripts", fa: "خودکارسازی با اسکریپت" }, d: { en: "Turn the commands you repeat into one script.", fa: "تبدیل دستورهای تکراری به یک اسکریپت." }, lesson: "bash-scripting" },
+    { t: { en: "Running a server", fa: "اداره‌ی سرور" }, d: { en: "Packages, services (systemctl), SSH, logs and backups — the daily work of an administrator.", fa: "بسته‌ها، سرویس‌ها (systemctl)، SSH، لاگ و پشتیبان‌گیری — کار روزانه‌ی یک مدیر سیستم." }, lesson: null }
+  ],
+  programming: [
+    { t: { en: "First programs in Python", fa: "اولین برنامه‌ها با پایتون" }, d: { en: "Variables, decisions and loops.", fa: "متغیر، تصمیم‌گیری و حلقه." }, lesson: "python-10-minutes" },
+    { t: { en: "Functions and lists", fa: "تابع و لیست" }, d: { en: "Name a piece of work once and reuse it; keep many values together.", fa: "یک کار را یک بار نام‌گذاری کن و دوباره استفاده کن؛ چند مقدار را کنار هم نگه دار." }, lesson: null },
+    { t: { en: "JavaScript and the web page", fa: "جاوااسکریپت و صفحه‌ی وب" }, d: { en: "Make a page react to the person using it.", fa: "صفحه را به کارهای کاربر واکنش‌پذیر کن." }, lesson: "javascript-basics" },
+    { t: { en: "Shell scripts", fa: "اسکریپت‌های شل" }, d: { en: "Glue system commands together with Bash.", fa: "دستورهای سیستم را با Bash به هم وصل کن." }, lesson: "bash-scripting" },
+    { t: { en: "Files, errors and data", fa: "فایل، خطا و داده" }, d: { en: "Read and write files, handle errors, store data with SQL.", fa: "خواندن و نوشتن فایل، مدیریت خطا و ذخیره‌ی داده با SQL." }, lesson: null },
+    { t: { en: "A real project", fa: "یک پروژه‌ی واقعی" }, d: { en: "Build one of the tools in the Tools section step by step, then add a feature of your own.", fa: "یکی از ابزارهای بخش «ابزارها» را قدم‌به‌قدم بساز و بعد یک قابلیت از خودت اضافه کن." }, lesson: null }
+  ],
+  network: [
+    { t: { en: "IP addresses", fa: "آدرس IP" }, d: { en: "What an address is, private and public, and what /24 means.", fa: "آدرس چیست، خصوصی و عمومی، و /24 یعنی چه." }, lesson: "what-is-ip" },
+    { t: { en: "Subnetting", fa: "زیرشبکه‌بندی" }, d: { en: "Split a network into the right-sized pieces by hand.", fa: "یک شبکه را دستی به تکه‌هایی با اندازه‌ی درست تقسیم کن." }, lesson: null },
+    { t: { en: "How data travels", fa: "داده چطور سفر می‌کند" }, d: { en: "Switch, router, gateway, DNS and DHCP — what each one does.", fa: "سوئیچ، روتر، گیت‌وی، DNS و DHCP — هر کدام چه می‌کنند." }, lesson: null },
+    { t: { en: "Ports and protocols", fa: "پورت‌ها و پروتکل‌ها" }, d: { en: "TCP and UDP, and the services behind common ports.", fa: "TCP و UDP و سرویس‌های پشت پورت‌های رایج." }, lesson: null },
+    { t: { en: "Troubleshooting", fa: "عیب‌یابی" }, d: { en: "A fixed order: cable, IP, gateway, DNS, service — with ping, traceroute and nslookup.", fa: "یک ترتیب ثابت: کابل، IP، گیت‌وی، DNS، سرویس — با ping، traceroute و nslookup." }, lesson: null },
+    { t: { en: "Switching and VLANs", fa: "سوئیچینگ و VLAN" }, d: { en: "Separate departments on the same switches; the level of CCNA.", fa: "جداکردن بخش‌ها روی همان سوئیچ‌ها؛ هم‌سطح CCNA." }, lesson: null }
+  ],
+  security: [
+    { t: { en: "Think like a defender", fa: "مثل یک مدافع فکر کن" }, d: { en: "The habits that stop most attacks.", fa: "عادت‌هایی که جلوی بیشتر حمله‌ها را می‌گیرند." }, lesson: "security-mindset" },
+    { t: { en: "Lock down your own system", fa: "سیستم خودت را امن کن" }, d: { en: "Permissions, updates, strong passwords and two-step login.", fa: "مجوزها، به‌روزرسانی، رمز قوی و ورود دومرحله‌ای." }, lesson: "linux-permissions" },
+    { t: { en: "Know the network", fa: "شبکه را بشناس" }, d: { en: "You can't protect what you don't understand: IP, ports, services.", fa: "چیزی را که نمی‌شناسی نمی‌توانی محافظت کنی: IP، پورت، سرویس." }, lesson: "what-is-ip" },
+    { t: { en: "Read the logs", fa: "لاگ‌ها را بخوان" }, d: { en: "Find failed logins and attacks in real log files.", fa: "ورودهای ناموفق و حمله‌ها را در لاگ واقعی پیدا کن." }, lesson: null },
+    { t: { en: "Firewalls and hardening", fa: "فایروال و مقاوم‌سازی" }, d: { en: "Close what isn't needed; allow only what is.", fa: "هر چه لازم نیست ببند؛ فقط چیزهای لازم را باز بگذار." }, lesson: null },
+    { t: { en: "Authorised testing", fa: "آزمون مجاز" }, d: { en: "Test your own systems the way an attacker would — with written permission only. The free book covers this.", fa: "سیستم‌های خودت را مثل یک مهاجم بیازما — فقط با اجازه‌ی کتبی. کتاب رایگان سایت این بخش را پوشش می‌دهد." }, lesson: null }
+  ]
+};
+
+window.LEARN.study = {
+  "linux-first-steps": {
+    goals: { en: ["Open a terminal and run a command without fear", "Find out who you are and which folder you are in", "Check the health of a machine: uptime, disk and memory"],
+             fa: ["بدون ترس ترمینال را باز کنی و دستور اجرا کنی", "بفهمی با کدام کاربر و در کدام پوشه هستی", "سلامت یک سیستم را بررسی کنی: مدت روشن‌بودن، دیسک و حافظه"] },
+    more: [
+      { h: { en: "How every command is built", fa: "ساختار هر دستور" } },
+      { p: { en: "Almost every command has the same three parts: the name, the options and the thing to work on. In  ls -l /etc  the name is ls, the option -l asks for details, and /etc is the folder to list. Once you see this pattern, new commands stop looking strange.",
+             fa: "تقریباً هر دستور همین سه بخش را دارد: اسم، گزینه‌ها و چیزی که رویش کار می‌کند. در  ls -l /etc  اسم دستور ls است، گزینه‌ی -l جزئیات می‌خواهد و /etc پوشه‌ای است که فهرست می‌شود. وقتی این الگو را ببینی، دستورهای جدید دیگر عجیب نیستند." } },
+      { list: { en: ["Help is built in: add --help to a command, or read its manual with  man ls  (press q to leave).", "The Tab key completes names for you; the ↑ key brings back earlier commands.", "Ctrl+C stops a command that is stuck. Ctrl+L or clear cleans the screen.", "Linux cares about capital letters: Notes.txt and notes.txt are two different files."],
+                fa: ["راهنما همیشه همراهت است: به آخر دستور --help اضافه کن یا با  man ls  راهنمایش را بخوان (با q خارج شو).", "کلید Tab اسم‌ها را کامل می‌کند و کلید ↑ دستورهای قبلی را برمی‌گرداند.", "Ctrl+C دستوری را که گیر کرده متوقف می‌کند. Ctrl+L یا clear صفحه را پاک می‌کند.", "لینوکس به حروف بزرگ و کوچک حساس است: Notes.txt و notes.txt دو فایل جدا هستند."] } }
+    ],
+    mistakes: { en: ["Typing the $ sign — it is the prompt, not part of the command.", "Forgetting the space between the command and its option (ls-l instead of ls -l).", "Panicking at an error. Read the last line: it nearly always says what is wrong."],
+                fa: ["تایپ‌کردن علامت $ — این فقط نشانه‌ی آماده‌بودن ترمینال است، نه بخشی از دستور.", "جاانداختن فاصله بین دستور و گزینه (ls-l به‌جای ls -l).", "ترسیدن از خطا. خط آخر را بخوان: تقریباً همیشه می‌گوید مشکل چیست."] },
+    practice: [
+      { q: { en: "Which command shows the folder you are in?", fa: "کدام دستور پوشه‌ای را که در آن هستی نشان می‌دهد؟" }, a: { en: "pwd", fa: "pwd" } },
+      { q: { en: "How do you see how full the disk is, in units that are easy to read?", fa: "چطور می‌بینی دیسک چقدر پر است، با واحدهای خوانا؟" }, a: { en: "df -h   (-h means human-readable: G and M instead of raw blocks)", fa: "df -h   (گزینه‌ی -h یعنی خوانا برای انسان: G و M به‌جای عدد خام)" } },
+      { q: { en: "A command has been running for a minute and nothing happens. What do you press?", fa: "یک دستور یک دقیقه است اجرا می‌شود و اتفاقی نمی‌افتد. چه کلیدی می‌زنی؟" }, a: { en: "Ctrl+C", fa: "Ctrl+C" } },
+      { q: { en: "You don't remember what the -a option of uname does. How do you find out without the internet?", fa: "یادت نیست گزینه‌ی -a در uname چه می‌کند. بدون اینترنت چطور می‌فهمی؟" }, a: { en: "uname --help   or   man uname", fa: "uname --help   یا   man uname" } }
+    ],
+    recap: { en: ["A command = name + options + target.", "whoami, pwd, uname, uptime, df and free only look — they are always safe.", "Stuck? --help, man, Tab and Ctrl+C."],
+             fa: ["دستور = اسم + گزینه‌ها + هدف.", "whoami، pwd، uname، uptime، df و free فقط نگاه می‌کنند — همیشه بی‌خطرند.", "گیر کردی؟ --help، man، Tab و Ctrl+C."] }
+  },
+  "linux-files": {
+    goals: { en: ["Move around the folder tree with cd and ls", "Create, copy, rename and delete files and folders", "Tell a relative path from an absolute one"],
+             fa: ["با cd و ls در درخت پوشه‌ها حرکت کنی", "فایل و پوشه بسازی، کپی کنی، تغییر نام بدهی و حذف کنی", "مسیر نسبی را از مسیر مطلق تشخیص بدهی"] },
+    more: [
+      { h: { en: "Paths: the address of a file", fa: "مسیر: آدرس یک فایل" } },
+      { p: { en: "An absolute path starts with / and works from anywhere, like /home/student/notes/todo.txt. A relative path starts from where you are now, like notes/todo.txt. Three shortcuts are worth memorising: a single dot is this folder, two dots is the folder above, and ~ is your home.",
+             fa: "مسیر مطلق با / شروع می‌شود و از هر جایی کار می‌کند، مثل /home/student/notes/todo.txt. مسیر نسبی از جایی که الان هستی شروع می‌شود، مثل notes/todo.txt. سه میانبر را حفظ کن: یک نقطه یعنی همین پوشه، دو نقطه یعنی پوشه‌ی بالاتر و ~ یعنی پوشه‌ی خانه‌ات." } },
+      { list: { en: ["cd ..  goes up one level;  cd ~  goes home;  cd -  returns to the previous folder.", "ls -la  also shows hidden files — the ones whose names start with a dot.", "mkdir -p a/b/c  creates the whole chain of folders in one go.", "cp -r  copies a folder with everything inside;  rm -r  deletes one the same way.", "A star matches many names:  ls *.txt  lists every file ending in .txt."],
+                fa: ["cd ..  یک پله بالا می‌رود؛  cd ~  به خانه می‌رود؛  cd -  به پوشه‌ی قبلی برمی‌گردد.", "ls -la  فایل‌های مخفی را هم نشان می‌دهد — آن‌هایی که اسمشان با نقطه شروع می‌شود.", "mkdir -p a/b/c  کل زنجیره‌ی پوشه‌ها را یک‌جا می‌سازد.", "cp -r  یک پوشه را با همه‌ی محتوایش کپی می‌کند؛  rm -r  همان‌طور حذفش می‌کند.", "ستاره با چند اسم جور می‌شود:  ls *.txt  همه‌ی فایل‌های با پسوند .txt را فهرست می‌کند."] } }
+    ],
+    mistakes: { en: ["Running rm without checking where you are. Run pwd and ls first.", "Names with spaces: write \"my file.txt\" in quotes, or the shell sees two names.", "Using mv onto an existing name — it replaces that file without asking."],
+                fa: ["اجرای rm بدون اینکه بدانی کجا هستی. اول pwd و ls را بزن.", "اسم‌های فاصله‌دار: \"my file.txt\" را داخل نقل‌قول بنویس، وگرنه شل دو اسم می‌بیند.", "استفاده از mv روی اسمی که وجود دارد — بدون پرسیدن آن فایل را جایگزین می‌کند."] },
+    practice: [
+      { q: { en: "Create a folder called lab and, inside it, an empty file called notes.txt.", fa: "یک پوشه به اسم lab بساز و داخلش یک فایل خالی به اسم notes.txt." }, a: { en: "mkdir lab\ncd lab\ntouch notes.txt", fa: "mkdir lab\ncd lab\ntouch notes.txt" } },
+      { q: { en: "Rename notes.txt to todo.txt.", fa: "اسم notes.txt را به todo.txt تغییر بده." }, a: { en: "mv notes.txt todo.txt", fa: "mv notes.txt todo.txt" } },
+      { q: { en: "You are in /home/student/lab. Which folder does  cd ../..  take you to?", fa: "در /home/student/lab هستی. دستور  cd ../..  تو را به کدام پوشه می‌برد؟" }, a: { en: "/home  (up two levels)", fa: "/home  (دو پله بالاتر)" } },
+      { q: { en: "Make a backup copy of the whole lab folder called lab-backup.", fa: "از کل پوشه‌ی lab یک نسخه‌ی پشتیبان به اسم lab-backup بساز." }, a: { en: "cp -r lab lab-backup", fa: "cp -r lab lab-backup" } }
+    ],
+    recap: { en: ["ls looks, cd moves, mkdir and touch create.", "cp copies, mv moves or renames, rm deletes for good.", "/ starts an absolute path; .. is up; ~ is home."],
+             fa: ["ls نگاه می‌کند، cd جابه‌جا می‌شود، mkdir و touch می‌سازند.", "cp کپی می‌کند، mv جابه‌جا یا تغییر نام می‌دهد، rm برای همیشه حذف می‌کند.", "/ شروع مسیر مطلق است؛ .. یعنی بالا؛ ~ یعنی خانه."] }
+  },
+  "linux-permissions": {
+    goals: { en: ["Read the ten permission characters of ls -l", "Change permissions with chmod, with letters and with numbers", "Choose safe permissions for private files and scripts"],
+             fa: ["ده نویسه‌ی مجوز در خروجی ls -l را بخوانی", "با chmod مجوزها را تغییر بدهی، هم با حرف و هم با عدد", "برای فایل‌های خصوصی و اسکریپت‌ها مجوز امن انتخاب کنی"] },
+    more: [
+      { h: { en: "Working out the numbers yourself", fa: "عددها را خودت حساب کن" } },
+      { p: { en: "Each permission has a value: read is 4, write is 2 and execute is 1. Add them up for each of the three groups — owner, group, others. So rwx is 4+2+1 = 7, r-x is 4+1 = 5 and r-- is 4. That is why 754 means: the owner can do everything, the group can read and run, everyone else can only read.",
+             fa: "هر مجوز یک مقدار دارد: خواندن ۴، نوشتن ۲ و اجرا ۱. برای هر یک از سه گروه — مالک، گروه، دیگران — این‌ها را جمع کن. پس rwx یعنی ۴+۲+۱ = ۷، r-x یعنی ۴+۱ = ۵ و r-- یعنی ۴. به همین دلیل 754 یعنی: مالک همه‌کار می‌تواند بکند، گروه می‌تواند بخواند و اجرا کند و بقیه فقط می‌توانند بخوانند." } },
+      { list: { en: ["644 — a normal file: you edit it, others read it.", "755 — a script or program: you edit it, everyone may run it.", "600 — a private file such as an SSH key: only you.", "700 — a private folder: only you can enter it.", "On a folder, x means 'may enter' and w means 'may create and delete files inside'.", "chown changes the owner of a file; it normally needs sudo."],
+                fa: ["644 — فایل معمولی: تو ویرایش می‌کنی و بقیه می‌خوانند.", "755 — اسکریپت یا برنامه: تو ویرایش می‌کنی و همه می‌توانند اجرا کنند.", "600 — فایل خصوصی مثل کلید SSH: فقط خودت.", "700 — پوشه‌ی خصوصی: فقط خودت می‌توانی واردش شوی.", "روی پوشه، x یعنی «اجازه‌ی ورود» و w یعنی «اجازه‌ی ساختن و حذف فایل داخلش».", "chown مالک فایل را عوض می‌کند و معمولاً sudo می‌خواهد."] } }
+    ],
+    mistakes: { en: ["chmod 777 to 'make it work'. It lets everyone change the file — find the real cause instead.", "Forgetting chmod +x on a new script, then wondering about 'Permission denied'.", "Using sudo for everything. Use it only when a task really needs the administrator."],
+                fa: ["زدن chmod 777 برای اینکه «فقط کار کند». این به همه اجازه‌ی تغییر می‌دهد — دلیل واقعی را پیدا کن.", "فراموش‌کردن chmod +x روی اسکریپت جدید و بعد تعجب از «Permission denied».", "استفاده از sudo برای همه‌چیز. فقط وقتی کار واقعاً به مدیر سیستم نیاز دارد."] },
+    practice: [
+      { q: { en: "What does  -rw-r-----  allow?", fa: "مجوز  -rw-r-----  چه اجازه‌هایی می‌دهد؟" }, a: { en: "Owner: read and write. Group: read. Others: nothing. As a number: 640.", fa: "مالک: خواندن و نوشتن. گروه: خواندن. دیگران: هیچ. به عدد: 640." } },
+      { q: { en: "Write the number for rwxr-xr-x.", fa: "عدد معادل rwxr-xr-x را بنویس." }, a: { en: "755", fa: "755" } },
+      { q: { en: "Make backup.sh runnable, then run it.", fa: "فایل backup.sh را قابل اجرا کن و اجرایش کن." }, a: { en: "chmod +x backup.sh\n./backup.sh", fa: "chmod +x backup.sh\n./backup.sh" } },
+      { q: { en: "SSH says your private key is 'too open'. Which command fixes it?", fa: "SSH می‌گوید کلید خصوصی‌ات «بیش از حد باز» است. کدام دستور درستش می‌کند؟" }, a: { en: "chmod 600 ~/.ssh/id_ed25519   (use the name of your own key file)", fa: "chmod 600 ~/.ssh/id_ed25519   (اسم فایل کلید خودت را بگذار)" } }
+    ],
+    recap: { en: ["Three groups (owner, group, others) × three rights (read, write, execute).", "r=4, w=2, x=1 — add them per group.", "Give the least permission that still works."],
+             fa: ["سه گروه (مالک، گروه، دیگران) × سه حق (خواندن، نوشتن، اجرا).", "r=4، w=2، x=1 — برای هر گروه جمع کن.", "کمترین مجوزی را بده که کار با آن انجام می‌شود."] }
+  },
+  "python-10-minutes": {
+    goals: { en: ["Store values in variables and print them", "Make decisions with if, elif and else", "Repeat work with a for loop over a list"],
+             fa: ["مقدارها را در متغیر نگه داری و چاپ کنی", "با if، elif و else تصمیم بگیری", "با حلقه‌ی for روی یک لیست کار تکراری انجام بدهی"] },
+    more: [
+      { h: { en: "Kinds of value, and your first function", fa: "انواع مقدار و اولین تابع" } },
+      { p: { en: "Every value has a type. Text is a string (str) and goes in quotes; whole numbers are int; numbers with a decimal point are float; True and False are bool. Python will not mix them silently: \"5\" + 5 is an error, because one is text and the other a number. Convert with int(\"5\") or str(5).",
+             fa: "هر مقدار یک نوع دارد. متن رشته (str) است و داخل نقل‌قول می‌آید؛ عدد صحیح int است؛ عدد اعشاری float است؛ True و False از نوع bool هستند. پایتون این‌ها را بی‌صدا قاطی نمی‌کند: \"5\" + 5 خطاست، چون یکی متن و دیگری عدد است. با int(\"5\") یا str(5) تبدیل کن." } },
+      { code: "def is_open(port, open_ports):\n    \"\"\"Return True if the port is in the list.\"\"\"\n    return port in open_ports\n\nports = [22, 80, 443]\nfor p in [22, 23, 443]:\n    if is_open(p, ports):\n        print(p, \"open\")\n    else:\n        print(p, \"closed\")", lang: "python",
+        cap: { en: "A function gives a piece of work a name. Define it once with def, then call it as often as you like.", fa: "تابع به یک تکه کار اسم می‌دهد. یک بار با def تعریفش کن و هر چند بار خواستی صدایش بزن." } },
+      { list: { en: ["Indentation is part of the language: the lines inside if, for and def start with four spaces.", "= stores a value; == compares two values.", "len(x) counts the items of a list or the letters of a string.", "range(1, 6) gives 1, 2, 3, 4, 5 — the end is not included.", "Read errors from the bottom up: the last line names the problem, the line above shows where."],
+                fa: ["تورفتگی بخشی از زبان است: خط‌های داخل if، for و def با چهار فاصله شروع می‌شوند.", "= مقدار را ذخیره می‌کند؛ == دو مقدار را مقایسه می‌کند.", "len(x) تعداد عضوهای لیست یا حرف‌های یک رشته را می‌شمارد.", "range(1, 6) عددهای ۱ تا ۵ را می‌دهد — عدد آخر حساب نمی‌شود.", "خطا را از پایین به بالا بخوان: خط آخر مشکل را می‌گوید و خط بالاترش جای آن را."] } }
+    ],
+    mistakes: { en: ["Forgetting the colon at the end of if, for or def.", "Mixing tabs and spaces, or indenting unevenly.", "Using = where you meant == inside an if."],
+                fa: ["جاانداختن دونقطه در آخر if، for یا def.", "قاطی‌کردن Tab و فاصله، یا تورفتگی نامنظم.", "نوشتن = به‌جای == داخل if."] },
+    practice: [
+      { q: { en: "Print the numbers 1 to 5, one per line.", fa: "عددهای ۱ تا ۵ را هر کدام در یک خط چاپ کن." }, a: { en: "for i in range(1, 6):\n    print(i)", fa: "for i in range(1, 6):\n    print(i)" } },
+      { q: { en: "Given  devices = [\"router\", \"switch\", \"camera\"] , print how many there are.", fa: "با داشتن  devices = [\"router\", \"switch\", \"camera\"]  تعدادشان را چاپ کن." }, a: { en: "print(len(devices))", fa: "print(len(devices))" } },
+      { q: { en: "Write a function double(n) that returns n times 2, and print double(21).", fa: "تابعی به اسم double(n) بنویس که n ضرب در ۲ را برگرداند و double(21) را چاپ کن." }, a: { en: "def double(n):\n    return n * 2\n\nprint(double(21))", fa: "def double(n):\n    return n * 2\n\nprint(double(21))" } },
+      { q: { en: "Why does  print(\"Age: \" + 23)  fail, and how do you fix it?", fa: "چرا  print(\"Age: \" + 23)  خطا می‌دهد و چطور درست می‌شود؟" }, a: { en: "Text and a number can't be joined with +. Use print(\"Age:\", 23) or print(\"Age: \" + str(23)).", fa: "متن و عدد با + به هم نمی‌چسبند. از print(\"Age:\", 23) یا print(\"Age: \" + str(23)) استفاده کن." } }
+    ],
+    recap: { en: ["Variables hold values; every value has a type.", "if decides, for repeats, def names a piece of work.", "Indentation and the colon are not optional."],
+             fa: ["متغیر مقدار را نگه می‌دارد و هر مقدار یک نوع دارد.", "if تصمیم می‌گیرد، for تکرار می‌کند و def به یک کار اسم می‌دهد.", "تورفتگی و دونقطه اختیاری نیستند."] }
+  },
+  "javascript-basics": {
+    goals: { en: ["Declare values with const and let", "Write and call a function", "Make a page element react to a click"],
+             fa: ["با const و let مقدار تعریف کنی", "تابع بنویسی و صدایش بزنی", "کاری کنی یک عنصر صفحه به کلیک واکنش نشان بدهد"] },
+    more: [
+      { h: { en: "Arrays, objects and the page", fa: "آرایه، شیء و صفحه" } },
+      { p: { en: "Two containers do most of the work in JavaScript. An array is an ordered list: [22, 80, 443]. An object groups named values: { name: \"router\", ip: \"192.168.1.1\" }. Real programs are mostly arrays of objects, and loops that walk through them.",
+             fa: "در جاوااسکریپت دو ظرف بیشتر کارها را انجام می‌دهند. آرایه یک فهرست مرتب است: [22, 80, 443]. شیء چند مقدار اسم‌دار را کنار هم می‌گذارد: { name: \"router\", ip: \"192.168.1.1\" }. برنامه‌های واقعی بیشتر آرایه‌ای از شیءها هستند و حلقه‌هایی که رویشان حرکت می‌کنند." } },
+      { code: "const devices = [\n  { name: \"router\", up: true },\n  { name: \"camera\", up: false }\n];\n\nfor (const d of devices) {\n  console.log(d.name, d.up ? \"online\" : \"OFFLINE\");\n}\n\nconst down = devices.filter((d) => !d.up);\nconsole.log(down.length, \"device(s) down\");", lang: "javascript",
+        cap: { en: "An array of objects, a loop over it, and filter to keep only the items you want.", fa: "آرایه‌ای از شیءها، یک حلقه روی آن و filter برای نگه‌داشتن فقط موردهایی که می‌خواهی." } },
+      { list: { en: ["Use const by default; use let only when the value must change.", "=== compares strictly. Avoid ==, which quietly converts types.", "Press F12 in your own pages to open the console — errors appear there in red.", "document.querySelector finds an element; .textContent changes its text.", "A script must run after the element exists: put the script tag at the end of the page."],
+                fa: ["به‌طور پیش‌فرض const بنویس و فقط وقتی مقدار باید عوض شود let.", "=== دقیق مقایسه می‌کند. از == دوری کن که بی‌صدا نوع را تبدیل می‌کند.", "در صفحه‌های خودت F12 را بزن تا کنسول باز شود — خطاها آنجا با رنگ قرمز دیده می‌شوند.", "document.querySelector یک عنصر را پیدا می‌کند و .textContent متنش را عوض می‌کند.", "اسکریپت باید بعد از ساخته‌شدن عنصر اجرا شود: تگ script را آخر صفحه بگذار."] } }
+    ],
+    mistakes: { en: ["Changing a const and getting 'Assignment to constant variable'.", "querySelector returns null because the id is misspelt or the script ran too early.", "Forgetting return — the function then gives back undefined."],
+                fa: ["تغییردادن یک const و گرفتن خطای «Assignment to constant variable».", "querySelector مقدار null می‌دهد چون id غلط نوشته شده یا اسکریپت زود اجرا شده.", "فراموش‌کردن return — آن‌وقت تابع undefined برمی‌گرداند."] },
+    practice: [
+      { q: { en: "Write a function square(n) and log square(7).", fa: "تابعی به اسم square(n) بنویس و square(7) را چاپ کن." }, a: { en: "function square(n) {\n  return n * n;\n}\nconsole.log(square(7));", fa: "function square(n) {\n  return n * n;\n}\nconsole.log(square(7));" } },
+      { q: { en: "Log how many items are in  const ports = [22, 80, 443];", fa: "تعداد عضوهای  const ports = [22, 80, 443];  را چاپ کن." }, a: { en: "console.log(ports.length);", fa: "console.log(ports.length);" } },
+      { q: { en: "Log every number from 1 to 5 with a for loop.", fa: "با حلقه‌ی for عددهای ۱ تا ۵ را چاپ کن." }, a: { en: "for (let i = 1; i <= 5; i++) {\n  console.log(i);\n}", fa: "for (let i = 1; i <= 5; i++) {\n  console.log(i);\n}" } },
+      { q: { en: "What is wrong here?   const count = 0; count = count + 1;", fa: "ایراد این کد چیست؟   const count = 0; count = count + 1;" }, a: { en: "A const can't be reassigned. Declare it with let.", fa: "مقدار const را نمی‌شود عوض کرد. با let تعریفش کن." } }
+    ],
+    recap: { en: ["const and let hold values; functions name a piece of work.", "Arrays are lists, objects are named values.", "The page reacts through events such as click."],
+             fa: ["const و let مقدار نگه می‌دارند و تابع به یک کار اسم می‌دهد.", "آرایه فهرست است و شیء مقدارهای اسم‌دار.", "صفحه از راه رویدادهایی مثل click واکنش نشان می‌دهد."] }
+  },
+  "bash-scripting": {
+    goals: { en: ["Write a script, make it runnable and run it", "Use variables, command output and if in a script", "Repeat a task for many items with a loop"],
+             fa: ["یک اسکریپت بنویسی، قابل اجرایش کنی و اجرا کنی", "در اسکریپت از متغیر، خروجی دستورها و if استفاده کنی", "با حلقه یک کار را برای چندین مورد تکرار کنی"] },
+    more: [
+      { h: { en: "Loops, arguments and exit codes", fa: "حلقه، آرگومان و کد خروج" } },
+      { p: { en: "Every command finishes with an exit code: 0 means success, anything else means failure. That is what if really tests. Scripts also receive the words typed after their name: $1 is the first, $2 the second, and $# is how many there were.",
+             fa: "هر دستور با یک کد خروج تمام می‌شود: صفر یعنی موفق و هر عدد دیگری یعنی ناموفق. if در واقع همین را بررسی می‌کند. اسکریپت کلمه‌هایی را که بعد از اسمش تایپ می‌شود هم می‌گیرد: $1 اولی، $2 دومی و $# تعدادشان است." } },
+      { code: "#!/bin/bash\n# check.sh — ping every address given on the command line\nif [ $# -eq 0 ]; then\n  echo \"usage: ./check.sh HOST...\"\n  exit 1\nfi\n\nfor host in \"$@\"; do\n  if ping -c 1 -W 1 \"$host\" > /dev/null; then\n    echo \"$host up\"\n  else\n    echo \"$host DOWN\"\n  fi\ndone", lang: "bash",
+        cap: { en: "Run it as  ./check.sh 192.168.1.1 8.8.8.8  — the loop handles as many addresses as you give it.", fa: "این‌طور اجرایش کن:  ./check.sh 192.168.1.1 8.8.8.8  — حلقه هر چند آدرس که بدهی بررسی می‌کند." } },
+      { list: { en: ["No spaces around = when you set a variable: name=\"lab\", not name = \"lab\".", "$(command) puts a command's output into a variable.", "Start serious scripts with  set -e  so they stop at the first error.", "bash -x script.sh  prints every line as it runs — the easiest way to find a bug.", "To run a script every night, add a line with  crontab -e ."],
+                fa: ["هنگام مقداردهی دور = فاصله نگذار: name=\"lab\" درست است، نه name = \"lab\".", "$(command) خروجی یک دستور را در متغیر می‌گذارد.", "اسکریپت‌های جدی را با  set -e  شروع کن تا با اولین خطا متوقف شوند.", "bash -x script.sh  هر خط را موقع اجرا چاپ می‌کند — ساده‌ترین راه پیداکردن باگ.", "برای اجرای هرشبه‌ی یک اسکریپت، با  crontab -e  یک خط اضافه کن."] } }
+    ],
+    mistakes: { en: ["Spaces around the = sign.", "Leaving out the spaces inside [ ] — it must be [ \"$a\" = \"$b\" ].", "Forgetting the quotes around variables, which breaks on names with spaces."],
+                fa: ["گذاشتن فاصله دور علامت =.", "جاانداختن فاصله‌های داخل [ ] — باید [ \"$a\" = \"$b\" ] باشد.", "فراموش‌کردن نقل‌قول دور متغیرها که با اسم‌های فاصله‌دار خراب می‌شود."] },
+    practice: [
+      { q: { en: "What must the first line of a Bash script be?", fa: "خط اول یک اسکریپت Bash باید چه باشد؟" }, a: { en: "#!/bin/bash", fa: "#!/bin/bash" } },
+      { q: { en: "Store today's date (YYYY-MM-DD) in a variable called today.", fa: "تاریخ امروز را (به شکل YYYY-MM-DD) در متغیری به اسم today بگذار." }, a: { en: "today=$(date +%Y-%m-%d)", fa: "today=$(date +%Y-%m-%d)" } },
+      { q: { en: "Write a loop that prints the name of every .log file in this folder.", fa: "حلقه‌ای بنویس که اسم همه‌ی فایل‌های .log این پوشه را چاپ کند." }, a: { en: "for f in *.log; do\n  echo \"$f\"\ndone", fa: "for f in *.log; do\n  echo \"$f\"\ndone" } },
+      { q: { en: "Your script says 'Permission denied' when you run ./backup.sh. Why?", fa: "موقع اجرای ./backup.sh پیام «Permission denied» می‌گیری. چرا؟" }, a: { en: "It is not executable yet: chmod +x backup.sh", fa: "هنوز قابل اجرا نیست: chmod +x backup.sh" } }
+    ],
+    recap: { en: ["A script is the commands you already know, saved in a file.", "Exit code 0 means success; if tests exactly that.", "Quote your variables, and test with bash -x."],
+             fa: ["اسکریپت همان دستورهایی است که بلدی، ذخیره‌شده در یک فایل.", "کد خروج صفر یعنی موفق و if دقیقاً همین را بررسی می‌کند.", "متغیرها را داخل نقل‌قول بگذار و با bash -x آزمایش کن."] }
+  },
+  "what-is-ip": {
+    goals: { en: ["Explain what an IP address is and why every device needs one", "Tell private addresses from public ones", "Work out how many devices fit in a /24 and find your own address"],
+             fa: ["توضیح بدهی آدرس IP چیست و چرا هر دستگاه یکی لازم دارد", "آدرس خصوصی را از عمومی تشخیص بدهی", "حساب کنی در یک /24 چند دستگاه جا می‌شود و آدرس خودت را پیدا کنی"] },
+    more: [
+      { h: { en: "Inside the address", fa: "درون آدرس" } },
+      { p: { en: "An IPv4 address is four numbers from 0 to 255, which is 32 bits. The number after the slash says how many of those bits name the network; the rest name the device. In 192.168.1.24/24 the first 24 bits (192.168.1) are the network and the last 8 bits (24) are the device. Eight bits give 256 addresses; two are reserved — the first for the network itself and the last for broadcast — so 254 devices fit.",
+             fa: "آدرس IPv4 چهار عدد از ۰ تا ۲۵۵ است، یعنی ۳۲ بیت. عدد بعد از اسلش می‌گوید چند بیت از این‌ها اسم شبکه است و بقیه اسم دستگاه. در 192.168.1.24/24 بیست‌وچهار بیت اول (192.168.1) شبکه است و ۸ بیت آخر (24) دستگاه. هشت بیت یعنی ۲۵۶ آدرس؛ دوتا رزرو است — اولی برای خود شبکه و آخری برای Broadcast — پس ۲۵۴ دستگاه جا می‌شود." } },
+      { list: { en: ["Private ranges: 10.0.0.0/8, 172.16.0.0/12 and 192.168.0.0/16. They work only inside a network.", "The gateway is the router's address — the door to other networks. Usually .1.", "DHCP hands out addresses automatically; a static address is typed in by hand (use it for servers, printers and cameras).", "DNS turns names into addresses. If ping 8.8.8.8 works but websites don't open, suspect DNS.", "127.0.0.1 always means 'this computer'.", "On Windows use ipconfig; on Linux use ip addr."],
+                fa: ["بازه‌های خصوصی: 10.0.0.0/8، 172.16.0.0/12 و 192.168.0.0/16. فقط داخل شبکه کار می‌کنند.", "گیت‌وی آدرس روتر است — درِ خروج به شبکه‌های دیگر. معمولاً ‎.1 است.", "DHCP آدرس‌ها را خودکار می‌دهد؛ آدرس ثابت دستی وارد می‌شود (برای سرور، پرینتر و دوربین).", "DNS اسم را به آدرس تبدیل می‌کند. اگر ping 8.8.8.8 کار می‌کند ولی سایت‌ها باز نمی‌شوند، به DNS شک کن.", "127.0.0.1 همیشه یعنی «همین کامپیوتر».", "در ویندوز ipconfig و در لینوکس ip addr."] } }
+    ],
+    mistakes: { en: ["Giving two devices the same address — both start dropping off the network.", "Setting a static address inside the range DHCP hands out.", "A wrong subnet mask: the device then can't see neighbours that are really on its own network."],
+                fa: ["دادن یک آدرس به دو دستگاه — هر دو مدام از شبکه قطع می‌شوند.", "تنظیم آدرس ثابت داخل بازه‌ای که DHCP پخش می‌کند.", "ماسک اشتباه: دستگاه همسایه‌هایی را که واقعاً در شبکه‌ی خودش هستند نمی‌بیند."] },
+    practice: [
+      { q: { en: "Is 172.20.5.9 private or public?", fa: "آدرس 172.20.5.9 خصوصی است یا عمومی؟" }, a: { en: "Private — it is inside 172.16.0.0 to 172.31.255.255.", fa: "خصوصی — داخل بازه‌ی 172.16.0.0 تا 172.31.255.255 است." } },
+      { q: { en: "How many devices fit in a /26?", fa: "در یک /26 چند دستگاه جا می‌شود؟" }, a: { en: "32 − 26 = 6 bits → 64 addresses → 62 usable.", fa: "۳۲ − ۲۶ = ۶ بیت ← ۶۴ آدرس ← ۶۲ آدرس قابل استفاده." } },
+      { q: { en: "For 192.168.10.0/24, what are the network address, the broadcast address and the usual gateway?", fa: "برای 192.168.10.0/24 آدرس شبکه، آدرس Broadcast و گیت‌وی معمول چیست؟" }, a: { en: "Network 192.168.10.0, broadcast 192.168.10.255, gateway usually 192.168.10.1.", fa: "شبکه 192.168.10.0، Broadcast برابر 192.168.10.255 و گیت‌وی معمولاً 192.168.10.1." } },
+      { q: { en: "ping 192.168.1.1 works, ping 8.8.8.8 works, but google.com won't open. Where is the fault?", fa: "ping 192.168.1.1 کار می‌کند، ping 8.8.8.8 هم کار می‌کند، ولی google.com باز نمی‌شود. مشکل کجاست؟" }, a: { en: "DNS — the network path is fine, names are not being turned into addresses.", fa: "DNS — مسیر شبکه سالم است ولی اسم‌ها به آدرس تبدیل نمی‌شوند." } }
+    ],
+    recap: { en: ["An address = network part + device part; the /number splits them.", "Usable devices = 2^(32 − prefix) − 2.", "Address, mask, gateway, DNS: the four settings every device needs."],
+             fa: ["آدرس = بخش شبکه + بخش دستگاه؛ عدد بعد از / مرزشان را مشخص می‌کند.", "تعداد دستگاه قابل استفاده = ۲ به توان (۳۲ − پیشوند) منهای ۲.", "آدرس، ماسک، گیت‌وی و DNS: چهار تنظیمی که هر دستگاه لازم دارد."] }
+  },
+  "security-mindset": {
+    goals: { en: ["Name the habits that stop most everyday attacks", "Recognise a phishing message", "Explain why defenders must understand attacks — and where the legal line is"],
+             fa: ["عادت‌هایی را که جلوی بیشتر حمله‌های روزمره را می‌گیرند نام ببری", "یک پیام فیشینگ را تشخیص بدهی", "توضیح بدهی چرا مدافع باید حمله را بشناسد — و مرز قانونی کجاست"] },
+    more: [
+      { h: { en: "Three questions for every system", fa: "سه سؤال برای هر سیستم" } },
+      { p: { en: "Professionals judge security with three words. Confidentiality: can only the right people read it? Integrity: can only the right people change it? Availability: is it there when it is needed? A stolen password breaks the first, an altered invoice the second, and ransomware the third. Asking these three questions about any system tells you what to protect first.",
+             fa: "حرفه‌ای‌ها امنیت را با سه کلمه می‌سنجند. محرمانگی: فقط افراد درست می‌توانند آن را بخوانند؟ یکپارچگی: فقط افراد درست می‌توانند تغییرش بدهند؟ دسترس‌پذیری: وقتی لازم است در دسترس هست؟ رمز دزدیده‌شده اولی را می‌شکند، فاکتور دست‌کاری‌شده دومی را و باج‌افزار سومی را. پرسیدن این سه سؤال درباره‌ی هر سیستم نشان می‌دهد اول از چه چیزی باید محافظت کنی." } },
+      { list: { en: ["Least privilege: give each person and program only the access it needs.", "Layers: a firewall, updates, backups and training together — never rely on one.", "Backups 3-2-1: three copies, on two kinds of storage, one of them somewhere else. Test that you can restore.", "A long passphrase beats a short complicated password. Use a password manager and two-step login.", "Phishing signs: urgency, a strange sender address, a link that goes somewhere other than it says.", "Never test a system you don't own without written permission. That line separates a professional from a criminal."],
+                fa: ["کمترین دسترسی: به هر فرد و برنامه فقط همان دسترسی لازم را بده.", "لایه‌لایه: فایروال، به‌روزرسانی، پشتیبان و آموزش با هم — هیچ‌وقت به یکی تکیه نکن.", "پشتیبان ۳-۲-۱: سه نسخه، روی دو نوع حافظه، یکی در جای دیگر. بازگردانی را هم آزمایش کن.", "یک عبارت بلند از رمز کوتاهِ پیچیده بهتر است. از مدیر رمز و ورود دومرحله‌ای استفاده کن.", "نشانه‌های فیشینگ: عجله‌انداختن، آدرس فرستنده‌ی عجیب، لینکی که به جای دیگری می‌رود.", "هیچ‌وقت سیستمی را که مال تو نیست بدون اجازه‌ی کتبی آزمایش نکن. همین مرز، حرفه‌ای را از مجرم جدا می‌کند."] } }
+    ],
+    mistakes: { en: ["Using one password everywhere — one leak opens every account.", "Postponing updates for months.", "Having backups but never testing that they restore."],
+                fa: ["استفاده از یک رمز برای همه‌جا — یک نشت همه‌ی حساب‌ها را باز می‌کند.", "عقب‌انداختن به‌روزرسانی برای ماه‌ها.", "داشتن پشتیبان ولی هیچ‌وقت آزمایش‌نکردن بازگردانی آن."] },
+    practice: [
+      { q: { en: "An email says your account will be closed in one hour unless you click a link. Name two warning signs.", fa: "ایمیلی می‌گوید اگر روی لینک نزنی حسابت تا یک ساعت دیگر بسته می‌شود. دو نشانه‌ی هشدار را نام ببر." }, a: { en: "Urgency, and a link you didn't ask for. Check the real sender address and open the site yourself instead of clicking.", fa: "عجله‌انداختن و لینکی که خودت نخواسته بودی. آدرس واقعی فرستنده را بررسی کن و به‌جای کلیک، خودت سایت را باز کن." } },
+      { q: { en: "Ransomware encrypts a company's files. Which of the three — confidentiality, integrity, availability — is hit first?", fa: "باج‌افزار فایل‌های یک شرکت را رمز می‌کند. کدام‌یک از سه مورد — محرمانگی، یکپارچگی، دسترس‌پذیری — اول آسیب می‌بیند؟" }, a: { en: "Availability. A tested backup is the defence.", fa: "دسترس‌پذیری. دفاعش یک پشتیبانِ آزمایش‌شده است." } },
+      { q: { en: "What does the 3-2-1 backup rule mean?", fa: "قانون پشتیبان ۳-۲-۱ یعنی چه؟" }, a: { en: "Three copies, on two different kinds of storage, with one copy kept in another place.", fa: "سه نسخه، روی دو نوع حافظه‌ی مختلف، و یک نسخه در مکانی دیگر." } },
+      { q: { en: "A friend asks you to 'test' the Wi-Fi of a café. What do you answer?", fa: "دوستی از تو می‌خواهد وای‌فای یک کافه را «تست» کنی. چه جوابی می‌دهی؟" }, a: { en: "No — not without the owner's written permission. Practise on your own lab instead.", fa: "نه — بدون اجازه‌ی کتبی صاحبش نه. به‌جایش روی آزمایشگاه خودت تمرین کن." } }
+    ],
+    recap: { en: ["Confidentiality, integrity, availability.", "Updates, strong unique passwords, two-step login and backups stop most attacks.", "Learn attacks to defend — and only test with permission."],
+             fa: ["محرمانگی، یکپارچگی، دسترس‌پذیری.", "به‌روزرسانی، رمز قوی و یکتا، ورود دومرحله‌ای و پشتیبان جلوی بیشتر حمله‌ها را می‌گیرند.", "حمله را یاد بگیر تا دفاع کنی — و فقط با اجازه آزمایش کن."] }
+  }
+};
+
+// The deeper sections become part of each lesson
+window.LEARN.articles.forEach((a) => { const s = window.LEARN.study[a.id]; if (s && s.more) a.blocks = a.blocks.concat(s.more); });

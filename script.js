@@ -86,7 +86,7 @@
       portIntro: "Working tools I wrote for real problems in network, security and IT support. Each one comes with its source code, documentation and automated tests.",
       portAll: "All", portNetwork: "Networking", portSecurity: "Security", portSupport: "IT support",
       portProblem: "The problem", portSolution: "What I built", portFeatures: "Features", portTech: "Built with",
-      portCode: "Code, explained", codeTitle: "How the code works", codeFull: "The whole file", codeLoading: "Loading the code…", codeErr: "The code could not be loaded. Check your connection and try again.", codeLines: (n) => `${n} lines`, portPreview: "Open full size",
+      portCode: "Code & how to build it", codeTitle: "Build it yourself, step by step", codeNeed: "Before you start", codeWrite: "Write", codeRun: "Run it", codeIdeas: "Now make it your own", codeCheck: "If your output looks like the preview above, you have built it. Stuck? Compare your file with the whole file below.", sGoals: "After this lesson you can", sMistakes: "Common mistakes", sPractice: "Exercises", sPracticeIntro: "Try each one yourself first, then open the answer.", sAnswer: "Show the answer", sRecap: "Remember", sLab: "Practise this in the lab", pathEyebrow: "Learning path", pathTitle: "From zero to professional", pathIntro: "Follow the stages in order. Each one builds on the one before.", pathMethod: "How to study here", pathSoon: "Coming soon", pathOpen: "Open the lesson", pathStage: (n) => `Stage ${n}`, codeFull: "The whole file", codeLoading: "Loading the code…", codeErr: "The code could not be loaded. Check your connection and try again.", codeLines: (n) => `${n} lines`, portPreview: "Open full size",
       projEyebrow: "07 · More work", projTitle: "Writing & reports",
       libEyebrow: "07 · Library", libTitle: "Articles & books", libIntro: "My writing, free to read online.", navLibrary: "Books", libRead: "Start reading", libContinue: "Continue from page", libDownload: "Download PDF", libPages: "pages", libFree: "Free", libContents: "Contents", libBack: "Back to the site", libPage: "Page", libOf: "of", libLoading: "Loading the book…", libFailed: "The book couldn't load. Please check your connection and try again.", libRetry: "Try again", navAsk: "How would you like to turn the pages?", navAskNote: "You can change this any time from the top bar.", navSwipe: "With your finger", navSwipeHint: "Swipe the page, or tap its edge", navButtons: "With buttons", navButtonsHint: "Use the arrow buttons under the book", navMode: "Page turning", libOpenPdf: "Open PDF", libZoomIn: "Zoom in", libZoomOut: "Zoom out", libBy: "By", libBook: "Book", libArticle: "Article", libToc: "Contents", libClose: "Close",
       navLearn: "Learn", navResume: "Résumé", navTracks: "Tracks", navArticles: "Articles", navTools: "Tools", navBooks: "Books",
@@ -144,7 +144,7 @@
       portIntro: "ابزارهای کاربردی که برای مشکلات واقعی شبکه، امنیت و پشتیبانی IT نوشته‌ام. هرکدام کد منبع، مستندات و تست خودکار دارد.",
       portAll: "همه", portNetwork: "شبکه", portSecurity: "امنیت", portSupport: "پشتیبانی IT",
       portProblem: "مشکل", portSolution: "راه‌حل من", portFeatures: "امکانات", portTech: "ابزار و فناوری",
-      portCode: "کد با توضیح", codeTitle: "کد چطور کار می‌کند", codeFull: "کل فایل", codeLoading: "در حال بارگذاری کد…", codeErr: "کد بارگذاری نشد. اتصال را بررسی کن و دوباره امتحان کن.", codeLines: (n) => `${n} خط`, portPreview: "نمایش در اندازه‌ی کامل",
+      portCode: "کد و آموزش ساخت", codeTitle: "خودت بساز، قدم‌به‌قدم", codeNeed: "قبل از شروع", codeWrite: "بنویس", codeRun: "اجرایش کن", codeIdeas: "حالا مال خودت کن", codeCheck: "اگر خروجی‌ات شبیه پیش‌نمایش بالا بود، ساخته‌ای. گیر کردی؟ فایل خودت را با «کل فایل» در پایین مقایسه کن.", sGoals: "بعد از این درس می‌توانی", sMistakes: "اشتباه‌های رایج", sPractice: "تمرین", sPracticeIntro: "اول خودت امتحان کن، بعد جواب را باز کن.", sAnswer: "نمایش جواب", sRecap: "یادت بماند", sLab: "همین را در آزمایشگاه تمرین کن", pathEyebrow: "نقشه‌ی راه", pathTitle: "از صفر تا حرفه‌ای", pathIntro: "مرحله‌ها را به ترتیب برو. هر کدام روی قبلی ساخته می‌شود.", pathMethod: "روش درس‌خواندن در این سایت", pathSoon: "به‌زودی", pathOpen: "باز کردن درس", pathStage: (n) => `مرحله‌ی ${n}`, codeFull: "کل فایل", codeLoading: "در حال بارگذاری کد…", codeErr: "کد بارگذاری نشد. اتصال را بررسی کن و دوباره امتحان کن.", codeLines: (n) => `${n} خط`, portPreview: "نمایش در اندازه‌ی کامل",
       projEyebrow: "۰۷ · کارهای دیگر", projTitle: "نوشته‌ها و گزارش‌ها",
       libEyebrow: "۰۷ · کتابخانه", libTitle: "مقالات و کتاب‌ها", libIntro: "نوشته‌های من؛ برای مطالعه‌ی آنلاین و رایگان.", navLibrary: "کتاب‌ها", libRead: "شروع مطالعه", libContinue: "ادامه از صفحه‌ی", libDownload: "دانلود PDF", libPages: "صفحه", libFree: "رایگان", libContents: "فهرست مطالب", libBack: "بازگشت به سایت", libPage: "صفحه", libOf: "از", libLoading: "در حال بارگذاری کتاب…", libFailed: "کتاب بارگذاری نشد. لطفاً اتصال اینترنت را بررسی کنید و دوباره امتحان کنید.", libRetry: "تلاش دوباره", navAsk: "دوست دارید صفحه‌ها را چطور ورق بزنید؟", navAskNote: "هر وقت خواستید می‌توانید از نوار بالا عوضش کنید.", navSwipe: "با انگشت", navSwipeHint: "صفحه را بکشید یا روی لبه‌اش بزنید", navButtons: "با دکمه‌ها", navButtonsHint: "با دکمه‌های فلش زیر کتاب", navMode: "روش ورق زدن", libOpenPdf: "باز کردن PDF", libZoomIn: "بزرگ‌نمایی", libZoomOut: "کوچک‌نمایی", libBy: "نوشته‌ی", libBook: "کتاب", libArticle: "مقاله", libToc: "فهرست", libClose: "بستن",
       navLearn: "آموزش", navResume: "رزومه", navTracks: "مسیرها", navArticles: "مقاله‌ها", navTools: "ابزارها", navBooks: "کتاب‌ها",
@@ -578,9 +578,13 @@
       const lines = src.replace(/\r/g, "").split("\n");
       const steps = x.code.steps.map((st, k) => {
         const b = fnBlock(lines, st.fn);
-        return b ? `<li><div class="code-note"><b>${num(k + 1)}</b><p><code dir="ltr">${esc(st.fn)}()</code> ${esc(tr(st))}</p></div><pre class="code-snip" dir="ltr"><code>${paintPy(b.text)}</code></pre></li>` : "";
+        return b ? `<li><div class="code-note"><b>${num(k + 1)}</b><p><span class="code-verb">${esc(ui("codeWrite"))}</span> <code dir="ltr">${esc(st.fn)}()</code> ${esc(tr(st))}</p></div><pre class="code-snip" dir="ltr"><code>${paintPy(b.text)}</code></pre></li>` : "";
       }).join("");
-      box.innerHTML = `<h4>${esc(ui("codeTitle"))}</h4><ol class="code-steps">${steps}</ol>
+      const bd = x.build, n = x.code.steps.length;
+      const need = bd ? `<div class="doc-note tip">${icon("spark")}<div><b>${esc(ui("codeNeed"))}</b><br>${esc(tr(bd.need))}</div></div>` : "";
+      const run = bd ? `<li><div class="code-note"><b>${num(n + 1)}</b><p><span class="code-verb">${esc(ui("codeRun"))}</span> ${esc(ui("codeCheck"))}</p></div><pre class="code-snip" dir="ltr"><code>${bd.run.split("\n").map((l) => `<i class="c">$</i> ${esc(l)}`).join("\n")}</code></pre></li>` : "";
+      const ideas = bd ? `<h4>${esc(ui("codeIdeas"))}</h4><ul class="points">${(tr(bd.ideas) || []).map((f) => `<li>${icon("check")}<span>${esc(f)}</span></li>`).join("")}</ul>` : "";
+      box.innerHTML = `<h4>${esc(ui("codeTitle"))}</h4>${need}<ol class="code-steps">${steps}${run}</ol>${ideas}
         <details class="code-full"><summary>${esc(ui("codeFull"))} · <bdi dir="ltr">${esc(x.code.file)}</bdi> · ${esc(ui("codeLines")(num(lines.length)))}</summary><pre class="code-snip" dir="ltr"><code>${paintPy(src.replace(/\r/g, "").replace(/\n+$/, ""))}</code></pre></details>`;
       box.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" });
     }).catch(() => { delete codeCache[url]; delete box.dataset.open; box.innerHTML = `<p class="form-status err">${esc(ui("codeErr"))}</p><button type="button" class="btn sm port-showcode">${icon("code")}${esc(ui("portCode"))}</button>`; box.querySelector("button").addEventListener("click", () => showCode(x)); });
@@ -1071,6 +1075,7 @@
   const trackById = (id) => LEARN.tracks.find((t) => t.id === id);
   let artFilter = "all";
 
+  let pathTrack = "linux";
   function renderLearn() {
     if (!LEARN.articles.length) return;
     // Numbers under the hero
@@ -1087,6 +1092,19 @@
         <span class="track-count">${esc(ui("artCount")(num(n)))}</span>
       </button>`;
     }).join("");
+
+    // Learning path: the method, then the stages of one track
+    const pathBox = $("path-box");
+    if (pathBox && LEARN.roadmap) {
+      if (!LEARN.roadmap[pathTrack]) pathTrack = LEARN.tracks[0].id;
+      pathBox.innerHTML = `<div class="path-tabs" role="tablist">${LEARN.tracks.map((t) => `<button type="button" role="tab" data-path="${esc(t.id)}" aria-selected="${t.id === pathTrack}" class="${t.id === pathTrack ? "on" : ""}">${icon(t.icon || "code")}${esc(tr(t.title))}</button>`).join("")}</div>
+        <div class="path-grid"><ol class="path-steps">${LEARN.roadmap[pathTrack].map((st, i) => {
+          const a = st.lesson && LEARN.articles.find((x) => x.id === st.lesson);
+          return `<li class="${a ? "ready" : "soon"}"><span class="path-n">${num(i + 1)}</span><div><small>${esc(ui("pathStage")(num(i + 1)))}</small><h3>${esc(tr(st.t))}</h3><p>${esc(tr(st.d))}</p>${a ? `<a class="art-read" href="${lang}/${esc(a.id)}/">${esc(ui("pathOpen"))}: ${esc(tr(a.title))} ${icon("arrow")}</a>` : `<span class="pill">${esc(ui("pathSoon"))}</span>`}</div></li>`;
+        }).join("")}</ol>
+        <aside class="card path-method"><h3>${esc(ui("pathMethod"))}</h3><ol>${(tr(LEARN.method) || []).map((m) => `<li>${esc(m)}</li>`).join("")}</ol><a class="btn primary sm" href="practice/">${esc(ui("labPracOpen"))}</a></aside></div>`;
+      pathBox.querySelectorAll("[data-path]").forEach((b) => b.addEventListener("click", () => { pathTrack = b.dataset.path; renderLearn(); document.querySelectorAll(".reveal:not(.in)").forEach((el) => el.classList.add("in")); }));
+    }
 
     // Filter chips
     const used = LEARN.tracks.filter((t) => LEARN.articles.some((a) => a.track === t.id));
@@ -1133,7 +1151,14 @@
   function articleHTML(a) {
     const fa = lang === "fa";
     const pick = (o) => (o && typeof o === "object" ? (o[lang] != null ? o[lang] : o.en) : o);
-    return (a.blocks || []).map((b) => {
+    const st = (LEARN.study || {})[a.id];
+    const ticks = (arr) => `<ul class="doc-list">${(arr || []).map((x) => `<li>${icon("check")}<span>${esc(x)}</span></li>`).join("")}</ul>`;
+    const head = st ? `<div class="study-box goals"><b>${esc(ui("sGoals"))}</b>${ticks(pick(st.goals))}</div>` : "";
+    const tail = st ? `<h2>${esc(ui("sMistakes"))}</h2><ul class="doc-list study-bad">${(pick(st.mistakes) || []).map((x) => `<li>${icon("alert")}<span>${esc(x)}</span></li>`).join("")}</ul>
+      <h2>${esc(ui("sPractice"))}</h2><p>${esc(ui("sPracticeIntro"))}</p><ol class="study-q">${(st.practice || []).map((q) => `<li><p>${esc(pick(q.q))}</p><details><summary>${esc(ui("sAnswer"))}</summary><pre dir="auto">${esc(pick(q.a))}</pre></details></li>`).join("")}</ol>
+      <p><a class="btn primary sm" href="practice/">${esc(ui("sLab"))}</a></p>
+      <div class="study-box recap"><b>${esc(ui("sRecap"))}</b>${ticks(pick(st.recap))}</div>` : "";
+    return head + (a.blocks || []).map((b) => {
       if (b.h) return `<h2>${esc(pick(b.h))}</h2>`;
       if (b.p) return `<p>${esc(pick(b.p))}</p>`;
       if (b.list) return `<ul class="doc-list">${(pick(b.list) || []).map((x) => `<li>${icon("check")}<span>${esc(x)}</span></li>`).join("")}</ul>`;
@@ -1142,7 +1167,7 @@
       if (b.code) return `<figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">${esc(b.lang || "code")}</span><button type="button" class="doc-copy" data-code="${encodeURIComponent(b.code)}">${icon("copy")}<span>${esc(ui("copyCode"))}</span></button></div><pre dir="ltr"><code>${esc(b.code)}</code></pre>${b.cap ? `<figcaption>${esc(pick(b.cap))}</figcaption>` : ""}</figure>`;
       if (b.term) return `<figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr">${termHTML(b.term)}</pre></div>${b.cap ? `<figcaption>${esc(pick(b.cap))}</figcaption>` : ""}</figure>`;
       return "";
-    }).join("");
+    }).join("") + tail;
   }
   // Colour a real terminal session: command lines (starting with $) vs output
   function termHTML(text) {

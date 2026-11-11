@@ -172,6 +172,11 @@ window.CV = {
         { fn: "uptime", en: "Every result is saved in SQLite. One SQL query then gives the uptime of each device: the average of the 'up' column (0 or 1) times 100.",
           fa: "هر نتیجه در SQLite ذخیره می‌شود. بعد یک کوئری SQL درصد در دسترس بودن هر دستگاه را می‌دهد: میانگین ستون up (صفر یا یک) ضرب در ۱۰۰." }
       ] },
+      build: { need: { en: "Python 3 (nothing else to install). Make a folder, and in it a file monitor.py and a file devices.csv with one line per device: name,host,type,port,location.",
+                       fa: "پایتون ۳ (چیز دیگری لازم نیست نصب کنی). یک پوشه بساز و داخلش فایل monitor.py و فایل devices.csv با یک خط برای هر دستگاه: name,host,type,port,location." },
+               run: "python3 monitor.py devices.csv\npython3 monitor.py devices.csv --every 60",
+               ideas: { en: ["Send yourself a message when a device goes down.", "Add a chart of response time for the last 24 hours.", "Check a web page's HTTP status as a third kind of test."],
+                        fa: ["وقتی دستگاهی قطع شد برای خودت پیام بفرست.", "نمودار زمان پاسخ ۲۴ ساعت گذشته را اضافه کن.", "بررسی وضعیت HTTP یک صفحه‌ی وب را به‌عنوان نوع سوم آزمون اضافه کن."] } },
       path: "projects/network-uptime-monitor"
     },
     {
@@ -200,6 +205,11 @@ window.CV = {
         { fn: "ios_range", en: "Cisco IOS wants ranges written with spaces (Gi1/0/1 - 6). One regular expression rewrites them in that form.",
           fa: "IOS سیسکو بازه‌ها را با فاصله می‌خواهد (Gi1/0/1 - 6). یک عبارت باقاعده (Regex) آن‌ها را به همین شکل بازنویسی می‌کند." }
       ] },
+      build: { need: { en: "Python 3 and basic knowledge of VLANs. Make genconfig.py, and a JSON file that describes one switch: hostname, vlans and port groups.",
+                       fa: "پایتون ۳ و آشنایی اولیه با VLAN. فایل genconfig.py را بساز و یک فایل JSON که یک سوئیچ را توصیف می‌کند: hostname، VLANها و گروه پورت‌ها." },
+               run: "python3 genconfig.py examples/hotel-floor1.json --check\npython3 genconfig.py examples/hotel-floor1.json --out configs",
+               ideas: { en: ["Add support for a second vendor's syntax.", "Generate the config for ten switches from one spreadsheet.", "Add a check that every trunk has a native VLAN that carries no users."],
+                        fa: ["پشتیبانی از دستورهای یک برند دیگر را اضافه کن.", "کانفیگ ده سوئیچ را از یک جدول اکسل بساز.", "بررسی‌ای اضافه کن که Native VLAN هر ترانک کاربری نداشته باشد."] } },
       path: "projects/cisco-config-generator"
     },
     {
@@ -230,6 +240,11 @@ window.CV = {
         { fn: "block_rules", en: "Writes ready-to-paste firewall rules for the attackers' addresses, for iptables, ufw or a Cisco access list.",
           fa: "برای آدرس مهاجم‌ها قانون آماده‌ی فایروال می‌نویسد: برای iptables، ufw یا Access List سیسکو." }
       ] },
+      build: { need: { en: "Python 3 and a log to read: /var/log/auth.log on Ubuntu, or the sample file. Make log_analyzer.py and start with the regular expressions that recognise a failed and a successful login.",
+                       fa: "پایتون ۳ و یک لاگ برای خواندن: /var/log/auth.log در اوبونتو یا فایل نمونه. فایل log_analyzer.py را بساز و با عبارت‌های باقاعده‌ای شروع کن که ورود ناموفق و موفق را تشخیص می‌دهند." },
+               run: "python3 log_analyzer.py sample/auth.log\npython3 log_analyzer.py sample/auth.log --block ufw",
+               ideas: { en: ["Show which country each address belongs to.", "Read the log live and warn the moment an attack starts.", "Do the same analysis for a web server's access log."],
+                        fa: ["نشان بده هر آدرس مال کدام کشور است.", "لاگ را زنده بخوان و همان لحظه‌ی شروع حمله هشدار بده.", "همین تحلیل را برای لاگ دسترسی یک وب‌سرور انجام بده."] } },
       path: "projects/ssh-log-analyzer"
     },
     {
@@ -260,6 +275,11 @@ window.CV = {
         { fn: "grab_banner", en: "Many services introduce themselves when you connect. This reads the first line (for example the SSH version), which tells you what is running there.",
           fa: "خیلی از سرویس‌ها موقع اتصال خودشان را معرفی می‌کنند. این تابع خط اول را می‌خواند (مثلاً نسخه‌ی SSH) تا معلوم شود چه چیزی آنجا اجرا می‌شود." }
       ] },
+      build: { need: { en: "Python 3, and a network that is yours or that you have written permission to test. Make portscan.py; everything it needs (socket, ipaddress, threads) ships with Python.",
+                       fa: "پایتون ۳ و شبکه‌ای که مال خودت است یا اجازه‌ی کتبی برای آزمایشش داری. فایل portscan.py را بساز؛ هر چه لازم دارد (socket، ipaddress و Thread) همراه پایتون هست." },
+               run: "python3 portscan.py 127.0.0.1\npython3 portscan.py 192.168.1.0/28 --banner",
+               ideas: { en: ["Save the result as a CSV or HTML report.", "Compare today's scan with last week's and show only what changed.", "Add a UDP check for DNS and SNMP."],
+                        fa: ["نتیجه را به شکل گزارش CSV یا HTML ذخیره کن.", "اسکن امروز را با هفته‌ی پیش مقایسه کن و فقط تغییرها را نشان بده.", "بررسی UDP برای DNS و SNMP اضافه کن."] } },
       path: "projects/port-scanner"
     },
     {
@@ -288,6 +308,11 @@ window.CV = {
         { fn: "split", en: "Cuts one network into equal smaller subnets, using Python's built-in ipaddress module.",
           fa: "یک شبکه را با ماژول آماده‌ی ipaddress پایتون به زیرشبکه‌های مساوی کوچک‌تر تقسیم می‌کند." }
       ] },
+      build: { need: { en: "Python 3 and the lesson on IP addresses. Make subnet_calc.py and import the built-in ipaddress and math modules. Work one example on paper first, so you can check the program against it.",
+                       fa: "پایتون ۳ و درس آدرس IP. فایل subnet_calc.py را بساز و ماژول‌های آماده‌ی ipaddress و math را وارد کن. اول یک مثال را روی کاغذ حل کن تا بتوانی جواب برنامه را با آن بسنجی." },
+               run: "python3 subnet_calc.py info 192.168.10.0/26\npython3 subnet_calc.py vlsm 172.16.0.0/22 Rooms=300 Reception=120 Cameras=60",
+               ideas: { en: ["Add IPv6.", "Draw the plan as a coloured bar showing used and free space.", "Export the plan as a table you can paste into documentation."],
+                        fa: ["IPv6 را اضافه کن.", "طرح را به شکل نواری رنگی بکش که فضای استفاده‌شده و آزاد را نشان بدهد.", "طرح را به شکل جدولی خروجی بده که در مستندات قابل استفاده باشد."] } },
       path: "projects/subnet-calculator"
     },
     {
@@ -315,6 +340,11 @@ window.CV = {
         { fn: "summarize", en: "Builds the monthly report: how many tickets, the average hours to fix, the percentage finished within the target time, and counts per area and department.",
           fa: "گزارش ماهانه را می‌سازد: تعداد تیکت‌ها، میانگین ساعت رسیدگی، درصدی که در زمان هدف تمام شده و شمارش بر اساس حوزه و بخش." }
       ] },
+      build: { need: { en: "Python 3; SQLite is already inside it. Make helpdesk.py and begin with the table: one row per ticket, with title, department, area, priority, opened, closed and resolution.",
+                       fa: "پایتون ۳؛ SQLite از قبل داخلش هست. فایل helpdesk.py را بساز و با جدول شروع کن: هر تیکت یک ردیف، با عنوان، بخش، حوزه، اولویت، زمان ثبت، زمان بستن و راه‌حل." },
+               run: "python3 helpdesk.py add \"Printer offline\" --dept Reception --area printers --priority high\npython3 helpdesk.py list\npython3 helpdesk.py report",
+               ideas: { en: ["Add a small web page for opening tickets from a phone.", "Warn when an urgent ticket has been open for more than its target time.", "Chart the busiest hours of the day."],
+                        fa: ["یک صفحه‌ی وب کوچک برای ثبت تیکت با گوشی اضافه کن.", "وقتی یک تیکت فوری بیش از زمان هدف باز مانده هشدار بده.", "شلوغ‌ترین ساعت‌های روز را روی نمودار نشان بده."] } },
       path: "projects/helpdesk-tracker"
     }
   ],
