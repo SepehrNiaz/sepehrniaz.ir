@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="fa" dir="rtl"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="../../">
+  <title>SQL از صفر: سؤال‌پرسیدن از داده — سپهر نیاز</title>
+  <meta name="description" content="پایگاه‌داده و جدول چیست و چطور با SQL داده را بخوانی، فیلتر کنی، مرتب کنی، بشماری، تغییر بدهی و به هم وصل کنی — هر دستور کلمه‌به‌کلمه، با خروجی واقعی.">
+  <meta name="author" content="Sepehr Niaz">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sepehrniaz.ir/fa/sql-from-zero/">
+  <link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/sql-from-zero/">
+  <link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/sql-from-zero/">
+  <link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/sql-from-zero/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/photo.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://sepehrniaz.ir/fa/sql-from-zero/">
+  <meta property="og:site_name" content="Sepehr Niaz">
+  <meta property="og:locale" content="fa_IR">
+  <meta property="og:title" content="SQL از صفر: سؤال‌پرسیدن از داده">
+  <meta property="og:description" content="پایگاه‌داده و جدول چیست و چطور با SQL داده را بخوانی، فیلتر کنی، مرتب کنی، بشماری، تغییر بدهی و به هم وصل کنی — هر دستور کلمه‌به‌کلمه، با خروجی واقعی.">
+  <meta property="og:image" content="https://sepehrniaz.ir/assets/og-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#070b14">
+  <script type="application/ld+json">[{"@context":"https://schema.org","@type":"TechArticle","headline":"SQL از صفر: سؤال‌پرسیدن از داده","description":"پایگاه‌داده و جدول چیست و چطور با SQL داده را بخوانی، فیلتر کنی، مرتب کنی، بشماری، تغییر بدهی و به هم وصل کنی — هر دستور کلمه‌به‌کلمه، با خروجی واقعی.","inLanguage":"fa","url":"https://sepehrniaz.ir/fa/sql-from-zero/","mainEntityOfPage":"https://sepehrniaz.ir/fa/sql-from-zero/","image":"https://sepehrniaz.ir/assets/og-card.jpg","author":{"@type":"Person","name":"Sepehr Niaz","alternateName":"سپهر نیاز","url":"https://sepehrniaz.ir/resume"},"publisher":{"@type":"Person","name":"Sepehr Niaz","url":"https://sepehrniaz.ir/"},"datePublished":"2026-11-01","dateModified":"2026-11-01","timeRequired":"PT30M"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"آموزش","item":"https://sepehrniaz.ir/"},{"@type":"ListItem","position":2,"name":"برنامه‌نویسی","item":"https://sepehrniaz.ir/#articles"},{"@type":"ListItem","position":3,"name":"SQL از صفر: سؤال‌پرسیدن از داده","item":"https://sepehrniaz.ir/fa/sql-from-zero/"}]}]</script>
+  <script>
+    (function () {
+      var d = document.documentElement;
+      try { var t = localStorage.getItem("theme"); if (t) d.dataset.theme = t; localStorage.setItem("lang", d.lang); } catch (e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Vazirmatn:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body data-page="article" data-article="sql-from-zero">
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="logo" id="logo"></a>
+      <div class="nav-links">
+        <a href="index.html#tracks" data-i18n="navTracks">مسیرها</a>
+        <a href="index.html#articles" data-i18n="navArticles">مقاله‌ها</a>
+        <a href="index.html#lab" data-i18n="navLab">آزمایشگاه</a>
+        <a href="index.html#library" data-i18n="navBooks">کتاب‌ها</a>
+        <a href="index.html#portfolio" data-i18n="navTools">ابزارها</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn lang-btn" id="lang-toggle">EN</button>
+        <button class="icon-btn" id="theme-toggle"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></button>
+        <a href="resume.html" class="btn primary sm" data-i18n="navResume">رزومه</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="article-main">
+    <article class="wrap adoc-body adoc-page">
+      <nav class="crumbs" aria-label="breadcrumb">
+        <a href="index.html">آموزش</a><span aria-hidden="true">/</span>
+        <a href="index.html#topic/programming">برنامه‌نویسی</a>
+      </nav>
+      <div class="adoc-hero"><img class="adoc-logo" src="assets/learn/logos/sqlite.svg" alt="" width="88" height="88"><div>
+      <p class="adoc-kick">مبتدی · ۳۰ دقیقه مطالعه · به‌روزرسانی ۲۰۲۶-۱۱</p>
+      <h1>SQL از صفر: سؤال‌پرسیدن از داده</h1></div></div>
+      <p class="adoc-summary">پایگاه‌داده و جدول چیست و چطور با SQL داده را بخوانی، فیلتر کنی، مرتب کنی، بشماری، تغییر بدهی و به هم وصل کنی — هر دستور کلمه‌به‌کلمه، با خروجی واقعی.</p>
+      <div class="adoc-content"><div class="study-box goals"><b>بعد از این درس می‌توانی</b><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>توضیح بدهی جدول، ردیف، ستون و کلید اصلی چیست</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>با SELECT، WHERE، ORDER BY و LIMIT داده بخوانی</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>با COUNT، AVG و GROUP BY خلاصه بسازی و با JOIN دو جدول را وصل کنی</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>با INSERT، UPDATE و DELETE داده را ایمن تغییر بدهی</span></li></ul></div><h2>پایگاه‌داده چیست؟</h2><p>پایگاه‌داده جایی منظم برای نگه‌داشتن اطلاعات است تا بشود سریع دوباره پیدایش کرد. یک صفحه‌ی اکسل را تصور کن: جدول ستون دارد (نام، شهر، نمره) و ردیف (برای هر دانش‌آموز یک ردیف). پایگاه‌داده مجموعه‌ای از همین جدول‌هاست که برنامه‌ای نگهش می‌دارد؛ برنامه‌ای که میلیون‌ها ردیف را در یک لحظه جست‌وجو می‌کند و اجازه می‌دهد چند نفر هم‌زمان استفاده کنند. تقریباً هر برنامه‌ای که استفاده می‌کنی — فروشگاه، بانک، پیام‌رسان — اطلاعاتش را همین‌طور نگه می‌دارد.</p><p>SQL (بخوان «سی‌کوئل» یا «اس‌کیو‌ال») زبانِ حرف‌زدن با آن برنامه است. مثل پایتون یک زبان برنامه‌نویسی همه‌کاره نیست: یک کار می‌کند — توصیف داده‌ای که می‌خواهی — و تقریباً مثل انگلیسی خوانده می‌شود. همین SQL با تفاوت‌های کوچک در SQLite، MySQL، PostgreSQL و Microsoft SQL Server کار می‌کند. این درس از SQLite استفاده می‌کند؛ همان چیزی که زبانه‌ی SQL آزمایشگاه تمرین اجرا می‌کند.</p><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>کلمه‌های SQL مثل SELECT را می‌شود با حروف بزرگ یا کوچک نوشت. حروف بزرگ فقط عادتی است که آن‌ها را مشخص‌تر می‌کند.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>هر دستور با نقطه‌ویرگول ; تمام می‌شود.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>مقدار متنی داخل نقل‌قول تکی می‌آید: 'Shiraz'. عدد نقل‌قول ندارد.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>فاصله و شکستن خط مهم نیست؛ دستورهای بلند را برای خوانایی در چند خط بنویس.</span></li></ul><h2>ساختن جدول: CREATE TABLE</h2><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">sql</span><button type="button" class="doc-copy" data-code="CREATE%20TABLE%20students%20(%0A%20%20id%20%20%20%20INTEGER%20PRIMARY%20KEY%2C%0A%20%20name%20%20TEXT%20NOT%20NULL%2C%0A%20%20city%20%20TEXT%2C%0A%20%20grade%20INTEGER%0A)%3B"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code>CREATE TABLE students (
+  id    INTEGER PRIMARY KEY,
+  name  TEXT NOT NULL,
+  city  TEXT,
+  grade INTEGER
+);</code></pre></figure><p>تکه‌تکه بخوانش. CREATE TABLE students یک جدول جدید و خالی به اسم students می‌سازد. داخل پرانتز برای هر ستون یک خط هست: اسم ستون و بعد نوع مقداری که نگه می‌دارد. INTEGER عدد صحیح است و TEXT متن. PRIMARY KEY ستونی را مشخص می‌کند که هر ردیف را یکتا می‌شناسد — پایگاه‌داده خودش ۱، ۲، ۳ را پر می‌کند. NOT NULL یعنی «این ستون نباید خالی بماند».</p><h2>اضافه‌کردن ردیف: INSERT</h2><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">sql</span><button type="button" class="doc-copy" data-code="INSERT%20INTO%20students%20(name%2C%20city%2C%20grade)%20VALUES%20('Ali'%2C%20'Shiraz'%2C%2017)%3B%0A%0AINSERT%20INTO%20students%20(name%2C%20city%2C%20grade)%20VALUES%0A%20%20('Sara'%2C%20'Tehran'%2C%2019)%2C%0A%20%20('Reza'%2C%20'Shiraz'%2C%2014)%2C%0A%20%20('Mina'%2C%20'Isfahan'%2C%2018)%2C%0A%20%20('Omid'%2C%20'Tehran'%2C%2012)%2C%0A%20%20('Neda'%2C%20'Shiraz'%2C%2020)%3B"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code>INSERT INTO students (name, city, grade) VALUES ('Ali', 'Shiraz', 17);
+
+INSERT INTO students (name, city, grade) VALUES
+  ('Sara', 'Tehran', 19),
+  ('Reza', 'Shiraz', 14),
+  ('Mina', 'Isfahan', 18),
+  ('Omid', 'Tehran', 12),
+  ('Neda', 'Shiraz', 20);</code></pre><figcaption>بعد از INTO اسم جدول و فهرست ستون‌ها می‌آید و بعد از VALUES مقدارها به همان ترتیب. چند ردیف را می‌شود یک‌جا و با کاما اضافه کرد.</figcaption></figure><h2>خواندن: SELECT</h2><p>SELECT دستوری است که نود درصد وقت‌ها استفاده می‌کنی. شکلش این است: SELECT کدام ستون‌ها FROM کدام جدول. ستاره یعنی «همه‌ی ستون‌ها».</p><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="o">sqlite&gt; SELECT * FROM students;</span>
+<span class="o">id|name|city|grade</span>
+<span class="o">1|Ali|Shiraz|17</span>
+<span class="o">2|Sara|Tehran|19</span>
+<span class="o">3|Reza|Shiraz|14</span>
+<span class="o">4|Mina|Isfahan|18</span>
+<span class="o">5|Omid|Tehran|12</span>
+<span class="o">6|Neda|Shiraz|20</span></pre></div><figcaption>شش ردیف و چهار ستون. ستون id خودکار پر شده است.</figcaption></figure><h2>فیلترکردن: WHERE</h2><p>WHERE فقط ردیف‌هایی را نگه می‌دارد که شرط برایشان درست باشد. دقت کن که SQL برای مقایسه یک = تکی دارد — برخلاف == در پایتون.</p><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="o">sqlite&gt; SELECT name, grade FROM students WHERE grade &gt;= 18;</span>
+<span class="o">name|grade</span>
+<span class="o">Sara|19</span>
+<span class="o">Mina|18</span>
+<span class="o">Neda|20</span>
+<span class="o">sqlite&gt; SELECT name, city FROM students WHERE city = 'Shiraz' AND grade &gt; 15;</span>
+<span class="o">name|city</span>
+<span class="o">Ali|Shiraz</span>
+<span class="o">Neda|Shiraz</span>
+<span class="o">sqlite&gt; SELECT name FROM students WHERE name LIKE 'S%';</span>
+<span class="o">name</span>
+<span class="o">Sara</span></pre></div><figcaption>AND هر دو شرط را لازم دارد. LIKE با یک الگو مقایسه می‌کند و % یعنی «هر چیزی».</figcaption></figure><div class="doc-table"><table><thead><tr><th>شرط</th><th>معنی</th></tr></thead><tbody><tr><td dir="ltr"><code>grade = 20</code></td><td>دقیقاً ۲۰</td></tr><tr><td dir="ltr"><code>grade &lt;&gt; 20</code></td><td>غیر از ۲۰ (به شکل != هم نوشته می‌شود)</td></tr><tr><td dir="ltr"><code>grade BETWEEN 10 AND 15</code></td><td>از ۱۰ تا ۱۵، هر دو شامل</td></tr><tr><td dir="ltr"><code>city IN ('Shiraz', 'Tehran')</code></td><td>هر مقداری از فهرست</td></tr><tr><td dir="ltr"><code>name LIKE '%a'</code></td><td>با a تمام می‌شود</td></tr><tr><td dir="ltr"><code>city IS NULL</code></td><td>ستون خالی است (هیچ‌وقت = NULL ننویس)</td></tr><tr><td dir="ltr"><code>NOT, AND, OR</code></td><td>ترکیب شرط‌ها؛ وقتی AND و OR را با هم می‌آوری پرانتز بگذار</td></tr></tbody></table></div><h2>مرتب‌کردن و محدودکردن: ORDER BY و LIMIT</h2><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="o">sqlite&gt; SELECT name, grade FROM students ORDER BY grade DESC LIMIT 3;</span>
+<span class="o">name|grade</span>
+<span class="o">Neda|20</span>
+<span class="o">Sara|19</span>
+<span class="o">Mina|18</span></pre></div><figcaption>ORDER BY مرتب می‌کند؛ DESC یعنی اول بزرگ‌ترین (ASC که پیش‌فرض است یعنی اول کوچک‌ترین). LIMIT 3 سه ردیف اول را نگه می‌دارد — با هم: سه نفر برتر.</figcaption></figure><div class="doc-note tip"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"></path></svg><div>جدول از خودش ترتیب ثابتی ندارد. اگر ترتیب مهم است همیشه ORDER BY بنویس.</div></div><h2>شمردن و میانگین‌گرفتن</h2><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="o">sqlite&gt; SELECT COUNT(*), AVG(grade), MAX(grade), MIN(grade) FROM students;</span>
+<span class="o">COUNT(*)|AVG(grade)|MAX(grade)|MIN(grade)</span>
+<span class="o">6|16.666666666666668|20|12</span></pre></div><figcaption>این تابع‌ها چندین ردیف را به یک جواب تبدیل می‌کنند: تعداد، میانگین، بزرگ‌ترین، کوچک‌ترین. SUM جمعشان را می‌دهد.</figcaption></figure><h2>برای هر گروه یک جواب: GROUP BY</h2><p>GROUP BY city ردیف‌ها را دسته‌دسته می‌کند، برای هر شهر یک دسته، و بعد تابع‌های شمارش برای هر دسته یک جواب می‌دهند. همین یک ایده بیشتر گزارش‌های دنیا را می‌سازد: فروش در هر ماه، تیکت در هر بخش، ورود ناموفق از هر آدرس.</p><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="o">sqlite&gt; SELECT city, COUNT(*) AS students, AVG(grade) AS average</span>
+<span class="o">   ...&gt; FROM students GROUP BY city ORDER BY average DESC;</span>
+<span class="o">city|students|average</span>
+<span class="o">Isfahan|1|18.0</span>
+<span class="o">Shiraz|3|17.0</span>
+<span class="o">Tehran|2|15.5</span>
+<span class="o">sqlite&gt; SELECT city, COUNT(*) AS n FROM students GROUP BY city HAVING COUNT(*) &gt;= 2;</span>
+<span class="o">city|n</span>
+<span class="o">Shiraz|3</span>
+<span class="o">Tehran|2</span></pre></div><figcaption>AS به ستون یک اسم خوانا می‌دهد. HAVING گروه‌ها را بعد از شمارش فیلتر می‌کند — WHERE ردیف‌ها را قبل از آن.</figcaption></figure><h2>تغییر و حذف: UPDATE و DELETE</h2><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="o">sqlite&gt; UPDATE students SET grade = 15 WHERE name = 'Reza';</span>
+<span class="o">sqlite&gt; SELECT name, grade FROM students WHERE name = 'Reza';</span>
+<span class="o">name|grade</span>
+<span class="o">Reza|15</span>
+<span class="o">sqlite&gt; DELETE FROM students WHERE grade &lt; 13;</span>
+<span class="o">sqlite&gt; SELECT COUNT(*) FROM students;</span>
+<span class="o">COUNT(*)</span>
+<span class="o">5</span></pre></div><figcaption>UPDATE مقدارها را در ردیف‌های جور عوض می‌کند و DELETE ردیف‌های جور را حذف می‌کند.</figcaption></figure><div class="doc-note warn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><div>UPDATE و DELETE بدون WHERE روی همه‌ی ردیف‌های جدول اثر می‌گذارند و برگشتی ندارد. اول WHERE را بنویس؛ بهتر از آن، همان شرط را اول با SELECT اجرا کن تا ببینی کدام ردیف‌ها تغییر می‌کنند.</div></div><h2>وصل‌کردن جدول‌ها: JOIN</h2><p>پایگاه‌داده‌های واقعی اطلاعات را بین چند جدول تقسیم می‌کنند تا هیچ‌چیز دو بار نوشته نشود. اینجا جدول دومی به اسم courses با نگه‌داشتن id دانش‌آموز — نه اسمش — ثبت می‌کند هر دانش‌آموز چه درسی دارد. JOIN دو جدول را هر جا id‌ها یکی باشند کنار هم می‌گذارد.</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">sql</span><button type="button" class="doc-copy" data-code="CREATE%20TABLE%20courses%20(id%20INTEGER%20PRIMARY%20KEY%2C%20title%20TEXT%2C%20student_id%20INTEGER)%3B%0AINSERT%20INTO%20courses%20(title%2C%20student_id)%20VALUES%0A%20%20('Linux'%2C%201)%2C%20('Python'%2C%201)%2C%20('Networking'%2C%202)%2C%20('Python'%2C%206)%3B"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code>CREATE TABLE courses (id INTEGER PRIMARY KEY, title TEXT, student_id INTEGER);
+INSERT INTO courses (title, student_id) VALUES
+  ('Linux', 1), ('Python', 1), ('Networking', 2), ('Python', 6);</code></pre></figure><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="o">sqlite&gt; SELECT students.name, courses.title</span>
+<span class="o">   ...&gt; FROM courses JOIN students ON students.id = courses.student_id</span>
+<span class="o">   ...&gt; ORDER BY students.name;</span>
+<span class="o">name|title</span>
+<span class="o">Ali|Linux</span>
+<span class="o">Ali|Python</span>
+<span class="o">Neda|Python</span>
+<span class="o">Sara|Networking</span>
+<span class="o">sqlite&gt; SELECT students.name, COUNT(courses.id) AS courses</span>
+<span class="o">   ...&gt; FROM students LEFT JOIN courses ON students.id = courses.student_id</span>
+<span class="o">   ...&gt; GROUP BY students.id ORDER BY courses DESC;</span>
+<span class="o">name|courses</span>
+<span class="o">Ali|2</span>
+<span class="o">Sara|1</span>
+<span class="o">Neda|1</span>
+<span class="o">Reza|0</span>
+<span class="o">Mina|0</span></pre></div><figcaption>JOIN فقط دانش‌آموزهایی را نشان می‌دهد که درس دارند. LEFT JOIN همه‌ی دانش‌آموزها را نگه می‌دارد و برای بی‌درس‌ها صفر نشان می‌دهد.</figcaption></figure><p>بخش ON قانونِ جورکردن است: «هر درس مال دانش‌آموزی است که id او برابر student_id آن درس باشد». نوشتن table.column (مثل students.name) می‌گوید ستون از کدام جدول است و وقتی هر دو جدول ستونی هم‌نام مثل id دارند لازم است.</p><h2>ترتیبی که SQL با آن فکر می‌کند</h2><p>تو اول SELECT را می‌نویسی ولی پایگاه‌داده از آنجا شروع نمی‌کند. دانستن ترتیب واقعی بیشتر خطاهای گیج‌کننده را توضیح می‌دهد — مثلاً اینکه چرا نمی‌شود اسمی را که با AS ساخته‌ای داخل WHERE استفاده کرد.</p><div class="doc-table"><table><thead><tr><th>قدم</th><th>بخش</th><th>چه می‌شود</th></tr></thead><tbody><tr><td dir="ltr"><code>1</code></td><td dir="ltr"><code>FROM / JOIN</code></td><td>انتخاب و وصل‌کردن جدول‌ها</td></tr><tr><td dir="ltr"><code>2</code></td><td dir="ltr"><code>WHERE</code></td><td>دورریختن ردیف‌هایی که جور نیستند</td></tr><tr><td dir="ltr"><code>3</code></td><td dir="ltr"><code>GROUP BY</code></td><td>دسته‌بندی ردیف‌های باقی‌مانده</td></tr><tr><td dir="ltr"><code>4</code></td><td dir="ltr"><code>HAVING</code></td><td>دورریختن گروه‌هایی که جور نیستند</td></tr><tr><td dir="ltr"><code>5</code></td><td dir="ltr"><code>SELECT</code></td><td>انتخاب ستون‌ها و محاسبه</td></tr><tr><td dir="ltr"><code>6</code></td><td dir="ltr"><code>ORDER BY</code></td><td>مرتب‌کردن نتیجه</td></tr><tr><td dir="ltr"><code>7</code></td><td dir="ltr"><code>LIMIT</code></td><td>نگه‌داشتن ردیف‌های اول</td></tr></tbody></table></div><h2>خواندن خطاهای SQL</h2><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="o">sqlite&gt; SELECT * FROM student;</span>
+<span class="o">Error: no such table: student</span>
+<span class="o">sqlite&gt; SELECT name FROM students WHERE grade &gt; ;</span>
+<span class="o">Error: near ";": syntax error</span>
+<span class="o">sqlite&gt; INSERT INTO students (city) VALUES ('Yazd');</span>
+<span class="o">Error: NOT NULL constraint failed: students.name</span></pre></div><figcaption>اسم جدول با غلط املایی؛ شرط ناتمام (کلمه‌ی near جایی را نشان می‌دهد که SQL گم شده)؛ و شکستن یکی از قانون‌های جدول.</figcaption></figure><h2>برای حرفه‌ای‌ها: داده‌ی امن و سریع</h2><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>هیچ‌وقت SQL را با چسباندن متنی که کاربر تایپ کرده نساز. «تزریق SQL» — یکی از رایج‌ترین حمله‌ها به وب‌سایت‌ها — همین‌طور کار می‌کند. به‌جایش از جای‌نگه‌دار استفاده کن: در پایتون،  db.execute("SELECT * FROM students WHERE name = ?", (name,)) .</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>ایندکس مثل نمایه‌ی آخر کتاب است: CREATE INDEX idx_city ON students(city); جست‌وجو روی آن ستون را سریع می‌کند، به قیمت کمی کندترشدن INSERT.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>تراکنش چند تغییر را یکی می‌کند تا یا همه انجام شوند یا هیچ‌کدام: BEGIN; … COMMIT; (یا ROLLBACK; برای لغو). بانک‌ها به آن وابسته‌اند.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>کلید خارجی به پایگاه‌داده می‌گوید courses.student_id باید به یک دانش‌آموز واقعی اشاره کند، پس ردیف بی‌صاحب را قبول نمی‌کند.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>قبل از هر تغییر پرخطر از پایگاه‌داده پشتیبان بگیر. در SQLite کل پایگاه‌داده یک فایل است که می‌شود کپی‌اش کرد.</span></li></ul><p>«سامانه‌ی ثبت درخواست‌های IT» در بخش ابزارها دقیقاً روی همین دستورها ساخته شده: INSERT برای ثبت تیکت، UPDATE برای بستنش و GROUP BY برای گزارش ماهانه. بعد از این درس آموزش ساختش را باز کن؛ همه‌ی کوئری‌هایش را می‌توانی بخوانی.</p><h2>اشتباه‌های رایج</h2><ul class="doc-list study-bad"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>جاانداختن نقطه‌ویرگول، که باعث می‌شود پایگاه‌داده منتظر ادامه بماند.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>نقل‌قول دوتایی یا بدون نقل‌قول دور متن: بنویس 'Shiraz'.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>DELETE یا UPDATE بدون WHERE.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>نوشتن = NULL به‌جای IS NULL.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>انتخاب ستونی که نه در GROUP BY آمده و نه داخل تابعی مثل COUNT است.</span></li></ul>
+      <h2>تمرین</h2><p>اول خودت امتحان کن، بعد جواب را باز کن.</p><ol class="study-q"><li><p>نام و شهر همه‌ی دانش‌آموزها را به ترتیب نام نشان بده.</p><details><summary>نمایش جواب</summary><pre dir="auto">SELECT name, city FROM students ORDER BY name;</pre></details></li><li><p>دانش‌آموزهای تهران یا اصفهان را که نمره‌شان دست‌کم ۱۵ است نشان بده.</p><details><summary>نمایش جواب</summary><pre dir="auto">SELECT * FROM students
+WHERE city IN ('Tehran', 'Isfahan') AND grade &gt;= 15;</pre></details></li><li><p>کدام شهر بالاترین میانگین نمره را دارد؟ فقط همان یک ردیف را نشان بده.</p><details><summary>نمایش جواب</summary><pre dir="auto">SELECT city, AVG(grade) AS average FROM students
+GROUP BY city ORDER BY average DESC LIMIT 1;</pre></details></li><li><p>به نمره‌ی همه‌ی دانش‌آموزهای شیراز یک نمره اضافه کن.</p><details><summary>نمایش جواب</summary><pre dir="auto">UPDATE students SET grade = grade + 1 WHERE city = 'Shiraz';</pre></details></li><li><p>عنوان هر درس را با تعداد دانش‌آموزهایش فهرست کن.</p><details><summary>نمایش جواب</summary><pre dir="auto">SELECT title, COUNT(*) AS students FROM courses GROUP BY title;</pre></details></li></ol>
+      <p><a class="btn primary sm" href="practice/">همین را در آزمایشگاه تمرین کن</a></p>
+      <div class="study-box recap"><b>یادت بماند</b><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>جدول یعنی ردیف و ستون؛ SQL ردیف‌هایی را که می‌خواهی توصیف می‌کند.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>SELECT ستون‌ها FROM جدول WHERE شرط ORDER BY ستون LIMIT تعداد;</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>GROUP BY برای هر گروه یک ردیف می‌سازد و JOIN … ON جدول‌ها را از راه id وصل می‌کند.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>UPDATE یا DELETE بدون WHERE یعنی همه‌ی ردیف‌ها.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>ورودی کاربر را هیچ‌وقت به SQL نچسبان — از جای‌نگه‌دار استفاده کن.</span></li></ul></div></div>
+      <nav class="adoc-nav">
+        <a class="adoc-navbtn prev" href="fa/bash-scripting/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span><small>قبلی</small><b>خودکارسازی با اسکریپت‌های Bash</b></span></a>
+        <a class="adoc-navbtn next" href="fa/build-a-tool/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span><small>بعدی</small><b>یک پروژه‌ی واقعی: ساختن یک ابزار از اول تا آخر</b></span></a>
+      </nav>
+      <a class="btn adoc-back" href="index.html#articles"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span>همه‌ی مقاله‌ها</span></a>
+    </article>
+  </main>
+
+  <footer class="site-footer" id="site-footer"><div class="wrap">
+      <div class="foot-grid"><nav class="foot-col"><h4>دسترسی سریع</h4><ul><li><a href="index.html#tracks"><bdi>مسیرها</bdi></a></li><li><a href="index.html#articles"><bdi>مقاله‌ها</bdi></a></li><li><a href="index.html#library"><bdi>کتاب‌ها</bdi></a></li><li><a href="index.html#portfolio"><bdi>ابزارها</bdi></a></li><li><a href="index.html#lab"><bdi>آزمایشگاه</bdi></a></li><li><a href="resume.html"><bdi>رزومه</bdi></a></li><li><a href="resume.html#contact"><bdi>تماس</bdi></a></li></ul></nav><nav class="foot-col"><h4>موضوعات آموزشی</h4><ul><li><a href="index.html#topic/linux"><bdi>لینوکس</bdi></a></li><li><a href="index.html#topic/programming"><bdi>برنامه‌نویسی</bdi></a></li><li><a href="index.html#topic/network"><bdi>شبکه</bdi></a></li><li><a href="index.html#topic/security"><bdi>امنیت</bdi></a></li></ul></nav><nav class="foot-col"><h4>تازه‌ترین مقاله‌ها</h4><ul><li><a href="fa/authorised-testing/"><bdi>آزمون امنیتی مجاز: مثل مهاجم فکر کن، ولی قانونی</bdi></a></li><li><a href="fa/firewalls-hardening/"><bdi>فایروال و مقاوم‌سازی</bdi></a></li><li><a href="fa/reading-logs/"><bdi>خواندن لاگ‌ها: پیداکردن حمله در میان شلوغی</bdi></a></li><li><a href="fa/security-mindset/"><bdi>طرز فکر امنیتی</bdi></a></li></ul></nav><nav class="foot-col"><h4>گواهینامه‌ها</h4><ul><li><a href="resume.html#certifications"><bdi>پکیج امنیت سایبری</bdi></a></li><li><a href="resume.html#certifications"><bdi>پکیج F5</bdi></a></li><li><a href="resume.html#certifications"><bdi>Security+</bdi></a></li><li><a href="resume.html#certifications"><bdi>Cisco CCNA 200-301</bdi></a></li><li><a href="resume.html#certifications"><bdi>آزمون زبان دولینگو</bdi></a></li></ul></nav></div>
+      <div class="foot-card">
+        <a class="foot-id" href="resume.html">
+          <span class="foot-badge"><img src="assets/photo.jpg" alt="سپهر نیاز" loading="lazy"></span>
+          <span class="foot-name"><b>سپهر نیاز</b><small>تکنسین IT · شبکه و امنیت</small></span>
+        </a>
+        <p class="foot-tag">تکنسین IT در شیراز. اینجا درس‌های رایگان و عملی شبکه، امنیت و لینوکس می‌نویسم — و برای کارهای IT و شبکه در دسترسم.</p>
+        <div class="foot-social"><a href="mailto:niazsepehr7@gmail.com" aria-label="ایمیل" title="ایمیل"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 5L2 7"></path></svg></a><a href="tel:+989177886291" aria-label="تماس تلفنی" title="تماس تلفنی"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a><a href="https://wa.me/989177886291" target="_blank" rel="noopener" aria-label="واتساپ" title="واتساپ"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg></a><a href="https://github.com/sepehrniaz" target="_blank" rel="noopener" aria-label="گیت‌هاب" title="گیت‌هاب"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a></div>
+      </div>
+      <div class="foot-bottom">
+        <span>© ۲۰۲۶ سپهر نیاز · شیراز، ایران</span>
+        <a href="tel:+989177886291">شماره تماس: <bdi dir="ltr">۰۹۱۷ ۷۸۸ ۶۲۹۱</bdi></a>
+      </div>
+    </div></footer>
+
+  <script src="config.js"></script>
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+  <script src="bot/nlu.js"></script>
+  <script src="bot/knowledge.js"></script>
+  <script src="bot/teacher.js"></script>
+  <script src="bot/engine.js"></script>
+  <script src="bot/guide.js"></script>
+  <script src="assistant.js"></script>
+</body></html>

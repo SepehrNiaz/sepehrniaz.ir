@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en" dir="ltr"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="../../">
+  <title>Firewalls and hardening — Sepehr Niaz</title>
+  <meta name="description" content="How a firewall decides, how to write rules that mean what you intend, and a practical checklist for making a server, a Windows PC and a network harder to attack.">
+  <meta name="author" content="Sepehr Niaz">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sepehrniaz.ir/en/firewalls-hardening/">
+  <link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/firewalls-hardening/">
+  <link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/firewalls-hardening/">
+  <link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/firewalls-hardening/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/photo.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://sepehrniaz.ir/en/firewalls-hardening/">
+  <meta property="og:site_name" content="Sepehr Niaz">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Firewalls and hardening">
+  <meta property="og:description" content="How a firewall decides, how to write rules that mean what you intend, and a practical checklist for making a server, a Windows PC and a network harder to attack.">
+  <meta property="og:image" content="https://sepehrniaz.ir/assets/og-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#070b14">
+  <script type="application/ld+json">[{"@context":"https://schema.org","@type":"TechArticle","headline":"Firewalls and hardening","description":"How a firewall decides, how to write rules that mean what you intend, and a practical checklist for making a server, a Windows PC and a network harder to attack.","inLanguage":"en","url":"https://sepehrniaz.ir/en/firewalls-hardening/","mainEntityOfPage":"https://sepehrniaz.ir/en/firewalls-hardening/","image":"https://sepehrniaz.ir/assets/og-card.jpg","author":{"@type":"Person","name":"Sepehr Niaz","alternateName":"سپهر نیاز","url":"https://sepehrniaz.ir/resume"},"publisher":{"@type":"Person","name":"Sepehr Niaz","url":"https://sepehrniaz.ir/"},"datePublished":"2026-11-01","dateModified":"2026-11-01","timeRequired":"PT24M"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Learn","item":"https://sepehrniaz.ir/"},{"@type":"ListItem","position":2,"name":"Security","item":"https://sepehrniaz.ir/#articles"},{"@type":"ListItem","position":3,"name":"Firewalls and hardening","item":"https://sepehrniaz.ir/en/firewalls-hardening/"}]}]</script>
+  <script>
+    (function () {
+      var d = document.documentElement;
+      try { var t = localStorage.getItem("theme"); if (t) d.dataset.theme = t; localStorage.setItem("lang", d.lang); } catch (e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Vazirmatn:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body data-page="article" data-article="firewalls-hardening">
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="logo" id="logo"></a>
+      <div class="nav-links">
+        <a href="index.html#tracks" data-i18n="navTracks">Tracks</a>
+        <a href="index.html#articles" data-i18n="navArticles">Articles</a>
+        <a href="index.html#lab" data-i18n="navLab">Lab</a>
+        <a href="index.html#library" data-i18n="navBooks">Books</a>
+        <a href="index.html#portfolio" data-i18n="navTools">Tools</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn lang-btn" id="lang-toggle">فا</button>
+        <button class="icon-btn" id="theme-toggle"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></button>
+        <a href="resume.html" class="btn primary sm" data-i18n="navResume">Résumé</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="article-main">
+    <article class="wrap adoc-body adoc-page">
+      <nav class="crumbs" aria-label="breadcrumb">
+        <a href="index.html">Learn</a><span aria-hidden="true">/</span>
+        <a href="index.html#topic/security">Security</a>
+      </nav>
+      <div class="adoc-hero"><img class="adoc-logo" src="assets/learn/logos/security.svg" alt="" width="88" height="88"><div>
+      <p class="adoc-kick">Intermediate · 24 min read · Updated 2026-11</p>
+      <h1>Firewalls and hardening</h1></div></div>
+      <p class="adoc-summary">How a firewall decides, how to write rules that mean what you intend, and a practical checklist for making a server, a Windows PC and a network harder to attack.</p>
+      <div class="adoc-content"><div class="study-box goals"><b>After this lesson you can</b><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Explain how a firewall matches a packet against its rules</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Write a default-deny rule set for a server</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Harden a Linux server, a Windows PC and network devices with a checklist</span></li></ul></div><h2>What a firewall does</h2><p>A firewall is a guard at a door. Every packet that wants to pass is compared with a list of rules, from the first rule down, and the first rule that matches decides: let it through, or throw it away. A rule looks at a few facts about the packet — where it comes from, where it is going, which protocol and which port. That is all. A firewall does not understand whether the content is good or bad; it only knows who may talk to whom, on which door.</p><div class="doc-table"><table><thead><tr><th>#</th><th>Source</th><th>Destination</th><th>Port</th><th>Action</th></tr></thead><tbody><tr><td dir="ltr"><code>1</code></td><td>anywhere</td><td>web server</td><td dir="ltr"><code>443 TCP</code></td><td>allow</td></tr><tr><td dir="ltr"><code>2</code></td><td>office network</td><td>web server</td><td dir="ltr"><code>22 TCP</code></td><td>allow</td></tr><tr><td dir="ltr"><code>3</code></td><td>web server</td><td>database</td><td dir="ltr"><code>3306 TCP</code></td><td>allow</td></tr><tr><td dir="ltr"><code>4</code></td><td>anywhere</td><td>anywhere</td><td>any</td><td>deny</td></tr></tbody></table></div><p>Read the table aloud: the world may reach the website; only the office may reach SSH; only the web server may reach the database; and everything else is refused. The last line is the most important idea in this lesson — default deny. You do not list what is forbidden, because you can never think of everything. You list the few things that are needed and forbid the rest.</p><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Order matters: a broad 'allow' above a narrow 'deny' makes the deny useless.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Stateful firewalls remember conversations. If your computer started a connection, the answers are let back in automatically — you only write rules for who may start.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Inbound means arriving at the machine; outbound means leaving it. Most rule sets control inbound strictly; controlling outbound as well stops malware from calling home.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>A host firewall protects one machine (ufw, Windows Firewall); a network firewall protects everything behind it. Use both.</span></li></ul><h2>A firewall on Linux in five lines</h2><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">bash</span><button type="button" class="doc-copy" data-code="sudo%20ufw%20default%20deny%20incoming%20%20%20%20%20%20%20%23%20refuse%20everything%20arriving%20%E2%80%A6%0Asudo%20ufw%20default%20allow%20outgoing%20%20%20%20%20%20%23%20%E2%80%A6%20but%20let%20this%20machine%20reach%20out%0Asudo%20ufw%20allow%20from%20192.168.1.0%2F24%20to%20any%20port%2022%20proto%20tcp%20%20%20%23%20SSH%20from%20the%20office%20only%0Asudo%20ufw%20allow%20443%2Ftcp%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20the%20website%2C%20for%20everyone%0Asudo%20ufw%20enable%0A%0Asudo%20ufw%20status%20numbered%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20read%20the%20rules%20back%0Asudo%20ufw%20delete%203%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20remove%20rule%20number%203"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button></div><pre dir="ltr"><code>sudo ufw default deny incoming       # refuse everything arriving …
+sudo ufw default allow outgoing      # … but let this machine reach out
+sudo ufw allow from 192.168.1.0/24 to any port 22 proto tcp   # SSH from the office only
+sudo ufw allow 443/tcp               # the website, for everyone
+sudo ufw enable
+
+sudo ufw status numbered             # read the rules back
+sudo ufw delete 3                    # remove rule number 3</code></pre><figcaption>Always add the SSH rule before 'enable', and keep your current session open while you test a new one.</figcaption></figure><p>ufw is a friendly layer over the kernel's own firewall (nftables, formerly iptables). On Windows the same ideas live in 'Windows Defender Firewall with Advanced Security', with separate lists for inbound and outbound rules and three profiles — domain, private and public. A laptop on café Wi-Fi should be on the public profile, which hides it from its neighbours.</p><h2>Hardening: removing what an attacker could use</h2><p>Systems are delivered to be easy, not safe: services you will never use are switched on, default passwords are set, and everything is allowed. Hardening is the unglamorous work of switching off what is not needed and tightening what is. The idea behind every item below is the same — a smaller target. A service that is not running cannot be attacked; an account that does not exist cannot be stolen.</p><div class="doc-table"><table><thead><tr><th>Linux server</th><th>Why</th></tr></thead><tbody><tr><td>Updates installed; automatic security updates on</td><td>Known holes are the first thing robots try</td></tr><tr><td>SSH: keys only, no root login</td><td>Password guessing becomes pointless</td></tr><tr><td>fail2ban installed</td><td>Addresses that keep failing are blocked automatically</td></tr><tr><td>Unneeded services removed (ss -tlnp to find them)</td><td>Every listening port is a door</td></tr><tr><td>Each service runs as its own unprivileged user</td><td>A hacked website cannot touch the rest</td></tr><tr><td>Tight file permissions; no 777</td><td>Limits what a stolen account can change</td></tr><tr><td>Logs sent to another machine; tested backups</td><td>You can investigate and recover</td></tr></tbody></table></div><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">bash</span><button type="button" class="doc-copy" data-code="sudo%20apt%20install%20fail2ban%20unattended-upgrades%0A%0A%23%20%2Fetc%2Fssh%2Fsshd_config%0APermitRootLogin%20no%0APasswordAuthentication%20no%0AMaxAuthTries%203%0A%0Asudo%20systemctl%20restart%20ssh%0Asudo%20ss%20-tlnp%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20what%20is%20still%20listening%3F"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button></div><pre dir="ltr"><code>sudo apt install fail2ban unattended-upgrades
+
+# /etc/ssh/sshd_config
+PermitRootLogin no
+PasswordAuthentication no
+MaxAuthTries 3
+
+sudo systemctl restart ssh
+sudo ss -tlnp                # what is still listening?</code></pre></figure><div class="doc-table"><table><thead><tr><th>Windows PC</th><th>Network devices</th></tr></thead><tbody><tr><td>Automatic updates on; supported Windows version</td><td>Firmware updated; default passwords changed</td></tr><tr><td>Daily work with a standard user, not an administrator</td><td>Management only over SSH/HTTPS, from a management VLAN</td></tr><tr><td>Firewall on, in all three profiles</td><td>Telnet, HTTP admin, UPnP and WPS off</td></tr><tr><td>Disk encryption (BitLocker) on laptops</td><td>Unused switch ports shut down</td></tr><tr><td>Remote Desktop off, or reachable only through a VPN</td><td>Guest Wi-Fi isolated from the internal network</td></tr><tr><td>Screen lock after a few minutes</td><td>Configuration backed up after every change</td></tr></tbody></table></div><h2>Layers: no single wall</h2><p>No defence is perfect, so professionals never rely on one. They stack them, so that an attacker who passes one meets the next: a firewall at the edge, separate VLANs inside, a firewall on each machine, strong logins, least privilege, updates, logs that someone reads, and backups for when everything else has failed. This is called defence in depth. When you review a system, ask of every layer: 'if this one failed tomorrow, what would stop the attacker next?'. If the answer is 'nothing', you have found your next job.</p><h2>Check your own work</h2><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>From outside your network, scan your own public address and compare the open ports with the list you intended. The Port Scanner in the Tools section is enough for this.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>From the guest Wi-Fi, try to reach a staff computer and the router's admin page. Both should fail.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Read the firewall's log of blocked packets once a week; it shows who is knocking.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Repeat after every change — a firewall rule added 'for a moment' is the most common hole there is.</span></li></ul><h2>Common mistakes</h2><ul class="doc-list study-bad"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>An 'allow everything' rule left in from testing.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>Rules in the wrong order.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>Trusting the network firewall alone and leaving host firewalls off.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>Hardening once and never checking again.</span></li></ul>
+      <h2>Exercises</h2><p>Try each one yourself first, then open the answer.</p><ol class="study-q"><li><p>Write ufw rules for a server that should offer only a website (443) to everyone and SSH to the address 192.168.1.10.</p><details><summary>Show the answer</summary><pre dir="auto">sudo ufw default deny incoming
+sudo ufw allow from 192.168.1.10 to any port 22 proto tcp
+sudo ufw allow 443/tcp
+sudo ufw enable</pre></details></li><li><p>Rule 1 says 'allow anywhere to anywhere, any port'. Rule 2 says 'deny port 23'. Is Telnet blocked?</p><details><summary>Show the answer</summary><pre dir="auto">No. The first matching rule decides, and rule 1 matches everything. Rule 2 is never reached.</pre></details></li><li><p>Name three things you would switch off on a new router.</p><details><summary>Show the answer</summary><pre dir="auto">WPS, UPnP, remote administration from the internet (and Telnet, if it has it) — and change the default admin password.</pre></details></li><li><p>What does 'defence in depth' mean, in one sentence?</p><details><summary>Show the answer</summary><pre dir="auto">Several independent layers of protection, so that the failure of one does not expose the system.</pre></details></li></ol>
+      <p><a class="btn primary sm" href="practice/">Practise this in the lab</a></p>
+      <div class="study-box recap"><b>Remember</b><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>First matching rule wins; end with deny everything.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Allow what is needed, not block what is bad.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Hardening = switch off, tighten, update.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Many layers, and check from the outside.</span></li></ul></div></div>
+      <nav class="adoc-nav">
+        <a class="adoc-navbtn prev" href="en/reading-logs/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span><small>Previous</small><b>Reading logs: finding an attack in the noise</b></span></a>
+        <a class="adoc-navbtn next" href="en/authorised-testing/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span><small>Next</small><b>Authorised security testing: thinking like an attacker, legally</b></span></a>
+      </nav>
+      <a class="btn adoc-back" href="index.html#articles"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span>All articles</span></a>
+    </article>
+  </main>
+
+  <footer class="site-footer" id="site-footer"><div class="wrap">
+      <div class="foot-grid"><nav class="foot-col"><h4>Quick links</h4><ul><li><a href="index.html#tracks"><bdi>Tracks</bdi></a></li><li><a href="index.html#articles"><bdi>Articles</bdi></a></li><li><a href="index.html#library"><bdi>Books</bdi></a></li><li><a href="index.html#portfolio"><bdi>Tools</bdi></a></li><li><a href="index.html#lab"><bdi>Lab</bdi></a></li><li><a href="resume.html"><bdi>Résumé</bdi></a></li><li><a href="resume.html#contact"><bdi>Contact</bdi></a></li></ul></nav><nav class="foot-col"><h4>Learning topics</h4><ul><li><a href="index.html#topic/linux"><bdi>Linux</bdi></a></li><li><a href="index.html#topic/programming"><bdi>Programming</bdi></a></li><li><a href="index.html#topic/network"><bdi>Networking</bdi></a></li><li><a href="index.html#topic/security"><bdi>Security</bdi></a></li></ul></nav><nav class="foot-col"><h4>Latest articles</h4><ul><li><a href="en/authorised-testing/"><bdi>Authorised security testing: thinking like an attacker, legally</bdi></a></li><li><a href="en/firewalls-hardening/"><bdi>Firewalls and hardening</bdi></a></li><li><a href="en/reading-logs/"><bdi>Reading logs: finding an attack in the noise</bdi></a></li><li><a href="en/security-mindset/"><bdi>The security mindset</bdi></a></li></ul></nav><nav class="foot-col"><h4>Certificates</h4><ul><li><a href="resume.html#certifications"><bdi>Cyber Security Pack</bdi></a></li><li><a href="resume.html#certifications"><bdi>F5 Package</bdi></a></li><li><a href="resume.html#certifications"><bdi>Security+</bdi></a></li><li><a href="resume.html#certifications"><bdi>Cisco CCNA 200-301</bdi></a></li><li><a href="resume.html#certifications"><bdi>Duolingo English Test</bdi></a></li></ul></nav></div>
+      <div class="foot-card">
+        <a class="foot-id" href="resume.html">
+          <span class="foot-badge"><img src="assets/photo.jpg" alt="Sepehr Niaz" loading="lazy"></span>
+          <span class="foot-name"><b>Sepehr Niaz</b><small>IT Technician · Network &amp; Security</small></span>
+        </a>
+        <p class="foot-tag">IT technician in Shiraz. I write free, practical lessons on networking, security and Linux — and I'm available for IT and network work.</p>
+        <div class="foot-social"><a href="mailto:niazsepehr7@gmail.com" aria-label="Email" title="Email"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 5L2 7"></path></svg></a><a href="tel:+989177886291" aria-label="Call" title="Call"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a><a href="https://wa.me/989177886291" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg></a><a href="https://github.com/sepehrniaz" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a></div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 Sepehr Niaz · Shiraz, Iran</span>
+        <a href="tel:+989177886291">Phone: <bdi dir="ltr">0917 788 6291</bdi></a>
+      </div>
+    </div></footer>
+
+  <script src="config.js"></script>
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+  <script src="bot/nlu.js"></script>
+  <script src="bot/knowledge.js"></script>
+  <script src="bot/teacher.js"></script>
+  <script src="bot/engine.js"></script>
+  <script src="bot/guide.js"></script>
+  <script src="assistant.js"></script>
+</body></html>

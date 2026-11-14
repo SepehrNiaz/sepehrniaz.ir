@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en" dir="ltr"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="../../">
+  <title>SQL from zero: asking questions of data — Sepehr Niaz</title>
+  <meta name="description" content="What a database and a table are, and how to read, filter, sort, count, change and join data with SQL — every command explained word by word, with real output.">
+  <meta name="author" content="Sepehr Niaz">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sepehrniaz.ir/en/sql-from-zero/">
+  <link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/sql-from-zero/">
+  <link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/sql-from-zero/">
+  <link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/sql-from-zero/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/photo.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://sepehrniaz.ir/en/sql-from-zero/">
+  <meta property="og:site_name" content="Sepehr Niaz">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="SQL from zero: asking questions of data">
+  <meta property="og:description" content="What a database and a table are, and how to read, filter, sort, count, change and join data with SQL — every command explained word by word, with real output.">
+  <meta property="og:image" content="https://sepehrniaz.ir/assets/og-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#070b14">
+  <script type="application/ld+json">[{"@context":"https://schema.org","@type":"TechArticle","headline":"SQL from zero: asking questions of data","description":"What a database and a table are, and how to read, filter, sort, count, change and join data with SQL — every command explained word by word, with real output.","inLanguage":"en","url":"https://sepehrniaz.ir/en/sql-from-zero/","mainEntityOfPage":"https://sepehrniaz.ir/en/sql-from-zero/","image":"https://sepehrniaz.ir/assets/og-card.jpg","author":{"@type":"Person","name":"Sepehr Niaz","alternateName":"سپهر نیاز","url":"https://sepehrniaz.ir/resume"},"publisher":{"@type":"Person","name":"Sepehr Niaz","url":"https://sepehrniaz.ir/"},"datePublished":"2026-11-01","dateModified":"2026-11-01","timeRequired":"PT30M"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Learn","item":"https://sepehrniaz.ir/"},{"@type":"ListItem","position":2,"name":"Programming","item":"https://sepehrniaz.ir/#articles"},{"@type":"ListItem","position":3,"name":"SQL from zero: asking questions of data","item":"https://sepehrniaz.ir/en/sql-from-zero/"}]}]</script>
+  <script>
+    (function () {
+      var d = document.documentElement;
+      try { var t = localStorage.getItem("theme"); if (t) d.dataset.theme = t; localStorage.setItem("lang", d.lang); } catch (e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Vazirmatn:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body data-page="article" data-article="sql-from-zero">
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="logo" id="logo"></a>
+      <div class="nav-links">
+        <a href="index.html#tracks" data-i18n="navTracks">Tracks</a>
+        <a href="index.html#articles" data-i18n="navArticles">Articles</a>
+        <a href="index.html#lab" data-i18n="navLab">Lab</a>
+        <a href="index.html#library" data-i18n="navBooks">Books</a>
+        <a href="index.html#portfolio" data-i18n="navTools">Tools</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn lang-btn" id="lang-toggle">فا</button>
+        <button class="icon-btn" id="theme-toggle"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></button>
+        <a href="resume.html" class="btn primary sm" data-i18n="navResume">Résumé</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="article-main">
+    <article class="wrap adoc-body adoc-page">
+      <nav class="crumbs" aria-label="breadcrumb">
+        <a href="index.html">Learn</a><span aria-hidden="true">/</span>
+        <a href="index.html#topic/programming">Programming</a>
+      </nav>
+      <div class="adoc-hero"><img class="adoc-logo" src="assets/learn/logos/sqlite.svg" alt="" width="88" height="88"><div>
+      <p class="adoc-kick">Beginner · 30 min read · Updated 2026-11</p>
+      <h1>SQL from zero: asking questions of data</h1></div></div>
+      <p class="adoc-summary">What a database and a table are, and how to read, filter, sort, count, change and join data with SQL — every command explained word by word, with real output.</p>
+      <div class="adoc-content"><div class="study-box goals"><b>After this lesson you can</b><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Explain what a table, a row, a column and a primary key are</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Read data with SELECT, WHERE, ORDER BY and LIMIT</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Summarise with COUNT, AVG and GROUP BY, and connect two tables with JOIN</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Change data safely with INSERT, UPDATE and DELETE</span></li></ul></div><h2>What is a database?</h2><p>A database is an organised place to keep information so that it can be found again quickly. Think of a spreadsheet: a table has columns (name, city, grade) and rows (one row for each student). A database is a collection of such tables, kept by a program that can search millions of rows in a moment and let many people use them at once. Almost every app you use — a shop, a bank, a messaging service — keeps its information this way.</p><p>SQL (say 'sequel' or 'S-Q-L') is the language for talking to that program. It is not a general programming language like Python: it does one thing — describe the data you want — and it reads almost like English. The same SQL works, with small differences, in SQLite, MySQL, PostgreSQL and Microsoft SQL Server. This lesson uses SQLite, which is also what the SQL tab of the practice lab runs.</p><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>SQL words such as SELECT can be written in capitals or small letters. Capitals are a habit that makes them stand out.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Every statement ends with a semicolon ;</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Text values go inside single quotation marks: 'Shiraz'. Numbers have no quotation marks.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Spaces and line breaks do not matter; break long statements over several lines to make them readable.</span></li></ul><h2>Making a table: CREATE TABLE</h2><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">sql</span><button type="button" class="doc-copy" data-code="CREATE%20TABLE%20students%20(%0A%20%20id%20%20%20%20INTEGER%20PRIMARY%20KEY%2C%0A%20%20name%20%20TEXT%20NOT%20NULL%2C%0A%20%20city%20%20TEXT%2C%0A%20%20grade%20INTEGER%0A)%3B"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button></div><pre dir="ltr"><code>CREATE TABLE students (
+  id    INTEGER PRIMARY KEY,
+  name  TEXT NOT NULL,
+  city  TEXT,
+  grade INTEGER
+);</code></pre></figure><p>Read it piece by piece. CREATE TABLE students makes a new, empty table called students. Inside the brackets is one line per column: its name, then the type of value it holds. INTEGER is a whole number and TEXT is text. PRIMARY KEY marks the column that identifies each row uniquely — the database fills in 1, 2, 3 by itself. NOT NULL means 'this column may not be left empty'.</p><h2>Adding rows: INSERT</h2><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">sql</span><button type="button" class="doc-copy" data-code="INSERT%20INTO%20students%20(name%2C%20city%2C%20grade)%20VALUES%20('Ali'%2C%20'Shiraz'%2C%2017)%3B%0A%0AINSERT%20INTO%20students%20(name%2C%20city%2C%20grade)%20VALUES%0A%20%20('Sara'%2C%20'Tehran'%2C%2019)%2C%0A%20%20('Reza'%2C%20'Shiraz'%2C%2014)%2C%0A%20%20('Mina'%2C%20'Isfahan'%2C%2018)%2C%0A%20%20('Omid'%2C%20'Tehran'%2C%2012)%2C%0A%20%20('Neda'%2C%20'Shiraz'%2C%2020)%3B"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button></div><pre dir="ltr"><code>INSERT INTO students (name, city, grade) VALUES ('Ali', 'Shiraz', 17);
+
+INSERT INTO students (name, city, grade) VALUES
+  ('Sara', 'Tehran', 19),
+  ('Reza', 'Shiraz', 14),
+  ('Mina', 'Isfahan', 18),
+  ('Omid', 'Tehran', 12),
+  ('Neda', 'Shiraz', 20);</code></pre><figcaption>After INTO comes the table and the list of columns; after VALUES come the values in the same order. Several rows can be added at once, separated by commas.</figcaption></figure><h2>Reading: SELECT</h2><p>SELECT is the command you will use ninety per cent of the time. Its shape is: SELECT which columns FROM which table. A star means 'all columns'.</p><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="o">sqlite&gt; SELECT * FROM students;</span>
+<span class="o">id|name|city|grade</span>
+<span class="o">1|Ali|Shiraz|17</span>
+<span class="o">2|Sara|Tehran|19</span>
+<span class="o">3|Reza|Shiraz|14</span>
+<span class="o">4|Mina|Isfahan|18</span>
+<span class="o">5|Omid|Tehran|12</span>
+<span class="o">6|Neda|Shiraz|20</span></pre></div><figcaption>Six rows, four columns. The id column was filled in automatically.</figcaption></figure><h2>Filtering: WHERE</h2><p>WHERE keeps only the rows for which a condition is true. Note that SQL uses a single = to compare — unlike Python's ==.</p><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="o">sqlite&gt; SELECT name, grade FROM students WHERE grade &gt;= 18;</span>
+<span class="o">name|grade</span>
+<span class="o">Sara|19</span>
+<span class="o">Mina|18</span>
+<span class="o">Neda|20</span>
+<span class="o">sqlite&gt; SELECT name, city FROM students WHERE city = 'Shiraz' AND grade &gt; 15;</span>
+<span class="o">name|city</span>
+<span class="o">Ali|Shiraz</span>
+<span class="o">Neda|Shiraz</span>
+<span class="o">sqlite&gt; SELECT name FROM students WHERE name LIKE 'S%';</span>
+<span class="o">name</span>
+<span class="o">Sara</span></pre></div><figcaption>AND needs both conditions. LIKE compares against a pattern, where % stands for 'anything'.</figcaption></figure><div class="doc-table"><table><thead><tr><th>Condition</th><th>Meaning</th></tr></thead><tbody><tr><td dir="ltr"><code>grade = 20</code></td><td>exactly 20</td></tr><tr><td dir="ltr"><code>grade &lt;&gt; 20</code></td><td>not 20 (also written !=)</td></tr><tr><td dir="ltr"><code>grade BETWEEN 10 AND 15</code></td><td>from 10 to 15, both included</td></tr><tr><td dir="ltr"><code>city IN ('Shiraz', 'Tehran')</code></td><td>any value in the list</td></tr><tr><td dir="ltr"><code>name LIKE '%a'</code></td><td>ends with a</td></tr><tr><td dir="ltr"><code>city IS NULL</code></td><td>the column is empty (never write = NULL)</td></tr><tr><td dir="ltr"><code>NOT, AND, OR</code></td><td>combine conditions; use brackets when you mix AND with OR</td></tr></tbody></table></div><h2>Sorting and limiting: ORDER BY, LIMIT</h2><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="o">sqlite&gt; SELECT name, grade FROM students ORDER BY grade DESC LIMIT 3;</span>
+<span class="o">name|grade</span>
+<span class="o">Neda|20</span>
+<span class="o">Sara|19</span>
+<span class="o">Mina|18</span></pre></div><figcaption>ORDER BY sorts; DESC means largest first (ASC, the default, means smallest first). LIMIT 3 keeps the first three rows — together: the top three.</figcaption></figure><div class="doc-note tip"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"></path></svg><div>A table has no fixed order of its own. If the order matters, always say ORDER BY.</div></div><h2>Counting and averaging</h2><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="o">sqlite&gt; SELECT COUNT(*), AVG(grade), MAX(grade), MIN(grade) FROM students;</span>
+<span class="o">COUNT(*)|AVG(grade)|MAX(grade)|MIN(grade)</span>
+<span class="o">6|16.666666666666668|20|12</span></pre></div><figcaption>These functions squeeze many rows into one answer: how many, the average, the largest, the smallest. SUM adds them up.</figcaption></figure><h2>One answer per group: GROUP BY</h2><p>GROUP BY city sorts the rows into piles, one pile per city, and then the counting functions give one answer for each pile. This single idea produces most of the reports in the world: sales per month, tickets per department, failed logins per address.</p><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="o">sqlite&gt; SELECT city, COUNT(*) AS students, AVG(grade) AS average</span>
+<span class="o">   ...&gt; FROM students GROUP BY city ORDER BY average DESC;</span>
+<span class="o">city|students|average</span>
+<span class="o">Isfahan|1|18.0</span>
+<span class="o">Shiraz|3|17.0</span>
+<span class="o">Tehran|2|15.5</span>
+<span class="o">sqlite&gt; SELECT city, COUNT(*) AS n FROM students GROUP BY city HAVING COUNT(*) &gt;= 2;</span>
+<span class="o">city|n</span>
+<span class="o">Shiraz|3</span>
+<span class="o">Tehran|2</span></pre></div><figcaption>AS gives a column a readable name. HAVING filters the groups after counting — WHERE filters rows before it.</figcaption></figure><h2>Changing and deleting: UPDATE, DELETE</h2><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="o">sqlite&gt; UPDATE students SET grade = 15 WHERE name = 'Reza';</span>
+<span class="o">sqlite&gt; SELECT name, grade FROM students WHERE name = 'Reza';</span>
+<span class="o">name|grade</span>
+<span class="o">Reza|15</span>
+<span class="o">sqlite&gt; DELETE FROM students WHERE grade &lt; 13;</span>
+<span class="o">sqlite&gt; SELECT COUNT(*) FROM students;</span>
+<span class="o">COUNT(*)</span>
+<span class="o">5</span></pre></div><figcaption>UPDATE changes values in the rows that match; DELETE removes the rows that match.</figcaption></figure><div class="doc-note warn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><div>UPDATE and DELETE without WHERE act on every row in the table, and there is no undo. Write the WHERE first; better still, run the same condition as a SELECT first to see which rows will be touched.</div></div><h2>Connecting tables: JOIN</h2><p>Real databases split information over several tables so that nothing is written twice. Here a second table, courses, stores which student takes which course by keeping the student's id — not the name. A JOIN puts the two tables side by side wherever the ids match.</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">sql</span><button type="button" class="doc-copy" data-code="CREATE%20TABLE%20courses%20(id%20INTEGER%20PRIMARY%20KEY%2C%20title%20TEXT%2C%20student_id%20INTEGER)%3B%0AINSERT%20INTO%20courses%20(title%2C%20student_id)%20VALUES%0A%20%20('Linux'%2C%201)%2C%20('Python'%2C%201)%2C%20('Networking'%2C%202)%2C%20('Python'%2C%206)%3B"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button></div><pre dir="ltr"><code>CREATE TABLE courses (id INTEGER PRIMARY KEY, title TEXT, student_id INTEGER);
+INSERT INTO courses (title, student_id) VALUES
+  ('Linux', 1), ('Python', 1), ('Networking', 2), ('Python', 6);</code></pre></figure><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="o">sqlite&gt; SELECT students.name, courses.title</span>
+<span class="o">   ...&gt; FROM courses JOIN students ON students.id = courses.student_id</span>
+<span class="o">   ...&gt; ORDER BY students.name;</span>
+<span class="o">name|title</span>
+<span class="o">Ali|Linux</span>
+<span class="o">Ali|Python</span>
+<span class="o">Neda|Python</span>
+<span class="o">Sara|Networking</span>
+<span class="o">sqlite&gt; SELECT students.name, COUNT(courses.id) AS courses</span>
+<span class="o">   ...&gt; FROM students LEFT JOIN courses ON students.id = courses.student_id</span>
+<span class="o">   ...&gt; GROUP BY students.id ORDER BY courses DESC;</span>
+<span class="o">name|courses</span>
+<span class="o">Ali|2</span>
+<span class="o">Sara|1</span>
+<span class="o">Neda|1</span>
+<span class="o">Reza|0</span>
+<span class="o">Mina|0</span></pre></div><figcaption>JOIN shows only students who have a course. LEFT JOIN keeps every student and shows 0 for those without one.</figcaption></figure><p>The ON part is the rule for matching: 'a course belongs to the student whose id equals the course's student_id'. Writing table.column (students.name) says which table a column comes from, which is required when both tables have a column with the same name, such as id.</p><h2>The order SQL thinks in</h2><p>You write SELECT first, but the database does not start there. Knowing the real order explains most confusing errors — for example, why you cannot use a name made with AS inside WHERE.</p><div class="doc-table"><table><thead><tr><th>Step</th><th>Clause</th><th>What happens</th></tr></thead><tbody><tr><td dir="ltr"><code>1</code></td><td dir="ltr"><code>FROM / JOIN</code></td><td>Choose and connect the tables</td></tr><tr><td dir="ltr"><code>2</code></td><td dir="ltr"><code>WHERE</code></td><td>Throw away rows that don't match</td></tr><tr><td dir="ltr"><code>3</code></td><td dir="ltr"><code>GROUP BY</code></td><td>Sort the remaining rows into groups</td></tr><tr><td dir="ltr"><code>4</code></td><td dir="ltr"><code>HAVING</code></td><td>Throw away groups that don't match</td></tr><tr><td dir="ltr"><code>5</code></td><td dir="ltr"><code>SELECT</code></td><td>Pick the columns and calculate</td></tr><tr><td dir="ltr"><code>6</code></td><td dir="ltr"><code>ORDER BY</code></td><td>Sort the result</td></tr><tr><td dir="ltr"><code>7</code></td><td dir="ltr"><code>LIMIT</code></td><td>Keep the first rows</td></tr></tbody></table></div><h2>Reading SQL errors</h2><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="o">sqlite&gt; SELECT * FROM student;</span>
+<span class="o">Error: no such table: student</span>
+<span class="o">sqlite&gt; SELECT name FROM students WHERE grade &gt; ;</span>
+<span class="o">Error: near ";": syntax error</span>
+<span class="o">sqlite&gt; INSERT INTO students (city) VALUES ('Yazd');</span>
+<span class="o">Error: NOT NULL constraint failed: students.name</span></pre></div><figcaption>A misspelt table name; an unfinished condition ('near' points at the place where SQL got lost); and a rule of the table being broken.</figcaption></figure><h2>For professionals: keeping data safe and fast</h2><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Never build SQL by gluing in text that a user typed. That is how SQL injection — one of the most common attacks on websites — works. Use placeholders instead: in Python,  db.execute("SELECT * FROM students WHERE name = ?", (name,)) .</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>An index is like the index at the back of a book: CREATE INDEX idx_city ON students(city); makes searches on that column fast, at the cost of slightly slower inserts.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>A transaction groups several changes so that either all happen or none: BEGIN; … COMMIT; (or ROLLBACK; to cancel). Banks depend on it.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>A foreign key tells the database that courses.student_id must point to a real student, so it refuses orphaned rows.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Back up the database before every risky change. For SQLite the whole database is one file you can copy.</span></li></ul><p>The Helpdesk Tracker in the Tools section is built on exactly these commands: INSERT to open a ticket, UPDATE to close it, and GROUP BY for the monthly report. Open its build tutorial after this lesson and you will be able to read every query in it.</p><h2>Common mistakes</h2><ul class="doc-list study-bad"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>Forgetting the semicolon, so the database waits for more.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>Double quotation marks or no quotation marks around text: write 'Shiraz'.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>DELETE or UPDATE without WHERE.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>Writing = NULL instead of IS NULL.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>Selecting a column that is neither in GROUP BY nor inside a function such as COUNT.</span></li></ul>
+      <h2>Exercises</h2><p>Try each one yourself first, then open the answer.</p><ol class="study-q"><li><p>Show the name and city of every student, sorted by name.</p><details><summary>Show the answer</summary><pre dir="auto">SELECT name, city FROM students ORDER BY name;</pre></details></li><li><p>Show the students from Tehran or Isfahan whose grade is at least 15.</p><details><summary>Show the answer</summary><pre dir="auto">SELECT * FROM students
+WHERE city IN ('Tehran', 'Isfahan') AND grade &gt;= 15;</pre></details></li><li><p>Which city has the highest average grade? Show only that one row.</p><details><summary>Show the answer</summary><pre dir="auto">SELECT city, AVG(grade) AS average FROM students
+GROUP BY city ORDER BY average DESC LIMIT 1;</pre></details></li><li><p>Add one point to the grade of every student in Shiraz.</p><details><summary>Show the answer</summary><pre dir="auto">UPDATE students SET grade = grade + 1 WHERE city = 'Shiraz';</pre></details></li><li><p>List each course title with the number of students taking it.</p><details><summary>Show the answer</summary><pre dir="auto">SELECT title, COUNT(*) AS students FROM courses GROUP BY title;</pre></details></li></ol>
+      <p><a class="btn primary sm" href="practice/">Practise this in the lab</a></p>
+      <div class="study-box recap"><b>Remember</b><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>A table is rows and columns; SQL describes the rows you want.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>SELECT columns FROM table WHERE condition ORDER BY column LIMIT n;</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>GROUP BY makes one row per group; JOIN … ON connects tables through ids.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>No WHERE on UPDATE or DELETE means every row.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Never glue user input into SQL — use placeholders.</span></li></ul></div></div>
+      <nav class="adoc-nav">
+        <a class="adoc-navbtn prev" href="en/bash-scripting/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span><small>Previous</small><b>Automate with Bash scripts</b></span></a>
+        <a class="adoc-navbtn next" href="en/build-a-tool/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span><small>Next</small><b>A real project: build a tool from start to finish</b></span></a>
+      </nav>
+      <a class="btn adoc-back" href="index.html#articles"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span>All articles</span></a>
+    </article>
+  </main>
+
+  <footer class="site-footer" id="site-footer"><div class="wrap">
+      <div class="foot-grid"><nav class="foot-col"><h4>Quick links</h4><ul><li><a href="index.html#tracks"><bdi>Tracks</bdi></a></li><li><a href="index.html#articles"><bdi>Articles</bdi></a></li><li><a href="index.html#library"><bdi>Books</bdi></a></li><li><a href="index.html#portfolio"><bdi>Tools</bdi></a></li><li><a href="index.html#lab"><bdi>Lab</bdi></a></li><li><a href="resume.html"><bdi>Résumé</bdi></a></li><li><a href="resume.html#contact"><bdi>Contact</bdi></a></li></ul></nav><nav class="foot-col"><h4>Learning topics</h4><ul><li><a href="index.html#topic/linux"><bdi>Linux</bdi></a></li><li><a href="index.html#topic/programming"><bdi>Programming</bdi></a></li><li><a href="index.html#topic/network"><bdi>Networking</bdi></a></li><li><a href="index.html#topic/security"><bdi>Security</bdi></a></li></ul></nav><nav class="foot-col"><h4>Latest articles</h4><ul><li><a href="en/authorised-testing/"><bdi>Authorised security testing: thinking like an attacker, legally</bdi></a></li><li><a href="en/firewalls-hardening/"><bdi>Firewalls and hardening</bdi></a></li><li><a href="en/reading-logs/"><bdi>Reading logs: finding an attack in the noise</bdi></a></li><li><a href="en/security-mindset/"><bdi>The security mindset</bdi></a></li></ul></nav><nav class="foot-col"><h4>Certificates</h4><ul><li><a href="resume.html#certifications"><bdi>Cyber Security Pack</bdi></a></li><li><a href="resume.html#certifications"><bdi>F5 Package</bdi></a></li><li><a href="resume.html#certifications"><bdi>Security+</bdi></a></li><li><a href="resume.html#certifications"><bdi>Cisco CCNA 200-301</bdi></a></li><li><a href="resume.html#certifications"><bdi>Duolingo English Test</bdi></a></li></ul></nav></div>
+      <div class="foot-card">
+        <a class="foot-id" href="resume.html">
+          <span class="foot-badge"><img src="assets/photo.jpg" alt="Sepehr Niaz" loading="lazy"></span>
+          <span class="foot-name"><b>Sepehr Niaz</b><small>IT Technician · Network &amp; Security</small></span>
+        </a>
+        <p class="foot-tag">IT technician in Shiraz. I write free, practical lessons on networking, security and Linux — and I'm available for IT and network work.</p>
+        <div class="foot-social"><a href="mailto:niazsepehr7@gmail.com" aria-label="Email" title="Email"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 5L2 7"></path></svg></a><a href="tel:+989177886291" aria-label="Call" title="Call"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a><a href="https://wa.me/989177886291" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg></a><a href="https://github.com/sepehrniaz" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a></div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 Sepehr Niaz · Shiraz, Iran</span>
+        <a href="tel:+989177886291">Phone: <bdi dir="ltr">0917 788 6291</bdi></a>
+      </div>
+    </div></footer>
+
+  <script src="config.js"></script>
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+  <script src="bot/nlu.js"></script>
+  <script src="bot/knowledge.js"></script>
+  <script src="bot/teacher.js"></script>
+  <script src="bot/engine.js"></script>
+  <script src="bot/guide.js"></script>
+  <script src="assistant.js"></script>
+</body></html>

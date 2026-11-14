@@ -109,6 +109,60 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://sepehrniaz.ir/fa/linux-text-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/linux-text-tools/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/linux-text-tools/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/linux-text-tools/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/en/linux-text-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/linux-text-tools/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/linux-text-tools/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/linux-text-tools/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/fa/linux-server/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/linux-server/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/linux-server/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/linux-server/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/en/linux-server/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/linux-server/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/linux-server/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/linux-server/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/fa/python-from-zero/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/python-from-zero/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/python-from-zero/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/python-from-zero/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/en/python-from-zero/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/python-from-zero/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/python-from-zero/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/python-from-zero/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://sepehrniaz.ir/fa/python-10-minutes/</loc>
     <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/python-10-minutes/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/python-10-minutes/"/>
@@ -163,6 +217,42 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://sepehrniaz.ir/fa/sql-from-zero/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/sql-from-zero/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/sql-from-zero/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/sql-from-zero/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/en/sql-from-zero/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/sql-from-zero/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/sql-from-zero/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/sql-from-zero/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/fa/build-a-tool/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/build-a-tool/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/build-a-tool/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/build-a-tool/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/en/build-a-tool/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/build-a-tool/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/build-a-tool/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/build-a-tool/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://sepehrniaz.ir/fa/what-is-ip/</loc>
     <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/what-is-ip/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/what-is-ip/"/>
@@ -181,6 +271,96 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://sepehrniaz.ir/fa/subnetting/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/subnetting/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/subnetting/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/subnetting/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/en/subnetting/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/subnetting/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/subnetting/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/subnetting/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/fa/how-data-travels/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/how-data-travels/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/how-data-travels/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/how-data-travels/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/en/how-data-travels/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/how-data-travels/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/how-data-travels/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/how-data-travels/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/fa/ports-and-protocols/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/ports-and-protocols/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/ports-and-protocols/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/ports-and-protocols/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/en/ports-and-protocols/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/ports-and-protocols/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/ports-and-protocols/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/ports-and-protocols/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/fa/network-troubleshooting/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/network-troubleshooting/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/network-troubleshooting/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/network-troubleshooting/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/en/network-troubleshooting/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/network-troubleshooting/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/network-troubleshooting/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/network-troubleshooting/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/fa/switching-vlans/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/switching-vlans/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/switching-vlans/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/switching-vlans/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/en/switching-vlans/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/switching-vlans/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/switching-vlans/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/switching-vlans/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://sepehrniaz.ir/fa/security-mindset/</loc>
     <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/security-mindset/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/security-mindset/"/>
@@ -194,6 +374,60 @@
     <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/security-mindset/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/security-mindset/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/security-mindset/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/fa/reading-logs/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/reading-logs/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/reading-logs/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/reading-logs/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/en/reading-logs/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/reading-logs/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/reading-logs/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/reading-logs/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/fa/firewalls-hardening/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/firewalls-hardening/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/firewalls-hardening/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/firewalls-hardening/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/en/firewalls-hardening/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/firewalls-hardening/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/firewalls-hardening/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/firewalls-hardening/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/fa/authorised-testing/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/authorised-testing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/authorised-testing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/authorised-testing/"/>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sepehrniaz.ir/en/authorised-testing/</loc>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/authorised-testing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/authorised-testing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/authorised-testing/"/>
     <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

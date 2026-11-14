@@ -352,6 +352,7 @@
         if (b.h) { steps.push(cur); cur = { title: tr(b.h), parts: [], code: null }; continue; }
         if (b.p) cur.parts.push(tr(b.p));
         else if (b.list) cur.parts.push((tr(b.list) || []).map((x) => "• " + x).join("\n"));
+        else if (b.table) cur.parts.push(b.table.rows.map((r) => "• " + r.map((x) => (typeof x === "string" ? x : tr(x))).join(" — ")).join("\n"));
         else if (b.note) cur.parts.push((b.kind === "warn" ? "⚠️ " : "💡 ") + tr(b.note));
         else if (b.code || b.term) {
           const code = String(b.code || b.term).split("\n").slice(0, 14).join("\n");

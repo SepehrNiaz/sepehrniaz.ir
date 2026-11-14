@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en" dir="ltr"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="../../">
+  <title>Switching and VLANs — Sepehr Niaz</title>
+  <meta name="description" content="How to split one set of switches into several separate networks, what access and trunk ports are, and the security settings every switch should have — with Cisco commands.">
+  <meta name="author" content="Sepehr Niaz">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sepehrniaz.ir/en/switching-vlans/">
+  <link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/switching-vlans/">
+  <link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/switching-vlans/">
+  <link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/switching-vlans/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/photo.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://sepehrniaz.ir/en/switching-vlans/">
+  <meta property="og:site_name" content="Sepehr Niaz">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Switching and VLANs">
+  <meta property="og:description" content="How to split one set of switches into several separate networks, what access and trunk ports are, and the security settings every switch should have — with Cisco commands.">
+  <meta property="og:image" content="https://sepehrniaz.ir/assets/og-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#070b14">
+  <script type="application/ld+json">[{"@context":"https://schema.org","@type":"TechArticle","headline":"Switching and VLANs","description":"How to split one set of switches into several separate networks, what access and trunk ports are, and the security settings every switch should have — with Cisco commands.","inLanguage":"en","url":"https://sepehrniaz.ir/en/switching-vlans/","mainEntityOfPage":"https://sepehrniaz.ir/en/switching-vlans/","image":"https://sepehrniaz.ir/assets/og-card.jpg","author":{"@type":"Person","name":"Sepehr Niaz","alternateName":"سپهر نیاز","url":"https://sepehrniaz.ir/resume"},"publisher":{"@type":"Person","name":"Sepehr Niaz","url":"https://sepehrniaz.ir/"},"datePublished":"2026-11-01","dateModified":"2026-11-01","timeRequired":"PT26M"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Learn","item":"https://sepehrniaz.ir/"},{"@type":"ListItem","position":2,"name":"Networking","item":"https://sepehrniaz.ir/#articles"},{"@type":"ListItem","position":3,"name":"Switching and VLANs","item":"https://sepehrniaz.ir/en/switching-vlans/"}]}]</script>
+  <script>
+    (function () {
+      var d = document.documentElement;
+      try { var t = localStorage.getItem("theme"); if (t) d.dataset.theme = t; localStorage.setItem("lang", d.lang); } catch (e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Vazirmatn:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body data-page="article" data-article="switching-vlans">
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="logo" id="logo"></a>
+      <div class="nav-links">
+        <a href="index.html#tracks" data-i18n="navTracks">Tracks</a>
+        <a href="index.html#articles" data-i18n="navArticles">Articles</a>
+        <a href="index.html#lab" data-i18n="navLab">Lab</a>
+        <a href="index.html#library" data-i18n="navBooks">Books</a>
+        <a href="index.html#portfolio" data-i18n="navTools">Tools</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn lang-btn" id="lang-toggle">فا</button>
+        <button class="icon-btn" id="theme-toggle"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></button>
+        <a href="resume.html" class="btn primary sm" data-i18n="navResume">Résumé</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="article-main">
+    <article class="wrap adoc-body adoc-page">
+      <nav class="crumbs" aria-label="breadcrumb">
+        <a href="index.html">Learn</a><span aria-hidden="true">/</span>
+        <a href="index.html#topic/network">Networking</a>
+      </nav>
+      <div class="adoc-hero"><img class="adoc-logo" src="assets/learn/logos/network.svg" alt="" width="88" height="88"><div>
+      <p class="adoc-kick">Intermediate · 26 min read · Updated 2026-11</p>
+      <h1>Switching and VLANs</h1></div></div>
+      <p class="adoc-summary">How to split one set of switches into several separate networks, what access and trunk ports are, and the security settings every switch should have — with Cisco commands.</p>
+      <div class="adoc-content"><div class="study-box goals"><b>After this lesson you can</b><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Explain what a VLAN is and why it is used</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Tell an access port from a trunk port and configure both</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Describe how VLANs reach each other and list the basic security settings of a switch</span></li></ul></div><h2>The problem VLANs solve</h2><p>A hotel wants guests, staff computers and cameras on separate networks, so that a guest can never reach the accounting server. The obvious way would be three sets of switches and three sets of cables — three times the cost. A VLAN (virtual LAN) does the same with one set: you tell the switch 'ports 1 to 12 are network 10, ports 13 to 20 are network 20', and it treats them as if they were different switches. A device in VLAN 10 cannot even see a device in VLAN 20; traffic between them must go through a router or firewall, where you decide what is allowed.</p><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Security: groups that should not reach each other are separated.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Less noise: broadcasts stay inside their own VLAN.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Flexibility: moving a person to another department is a setting, not a new cable.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Each VLAN is its own IP network, with its own subnet and gateway — VLAN 10 might be 192.168.10.0/24 and VLAN 20 192.168.20.0/24.</span></li></ul><h2>Access ports and trunk ports</h2><p>A switch port is one of two kinds. An access port belongs to exactly one VLAN and is where an ordinary device plugs in — a PC, a printer, a camera. The device knows nothing about VLANs. A trunk port carries many VLANs at once and connects switches to each other, or a switch to a router. To keep the VLANs apart on that shared cable, the switch adds a small label to every frame saying which VLAN it belongs to. The standard for that label is called 802.1Q, and the label is called a tag.</p><div class="doc-table"><table><thead><tr><th></th><th>Access port</th><th>Trunk port</th></tr></thead><tbody><tr><td>Carries</td><td>one VLAN</td><td>many VLANs</td></tr><tr><td>Frames are</td><td>untagged</td><td>tagged (802.1Q)</td></tr><tr><td>Connects to</td><td>PCs, printers, cameras</td><td>switches, routers, access points</td></tr></tbody></table></div><h2>Configuring it on a Cisco switch</h2><p>Cisco's command line has levels. You start in user mode (the prompt ends with &gt;). enable takes you to privileged mode (#), where you can look at everything. configure terminal takes you to configuration mode, where you change things. Commands can be shortened as long as they stay unique, and a question mark shows what you may type next.</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">cisco</span><button type="button" class="doc-copy" data-code="Switch%3E%20enable%0ASwitch%23%20configure%20terminal%0A%0A!%201.%20create%20the%20VLANs%20and%20name%20them%0ASwitch(config)%23%20vlan%2010%0ASwitch(config-vlan)%23%20name%20STAFF%0ASwitch(config-vlan)%23%20vlan%2020%0ASwitch(config-vlan)%23%20name%20GUESTS%0ASwitch(config-vlan)%23%20exit%0A%0A!%202.%20put%20ports%201-12%20in%20VLAN%2010%20as%20access%20ports%0ASwitch(config)%23%20interface%20range%20GigabitEthernet1%2F0%2F1%20-%2012%0ASwitch(config-if-range)%23%20switchport%20mode%20access%0ASwitch(config-if-range)%23%20switchport%20access%20vlan%2010%0ASwitch(config-if-range)%23%20exit%0A%0A!%203.%20make%20port%2024%20a%20trunk%20to%20the%20next%20switch%0ASwitch(config)%23%20interface%20GigabitEthernet1%2F0%2F24%0ASwitch(config-if)%23%20switchport%20mode%20trunk%0ASwitch(config-if)%23%20switchport%20trunk%20allowed%20vlan%2010%2C20%0ASwitch(config-if)%23%20end%0A%0A!%204.%20look%2C%20then%20save%0ASwitch%23%20show%20vlan%20brief%0ASwitch%23%20show%20interfaces%20trunk%0ASwitch%23%20copy%20running-config%20startup-config"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button></div><pre dir="ltr"><code>Switch&gt; enable
+Switch# configure terminal
+
+! 1. create the VLANs and name them
+Switch(config)# vlan 10
+Switch(config-vlan)# name STAFF
+Switch(config-vlan)# vlan 20
+Switch(config-vlan)# name GUESTS
+Switch(config-vlan)# exit
+
+! 2. put ports 1-12 in VLAN 10 as access ports
+Switch(config)# interface range GigabitEthernet1/0/1 - 12
+Switch(config-if-range)# switchport mode access
+Switch(config-if-range)# switchport access vlan 10
+Switch(config-if-range)# exit
+
+! 3. make port 24 a trunk to the next switch
+Switch(config)# interface GigabitEthernet1/0/24
+Switch(config-if)# switchport mode trunk
+Switch(config-if)# switchport trunk allowed vlan 10,20
+Switch(config-if)# end
+
+! 4. look, then save
+Switch# show vlan brief
+Switch# show interfaces trunk
+Switch# copy running-config startup-config</code></pre><figcaption>Lines starting with ! are comments. The last command saves the configuration; without it everything is lost when the switch restarts.</figcaption></figure><h2>Letting VLANs talk: inter-VLAN routing</h2><p>Separate VLANs are separate networks, so only a router can pass traffic between them. There are two common designs. In 'router on a stick', one trunk cable runs to a router that has a virtual interface for each VLAN. In a layer 3 switch, the switch itself has an address in each VLAN and routes between them, which is faster and is what most offices use today. Either way, that address becomes the default gateway of the devices in that VLAN — and the place where you put rules such as 'guests may reach the internet but not the staff network'.</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">cisco</span><button type="button" class="doc-copy" data-code="!%20on%20a%20layer%203%20switch%0ASwitch(config)%23%20ip%20routing%0ASwitch(config)%23%20interface%20vlan%2010%0ASwitch(config-if)%23%20ip%20address%20192.168.10.1%20255.255.255.0%0ASwitch(config-if)%23%20no%20shutdown%0ASwitch(config)%23%20interface%20vlan%2020%0ASwitch(config-if)%23%20ip%20address%20192.168.20.1%20255.255.255.0%0ASwitch(config-if)%23%20no%20shutdown"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button></div><pre dir="ltr"><code>! on a layer 3 switch
+Switch(config)# ip routing
+Switch(config)# interface vlan 10
+Switch(config-if)# ip address 192.168.10.1 255.255.255.0
+Switch(config-if)# no shutdown
+Switch(config)# interface vlan 20
+Switch(config-if)# ip address 192.168.20.1 255.255.255.0
+Switch(config-if)# no shutdown</code></pre></figure><h2>Loops and the spanning tree</h2><p>Networks often have spare cables between switches so that one broken link does not cut off a floor. But two paths between the same switches form a loop, and a broadcast frame would circle it forever, multiplying until the network stops within seconds — a broadcast storm. The Spanning Tree Protocol (STP) prevents this automatically: the switches talk to each other, find the loops and block the spare links, opening them again only if the main link fails. It is on by default. Leave it on.</p><h2>Security settings every switch should have</h2><div class="doc-table"><table><thead><tr><th>Setting</th><th>What it stops</th></tr></thead><tbody><tr><td dir="ltr"><code>Port security</code></td><td>Someone unplugging a PC and connecting their own device or a small switch</td></tr><tr><td dir="ltr"><code>BPDU Guard</code></td><td>A switch plugged into an access port and disturbing the spanning tree</td></tr><tr><td dir="ltr"><code>DHCP snooping</code></td><td>A fake DHCP server handing out wrong settings</td></tr><tr><td dir="ltr"><code>Storm control</code></td><td>A broadcast storm taking the whole network down</td></tr><tr><td>Unused ports shut down</td><td>A visitor plugging into an empty wall socket</td></tr><tr><td>SSH instead of Telnet</td><td>The admin password being read off the network</td></tr><tr><td>A native VLAN nobody uses</td><td>VLAN hopping attacks through the trunk</td></tr></tbody></table></div><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">cisco</span><button type="button" class="doc-copy" data-code="Switch(config)%23%20interface%20range%20GigabitEthernet1%2F0%2F1%20-%2012%0ASwitch(config-if-range)%23%20switchport%20port-security%0ASwitch(config-if-range)%23%20switchport%20port-security%20maximum%202%0ASwitch(config-if-range)%23%20switchport%20port-security%20violation%20restrict%0ASwitch(config-if-range)%23%20spanning-tree%20portfast%0ASwitch(config-if-range)%23%20spanning-tree%20bpduguard%20enable%0ASwitch(config-if-range)%23%20storm-control%20broadcast%20level%205.00%0A%0ASwitch(config)%23%20interface%20range%20GigabitEthernet1%2F0%2F21%20-%2023%0ASwitch(config-if-range)%23%20shutdown"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button></div><pre dir="ltr"><code>Switch(config)# interface range GigabitEthernet1/0/1 - 12
+Switch(config-if-range)# switchport port-security
+Switch(config-if-range)# switchport port-security maximum 2
+Switch(config-if-range)# switchport port-security violation restrict
+Switch(config-if-range)# spanning-tree portfast
+Switch(config-if-range)# spanning-tree bpduguard enable
+Switch(config-if-range)# storm-control broadcast level 5.00
+
+Switch(config)# interface range GigabitEthernet1/0/21 - 23
+Switch(config-if-range)# shutdown</code></pre><figcaption>Typing this for every switch by hand is slow and error-prone. The Cisco Config Generator in the Tools section writes the whole file from a short description — its build tutorial shows how.</figcaption></figure><h2>A plan before the first command</h2><div class="doc-table"><table><thead><tr><th>VLAN</th><th>Name</th><th>Subnet</th><th>Gateway</th><th>Who</th></tr></thead><tbody><tr><td dir="ltr"><code>10</code></td><td dir="ltr"><code>STAFF</code></td><td dir="ltr"><code>192.168.10.0/24</code></td><td dir="ltr"><code>192.168.10.1</code></td><td>Office computers</td></tr><tr><td dir="ltr"><code>20</code></td><td dir="ltr"><code>GUESTS</code></td><td dir="ltr"><code>192.168.20.0/23</code></td><td dir="ltr"><code>192.168.20.1</code></td><td>Guest Wi-Fi, internet only</td></tr><tr><td dir="ltr"><code>30</code></td><td dir="ltr"><code>CAMERAS</code></td><td dir="ltr"><code>192.168.30.0/26</code></td><td dir="ltr"><code>192.168.30.1</code></td><td>Cameras and the recorder</td></tr><tr><td dir="ltr"><code>40</code></td><td dir="ltr"><code>VOICE</code></td><td dir="ltr"><code>192.168.40.0/24</code></td><td dir="ltr"><code>192.168.40.1</code></td><td>IP phones</td></tr><tr><td dir="ltr"><code>99</code></td><td dir="ltr"><code>MGMT</code></td><td dir="ltr"><code>192.168.99.0/27</code></td><td dir="ltr"><code>192.168.99.1</code></td><td>Switch and router management</td></tr></tbody></table></div><p>This table is the real work; the commands only write it down. It is also the level of the CCNA exam: if you can design this table, configure it and explain why each line is there, you are working as a network technician.</p><h2>Common mistakes</h2><ul class="doc-list study-bad"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>Forgetting to save: copy running-config startup-config.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>A VLAN that exists on one switch but is not allowed on the trunk between them.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>Leaving users in VLAN 1, the default that every port starts in.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>Turning spanning tree off 'to speed things up'.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>Putting two VLANs in the same IP subnet.</span></li></ul>
+      <h2>Exercises</h2><p>Try each one yourself first, then open the answer.</p><ol class="study-q"><li><p>A PC in VLAN 10 cannot ping a PC in VLAN 20 on the same switch. Is that a fault?</p><details><summary>Show the answer</summary><pre dir="auto">No — it is the purpose of VLANs. They can only talk through a router or a layer 3 switch.</pre></details></li><li><p>Write the commands that put port Gi1/0/5 in VLAN 30 as an access port.</p><details><summary>Show the answer</summary><pre dir="auto">interface GigabitEthernet1/0/5
+ switchport mode access
+ switchport access vlan 30</pre></details></li><li><p>Which kind of port connects two switches, and what does it add to each frame?</p><details><summary>Show the answer</summary><pre dir="auto">A trunk port. It adds an 802.1Q tag with the VLAN number.</pre></details></li><li><p>Someone plugs a home router into a wall socket and people start getting wrong addresses. Which switch feature prevents this?</p><details><summary>Show the answer</summary><pre dir="auto">DHCP snooping: only ports marked as trusted may send DHCP offers.</pre></details></li></ol>
+      <p><a class="btn primary sm" href="practice/">Practise this in the lab</a></p>
+      <div class="study-box recap"><b>Remember</b><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>A VLAN is a separate network on shared switches.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Access port: one VLAN, for devices. Trunk port: many VLANs, tagged, between switches.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>VLANs meet only at a router or layer 3 switch.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Keep spanning tree on, shut unused ports, save the configuration.</span></li></ul></div></div>
+      <nav class="adoc-nav">
+        <a class="adoc-navbtn prev" href="en/network-troubleshooting/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span><small>Previous</small><b>Network troubleshooting: a method that always works</b></span></a>
+        <span></span>
+      </nav>
+      <a class="btn adoc-back" href="index.html#articles"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span>All articles</span></a>
+    </article>
+  </main>
+
+  <footer class="site-footer" id="site-footer"><div class="wrap">
+      <div class="foot-grid"><nav class="foot-col"><h4>Quick links</h4><ul><li><a href="index.html#tracks"><bdi>Tracks</bdi></a></li><li><a href="index.html#articles"><bdi>Articles</bdi></a></li><li><a href="index.html#library"><bdi>Books</bdi></a></li><li><a href="index.html#portfolio"><bdi>Tools</bdi></a></li><li><a href="index.html#lab"><bdi>Lab</bdi></a></li><li><a href="resume.html"><bdi>Résumé</bdi></a></li><li><a href="resume.html#contact"><bdi>Contact</bdi></a></li></ul></nav><nav class="foot-col"><h4>Learning topics</h4><ul><li><a href="index.html#topic/linux"><bdi>Linux</bdi></a></li><li><a href="index.html#topic/programming"><bdi>Programming</bdi></a></li><li><a href="index.html#topic/network"><bdi>Networking</bdi></a></li><li><a href="index.html#topic/security"><bdi>Security</bdi></a></li></ul></nav><nav class="foot-col"><h4>Latest articles</h4><ul><li><a href="en/authorised-testing/"><bdi>Authorised security testing: thinking like an attacker, legally</bdi></a></li><li><a href="en/firewalls-hardening/"><bdi>Firewalls and hardening</bdi></a></li><li><a href="en/reading-logs/"><bdi>Reading logs: finding an attack in the noise</bdi></a></li><li><a href="en/security-mindset/"><bdi>The security mindset</bdi></a></li></ul></nav><nav class="foot-col"><h4>Certificates</h4><ul><li><a href="resume.html#certifications"><bdi>Cyber Security Pack</bdi></a></li><li><a href="resume.html#certifications"><bdi>F5 Package</bdi></a></li><li><a href="resume.html#certifications"><bdi>Security+</bdi></a></li><li><a href="resume.html#certifications"><bdi>Cisco CCNA 200-301</bdi></a></li><li><a href="resume.html#certifications"><bdi>Duolingo English Test</bdi></a></li></ul></nav></div>
+      <div class="foot-card">
+        <a class="foot-id" href="resume.html">
+          <span class="foot-badge"><img src="assets/photo.jpg" alt="Sepehr Niaz" loading="lazy"></span>
+          <span class="foot-name"><b>Sepehr Niaz</b><small>IT Technician · Network &amp; Security</small></span>
+        </a>
+        <p class="foot-tag">IT technician in Shiraz. I write free, practical lessons on networking, security and Linux — and I'm available for IT and network work.</p>
+        <div class="foot-social"><a href="mailto:niazsepehr7@gmail.com" aria-label="Email" title="Email"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 5L2 7"></path></svg></a><a href="tel:+989177886291" aria-label="Call" title="Call"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a><a href="https://wa.me/989177886291" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg></a><a href="https://github.com/sepehrniaz" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a></div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 Sepehr Niaz · Shiraz, Iran</span>
+        <a href="tel:+989177886291">Phone: <bdi dir="ltr">0917 788 6291</bdi></a>
+      </div>
+    </div></footer>
+
+  <script src="config.js"></script>
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+  <script src="bot/nlu.js"></script>
+  <script src="bot/knowledge.js"></script>
+  <script src="bot/teacher.js"></script>
+  <script src="bot/engine.js"></script>
+  <script src="bot/guide.js"></script>
+  <script src="assistant.js"></script>
+</body></html>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Network diagram">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#6366f1"/></linearGradient>
+  </defs>
+  <g fill="none" stroke="#7dd3fc" stroke-width="5" stroke-linecap="round">
+    <path d="M120 62v38M120 140v22M120 162H48v20M120 162h72v20M120 162v20"/>
+  </g>
+  <!-- internet -->
+  <circle cx="120" cy="38" r="26" fill="url(#g)"/>
+  <g fill="none" stroke="#fff" stroke-width="3.5"><circle cx="120" cy="38" r="15"/><path d="M105 38h30M120 23c-8 8-8 22 0 30M120 23c8 8 8 22 0 30"/></g>
+  <!-- router -->
+  <rect x="72" y="100" width="96" height="40" rx="10" fill="#0f172a" stroke="url(#g)" stroke-width="5"/>
+  <circle cx="92" cy="120" r="5" fill="#34d399"/><circle cx="110" cy="120" r="5" fill="#34d399"/><circle cx="128" cy="120" r="5" fill="#fbbf24"/>
+  <path d="M142 120h14" stroke="#7dd3fc" stroke-width="5" stroke-linecap="round"/>
+  <!-- devices -->
+  <g fill="#0f172a" stroke="url(#g)" stroke-width="5">
+    <rect x="22" y="182" width="52" height="36" rx="6"/>
+    <rect x="94" y="182" width="52" height="36" rx="6"/>
+    <rect x="166" y="182" width="52" height="36" rx="6"/>
+  </g>
+  <g fill="#7dd3fc"><rect x="34" y="226" width="28" height="5" rx="2.5"/><rect x="106" y="226" width="28" height="5" rx="2.5"/><rect x="178" y="226" width="28" height="5" rx="2.5"/></g>
+</svg>

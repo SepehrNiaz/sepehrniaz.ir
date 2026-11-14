@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="fa" dir="rtl"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="../../">
+  <title>یک پروژه‌ی واقعی: ساختن یک ابزار از اول تا آخر — سپهر نیاز</title>
+  <meta name="description" content="برنامه‌نویس چطور یک مسئله را به ابزاری کامل تبدیل می‌کند: توصیف مسئله، تقسیم به تابع‌های کوچک، آزمایش هر کدام، مدیریت خطا و افزودن خط فرمان.">
+  <meta name="author" content="Sepehr Niaz">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sepehrniaz.ir/fa/build-a-tool/">
+  <link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/build-a-tool/">
+  <link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/build-a-tool/">
+  <link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/build-a-tool/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/photo.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://sepehrniaz.ir/fa/build-a-tool/">
+  <meta property="og:site_name" content="Sepehr Niaz">
+  <meta property="og:locale" content="fa_IR">
+  <meta property="og:title" content="یک پروژه‌ی واقعی: ساختن یک ابزار از اول تا آخر">
+  <meta property="og:description" content="برنامه‌نویس چطور یک مسئله را به ابزاری کامل تبدیل می‌کند: توصیف مسئله، تقسیم به تابع‌های کوچک، آزمایش هر کدام، مدیریت خطا و افزودن خط فرمان.">
+  <meta property="og:image" content="https://sepehrniaz.ir/assets/og-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#070b14">
+  <script type="application/ld+json">[{"@context":"https://schema.org","@type":"TechArticle","headline":"یک پروژه‌ی واقعی: ساختن یک ابزار از اول تا آخر","description":"برنامه‌نویس چطور یک مسئله را به ابزاری کامل تبدیل می‌کند: توصیف مسئله، تقسیم به تابع‌های کوچک، آزمایش هر کدام، مدیریت خطا و افزودن خط فرمان.","inLanguage":"fa","url":"https://sepehrniaz.ir/fa/build-a-tool/","mainEntityOfPage":"https://sepehrniaz.ir/fa/build-a-tool/","image":"https://sepehrniaz.ir/assets/og-card.jpg","author":{"@type":"Person","name":"Sepehr Niaz","alternateName":"سپهر نیاز","url":"https://sepehrniaz.ir/resume"},"publisher":{"@type":"Person","name":"Sepehr Niaz","url":"https://sepehrniaz.ir/"},"datePublished":"2026-11-01","dateModified":"2026-11-01","timeRequired":"PT24M"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"آموزش","item":"https://sepehrniaz.ir/"},{"@type":"ListItem","position":2,"name":"برنامه‌نویسی","item":"https://sepehrniaz.ir/#articles"},{"@type":"ListItem","position":3,"name":"یک پروژه‌ی واقعی: ساختن یک ابزار از اول تا آخر","item":"https://sepehrniaz.ir/fa/build-a-tool/"}]}]</script>
+  <script>
+    (function () {
+      var d = document.documentElement;
+      try { var t = localStorage.getItem("theme"); if (t) d.dataset.theme = t; localStorage.setItem("lang", d.lang); } catch (e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Vazirmatn:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body data-page="article" data-article="build-a-tool">
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="logo" id="logo"></a>
+      <div class="nav-links">
+        <a href="index.html#tracks" data-i18n="navTracks">مسیرها</a>
+        <a href="index.html#articles" data-i18n="navArticles">مقاله‌ها</a>
+        <a href="index.html#lab" data-i18n="navLab">آزمایشگاه</a>
+        <a href="index.html#library" data-i18n="navBooks">کتاب‌ها</a>
+        <a href="index.html#portfolio" data-i18n="navTools">ابزارها</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn lang-btn" id="lang-toggle">EN</button>
+        <button class="icon-btn" id="theme-toggle"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></button>
+        <a href="resume.html" class="btn primary sm" data-i18n="navResume">رزومه</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="article-main">
+    <article class="wrap adoc-body adoc-page">
+      <nav class="crumbs" aria-label="breadcrumb">
+        <a href="index.html">آموزش</a><span aria-hidden="true">/</span>
+        <a href="index.html#topic/programming">برنامه‌نویسی</a>
+      </nav>
+      <div class="adoc-hero"><img class="adoc-logo" src="assets/learn/logos/python.svg" alt="" width="88" height="88"><div>
+      <p class="adoc-kick">متوسط · ۲۴ دقیقه مطالعه · به‌روزرسانی ۲۰۲۶-۱۱</p>
+      <h1>یک پروژه‌ی واقعی: ساختن یک ابزار از اول تا آخر</h1></div></div>
+      <p class="adoc-summary">برنامه‌نویس چطور یک مسئله را به ابزاری کامل تبدیل می‌کند: توصیف مسئله، تقسیم به تابع‌های کوچک، آزمایش هر کدام، مدیریت خطا و افزودن خط فرمان.</p>
+      <div class="adoc-content"><div class="study-box goals"><b>بعد از این درس می‌توانی</b><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>قبل از کدنویسی ابزار را در یک پاراگراف توصیف کنی</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>مسئله را به تابع‌های کوچک تقسیم کنی و هر کدام را همان‌جا آزمایش کنی</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>ورودی اشتباه را مدیریت کنی، گزینه‌ی خط فرمان اضافه کنی و اولین آزمون را بنویسی</span></li></ul></div><h2>از تمرین تا برنامه‌ی واقعی</h2><p>تمرین‌ها کلمه‌های یک زبان را یاد می‌دهند. پروژه فکرکردن را یاد می‌دهد: وقتی صفحه خالی است از کجا شروع کنی، برنامه‌ای را که بزرگ می‌شود چطور مهار کنی و از کجا بدانی کار می‌کند. روش پایین همان روشی است که پشت هر شش ابزار بخش «ابزارها» است. با آن یک ابزار کوچک ولی واقعاً مفید می‌سازیم — اسکریپتی که بررسی می‌کند کدام دستگاه‌های یک فهرست در دسترس‌اند — و بعد می‌توانی برای هر ایده‌ی خودت تکرارش کنی.</p><h2>قدم ۱ — مسئله را در یک پاراگراف بنویس</h2><p>قبل از هر کدی، با کلمه‌های ساده بنویس ابزار چه می‌کند، از جمله اینکه چه چیزی وارد و چه چیزی خارج می‌شود. اگر نمی‌توانی این پاراگراف را بنویسی، هنوز آماده‌ی نوشتن برنامه نیستی.</p><div class="doc-note tip"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"></path></svg><div>«ابزار یک فایل متنی را می‌خواند که هر خطش یک دستگاه است (نام و آدرس). سعی می‌کند روی یک پورت مشخص به هر دستگاه وصل شود. برای هر دستگاه یک خط چاپ می‌کند — UP با زمان پاسخ، یا DOWN — و در آخر یک خلاصه. اگر چیزی قطع بود با کد ۱ خارج می‌شود تا اسکریپت‌های دیگر بتوانند واکنش نشان بدهند.»</div></div><h2>قدم ۲ — به کارهای کوچک تقسیمش کن</h2><p>پاراگراف را دوباره بخوان و زیر فعل‌ها خط بکش: می‌خواند، سعی می‌کند وصل شود، چاپ می‌کند، خلاصه می‌کند. هر فعل تابعی می‌شود با یک کار مشخص، ورودی مشخص و نتیجه‌ی مشخص. تابع خوب در یک صفحه جا می‌شود و در یک جمله توضیح داده می‌شود.</p><div class="doc-table"><table><thead><tr><th>تابع</th><th>می‌گیرد</th><th>برمی‌گرداند</th></tr></thead><tbody><tr><td dir="ltr"><code>load_devices(path)</code></td><td>نام فایل</td><td>لیستی از جفت‌های (نام، آدرس)</td></tr><tr><td dir="ltr"><code>check(address, port)</code></td><td>یک آدرس و یک پورت</td><td>زمان پاسخ، یا None اگر قطع بود</td></tr><tr><td dir="ltr"><code>report(results)</code></td><td>لیست نتیجه‌ها</td><td>جدول را چاپ می‌کند و تعداد قطعی‌ها را برمی‌گرداند</td></tr><tr><td dir="ltr"><code>main()</code></td><td>آرگومان‌های خط فرمان</td><td>بقیه را به ترتیب صدا می‌زند</td></tr></tbody></table></div><h2>قدم ۳ — یک تابع بساز و همان لحظه امتحانش کن</h2><p>هیچ‌وقت کل برنامه را ننویس که بعد برای اولین بار اجرایش کنی: بیست خطا می‌گیری و نمی‌دانی از کجا شروع کنی. یک تابع بنویس، با یک مقدار ساده صدایش بزن، نتیجه را ببین و فقط بعدش ادامه بده.</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="import%20socket%0Aimport%20time%0A%0Adef%20check(address%2C%20port%2C%20timeout%3D1.0)%3A%0A%20%20%20%20%22%22%22Return%20the%20response%20time%20in%20milliseconds%2C%20or%20None%20if%20unreachable.%22%22%22%0A%20%20%20%20start%20%3D%20time.perf_counter()%0A%20%20%20%20try%3A%0A%20%20%20%20%20%20%20%20with%20socket.create_connection((address%2C%20port)%2C%20timeout%3Dtimeout)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20(time.perf_counter()%20-%20start)%20*%201000%0A%20%20%20%20except%20OSError%3A%0A%20%20%20%20%20%20%20%20return%20None%0A%0A%23%20try%20it%20straight%20away%0Aprint(check(%22127.0.0.1%22%2C%2022))%0Aprint(check(%22192.0.2.1%22%2C%2022))%20%20%20%20%20%20%23%20an%20address%20that%20never%20answers"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code>import socket
+import time
+
+def check(address, port, timeout=1.0):
+    """Return the response time in milliseconds, or None if unreachable."""
+    start = time.perf_counter()
+    try:
+        with socket.create_connection((address, port), timeout=timeout):
+            return (time.perf_counter() - start) * 1000
+    except OSError:
+        return None
+
+# try it straight away
+print(check("127.0.0.1", 22))
+print(check("192.0.2.1", 22))      # an address that never answers</code></pre><figcaption>متن داخل سه نقل‌قول «Docstring» است: یک جمله که می‌گوید تابع چه می‌کند. try / except «اتصال برقرار نشد» را به‌جای ازکارافتادن برنامه به یک جواب معمولی تبدیل می‌کند.</figcaption></figure><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="def%20load_devices(path)%3A%0A%20%20%20%20%22%22%22Read%20'name%20address'%20lines%3B%20skip%20blank%20lines%20and%20%23%20comments.%22%22%22%0A%20%20%20%20devices%20%3D%20%5B%5D%0A%20%20%20%20with%20open(path)%20as%20f%3A%0A%20%20%20%20%20%20%20%20for%20line%20in%20f%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20line%20%3D%20line.strip()%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20not%20line%20or%20line.startswith(%22%23%22)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20continue%0A%20%20%20%20%20%20%20%20%20%20%20%20name%2C%20address%20%3D%20line.split()%0A%20%20%20%20%20%20%20%20%20%20%20%20devices.append((name%2C%20address))%0A%20%20%20%20return%20devices"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code>def load_devices(path):
+    """Read 'name address' lines; skip blank lines and # comments."""
+    devices = []
+    with open(path) as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            name, address = line.split()
+            devices.append((name, address))
+    return devices</code></pre></figure><h2>قدم ۴ — تکه‌ها را وصل کن</h2><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="def%20report(results)%3A%0A%20%20%20%20down%20%3D%200%0A%20%20%20%20for%20name%2C%20address%2C%20ms%20in%20results%3A%0A%20%20%20%20%20%20%20%20if%20ms%20is%20None%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20print(f%22%7Bname%3A15%7D%20%7Baddress%3A15%7D%20DOWN%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20down%20%2B%3D%201%0A%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20print(f%22%7Bname%3A15%7D%20%7Baddress%3A15%7D%20UP%20%20%20%7Bms%3A6.1f%7D%20ms%22)%0A%20%20%20%20print(f%22%7Blen(results)%20-%20down%7D%20up%2C%20%7Bdown%7D%20down%22)%0A%20%20%20%20return%20down%0A%0Adef%20main()%3A%0A%20%20%20%20devices%20%3D%20load_devices(%22devices.txt%22)%0A%20%20%20%20results%20%3D%20%5B(name%2C%20address%2C%20check(address%2C%2080))%20for%20name%2C%20address%20in%20devices%5D%0A%20%20%20%20down%20%3D%20report(results)%0A%20%20%20%20raise%20SystemExit(1%20if%20down%20else%200)%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20main()"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code>def report(results):
+    down = 0
+    for name, address, ms in results:
+        if ms is None:
+            print(f"{name:15} {address:15} DOWN")
+            down += 1
+        else:
+            print(f"{name:15} {address:15} UP   {ms:6.1f} ms")
+    print(f"{len(results) - down} up, {down} down")
+    return down
+
+def main():
+    devices = load_devices("devices.txt")
+    results = [(name, address, check(address, 80)) for name, address in devices]
+    down = report(results)
+    raise SystemExit(1 if down else 0)
+
+if __name__ == "__main__":
+    main()</code></pre><figcaption>دو خط آخر یعنی «main() را فقط وقتی اجرا کن که همین فایل مستقیم اجرا شده». این اجازه می‌دهد برنامه‌ی دیگری تابع‌هایت را import کند بدون اینکه کل ابزار راه بیفتد.</figcaption></figure><h2>قدم ۵ — انتظار خرابی را داشته باش</h2><p>برنامه‌ای که با ورودی بی‌نقص کار می‌کند نیمه‌تمام است. درباره‌ی هر ورودی بپرس: اگر نباشد، خالی باشد یا اشتباه باشد چه؟ بعد تصمیم بگیر برنامه چه بگوید. پیام خطای خوب مشکل را نام می‌برد و می‌گوید قدم بعدی چیست.</p><div class="doc-table"><table><thead><tr><th>اگر …</th><th>ابزار باید</th></tr></thead><tbody><tr><td>فایل وجود نداشته باشد؟</td><td>بگوید «devices.txt not found» و با کد ۲ خارج شود</td></tr><tr><td>خطی سه کلمه یا یک کلمه داشته باشد؟</td><td>شماره‌ی خط را بگوید و از آن رد شود</td></tr><tr><td>فهرست خالی باشد؟</td><td>همین را بگوید، به‌جای چاپ «0 up, 0 down»</td></tr><tr><td>دستگاهی یک دقیقه طول بکشد تا رد کند؟</td><td>بعد از مهلت تعیین‌شده منصرف شود</td></tr></tbody></table></div><h2>قدم ۶ — یک خط فرمان درست</h2><p>نام فایل و پورت داخل برنامه نوشته شده‌اند، پس عوض‌کردنشان یعنی ویرایش کد. ماژول argparse آن‌ها را به گزینه تبدیل می‌کند، بررسی‌شان می‌کند و متن --help را خودش می‌نویسد.</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="import%20argparse%0A%0Adef%20main()%3A%0A%20%20%20%20ap%20%3D%20argparse.ArgumentParser(description%3D%22Check%20which%20devices%20are%20reachable.%22)%0A%20%20%20%20ap.add_argument(%22file%22%2C%20help%3D%22text%20file%20with%20'name%20address'%20on%20each%20line%22)%0A%20%20%20%20ap.add_argument(%22-p%22%2C%20%22--port%22%2C%20type%3Dint%2C%20default%3D80)%0A%20%20%20%20ap.add_argument(%22-t%22%2C%20%22--timeout%22%2C%20type%3Dfloat%2C%20default%3D1.0)%0A%20%20%20%20args%20%3D%20ap.parse_args()%0A%0A%20%20%20%20devices%20%3D%20load_devices(args.file)%0A%20%20%20%20results%20%3D%20%5B(n%2C%20a%2C%20check(a%2C%20args.port%2C%20args.timeout))%20for%20n%2C%20a%20in%20devices%5D%0A%20%20%20%20raise%20SystemExit(1%20if%20report(results)%20else%200)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code>import argparse
+
+def main():
+    ap = argparse.ArgumentParser(description="Check which devices are reachable.")
+    ap.add_argument("file", help="text file with 'name address' on each line")
+    ap.add_argument("-p", "--port", type=int, default=80)
+    ap.add_argument("-t", "--timeout", type=float, default=1.0)
+    args = ap.parse_args()
+
+    devices = load_devices(args.file)
+    results = [(n, a, check(a, args.port, args.timeout)) for n, a in devices]
+    raise SystemExit(1 if report(results) else 0)</code></pre></figure><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">bash</span><button type="button" class="doc-copy" data-code="python3%20check.py%20devices.txt%0Apython3%20check.py%20devices.txt%20--port%2022%20--timeout%200.5%0Apython3%20check.py%20--help"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code>python3 check.py devices.txt
+python3 check.py devices.txt --port 22 --timeout 0.5
+python3 check.py --help</code></pre></figure><h2>قدم ۷ — آزمون‌هایی که کارت را برایت بررسی می‌کنند</h2><p>هر بار برنامه را تغییر می‌دهی ممکن است چیزی که قبلاً کار می‌کرد خراب شود. آزمون برنامه‌ی کوچکی است که یکی از تابع‌هایت را صدا می‌زند و جواب را با چیزی که انتظار داری مقایسه می‌کند. وقتی نوشته شد، صد آزمون هر بار در یک ثانیه اجرا می‌شوند و هیچ‌وقت خسته نمی‌شوند.</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="%23%20test_check.py%20%E2%80%94%20install%20once%3A%20%20pip%20install%20pytest%20%20%20then%20run%3A%20%20python3%20-m%20pytest%0Afrom%20check%20import%20load_devices%0A%0Adef%20test_skips_comments_and_blank_lines(tmp_path)%3A%0A%20%20%20%20f%20%3D%20tmp_path%20%2F%20%22d.txt%22%0A%20%20%20%20f.write_text(%22%23%20my%20devices%5Cn%5Cnrouter%20192.168.1.1%5Cnprinter%20192.168.1.9%5Cn%22)%0A%20%20%20%20assert%20load_devices(f)%20%3D%3D%20%5B(%22router%22%2C%20%22192.168.1.1%22)%2C%20(%22printer%22%2C%20%22192.168.1.9%22)%5D"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code># test_check.py — install once:  pip install pytest   then run:  python3 -m pytest
+from check import load_devices
+
+def test_skips_comments_and_blank_lines(tmp_path):
+    f = tmp_path / "d.txt"
+    f.write_text("# my devices\n\nrouter 192.168.1.1\nprinter 192.168.1.9\n")
+    assert load_devices(f) == [("router", "192.168.1.1"), ("printer", "192.168.1.9")]</code></pre><figcaption>assert یعنی «این باید درست باشد». اگر نبود، آزمون رد می‌شود و می‌گوید کدام خط. هر ابزار این سایت با آزمون‌هایی مثل این در پوشه‌ی tests خودش همراه است.</figcaption></figure><h2>قدم ۸ — قابل استفاده برای دیگران</h2><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>یک README ده‌خطی: چه می‌کند، چطور اجرا می‌شود و یک مثال با خروجی‌اش.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>اسم‌هایی که خودشان را توضیح بدهند و برای هر تابع یک Docstring.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>بدون رمز، آدرس مشتری واقعی یا مسیر شخصی در کد.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>حتی وقتی تنها کار می‌کنی نسخه‌ها را با git نگه دار: git init و بعد از هر قدمی که کار کرد git commit. این دکمه‌ی «برگرد» برای کل پروژه است.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>بعد قدم‌به‌قدم بهترش کن: دستگاه‌ها را هم‌زمان بررسی کن، نتیجه را HTML بنویس، وقتی چیزی قطع شد پیام بفرست. «مانیتورینگ تجهیزات شبکه» در بخش ابزارها دقیقاً از همین اسکریپت رشد کرده.</span></li></ul><h2>ایده برای اولین پروژه‌ی خودت</h2><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>عکس‌های یک پوشه را بر اساس تاریخ گرفتنشان تغییر نام بده.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>یک CSV از هزینه‌ها را بخوان و جمع هر ماه را چاپ کن.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>هر ساعت فهرستی از سایت‌ها را بررسی کن و بنویس کدام‌ها کندند.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>کلمه‌های یک کتاب را بشمار و بیست کلمه‌ی پرتکرار را نشان بده.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>فهرستی از نام‌ها و داخلی‌ها را به یک دفترچه‌ی تلفنِ قابل چاپ در HTML تبدیل کن.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>آن یکی را انتخاب کن که به مشکلی که واقعاً داری نزدیک‌تر است. ابزاری که استفاده‌اش می‌کنی ابزاری است که تمامش می‌کنی.</span></li></ul><h2>اشتباه‌های رایج</h2><ul class="doc-list study-bad"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>نوشتن دویست خط قبل از اجرای هر چیزی.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>یک تابع غول‌پیکر که می‌خواند، حساب می‌کند و چاپ می‌کند.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>آزمایش فقط با ورودی بی‌نقص.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>مقدارهایی مثل نام فایل که در دل کد دفن شده‌اند.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>نداشتن نسخه‌ای از چیزی که دیروز کار می‌کرد.</span></li></ul>
+      <h2>تمرین</h2><p>اول خودت امتحان کن، بعد جواب را باز کن.</p><ol class="study-q"><li><p>توصیف یک‌پاراگرافیِ ابزاری را بنویس که می‌شمارد هر کلمه چند بار در یک فایل متنی آمده.</p><details><summary>نمایش جواب</summary><pre dir="auto">«ابزار نام یک فایل متنی را می‌گیرد. فایل را می‌خواند، همه را به حروف کوچک تبدیل می‌کند، به کلمه‌ها می‌شکند و هر کلمه را می‌شمارد. بیست کلمه‌ی پرتکرار را با تعدادشان، از بیشترین، چاپ می‌کند. اگر فایل وجود نداشته باشد همین را می‌گوید و با کد ۲ خارج می‌شود.»</pre></details></li><li><p>آن ابزار را به کدام تابع‌ها تقسیم می‌کنی؟</p><details><summary>نمایش جواب</summary><pre dir="auto">read_text(path) ← متن؛ count_words(text) ← دیکشنری شمارش‌ها؛ top(counts, n) ← n مورد بزرگ‌تر؛ main() ← آرگومان‌ها را می‌خواند و چاپ می‌کند.</pre></details></li><li><p>load_devices روی خطی که فقط نام دارد با «ValueError: not enough values to unpack» از کار می‌افتد. کاری کن از چنین خط‌هایی با یک هشدار رد شود.</p><details><summary>نمایش جواب</summary><pre dir="auto">parts = line.split()
+if len(parts) != 2:
+    print("skipping line:", line)
+    continue
+name, address = parts</pre></details></li><li><p>خط‌های  if __name__ == "__main__": main()  چه می‌کنند؟</p><details><summary>نمایش جواب</summary><pre dir="auto">main() را فقط وقتی اجرا می‌کنند که فایل مستقیم اجرا شده باشد، نه وقتی فایل دیگری آن را import می‌کند — تا آزمون‌ها بتوانند تابع‌ها را بدون اجرای ابزار وارد کنند.</pre></details></li></ol>
+      <p><a class="btn primary sm" href="practice/">همین را در آزمایشگاه تمرین کن</a></p>
+      <div class="study-box recap"><b>یادت بماند</b><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>توصیف کن، تقسیم کن، یک تکه بساز، امتحانش کن، تکرار کن.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>هر تابع یک کار.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>برای ورودیِ نبوده و اشتباه برنامه داشته باش.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>آزمون و git اجازه می‌دهند بدون ترس کد را عوض کنی.</span></li></ul></div></div>
+      <nav class="adoc-nav">
+        <a class="adoc-navbtn prev" href="fa/sql-from-zero/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span><small>قبلی</small><b>SQL از صفر: سؤال‌پرسیدن از داده</b></span></a>
+        <span></span>
+      </nav>
+      <a class="btn adoc-back" href="index.html#articles"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span>همه‌ی مقاله‌ها</span></a>
+    </article>
+  </main>
+
+  <footer class="site-footer" id="site-footer"><div class="wrap">
+      <div class="foot-grid"><nav class="foot-col"><h4>دسترسی سریع</h4><ul><li><a href="index.html#tracks"><bdi>مسیرها</bdi></a></li><li><a href="index.html#articles"><bdi>مقاله‌ها</bdi></a></li><li><a href="index.html#library"><bdi>کتاب‌ها</bdi></a></li><li><a href="index.html#portfolio"><bdi>ابزارها</bdi></a></li><li><a href="index.html#lab"><bdi>آزمایشگاه</bdi></a></li><li><a href="resume.html"><bdi>رزومه</bdi></a></li><li><a href="resume.html#contact"><bdi>تماس</bdi></a></li></ul></nav><nav class="foot-col"><h4>موضوعات آموزشی</h4><ul><li><a href="index.html#topic/linux"><bdi>لینوکس</bdi></a></li><li><a href="index.html#topic/programming"><bdi>برنامه‌نویسی</bdi></a></li><li><a href="index.html#topic/network"><bdi>شبکه</bdi></a></li><li><a href="index.html#topic/security"><bdi>امنیت</bdi></a></li></ul></nav><nav class="foot-col"><h4>تازه‌ترین مقاله‌ها</h4><ul><li><a href="fa/authorised-testing/"><bdi>آزمون امنیتی مجاز: مثل مهاجم فکر کن، ولی قانونی</bdi></a></li><li><a href="fa/firewalls-hardening/"><bdi>فایروال و مقاوم‌سازی</bdi></a></li><li><a href="fa/reading-logs/"><bdi>خواندن لاگ‌ها: پیداکردن حمله در میان شلوغی</bdi></a></li><li><a href="fa/security-mindset/"><bdi>طرز فکر امنیتی</bdi></a></li></ul></nav><nav class="foot-col"><h4>گواهینامه‌ها</h4><ul><li><a href="resume.html#certifications"><bdi>پکیج امنیت سایبری</bdi></a></li><li><a href="resume.html#certifications"><bdi>پکیج F5</bdi></a></li><li><a href="resume.html#certifications"><bdi>Security+</bdi></a></li><li><a href="resume.html#certifications"><bdi>Cisco CCNA 200-301</bdi></a></li><li><a href="resume.html#certifications"><bdi>آزمون زبان دولینگو</bdi></a></li></ul></nav></div>
+      <div class="foot-card">
+        <a class="foot-id" href="resume.html">
+          <span class="foot-badge"><img src="assets/photo.jpg" alt="سپهر نیاز" loading="lazy"></span>
+          <span class="foot-name"><b>سپهر نیاز</b><small>تکنسین IT · شبکه و امنیت</small></span>
+        </a>
+        <p class="foot-tag">تکنسین IT در شیراز. اینجا درس‌های رایگان و عملی شبکه، امنیت و لینوکس می‌نویسم — و برای کارهای IT و شبکه در دسترسم.</p>
+        <div class="foot-social"><a href="mailto:niazsepehr7@gmail.com" aria-label="ایمیل" title="ایمیل"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 5L2 7"></path></svg></a><a href="tel:+989177886291" aria-label="تماس تلفنی" title="تماس تلفنی"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a><a href="https://wa.me/989177886291" target="_blank" rel="noopener" aria-label="واتساپ" title="واتساپ"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg></a><a href="https://github.com/sepehrniaz" target="_blank" rel="noopener" aria-label="گیت‌هاب" title="گیت‌هاب"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a></div>
+      </div>
+      <div class="foot-bottom">
+        <span>© ۲۰۲۶ سپهر نیاز · شیراز، ایران</span>
+        <a href="tel:+989177886291">شماره تماس: <bdi dir="ltr">۰۹۱۷ ۷۸۸ ۶۲۹۱</bdi></a>
+      </div>
+    </div></footer>
+
+  <script src="config.js"></script>
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+  <script src="bot/nlu.js"></script>
+  <script src="bot/knowledge.js"></script>
+  <script src="bot/teacher.js"></script>
+  <script src="bot/engine.js"></script>
+  <script src="bot/guide.js"></script>
+  <script src="assistant.js"></script>
+</body></html>

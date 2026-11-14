@@ -1388,3 +1388,17 @@ img, svg { -webkit-user-drag: none; }
 @media (max-width: 640px) { .doc-table th, .doc-table td { padding: 9px 10px; font-size: 14px; } .doc-table td[dir="ltr"] { white-space: normal; word-break: break-word; } }
 .adoc-body p, .adoc-body li, .adoc-body figcaption, .adoc-body h2 { overflow-wrap: anywhere; }
 .adoc-body figure, .adoc-body .study-box, .adoc-body .doc-note { min-width: 0; max-width: 100%; }
+
+/* ───────── Real logos on lessons and tracks ───────── */
+.art-cover { height: 128px; }
+.art-logo { position: absolute; inset-inline-end: 18px; top: 50%; width: 84px; height: 84px; object-fit: contain; transform: translateY(-50%); filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .35)); transition: transform .4s; }
+.art:hover .art-logo { transform: translateY(-56%) scale(1.07) rotate(-4deg); }
+.logo-tile { background: color-mix(in srgb, var(--text) 6%, transparent) !important; }
+.logo-tile img { width: 34px; height: 34px; object-fit: contain; }
+.adoc-hero { display: flex; align-items: center; gap: 22px; }
+.adoc-hero > div { min-width: 0; }
+.adoc-hero h1 { margin-top: 6px; }
+.adoc-logo { flex: none; width: 88px; height: 88px; object-fit: contain; padding: 12px; border-radius: 22px; background: var(--surface-2); border: 1px solid var(--border); box-shadow: var(--shadow); }
+@media (max-width: 640px) { .art-cover { height: 108px; } .art-logo { width: 66px; height: 66px; } .adoc-hero { gap: 14px; align-items: flex-start; } .adoc-logo { width: 60px; height: 60px; padding: 8px; border-radius: 16px; } }
+.adoc-hero h1 { overflow-wrap: anywhere; }
+@media (max-width: 420px) { .adoc-hero h1 { font-size: 1.55rem; line-height: 1.3; } }

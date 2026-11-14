@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="fa" dir="rtl"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="../../">
+  <title>ابزارهای متن و پایپ: جواب‌گرفتن از هر فایل — سپهر نیاز</title>
+  <meta name="description" content="grep، cut، sort، uniq، wc، tr، sed و awk — و پایپی که آن‌ها را به هم وصل می‌کند. یاد بگیر یک لاگ خام را با یک خط به جواب تبدیل کنی.">
+  <meta name="author" content="Sepehr Niaz">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sepehrniaz.ir/fa/linux-text-tools/">
+  <link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/linux-text-tools/">
+  <link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/linux-text-tools/">
+  <link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/linux-text-tools/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/photo.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://sepehrniaz.ir/fa/linux-text-tools/">
+  <meta property="og:site_name" content="Sepehr Niaz">
+  <meta property="og:locale" content="fa_IR">
+  <meta property="og:title" content="ابزارهای متن و پایپ: جواب‌گرفتن از هر فایل">
+  <meta property="og:description" content="grep، cut، sort، uniq، wc، tr، sed و awk — و پایپی که آن‌ها را به هم وصل می‌کند. یاد بگیر یک لاگ خام را با یک خط به جواب تبدیل کنی.">
+  <meta property="og:image" content="https://sepehrniaz.ir/assets/og-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#070b14">
+  <script type="application/ld+json">[{"@context":"https://schema.org","@type":"TechArticle","headline":"ابزارهای متن و پایپ: جواب‌گرفتن از هر فایل","description":"grep، cut، sort، uniq، wc، tr، sed و awk — و پایپی که آن‌ها را به هم وصل می‌کند. یاد بگیر یک لاگ خام را با یک خط به جواب تبدیل کنی.","inLanguage":"fa","url":"https://sepehrniaz.ir/fa/linux-text-tools/","mainEntityOfPage":"https://sepehrniaz.ir/fa/linux-text-tools/","image":"https://sepehrniaz.ir/assets/og-card.jpg","author":{"@type":"Person","name":"Sepehr Niaz","alternateName":"سپهر نیاز","url":"https://sepehrniaz.ir/resume"},"publisher":{"@type":"Person","name":"Sepehr Niaz","url":"https://sepehrniaz.ir/"},"datePublished":"2026-11-01","dateModified":"2026-11-01","timeRequired":"PT26M"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"آموزش","item":"https://sepehrniaz.ir/"},{"@type":"ListItem","position":2,"name":"لینوکس","item":"https://sepehrniaz.ir/#articles"},{"@type":"ListItem","position":3,"name":"ابزارهای متن و پایپ: جواب‌گرفتن از هر فایل","item":"https://sepehrniaz.ir/fa/linux-text-tools/"}]}]</script>
+  <script>
+    (function () {
+      var d = document.documentElement;
+      try { var t = localStorage.getItem("theme"); if (t) d.dataset.theme = t; localStorage.setItem("lang", d.lang); } catch (e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Vazirmatn:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body data-page="article" data-article="linux-text-tools">
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="logo" id="logo"></a>
+      <div class="nav-links">
+        <a href="index.html#tracks" data-i18n="navTracks">مسیرها</a>
+        <a href="index.html#articles" data-i18n="navArticles">مقاله‌ها</a>
+        <a href="index.html#lab" data-i18n="navLab">آزمایشگاه</a>
+        <a href="index.html#library" data-i18n="navBooks">کتاب‌ها</a>
+        <a href="index.html#portfolio" data-i18n="navTools">ابزارها</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn lang-btn" id="lang-toggle">EN</button>
+        <button class="icon-btn" id="theme-toggle"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></button>
+        <a href="resume.html" class="btn primary sm" data-i18n="navResume">رزومه</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="article-main">
+    <article class="wrap adoc-body adoc-page">
+      <nav class="crumbs" aria-label="breadcrumb">
+        <a href="index.html">آموزش</a><span aria-hidden="true">/</span>
+        <a href="index.html#topic/linux">لینوکس</a>
+      </nav>
+      <div class="adoc-hero"><img class="adoc-logo" src="assets/learn/logos/linux.svg" alt="" width="88" height="88"><div>
+      <p class="adoc-kick">متوسط · ۲۶ دقیقه مطالعه · به‌روزرسانی ۲۰۲۶-۱۱</p>
+      <h1>ابزارهای متن و پایپ: جواب‌گرفتن از هر فایل</h1></div></div>
+      <p class="adoc-summary">grep، cut، sort، uniq، wc، tr، sed و awk — و پایپی که آن‌ها را به هم وصل می‌کند. یاد بگیر یک لاگ خام را با یک خط به جواب تبدیل کنی.</p>
+      <div class="adoc-content"><div class="study-box goals"><b>بعد از این درس می‌توانی</b><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>دستورها را با پایپ وصل کنی و نتیجه‌ی هر قدم را بخوانی</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>با grep خط، با cut و awk ستون انتخاب کنی و با sort | uniq -c بشماری</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>نتیجه و خطا را با &gt;، &gt;&gt; و 2&gt; در فایل ذخیره کنی</span></li></ul></div><h2>ایده: ابزارهای کوچک، وصل به هم</h2><p>لینوکس برای تحلیل متن یک برنامه‌ی غول‌پیکر ندارد. چندین برنامه‌ی کوچک دارد که هر کدام یک کار را خوب انجام می‌دهد: یکی خط پیدا می‌کند، یکی ستون می‌بُرد، یکی مرتب می‌کند و یکی می‌شمارد. قدرت از وصل‌کردنشان می‌آید. هر ابزار متن را می‌خواند، کمی تغییرش می‌دهد و به بعدی می‌دهد، مثل کارگرهای یک خط تولید. وقتی هشت‌تا از این ابزارها را بلد باشی، بدون بازکردن اکسل درباره‌ی هر لاگ، فهرست یا فایل خروجی می‌توانی جواب بگیری.</p><p>همه‌ی مثال‌ها از دو فایل کوچک استفاده می‌کنند. auth.log یک لاگ ورود است که هر خطش یک رویداد است و staff.csv فهرستی است که بین خانه‌هایش کاما دارد.</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">auth.log</span><button type="button" class="doc-copy" data-code="Nov%2010%2009%3A12%3A01%20srv%20sshd%5B811%5D%3A%20Accepted%20password%20for%20sara%20from%20192.168.1.20%0ANov%2010%2009%3A40%3A13%20srv%20sshd%5B902%5D%3A%20Failed%20password%20for%20root%20from%20203.0.113.45%0ANov%2010%2009%3A40%3A15%20srv%20sshd%5B902%5D%3A%20Failed%20password%20for%20root%20from%20203.0.113.45%0ANov%2010%2009%3A40%3A18%20srv%20sshd%5B902%5D%3A%20Failed%20password%20for%20admin%20from%20203.0.113.45%0ANov%2010%2010%3A02%3A44%20srv%20sshd%5B955%5D%3A%20Accepted%20password%20for%20ali%20from%20192.168.1.31%0ANov%2010%2011%3A30%3A09%20srv%20sshd%5B990%5D%3A%20Failed%20password%20for%20admin%20from%20198.51.100.77%0ANov%2010%2011%3A31%3A10%20srv%20sshd%5B991%5D%3A%20Failed%20password%20for%20root%20from%20198.51.100.77%0ANov%2010%2012%3A05%3A00%20srv%20sshd%5B1002%5D%3A%20Accepted%20password%20for%20sara%20from%20192.168.1.20"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code>Nov 10 09:12:01 srv sshd[811]: Accepted password for sara from 192.168.1.20
+Nov 10 09:40:13 srv sshd[902]: Failed password for root from 203.0.113.45
+Nov 10 09:40:15 srv sshd[902]: Failed password for root from 203.0.113.45
+Nov 10 09:40:18 srv sshd[902]: Failed password for admin from 203.0.113.45
+Nov 10 10:02:44 srv sshd[955]: Accepted password for ali from 192.168.1.31
+Nov 10 11:30:09 srv sshd[990]: Failed password for admin from 198.51.100.77
+Nov 10 11:31:10 srv sshd[991]: Failed password for root from 198.51.100.77
+Nov 10 12:05:00 srv sshd[1002]: Accepted password for sara from 192.168.1.20</code></pre></figure><h2>پایپ: |</h2><p>خط عمودی «پایپ» نام دارد. هر چه دستور سمت چپش چاپ می‌کند را به‌جای نمایش روی صفحه به دستور سمت راستش می‌دهد. آن را «و بعد» بخوان.</p><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">wc -l auth.log</span>
+<span class="o">8 auth.log</span>
+<span class="p">$</span> <span class="k">grep Failed auth.log | wc -l</span>
+<span class="o">5</span></pre></div><figcaption>خط‌هایی را که Failed دارند پیدا کن و بعد بشمار: از ۸ ورود، ۵تا ناموفق بوده.</figcaption></figure><h2>grep: خط‌های جور را نگه دار</h2><div class="doc-table"><table><thead><tr><th>گزینه</th><th>اثر</th></tr></thead><tbody><tr><td dir="ltr"><code>grep word file</code></td><td>خط‌هایی که کلمه را دارند</td></tr><tr><td dir="ltr"><code>-i</code></td><td>نادیده‌گرفتن بزرگی و کوچکی حروف</td></tr><tr><td dir="ltr"><code>-v</code></td><td>خط‌هایی که آن را ندارند</td></tr><tr><td dir="ltr"><code>-c</code></td><td>فقط شمردن خط‌های جور</td></tr><tr><td dir="ltr"><code>-n</code></td><td>نمایش شماره‌ی خط</td></tr><tr><td dir="ltr"><code>-r</code></td><td>جست‌وجو در همه‌ی فایل‌های زیر یک پوشه</td></tr><tr><td dir="ltr"><code>-E "a|b"</code></td><td>این یا آن</td></tr><tr><td dir="ltr"><code>-A 2 / -B 2</code></td><td>دو خط بعد / قبل از هر مورد را هم نشان بده</td></tr></tbody></table></div><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">grep -E "root|admin" auth.log | wc -l</span>
+<span class="o">5</span>
+<span class="p">$</span> <span class="k">grep -n "ali" auth.log</span>
+<span class="o">5:Nov 10 10:02:44 srv sshd[955]: Accepted password for ali from 192.168.1.31</span></pre></div><figcaption>پنج تلاش با نام‌های root یا admin بوده؛ ali در خط ۵ وارد شده.</figcaption></figure><h2>cut و awk: برداشتن یک ستون</h2><p>cut هر خط را از محل یک جداکننده می‌شکند و خانه‌هایی را که می‌خواهی نگه می‌دارد: -d جداکننده را تعیین می‌کند و -f شماره‌ی خانه‌ها را. برای فایل‌های مرتب مثل CSV عالی است.</p><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">cut -d, -f1,2 staff.csv</span>
+<span class="o">name,dept</span>
+<span class="o">Sara,Reception</span>
+<span class="o">Ali,IT</span>
+<span class="o">Mina,Accounting</span>
+<span class="o">Reza,IT</span>
+<span class="o">Neda,Reception</span></pre></div><figcaption>خانه‌های ۱ و ۲، با جداکننده‌ی کاما.</figcaption></figure><p>خط‌های لاگ با تعداد متغیری فاصله جدا شده‌اند و cut با آن‌ها مشکل دارد. awk از پسشان برمی‌آید: هر خط را خودکار به کلمه‌ها می‌شکند و اسمشان را $1، $2، $3 و … می‌گذارد؛ $NF همیشه آخرین کلمه است. awk می‌تواند قبل از چاپ شرط هم بررسی کند.</p><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">grep Failed auth.log | awk '{print $NF}'</span>
+<span class="o">203.0.113.45</span>
+<span class="o">203.0.113.45</span>
+<span class="o">203.0.113.45</span>
+<span class="o">198.51.100.77</span>
+<span class="o">198.51.100.77</span>
+<span class="p">$</span> <span class="k">awk -F, '$2 == "IT" {print $1, $3}' staff.csv</span>
+<span class="o">Ali 102</span>
+<span class="o">Reza 104</span></pre></div><figcaption>آخرین کلمه‌ی هر خط ناموفق آدرس مهاجم است. در دستور دوم -F, جداکننده را تعیین می‌کند و فقط ردیف‌هایی چاپ می‌شوند که خانه‌ی دومشان IT است.</figcaption></figure><h2>sort و uniq: ترتیب و شمارش</h2><p>sort خط‌ها را مرتب می‌کند. uniq خط‌های تکراری را حذف می‌کند — ولی فقط وقتی کنار هم باشند، برای همین تقریباً همیشه بعد از sort می‌آید. uniq با -c می‌نویسد هر خط چند بار آمده. یک sort -rn در آخر بزرگ‌ترین عدد را اول می‌گذارد. این زنجیره‌ی چهارتکه مفیدترین جمله در کل تحلیل لاگ است.</p><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">grep Failed auth.log | awk '{print $NF}' | sort | uniq -c | sort -rn</span>
+<span class="o">      3 203.0.113.45</span>
+<span class="o">      2 198.51.100.77</span>
+<span class="p">$</span> <span class="k">cut -d, -f2 staff.csv | tail -n +2 | sort | uniq -c</span>
+<span class="o">      1 Accounting</span>
+<span class="o">      2 IT</span>
+<span class="o">      2 Reception</span></pre></div><figcaption>چه کسی بیشتر حمله کرده و در هر بخش چند نفر کار می‌کنند. tail -n +2 از خط عنوان رد می‌شود.</figcaption></figure><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>sort -n  به شکل عدد مرتب می‌کند (تا ۹ قبل از ۱۰ بیاید)؛  -r  برعکس می‌کند؛  -u  تکراری‌ها را حذف می‌کند.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>sort -t, -k2  یک CSV را بر اساس خانه‌ی دوم مرتب می‌کند.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>sort | uniq -c | sort -rn | head -5  از هر چیزی «پنج‌تای برتر» می‌دهد.</span></li></ul><h2>tr و sed: تغییر متن</h2><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">echo "hello" | tr a-z A-Z</span>
+<span class="o">HELLO</span>
+<span class="p">$</span> <span class="k">echo "one two three" | tr " " "\n"</span>
+<span class="o">one</span>
+<span class="o">two</span>
+<span class="o">three</span>
+<span class="p">$</span> <span class="k">sed "s/Failed/FAILED/" auth.log | head -3</span>
+<span class="o">Nov 10 09:12:01 srv sshd[811]: Accepted password for sara from 192.168.1.20</span>
+<span class="o">Nov 10 09:40:13 srv sshd[902]: FAILED password for root from 203.0.113.45</span>
+<span class="o">Nov 10 09:40:15 srv sshd[902]: FAILED password for root from 203.0.113.45</span></pre></div><figcaption>tr نویسه‌های تکی را عوض می‌کند. s/old/new/ در sed متن را در هر خط جایگزین می‌کند.</figcaption></figure><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>s/old/new/g  همه‌ی موردهای یک خط را جایگزین می‌کند، نه فقط اولی را.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>sed -n '5,10p' file  فقط خط‌های ۵ تا ۱۰ را چاپ می‌کند.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>sed -i 's/old/new/g' file  خود فایل را تغییر می‌دهد. اول یک کپی بگیر — برگشتی ندارد.</span></li></ul><h2>فرستادن خروجی به فایل: تغییر مسیر</h2><p>هر دستور دو کانال خروجی دارد: نتیجه‌ی عادی و پیام خطا. &gt; نتیجه‌ی عادی را به فایل می‌فرستد، &gt;&gt; به فایل اضافه می‌کند و 2&gt; خطاها را می‌فرستد. این‌طور می‌توانی نتیجه‌ی تمیز را نگه داری و خطاها را جای دیگری جمع کنی — یا با فرستادن به /dev/null، سطل بی‌انتهای سیستم، دورشان بریزی.</p><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">grep Failed auth.log &gt; failed.txt; wc -l &lt; failed.txt</span>
+<span class="o">5</span>
+<span class="p">$</span> <span class="k">ls nofile 2&gt; errors.txt; cat errors.txt</span>
+<span class="o">ls: cannot access 'nofile': No such file or directory</span></pre></div><figcaption>&gt; نتیجه را ذخیره کرد و 2&gt; پیام خطا را به‌جای نمایش ذخیره کرد.</figcaption></figure><h2>ساختن یک زنجیره، قدم‌به‌قدم</h2><p>هیچ‌کس یک زنجیره‌ی بلند را یک‌جا نمی‌نویسد. یک ابزار اضافه می‌کنی، خروجی را می‌بینی و بعد ابزار بعدی را. سؤال: ورودها در چه ساعت‌هایی از روز رخ می‌دهد؟</p><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>cat auth.log — داده را ببین. زمان کلمه‌ی سوم است.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>… | awk '{print $3}' — فقط زمان را نگه دار: 09:12:01.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>… | cut -d: -f1 — فقط ساعت را نگه دار، یعنی بخش قبل از اولین دونقطه.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>… | sort | uniq -c — هر ساعت را بشمار.</span></li></ul><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">cat auth.log | awk '{print $3}' | cut -d: -f1 | sort | uniq -c</span>
+<span class="o">      4 09</span>
+<span class="o">      1 10</span>
+<span class="o">      2 11</span>
+<span class="o">      1 12</span></pre></div><figcaption>چهار رویداد در ساعت نه — ارزش نگاه دقیق‌تر را دارد.</figcaption></figure><h2>برای حرفه‌ای‌ها</h2><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>journalctl -u ssh --since "1 hour ago"  در لینوکس‌های جدید ژورنال سیستم را می‌خواند؛ خروجی‌اش را به همین ابزارها بده.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>tail -f file | grep --line-buffered Failed  لاگ را زنده تماشا می‌کند و فقط چیزهای مهم را نشان می‌دهد.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>xargs خط‌ها را به آرگومان تبدیل می‌کند:  find . -name "*.tmp" | xargs rm .</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>tee هم‌زمان در فایل و روی صفحه می‌نویسد:  command | tee result.txt .</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>برای لاگ JSON از jq استفاده کن؛ برای فایل‌های بزرگ‌تر از چند گیگابایت ripgrep (rg) را ببین که خیلی سریع‌تر از grep است.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>وقتی زنجیره از یک خط بلندتر شد، آن را به اسکریپت منتقل کن — درس بعدیِ همین مسیر.</span></li></ul><h2>اشتباه‌های رایج</h2><ul class="doc-list study-bad"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>استفاده از uniq بدون sort قبلش — خط‌های تکراری که کنار هم نیستند یکی نمی‌شوند.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>مرتب‌کردن عدد بدون -n، که باعث می‌شود ۱۰ قبل از ۹ بیاید.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>نوشتن &gt; وقتی منظور &gt;&gt; بوده و پاک‌شدن فایل.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>نوشتن برنامه‌ی awk داخل نقل‌قول دوتایی، که باعث می‌شود شل قبل از awk مقدار $1 را جایگزین کند. نقل‌قول تکی بگذار.</span></li></ul>
+      <h2>تمرین</h2><p>اول خودت امتحان کن، بعد جواب را باز کن.</p><ol class="study-q"><li><p>چند ورود موفق در auth.log هست؟</p><details><summary>نمایش جواب</summary><pre dir="auto">grep -c Accepted auth.log</pre></details></li><li><p>نام کاربرهایی را که موفق وارد شده‌اند، هر کدام یک بار، فهرست کن. (نام کلمه‌ی نهم است.)</p><details><summary>نمایش جواب</summary><pre dir="auto">grep Accepted auth.log | awk '{print $9}' | sort -u</pre></details></li><li><p>کدام نام کاربری بیشتر هدف حمله بوده؟</p><details><summary>نمایش جواب</summary><pre dir="auto">grep Failed auth.log | awk '{print $9}' | sort | uniq -c | sort -rn | head -1</pre></details></li><li><p>نام و داخلی کارمندهای Reception را در reception.txt ذخیره کن.</p><details><summary>نمایش جواب</summary><pre dir="auto">awk -F, '$2 == "Reception" {print $1, $3}' staff.csv &gt; reception.txt</pre></details></li></ol>
+      <p><a class="btn primary sm" href="practice/">همین را در آزمایشگاه تمرین کن</a></p>
+      <div class="study-box recap"><b>یادت بماند</b><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>| یعنی «و بعد».</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>grep خط انتخاب می‌کند، cut و awk ستون، sort مرتب می‌کند و uniq -c می‌شمارد.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>sort | uniq -c | sort -rn الگوی «برترین‌ها» است.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>&gt; جایگزین می‌کند، &gt;&gt; اضافه می‌کند و 2&gt; خطاها را می‌گیرد.</span></li></ul></div></div>
+      <nav class="adoc-nav">
+        <a class="adoc-navbtn prev" href="fa/linux-permissions/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span><small>قبلی</small><b>درک مجوزهای فایل</b></span></a>
+        <a class="adoc-navbtn next" href="fa/linux-server/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span><small>بعدی</small><b>اداره‌ی یک سرور لینوکس</b></span></a>
+      </nav>
+      <a class="btn adoc-back" href="index.html#articles"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span>همه‌ی مقاله‌ها</span></a>
+    </article>
+  </main>
+
+  <footer class="site-footer" id="site-footer"><div class="wrap">
+      <div class="foot-grid"><nav class="foot-col"><h4>دسترسی سریع</h4><ul><li><a href="index.html#tracks"><bdi>مسیرها</bdi></a></li><li><a href="index.html#articles"><bdi>مقاله‌ها</bdi></a></li><li><a href="index.html#library"><bdi>کتاب‌ها</bdi></a></li><li><a href="index.html#portfolio"><bdi>ابزارها</bdi></a></li><li><a href="index.html#lab"><bdi>آزمایشگاه</bdi></a></li><li><a href="resume.html"><bdi>رزومه</bdi></a></li><li><a href="resume.html#contact"><bdi>تماس</bdi></a></li></ul></nav><nav class="foot-col"><h4>موضوعات آموزشی</h4><ul><li><a href="index.html#topic/linux"><bdi>لینوکس</bdi></a></li><li><a href="index.html#topic/programming"><bdi>برنامه‌نویسی</bdi></a></li><li><a href="index.html#topic/network"><bdi>شبکه</bdi></a></li><li><a href="index.html#topic/security"><bdi>امنیت</bdi></a></li></ul></nav><nav class="foot-col"><h4>تازه‌ترین مقاله‌ها</h4><ul><li><a href="fa/authorised-testing/"><bdi>آزمون امنیتی مجاز: مثل مهاجم فکر کن، ولی قانونی</bdi></a></li><li><a href="fa/firewalls-hardening/"><bdi>فایروال و مقاوم‌سازی</bdi></a></li><li><a href="fa/reading-logs/"><bdi>خواندن لاگ‌ها: پیداکردن حمله در میان شلوغی</bdi></a></li><li><a href="fa/security-mindset/"><bdi>طرز فکر امنیتی</bdi></a></li></ul></nav><nav class="foot-col"><h4>گواهینامه‌ها</h4><ul><li><a href="resume.html#certifications"><bdi>پکیج امنیت سایبری</bdi></a></li><li><a href="resume.html#certifications"><bdi>پکیج F5</bdi></a></li><li><a href="resume.html#certifications"><bdi>Security+</bdi></a></li><li><a href="resume.html#certifications"><bdi>Cisco CCNA 200-301</bdi></a></li><li><a href="resume.html#certifications"><bdi>آزمون زبان دولینگو</bdi></a></li></ul></nav></div>
+      <div class="foot-card">
+        <a class="foot-id" href="resume.html">
+          <span class="foot-badge"><img src="assets/photo.jpg" alt="سپهر نیاز" loading="lazy"></span>
+          <span class="foot-name"><b>سپهر نیاز</b><small>تکنسین IT · شبکه و امنیت</small></span>
+        </a>
+        <p class="foot-tag">تکنسین IT در شیراز. اینجا درس‌های رایگان و عملی شبکه، امنیت و لینوکس می‌نویسم — و برای کارهای IT و شبکه در دسترسم.</p>
+        <div class="foot-social"><a href="mailto:niazsepehr7@gmail.com" aria-label="ایمیل" title="ایمیل"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 5L2 7"></path></svg></a><a href="tel:+989177886291" aria-label="تماس تلفنی" title="تماس تلفنی"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a><a href="https://wa.me/989177886291" target="_blank" rel="noopener" aria-label="واتساپ" title="واتساپ"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg></a><a href="https://github.com/sepehrniaz" target="_blank" rel="noopener" aria-label="گیت‌هاب" title="گیت‌هاب"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a></div>
+      </div>
+      <div class="foot-bottom">
+        <span>© ۲۰۲۶ سپهر نیاز · شیراز، ایران</span>
+        <a href="tel:+989177886291">شماره تماس: <bdi dir="ltr">۰۹۱۷ ۷۸۸ ۶۲۹۱</bdi></a>
+      </div>
+    </div></footer>
+
+  <script src="config.js"></script>
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+  <script src="bot/nlu.js"></script>
+  <script src="bot/knowledge.js"></script>
+  <script src="bot/teacher.js"></script>
+  <script src="bot/engine.js"></script>
+  <script src="bot/guide.js"></script>
+  <script src="assistant.js"></script>
+</body></html>

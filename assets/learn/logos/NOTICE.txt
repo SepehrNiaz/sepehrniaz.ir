@@ -1,0 +1,9 @@
+Logos in this folder are shown only to name the technology a lesson is about.
+
+linux.svg       Tux, by Larry Ewing (lewing@isc.tamu.edu), made with The GIMP. Free to use with this credit.
+python.svg      The Python logo is a trademark of the Python Software Foundation.
+javascript.svg  The unofficial JavaScript logo by Chris Williams (MIT licence).
+bash.svg        The official Bash logo by Justin Dorfman and Prospect One (MIT licence).
+sqlite.svg      The SQLite logo, from sqlite.org (public domain project).
+html5.svg       The HTML5 logo by W3C (CC BY 3.0).
+network.svg, security.svg   Drawn for this site.

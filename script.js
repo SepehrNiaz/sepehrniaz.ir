@@ -1086,7 +1086,7 @@
     $("track-list").innerHTML = LEARN.tracks.map((t, i) => {
       const n = LEARN.articles.filter((a) => a.track === t.id).length;
       return `<button type="button" class="card hover track reveal" style="--d:${(i % 4) * 0.06}s" data-track="${esc(t.id)}">
-        <span class="icon-tile">${icon(t.icon)}</span>
+        <span class="icon-tile logo-tile"><img src="assets/learn/logos/${esc((LEARN.logos.tracks || {})[t.id] || "network")}.svg" alt="" width="40" height="40" loading="lazy"></span>
         <h3>${esc(tr(t.title))}</h3>
         <p>${esc(tr(t.desc))}</p>
         <span class="track-count">${esc(ui("artCount")(num(n)))}</span>
@@ -1117,7 +1117,7 @@
       const t = trackById(a.track);
       const hidden = artFilter !== "all" && a.track !== artFilter;
       return `<a class="card hover art reveal" href="${lang}/${esc(a.id)}/" data-cat="${esc(a.track)}" style="--d:${(i % 3) * 0.06}s"${hidden ? " hidden" : ""}>
-        <div class="art-cover"><span class="pill">${esc(t ? tr(t.title) : "")}</span>${icon(a.icon || (t && t.icon) || "code")}</div>
+        <div class="art-cover"><span class="pill">${esc(t ? tr(t.title) : "")}</span><img class="art-logo" src="${esc(LEARN.logoOf(a))}" alt="" width="84" height="84" loading="lazy"></div>
         <div class="art-body">
           <span class="art-meta">${esc(ui(a.level === "intermediate" ? "lvlIntermediate" : "lvlBeginner"))} · ${esc(ui("readMins")(num(a.minutes || 5)))}</span>
           <h3>${esc(tr(a.title))}</h3>
@@ -1263,6 +1263,7 @@
       id: a.id, track: a.track, trackTitle: t ? tr(t.title) : "", title: tr(a.title), summary: tr(a.summary),
       updated: a.updated || "", minutes: a.minutes || 5,
       kicker: `${ui(a.level === "intermediate" ? "lvlIntermediate" : "lvlBeginner")} · ${ui("readMins")(num(a.minutes || 5))}${a.updated ? ` · ${ui("updatedOn")} ${lang === "fa" ? a.updated.replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[d]) : a.updated}` : ""}`,
+      logo: LEARN.logoOf(a),
       body: articleHTML(a), prev: pn(sib[pos - 1]), next: pn(sib[pos + 1]),
       labels: { learn: ui("navLearn"), back: ui("aBackList"), prev: ui("aPrev"), next: ui("aNext"), home: tr(cv.name) },
       icons: { back: icon("back") }

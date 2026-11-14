@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="fa" dir="rtl"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="../../">
+  <title>پایتون از صفرِ مطلق — سپهر نیاز</title>
+  <meta name="description" content="برای کسی که تا حالا برنامه ننوشته: برنامه چیست، پایتون خط‌هایت را چطور می‌خواند و چرا فاصله‌ی اول خط مهم است — قدم‌به‌قدم و دانه‌دانه.">
+  <meta name="author" content="Sepehr Niaz">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sepehrniaz.ir/fa/python-from-zero/">
+  <link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/python-from-zero/">
+  <link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/python-from-zero/">
+  <link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/python-from-zero/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/photo.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://sepehrniaz.ir/fa/python-from-zero/">
+  <meta property="og:site_name" content="Sepehr Niaz">
+  <meta property="og:locale" content="fa_IR">
+  <meta property="og:title" content="پایتون از صفرِ مطلق">
+  <meta property="og:description" content="برای کسی که تا حالا برنامه ننوشته: برنامه چیست، پایتون خط‌هایت را چطور می‌خواند و چرا فاصله‌ی اول خط مهم است — قدم‌به‌قدم و دانه‌دانه.">
+  <meta property="og:image" content="https://sepehrniaz.ir/assets/og-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#070b14">
+  <script type="application/ld+json">[{"@context":"https://schema.org","@type":"TechArticle","headline":"پایتون از صفرِ مطلق","description":"برای کسی که تا حالا برنامه ننوشته: برنامه چیست، پایتون خط‌هایت را چطور می‌خواند و چرا فاصله‌ی اول خط مهم است — قدم‌به‌قدم و دانه‌دانه.","inLanguage":"fa","url":"https://sepehrniaz.ir/fa/python-from-zero/","mainEntityOfPage":"https://sepehrniaz.ir/fa/python-from-zero/","image":"https://sepehrniaz.ir/assets/og-card.jpg","author":{"@type":"Person","name":"Sepehr Niaz","alternateName":"سپهر نیاز","url":"https://sepehrniaz.ir/resume"},"publisher":{"@type":"Person","name":"Sepehr Niaz","url":"https://sepehrniaz.ir/"},"datePublished":"2026-11-01","dateModified":"2026-11-01","timeRequired":"PT35M"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"آموزش","item":"https://sepehrniaz.ir/"},{"@type":"ListItem","position":2,"name":"برنامه‌نویسی","item":"https://sepehrniaz.ir/#articles"},{"@type":"ListItem","position":3,"name":"پایتون از صفرِ مطلق","item":"https://sepehrniaz.ir/fa/python-from-zero/"}]}]</script>
+  <script>
+    (function () {
+      var d = document.documentElement;
+      try { var t = localStorage.getItem("theme"); if (t) d.dataset.theme = t; localStorage.setItem("lang", d.lang); } catch (e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Vazirmatn:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body data-page="article" data-article="python-from-zero">
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="logo" id="logo"></a>
+      <div class="nav-links">
+        <a href="index.html#tracks" data-i18n="navTracks">مسیرها</a>
+        <a href="index.html#articles" data-i18n="navArticles">مقاله‌ها</a>
+        <a href="index.html#lab" data-i18n="navLab">آزمایشگاه</a>
+        <a href="index.html#library" data-i18n="navBooks">کتاب‌ها</a>
+        <a href="index.html#portfolio" data-i18n="navTools">ابزارها</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn lang-btn" id="lang-toggle">EN</button>
+        <button class="icon-btn" id="theme-toggle"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></button>
+        <a href="resume.html" class="btn primary sm" data-i18n="navResume">رزومه</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="article-main">
+    <article class="wrap adoc-body adoc-page">
+      <nav class="crumbs" aria-label="breadcrumb">
+        <a href="index.html">آموزش</a><span aria-hidden="true">/</span>
+        <a href="index.html#topic/programming">برنامه‌نویسی</a>
+      </nav>
+      <div class="adoc-hero"><img class="adoc-logo" src="assets/learn/logos/python.svg" alt="" width="88" height="88"><div>
+      <p class="adoc-kick">مبتدی · ۳۵ دقیقه مطالعه · به‌روزرسانی ۲۰۲۶-۱۱</p>
+      <h1>پایتون از صفرِ مطلق</h1></div></div>
+      <p class="adoc-summary">برای کسی که تا حالا برنامه ننوشته: برنامه چیست، پایتون خط‌هایت را چطور می‌خواند و چرا فاصله‌ی اول خط مهم است — قدم‌به‌قدم و دانه‌دانه.</p>
+      <div class="adoc-content"><div class="study-box goals"><b>بعد از این درس می‌توانی</b><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>توضیح بدهی برنامه چیست و پایتون چطور آن را می‌خواند</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>بدون کمک print، متغیر، if / elif / else، for، while و def بنویسی</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>دقیق بگویی چرا و کجا یک خط باید تورفته باشد و خطای IndentationError را رفع کنی</span></li></ul></div><h2>برنامه چیست؟</h2><p>برنامه فهرستی از دستورالعمل‌هاست که در یک فایل متنی نوشته شده. کامپیوتر فایل را از بالا، خط‌به‌خط می‌خواند و دقیقاً همان کاری را می‌کند که هر خط می‌گوید — نه بیشتر و نه چیزی که به او نگفته‌ای. حدس نمی‌زند منظورت چه بوده. سخت‌گیرانه به نظر می‌رسد و هست، ولی خبر خوبی هم هست: وقتی چیزی خراب می‌شود، دلیلش همیشه روی صفحه جلوی چشمت نوشته شده.</p><p>پایتون یکی از زبان‌هایی است که می‌توانی این دستورها را با آن بنویسی. طوری طراحی شده که راحت خوانده شود و برای همین مدرسه‌ها، دانشمندان، مهندس‌های شبکه و تیم‌های امنیت همه از آن استفاده می‌کنند. لازم نیست ریاضی‌ات قوی باشد. صبر لازم داری و عادتِ اینکه مثال‌ها را خودت تایپ کنی.</p><div class="doc-note tip"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"></path></svg><div>زبانه‌ی پایتون آزمایشگاه تمرین را در پنجره‌ی دیگری باز کن و هر مثال این درس را تایپ کن. خواندن حدود ده درصد یاد می‌دهد؛ بقیه را تایپ‌کردن یاد می‌دهد.</div></div><h2>اولین خط: print</h2><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="print(%22Hello%2C%20world!%22)%0Aprint(%22My%20name%20is%22%2C%20%22Sara%22)%0Aprint(2%20%2B%203)%0Aprint(%222%20%2B%203%22)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code>print("Hello, world!")
+print("My name is", "Sara")
+print(2 + 3)
+print("2 + 3")</code></pre></figure><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">python3 hello.py</span>
+<span class="o">Hello, world!</span>
+<span class="o">My name is Sara</span>
+<span class="o">5</span>
+<span class="o">2 + 3</span></pre></div><figcaption>چهار خط نوشتیم و چهار خط گرفتیم.</figcaption></figure><p>به هر تکه دقت کن، چون همه‌ی خط‌های بعدی از همین تکه‌ها ساخته می‌شوند. print اسم یک دستور است (پایتون به آن «تابع» می‌گوید) که چیزی را روی صفحه نشان می‌دهد. پرانتزها ( ) چیزی را که به دستور می‌دهی نگه می‌دارند و باید باز و بسته شوند. علامت‌های نقل‌قول " " به پایتون می‌گویند «این متن است، دقیقاً همان‌طور که نوشته شده نشانش بده». بدون نقل‌قول پایتون سعی می‌کند حسابش کند — برای همین print(2 + 3) عدد ۵ را نشان می‌دهد ولی print("2 + 3") خودِ نویسه‌های 2 + 3 را. کاما بین دو چیز، هر دو را با یک فاصله بینشان چاپ می‌کند.</p><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>حروف بزرگ و کوچک مهم‌اند: Print و PRINT وجود ندارند؛ فقط print هست.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>هر ( یک ) می‌خواهد و هر " یک " دوم.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>هر خط یک دستور. آخر خط نقطه یا نقطه‌ویرگول نمی‌گذاری.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>خطی که با # شروع شود «توضیح» است: یادداشتی برای آدم‌ها. پایتون از رویش رد می‌شود.</span></li></ul><h2>متغیر: اسم‌گذاشتن روی یک مقدار</h2><p>متغیر اسمی است که به یک مقدار اشاره می‌کند، مثل برچسب روی یک جعبه. با یک علامت مساوی ساخته می‌شود: اسم سمت چپ و مقدار سمت راست. خط  age = 17  را «بگذار age برابر ۱۷ باشد» بخوان، نه «age مساوی ۱۷ است». برای همین خط دوم پایین بی‌معنی نیست: یعنی «مقدار فعلی age را بردار، یکی اضافه کن و نتیجه را زیر همان اسم ذخیره کن».</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="age%20%3D%2017%0Aage%20%3D%20age%20%2B%201%0Aname%20%3D%20%22Sara%22%0Aprint(name%2C%20%22is%22%2C%20age)%0Aprint(type(age)%2C%20type(name)%2C%20type(3.5)%2C%20type(True))"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code>age = 17
+age = age + 1
+name = "Sara"
+print(name, "is", age)
+print(type(age), type(name), type(3.5), type(True))</code></pre></figure><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">python3 vars.py</span>
+<span class="o">Sara is 18</span>
+<span class="o">&lt;class 'int'&gt; &lt;class 'str'&gt; &lt;class 'float'&gt; &lt;class 'bool'&gt;</span></pre></div><figcaption>type() می‌گوید یک اسم چه نوع مقداری دارد.</figcaption></figure><div class="doc-table"><table><thead><tr><th>نوع</th><th>مثال</th><th>چیست</th></tr></thead><tbody><tr><td dir="ltr"><code>int</code></td><td dir="ltr"><code>17</code></td><td>عدد صحیح</td></tr><tr><td dir="ltr"><code>float</code></td><td dir="ltr"><code>3.5</code></td><td>عدد اعشاری</td></tr><tr><td dir="ltr"><code>str</code></td><td dir="ltr"><code>"Sara"</code></td><td>متن (رشته‌ای از نویسه‌ها)، همیشه داخل نقل‌قول</td></tr><tr><td dir="ltr"><code>bool</code></td><td dir="ltr"><code>True</code></td><td>بله یا نه: فقط True یا False، با حرف اول بزرگ</td></tr></tbody></table></div><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>اسم می‌تواند حرف، رقم و خط زیر _ داشته باشد، ولی با رقم شروع نمی‌شود و فاصله ندارد.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>اسمی انتخاب کن که خودش را توضیح بدهد: student_count بهتر از sc یا x است.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>name و Name دو متغیر جدا هستند.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>چند کلمه مال خودِ پایتون است و نمی‌شود اسم متغیر باشد: if، for، def، True، class و حدود سی کلمه‌ی دیگر.</span></li></ul><h2>متن و عدد دو چیز متفاوت‌اند</h2><p>"42" داخل نقل‌قول دو نویسه‌ی متن است؛ 42 بدون نقل‌قول عددی است که می‌شود با آن حساب کرد. پایتون هیچ‌وقت این دو را بی‌صدا قاطی نمی‌کند و همین تو را از یک خانواده‌ی کامل از اشتباه‌ها حفظ می‌کند. وقتی لازم است از یکی به دیگری بروی، عمداً تبدیل می‌کنی: int() عدد صحیح می‌سازد، float() عدد اعشاری و str() متن.</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="text%20%3D%20%2242%22%0Anumber%20%3D%20int(text)%0Aprint(number%20%2B%201)%0Aprint(text%20%2B%20%221%22)%0Aprint(float(%223.5%22)%20*%202%2C%20str(7)%20%2B%20%22%20days%22)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code>text = "42"
+number = int(text)
+print(number + 1)
+print(text + "1")
+print(float("3.5") * 2, str(7) + " days")</code></pre></figure><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">python3 conv.py</span>
+<span class="o">43</span>
+<span class="o">421</span>
+<span class="o">7.0 7 days</span></pre></div><figcaption>با عدد، + جمع می‌کند؛ با متن، + تکه‌ها را به هم می‌چسباند.</figcaption></figure><h2>پرسیدن سؤال بله یا نه</h2><p>برنامه وقتی مفید می‌شود که بتواند تصمیم بگیرد. تصمیم با سؤالی شروع می‌شود که جوابش True یا False است. به مساویِ دوتایی دقت کن: یک = مقدار را ذخیره می‌کند و دوتا == می‌پرسد «این دو یکی هستند؟». قاطی‌کردن این دو رایج‌ترین اشتباه تازه‌کارهاست.</p><div class="doc-table"><table><thead><tr><th>علامت</th><th>سؤال</th><th>مثال</th><th>جواب</th></tr></thead><tbody><tr><td dir="ltr"><code>==</code></td><td>برابر است؟</td><td dir="ltr"><code>10 == 3</code></td><td dir="ltr"><code>False</code></td></tr><tr><td dir="ltr"><code>!=</code></td><td>نابرابر است؟</td><td dir="ltr"><code>10 != 3</code></td><td dir="ltr"><code>True</code></td></tr><tr><td dir="ltr"><code>&gt;</code></td><td>بزرگ‌تر است؟</td><td dir="ltr"><code>10 &gt; 3</code></td><td dir="ltr"><code>True</code></td></tr><tr><td dir="ltr"><code>&lt;</code></td><td>کوچک‌تر است؟</td><td dir="ltr"><code>10 &lt; 3</code></td><td dir="ltr"><code>False</code></td></tr><tr><td dir="ltr"><code>&gt;=</code></td><td>بزرگ‌تر یا مساوی؟</td><td dir="ltr"><code>18 &gt;= 18</code></td><td dir="ltr"><code>True</code></td></tr><tr><td dir="ltr"><code>and</code></td><td>هر دو درست‌اند؟</td><td dir="ltr"><code>True and False</code></td><td dir="ltr"><code>False</code></td></tr><tr><td dir="ltr"><code>or</code></td><td>دست‌کم یکی درست است؟</td><td dir="ltr"><code>True or False</code></td><td dir="ltr"><code>True</code></td></tr><tr><td dir="ltr"><code>not</code></td><td>برعکس</td><td dir="ltr"><code>not True</code></td><td dir="ltr"><code>False</code></td></tr></tbody></table></div><h2>if — و چرا خط بعدی باید با فاصله شروع شود</h2><p>این همان بخشی است که تقریباً همه را اولش گیج می‌کند، پس آرام پیش می‌رویم. دستور if دو بخش دارد. خط اول سؤال را می‌پرسد و با دونقطه تمام می‌شود. دونقطه یعنی «هر چه بعد از من می‌آید مال من است». خط‌های بعدی که به سمت راست هل داده شده‌اند — با چهار فاصله تورفته‌اند — خط‌هایی هستند که فقط وقتی جواب True باشد اجرا می‌شوند. به مجموعه‌ی این خط‌ها «بلوک» می‌گویند.</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="age%20%3D%2015%0Aif%20age%20%3E%3D%2018%3A%0A%20%20%20%20print(%22You%20can%20vote.%22)%0A%20%20%20%20print(%22You%20can%20drive.%22)%0Aprint(%22Thanks%20for%20coming.%22)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code>age = 15
+if age &gt;= 18:
+    print("You can vote.")
+    print("You can drive.")
+print("Thanks for coming.")</code></pre></figure><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">python3 block.py</span>
+<span class="o">Thanks for coming.</span></pre></div><figcaption>age برابر ۱۵ است، پس دو خط تورفته رد می‌شوند. خط آخر تورفته نیست، پس بیرون از if است و همیشه اجرا می‌شود.</figcaption></figure><p>چرا فاصله؟ پایتون باید راهی داشته باشد که بفهمد بخشِ «فقط اگر درست بود» از کجا شروع و کجا تمام می‌شود. خیلی از زبان‌های دیگر برای این کار از آکولاد { } استفاده می‌کنند و فاصله‌ها را تزئین حساب می‌کنند. طراح پایتون خودِ فاصله‌ها را قانون قرار داد، چون برنامه‌نویس‌های خوب در هر حال کدشان را تورفته می‌نویسند — پس در پایتون، ظاهر کد همان رفتار کد است. این فاصله‌ها سلیقه نیستند؛ دستور زبان‌اند. اگر خطی را چهار فاصله به چپ ببری، کار برنامه را عوض کرده‌ای.</p><p>این چیزی است که پایتون وقتی فراموش کنی می‌گوید — اول فاصله‌ها و بعد دونقطه. هر دو پیام را بخوان: شماره‌ی خط و دقیقاً چیزی را که انتظار می‌رفت می‌گویند.</p><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">python3 bad_indent.py</span>
+<span class="o">  File "bad_indent.py", line 3</span>
+<span class="o">    print("adult")</span>
+<span class="o">    ^^^^^</span>
+<span class="o">IndentationError: expected an indented block after 'if' statement on line 2</span>
+<span class="p">$</span> <span class="k">python3 no_colon.py</span>
+<span class="o">  File "no_colon.py", line 2</span>
+<span class="o">    if age &gt;= 18</span>
+<span class="o">                ^</span>
+<span class="o">SyntaxError: expected ':'</span></pre></div><figcaption>«expected an indented block» یعنی: بعد از خطی که با دونقطه تمام می‌شود، خط بعدی باید به راست هل داده شود.</figcaption></figure><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>قانون در یک جمله: بعد از خطی که با دونقطه تمام می‌شود همیشه یک بلوک تورفته می‌آید.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>این برای همه‌ی این خط‌ها درست است: if، elif، else، for، while، def، class، try، except و with.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>برای هر سطح چهار فاصله بگذار. همه‌ی خط‌های یک بلوک باید دقیقاً به یک اندازه تورفته باشند.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>در یک فایل کلید Tab و فاصله را قاطی نکن. ویرایشگرهای خوب — و آزمایشگاه تمرین — با زدن Tab چهار فاصله تایپ می‌کنند.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>بلوک با اولین خطی که به چپ برمی‌گردد تمام می‌شود. کلمه‌ای مثل «پایان» وجود ندارد.</span></li></ul><h2>else، elif و بلوک داخل بلوک</h2><p>else شاخه‌ی «وگرنه» است: وقتی جواب سؤال False بود اجرا می‌شود. elif (کوتاه‌شده‌ی else if) وقتی سؤال اول رد شد سؤال دیگری می‌پرسد. یک بلوک می‌تواند if دیگری داخل خودش داشته باشد و آن‌وقت بلوک درونی چهار فاصله‌ی دیگر تورفته می‌شود — در مجموع هشت‌تا. همیشه می‌توانی با نگاه مستقیم به بالای اولین نویسه‌ی یک خط بفهمی آن خط مال کدام if است.</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="temperature%20%3D%2035%0Araining%20%3D%20False%0A%0Aif%20temperature%20%3E%2030%3A%0A%20%20%20%20print(%22It%20is%20hot.%22)%0A%20%20%20%20if%20raining%3A%0A%20%20%20%20%20%20%20%20print(%22Take%20an%20umbrella%20anyway.%22)%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20print(%22Take%20water.%22)%0Aelse%3A%0A%20%20%20%20print(%22It%20is%20not%20hot.%22)%0Aprint(%22Have%20a%20good%20day.%22)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code>temperature = 35
+raining = False
+
+if temperature &gt; 30:
+    print("It is hot.")
+    if raining:
+        print("Take an umbrella anyway.")
+    else:
+        print("Take water.")
+else:
+    print("It is not hot.")
+print("Have a good day.")</code></pre></figure><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">python3 nested.py</span>
+<span class="o">It is hot.</span>
+<span class="o">Take water.</span>
+<span class="o">Have a good day.</span></pre></div><figcaption>else درونی زیر if درونی قرار دارد و else بیرونی زیر if بیرونی.</figcaption></figure><h2>تکرار: for و while</h2><p>حلقه یک بلوک را چند بار اجرا می‌کند. for عضوهای یک مجموعه را یکی‌یکی برمی‌دارد؛ range(1, 4) عددهای ۱ و ۲ و ۳ را می‌سازد — عدد آخر حساب نمی‌شود. خط حلقه با دونقطه تمام می‌شود، پس خط‌هایی که تکرار می‌شوند تورفته‌اند، دقیقاً مثل if.</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="for%20n%20in%20range(1%2C%204)%3A%0A%20%20%20%20square%20%3D%20n%20*%20n%0A%20%20%20%20print(n%2C%20%22squared%20is%22%2C%20square)%0Aprint(%22done%22)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code>for n in range(1, 4):
+    square = n * n
+    print(n, "squared is", square)
+print("done")</code></pre></figure><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">python3 mixed.py</span>
+<span class="o">1 squared is 1</span>
+<span class="o">2 squared is 4</span>
+<span class="o">3 squared is 9</span>
+<span class="o">done</span></pre></div><figcaption>دو خط تورفته سه بار اجرا شدند؛ done بیرون حلقه است و یک بار اجرا شد.</figcaption></figure><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="count%20%3D%201%0Awhile%20count%20%3C%3D%203%3A%0A%20%20%20%20print(%22count%20is%22%2C%20count)%0A%20%20%20%20count%20%3D%20count%20%2B%201%0Aprint(%22finished%22)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code>count = 1
+while count &lt;= 3:
+    print("count is", count)
+    count = count + 1
+print("finished")</code></pre><figcaption>while تا وقتی جواب سؤالش True است تکرار می‌کند. خط count = count + 1 همان چیزی است که بالاخره آن را False می‌کند؛ بدون آن حلقه هیچ‌وقت نمی‌ایستد (Ctrl+C برنامه‌ی ازکنترل‌خارج‌شده را متوقف می‌کند).</figcaption></figure><h2>لیست: چند مقدار زیر یک اسم</h2><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="fruits%20%3D%20%5B%22apple%22%2C%20%22banana%22%2C%20%22cherry%22%5D%0Aprint(fruits%5B0%5D)%0Aprint(len(fruits))%0Afruits.append(%22date%22)%0Afor%20fruit%20in%20fruits%3A%0A%20%20%20%20print(%22I%20like%22%2C%20fruit)%0Aprint(fruits%5B10%5D)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code>fruits = ["apple", "banana", "cherry"]
+print(fruits[0])
+print(len(fruits))
+fruits.append("date")
+for fruit in fruits:
+    print("I like", fruit)
+print(fruits[10])</code></pre></figure><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">python3 listz.py</span>
+<span class="o">apple</span>
+<span class="o">3</span>
+<span class="o">I like apple</span>
+<span class="o">I like banana</span>
+<span class="o">I like cherry</span>
+<span class="o">I like date</span>
+<span class="o">Traceback (most recent call last):</span>
+<span class="o">  File "listz.py", line 7, in &lt;module&gt;</span>
+<span class="o">    print(fruits[10])</span>
+<span class="o">          ~~~~~~^^^^</span>
+<span class="o">IndexError: list index out of range</span></pre></div><figcaption>کروشه لیست می‌سازد. شمارش از صفر شروع می‌شود، پس fruits[0] اولین عضو است. خواستن جایگاه ۱۰ از لیستی چهارتایی خطای IndexError می‌دهد.</figcaption></figure><h2>تابع: def، و همان قانون فاصله</h2><p>تابع بلوکی از کد با یک اسم است، تا بتوانی بدون دوباره‌نویسی دوباره از آن استفاده کنی. با def تعریفش می‌کنی. خط اول را تکه‌تکه نگاه کن: def می‌گوید «دارم یک تابع تعریف می‌کنم»، greet اسمی است که خودت انتخاب کرده‌ای، name داخل پرانتز «پارامتر» است — متغیری که هر چه به تابع داده شود می‌گیرد — و دونقطه‌ی آخر، مثل همیشه، خبر از یک بلوک می‌دهد. پس خط‌های تابع چهار فاصله تورفته‌اند. هر چه زیر def تورفته باشد خودِ تابع است و اولین خطی که به لبه‌ی چپ برگردد بیرون از آن است.</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="def%20greet(name)%3A%0A%20%20%20%20message%20%3D%20%22Hello%2C%20%22%20%2B%20name%20%2B%20%22!%22%0A%20%20%20%20return%20message%0A%0Aprint(greet(%22Ali%22))%0Aprint(greet(%22Sara%22))%0A%0Adef%20add(a%2C%20b)%3A%0A%20%20%20%20return%20a%20%2B%20b%0A%0Atotal%20%3D%20add(2%2C%203)%0Aprint(total)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code>def greet(name):
+    message = "Hello, " + name + "!"
+    return message
+
+print(greet("Ali"))
+print(greet("Sara"))
+
+def add(a, b):
+    return a + b
+
+total = add(2, 3)
+print(total)</code></pre></figure><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">python3 func.py</span>
+<span class="o">Hello, Ali!</span>
+<span class="o">Hello, Sara!</span>
+<span class="o">5</span></pre></div><figcaption>تعریف تابع کار قابل‌دیدنی انجام نمی‌دهد. فقط وقتی اجرا می‌شود که با نوشتن اسمش و پرانتز «صدایش بزنی».</figcaption></figure><p>return نتیجه را به جایی که تابع را صدا زده برمی‌گرداند تا بتوانی ذخیره یا چاپش کنی. print فقط چیزی را روی صفحه نشان می‌دهد. این دو یکی نیستند و تابعی که حساب می‌کند ولی return را فراموش کرده مقدار ویژه‌ی None را برمی‌گرداند:</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="def%20add(a%2C%20b)%3A%0A%20%20%20%20a%20%2B%20b%20%20%20%20%20%20%20%20%20%20%23%20calculated%2C%20then%20thrown%20away%0A%0Aprint(add(2%2C%203))%20%20%20%23%20None"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code>def add(a, b):
+    a + b          # calculated, then thrown away
+
+print(add(2, 3))   # None</code></pre></figure><h2>خواندن پیام خطا</h2><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">python3 name_err.py</span>
+<span class="o">Traceback (most recent call last):</span>
+<span class="o">  File "name_err.py", line 2, in &lt;module&gt;</span>
+<span class="o">    print(totl)</span>
+<span class="o">          ^^^^</span>
+<span class="o">NameError: name 'totl' is not defined. Did you mean: 'total'?</span></pre></div><figcaption>از پایین بخوان: نوع خطا و یک جمله‌ی ساده؛ بالایش خطِ دقیق، با علامت زیر محل مشکل.</figcaption></figure><p>خطا وضعیت عادی برنامه‌نویسی است، نه نشانه‌ی اینکه در آن بد هستی. حرفه‌ای‌ها هر روز ده‌ها خطا می‌بینند. تفاوت فقط این است که پیام را با آرامش می‌خوانند: کدام خط، چه نوع خطایی، چه چیزی انتظار می‌رفت. پایتون اغلب راه‌حل را هم پیشنهاد می‌دهد، همان‌طور که اینجا داد.</p><h2>همه را کنار هم بگذاریم</h2><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="%23%20grades.py%20%E2%80%94%20tell%20each%20student%20whether%20they%20passed%0Adef%20result(grade)%3A%0A%20%20%20%20if%20grade%20%3E%3D%2010%3A%0A%20%20%20%20%20%20%20%20return%20%22passed%22%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20return%20%22failed%22%0A%0Agrades%20%3D%20%5B17%2C%208%2C%2012%2C%2019%2C%209%5D%0Apassed%20%3D%200%0A%0Afor%20grade%20in%20grades%3A%0A%20%20%20%20answer%20%3D%20result(grade)%0A%20%20%20%20print(grade%2C%20answer)%0A%20%20%20%20if%20answer%20%3D%3D%20%22passed%22%3A%0A%20%20%20%20%20%20%20%20passed%20%3D%20passed%20%2B%201%0A%0Aprint(passed%2C%20%22of%22%2C%20len(grades)%2C%20%22students%20passed%22)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code># grades.py — tell each student whether they passed
+def result(grade):
+    if grade &gt;= 10:
+        return "passed"
+    else:
+        return "failed"
+
+grades = [17, 8, 12, 19, 9]
+passed = 0
+
+for grade in grades:
+    answer = result(grade)
+    print(grade, answer)
+    if answer == "passed":
+        passed = passed + 1
+
+print(passed, "of", len(grades), "students passed")</code></pre><figcaption>همه‌ی ایده‌های این درس در هفده خط: توضیح، تابع، if و else، لیست، حلقه، بلوک داخل بلوک و سه سطح تورفتگی. تایپش کن، اجرایش کن و بعد نمره‌ی قبولی را ۱۲ کن.</figcaption></figure><h2>اشتباه‌های رایج</h2><ul class="doc-list study-bad"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>جاانداختن دونقطه در آخر if، else، for، while یا def.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>تورفته‌نکردن خط بعد از دونقطه — یا تورفتگی ۴ فاصله برای بعضی خط‌های یک بلوک و ۳ فاصله برای بقیه.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>نوشتن = هنگام پرسیدن سؤال. if age = 18 خطاست؛ باید if age == 18 باشد.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>جاانداختن نقل‌قول، که باعث می‌شود پایتون دنبال متغیری به اسم Sara بگردد.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>استفاده از print داخل تابع وقتی منظورت return بوده.</span></li></ul>
+      <h2>تمرین</h2><p>اول خودت امتحان کن، بعد جواب را باز کن.</p><ol class="study-q"><li><p>این چه چیزی چاپ می‌کند و چرا؟
+
+x = 5
+if x &gt; 10:
+    print("big")
+print("end")</p><details><summary>نمایش جواب</summary><pre dir="auto">فقط: end
+x &gt; 10 نادرست است، پس خط تورفته رد می‌شود. print("end") تورفته نیست، پس بیرون از if است.</pre></details></li><li><p>دو اشتباه را پیدا کن:
+
+def double(n)
+return n * 2</p><details><summary>نمایش جواب</summary><pre dir="auto">دونقطه بعد از def double(n) جا افتاده و return باید چهار فاصله تورفته باشد:
+
+def double(n):
+    return n * 2</pre></details></li><li><p>برنامه‌ای بنویس که عددهای ۱ تا ۱۰ را چاپ کند و کنار هر کدام even (زوج) یا odd (فرد) بنویسد. (راهنما: n % 2 برای عددهای زوج صفر است.)</p><details><summary>نمایش جواب</summary><pre dir="auto">for n in range(1, 11):
+    if n % 2 == 0:
+        print(n, "even")
+    else:
+        print(n, "odd")</pre></details></li><li><p>تابعی به اسم biggest(a, b) بنویس که بزرگ‌ترِ دو عدد را برگرداند و biggest(7, 12) را چاپ کن.</p><details><summary>نمایش جواب</summary><pre dir="auto">def biggest(a, b):
+    if a &gt; b:
+        return a
+    else:
+        return b
+
+print(biggest(7, 12))</pre></details></li><li><p>چرا print("10" + 5) خطا می‌دهد و دو راه رفعش چیست؟</p><details><summary>نمایش جواب</summary><pre dir="auto">"10" متن است و 5 عدد. یا هر دو را عدد کن — print(int("10") + 5) جواب ۱۵ می‌دهد — یا هر دو را متن — print("10" + str(5)) جواب 105 می‌دهد.</pre></details></li></ol>
+      <p><a class="btn primary sm" href="practice/">همین را در آزمایشگاه تمرین کن</a></p>
+      <div class="study-box recap"><b>یادت بماند</b><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>پایتون از بالا به پایین می‌خواند، هر خط یک دستور.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>دونقطه‌ی آخر خط وعده‌ی یک بلوک است؛ بلوک همان خط‌هایی است که زیرش چهار فاصله تورفته‌اند.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>= ذخیره می‌کند و == می‌پرسد. متن داخل نقل‌قول است.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>def تابع می‌سازد و return جوابش را برمی‌گرداند.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>خطا را از خط آخر به بالا بخوان.</span></li></ul></div></div>
+      <nav class="adoc-nav">
+        <span></span>
+        <a class="adoc-navbtn next" href="fa/python-10-minutes/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span><small>بعدی</small><b>پایتون: اولین برنامه‌های واقعی</b></span></a>
+      </nav>
+      <a class="btn adoc-back" href="index.html#articles"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span>همه‌ی مقاله‌ها</span></a>
+    </article>
+  </main>
+
+  <footer class="site-footer" id="site-footer"><div class="wrap">
+      <div class="foot-grid"><nav class="foot-col"><h4>دسترسی سریع</h4><ul><li><a href="index.html#tracks"><bdi>مسیرها</bdi></a></li><li><a href="index.html#articles"><bdi>مقاله‌ها</bdi></a></li><li><a href="index.html#library"><bdi>کتاب‌ها</bdi></a></li><li><a href="index.html#portfolio"><bdi>ابزارها</bdi></a></li><li><a href="index.html#lab"><bdi>آزمایشگاه</bdi></a></li><li><a href="resume.html"><bdi>رزومه</bdi></a></li><li><a href="resume.html#contact"><bdi>تماس</bdi></a></li></ul></nav><nav class="foot-col"><h4>موضوعات آموزشی</h4><ul><li><a href="index.html#topic/linux"><bdi>لینوکس</bdi></a></li><li><a href="index.html#topic/programming"><bdi>برنامه‌نویسی</bdi></a></li><li><a href="index.html#topic/network"><bdi>شبکه</bdi></a></li><li><a href="index.html#topic/security"><bdi>امنیت</bdi></a></li></ul></nav><nav class="foot-col"><h4>تازه‌ترین مقاله‌ها</h4><ul><li><a href="fa/authorised-testing/"><bdi>آزمون امنیتی مجاز: مثل مهاجم فکر کن، ولی قانونی</bdi></a></li><li><a href="fa/firewalls-hardening/"><bdi>فایروال و مقاوم‌سازی</bdi></a></li><li><a href="fa/reading-logs/"><bdi>خواندن لاگ‌ها: پیداکردن حمله در میان شلوغی</bdi></a></li><li><a href="fa/security-mindset/"><bdi>طرز فکر امنیتی</bdi></a></li></ul></nav><nav class="foot-col"><h4>گواهینامه‌ها</h4><ul><li><a href="resume.html#certifications"><bdi>پکیج امنیت سایبری</bdi></a></li><li><a href="resume.html#certifications"><bdi>پکیج F5</bdi></a></li><li><a href="resume.html#certifications"><bdi>Security+</bdi></a></li><li><a href="resume.html#certifications"><bdi>Cisco CCNA 200-301</bdi></a></li><li><a href="resume.html#certifications"><bdi>آزمون زبان دولینگو</bdi></a></li></ul></nav></div>
+      <div class="foot-card">
+        <a class="foot-id" href="resume.html">
+          <span class="foot-badge"><img src="assets/photo.jpg" alt="سپهر نیاز" loading="lazy"></span>
+          <span class="foot-name"><b>سپهر نیاز</b><small>تکنسین IT · شبکه و امنیت</small></span>
+        </a>
+        <p class="foot-tag">تکنسین IT در شیراز. اینجا درس‌های رایگان و عملی شبکه، امنیت و لینوکس می‌نویسم — و برای کارهای IT و شبکه در دسترسم.</p>
+        <div class="foot-social"><a href="mailto:niazsepehr7@gmail.com" aria-label="ایمیل" title="ایمیل"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 5L2 7"></path></svg></a><a href="tel:+989177886291" aria-label="تماس تلفنی" title="تماس تلفنی"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a><a href="https://wa.me/989177886291" target="_blank" rel="noopener" aria-label="واتساپ" title="واتساپ"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg></a><a href="https://github.com/sepehrniaz" target="_blank" rel="noopener" aria-label="گیت‌هاب" title="گیت‌هاب"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a></div>
+      </div>
+      <div class="foot-bottom">
+        <span>© ۲۰۲۶ سپهر نیاز · شیراز، ایران</span>
+        <a href="tel:+989177886291">شماره تماس: <bdi dir="ltr">۰۹۱۷ ۷۸۸ ۶۲۹۱</bdi></a>
+      </div>
+    </div></footer>
+
+  <script src="config.js"></script>
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+  <script src="bot/nlu.js"></script>
+  <script src="bot/knowledge.js"></script>
+  <script src="bot/teacher.js"></script>
+  <script src="bot/engine.js"></script>
+  <script src="bot/guide.js"></script>
+  <script src="assistant.js"></script>
+</body></html>

@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en" dir="ltr"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="../../">
+  <title>Python from absolute zero — Sepehr Niaz</title>
+  <meta name="description" content="For someone who has never programmed: what a program is, how Python reads your lines, and why the spaces at the start of a line matter — explained one small step at a time.">
+  <meta name="author" content="Sepehr Niaz">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sepehrniaz.ir/en/python-from-zero/">
+  <link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/python-from-zero/">
+  <link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/python-from-zero/">
+  <link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/python-from-zero/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/photo.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://sepehrniaz.ir/en/python-from-zero/">
+  <meta property="og:site_name" content="Sepehr Niaz">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Python from absolute zero">
+  <meta property="og:description" content="For someone who has never programmed: what a program is, how Python reads your lines, and why the spaces at the start of a line matter — explained one small step at a time.">
+  <meta property="og:image" content="https://sepehrniaz.ir/assets/og-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#070b14">
+  <script type="application/ld+json">[{"@context":"https://schema.org","@type":"TechArticle","headline":"Python from absolute zero","description":"For someone who has never programmed: what a program is, how Python reads your lines, and why the spaces at the start of a line matter — explained one small step at a time.","inLanguage":"en","url":"https://sepehrniaz.ir/en/python-from-zero/","mainEntityOfPage":"https://sepehrniaz.ir/en/python-from-zero/","image":"https://sepehrniaz.ir/assets/og-card.jpg","author":{"@type":"Person","name":"Sepehr Niaz","alternateName":"سپهر نیاز","url":"https://sepehrniaz.ir/resume"},"publisher":{"@type":"Person","name":"Sepehr Niaz","url":"https://sepehrniaz.ir/"},"datePublished":"2026-11-01","dateModified":"2026-11-01","timeRequired":"PT35M"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Learn","item":"https://sepehrniaz.ir/"},{"@type":"ListItem","position":2,"name":"Programming","item":"https://sepehrniaz.ir/#articles"},{"@type":"ListItem","position":3,"name":"Python from absolute zero","item":"https://sepehrniaz.ir/en/python-from-zero/"}]}]</script>
+  <script>
+    (function () {
+      var d = document.documentElement;
+      try { var t = localStorage.getItem("theme"); if (t) d.dataset.theme = t; localStorage.setItem("lang", d.lang); } catch (e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Vazirmatn:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body data-page="article" data-article="python-from-zero">
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="logo" id="logo"></a>
+      <div class="nav-links">
+        <a href="index.html#tracks" data-i18n="navTracks">Tracks</a>
+        <a href="index.html#articles" data-i18n="navArticles">Articles</a>
+        <a href="index.html#lab" data-i18n="navLab">Lab</a>
+        <a href="index.html#library" data-i18n="navBooks">Books</a>
+        <a href="index.html#portfolio" data-i18n="navTools">Tools</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn lang-btn" id="lang-toggle">فا</button>
+        <button class="icon-btn" id="theme-toggle"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></button>
+        <a href="resume.html" class="btn primary sm" data-i18n="navResume">Résumé</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="article-main">
+    <article class="wrap adoc-body adoc-page">
+      <nav class="crumbs" aria-label="breadcrumb">
+        <a href="index.html">Learn</a><span aria-hidden="true">/</span>
+        <a href="index.html#topic/programming">Programming</a>
+      </nav>
+      <div class="adoc-hero"><img class="adoc-logo" src="assets/learn/logos/python.svg" alt="" width="88" height="88"><div>
+      <p class="adoc-kick">Beginner · 35 min read · Updated 2026-11</p>
+      <h1>Python from absolute zero</h1></div></div>
+      <p class="adoc-summary">For someone who has never programmed: what a program is, how Python reads your lines, and why the spaces at the start of a line matter — explained one small step at a time.</p>
+      <div class="adoc-content"><div class="study-box goals"><b>After this lesson you can</b><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Explain what a program is and how Python reads it</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Write print, variables, if / elif / else, for, while and def without help</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Say exactly why and where a line must be indented, and fix an IndentationError</span></li></ul></div><h2>What is a program?</h2><p>A program is a list of instructions written in a text file. The computer reads the file from the top, one line at a time, and does exactly what each line says — nothing more, and nothing it was not told. It does not guess what you meant. That sounds strict, and it is, but it is also good news: when something goes wrong, the reason is always written on the screen in front of you.</p><p>Python is one of the languages you can write those instructions in. It was designed to be read easily, which is why schools, scientists, network engineers and security teams all use it. You do not need to be good at mathematics. You need patience, and the habit of typing the examples yourself.</p><div class="doc-note tip"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"></path></svg><div>Open the Python tab of the practice lab in another window and type every example in this lesson. Reading teaches you about ten per cent; typing teaches the rest.</div></div><h2>Your first line: print</h2><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="print(%22Hello%2C%20world!%22)%0Aprint(%22My%20name%20is%22%2C%20%22Sara%22)%0Aprint(2%20%2B%203)%0Aprint(%222%20%2B%203%22)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button></div><pre dir="ltr"><code>print("Hello, world!")
+print("My name is", "Sara")
+print(2 + 3)
+print("2 + 3")</code></pre></figure><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">python3 hello.py</span>
+<span class="o">Hello, world!</span>
+<span class="o">My name is Sara</span>
+<span class="o">5</span>
+<span class="o">2 + 3</span></pre></div><figcaption>Four lines in, four lines out.</figcaption></figure><p>Look at each piece, because every later line is built from the same pieces. print is the name of a command (Python calls it a function) that shows something on the screen. The round brackets ( ) hold what you hand to the command; they must open and close. The quotation marks " " tell Python 'this is text, show it exactly as written'. Without quotation marks Python tries to work the thing out — which is why print(2 + 3) shows 5, but print("2 + 3") shows the characters 2 + 3. A comma between two things prints both with a space between them.</p><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Capital letters matter: Print and PRINT do not exist; only print does.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Every ( needs a ) and every " needs a second ".</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>One instruction per line. You do not put a full stop or a semicolon at the end.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>A line that starts with # is a comment: a note for people. Python skips it.</span></li></ul><h2>Variables: giving a value a name</h2><p>A variable is a name that points to a value, like a label on a box. You create it with a single equals sign: the name goes on the left, the value on the right. Read  age = 17  as 'let age be 17', not as 'age equals 17'. That is why the second line below is not nonsense: it means 'take the current age, add one, and store the result under the same name'.</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="age%20%3D%2017%0Aage%20%3D%20age%20%2B%201%0Aname%20%3D%20%22Sara%22%0Aprint(name%2C%20%22is%22%2C%20age)%0Aprint(type(age)%2C%20type(name)%2C%20type(3.5)%2C%20type(True))"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button></div><pre dir="ltr"><code>age = 17
+age = age + 1
+name = "Sara"
+print(name, "is", age)
+print(type(age), type(name), type(3.5), type(True))</code></pre></figure><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">python3 vars.py</span>
+<span class="o">Sara is 18</span>
+<span class="o">&lt;class 'int'&gt; &lt;class 'str'&gt; &lt;class 'float'&gt; &lt;class 'bool'&gt;</span></pre></div><figcaption>type() tells you what kind of value a name holds.</figcaption></figure><div class="doc-table"><table><thead><tr><th>Type</th><th>Example</th><th>What it is</th></tr></thead><tbody><tr><td dir="ltr"><code>int</code></td><td dir="ltr"><code>17</code></td><td>A whole number</td></tr><tr><td dir="ltr"><code>float</code></td><td dir="ltr"><code>3.5</code></td><td>A number with a decimal point</td></tr><tr><td dir="ltr"><code>str</code></td><td dir="ltr"><code>"Sara"</code></td><td>Text (a string of characters), always inside quotation marks</td></tr><tr><td dir="ltr"><code>bool</code></td><td dir="ltr"><code>True</code></td><td>Yes or no: only True or False, with a capital first letter</td></tr></tbody></table></div><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Names may contain letters, digits and the underscore _, but cannot start with a digit and cannot contain spaces.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Choose names that explain themselves: student_count is better than sc or x.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>name and Name are two different variables.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>A few words belong to Python and cannot be used as names: if, for, def, True, class and about thirty others.</span></li></ul><h2>Text and numbers are different things</h2><p>"42" in quotation marks is two characters of text; 42 without them is a number you can calculate with. Python never mixes them silently, and that protects you from a whole family of mistakes. When you need to cross from one to the other, you convert on purpose: int() makes a whole number, float() a decimal number and str() text.</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="text%20%3D%20%2242%22%0Anumber%20%3D%20int(text)%0Aprint(number%20%2B%201)%0Aprint(text%20%2B%20%221%22)%0Aprint(float(%223.5%22)%20*%202%2C%20str(7)%20%2B%20%22%20days%22)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button></div><pre dir="ltr"><code>text = "42"
+number = int(text)
+print(number + 1)
+print(text + "1")
+print(float("3.5") * 2, str(7) + " days")</code></pre></figure><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">python3 conv.py</span>
+<span class="o">43</span>
+<span class="o">421</span>
+<span class="o">7.0 7 days</span></pre></div><figcaption>With numbers + adds; with text + glues the pieces together.</figcaption></figure><h2>Asking yes-or-no questions</h2><p>Programs become useful when they can decide. A decision starts with a question whose answer is True or False. Notice the double equals sign: one = stores a value, two == ask 'are these the same?'. Mixing them up is the most common beginner mistake of all.</p><div class="doc-table"><table><thead><tr><th>Sign</th><th>Question</th><th>Example</th><th>Answer</th></tr></thead><tbody><tr><td dir="ltr"><code>==</code></td><td>equal to?</td><td dir="ltr"><code>10 == 3</code></td><td dir="ltr"><code>False</code></td></tr><tr><td dir="ltr"><code>!=</code></td><td>not equal to?</td><td dir="ltr"><code>10 != 3</code></td><td dir="ltr"><code>True</code></td></tr><tr><td dir="ltr"><code>&gt;</code></td><td>greater than?</td><td dir="ltr"><code>10 &gt; 3</code></td><td dir="ltr"><code>True</code></td></tr><tr><td dir="ltr"><code>&lt;</code></td><td>less than?</td><td dir="ltr"><code>10 &lt; 3</code></td><td dir="ltr"><code>False</code></td></tr><tr><td dir="ltr"><code>&gt;=</code></td><td>greater than or equal to?</td><td dir="ltr"><code>18 &gt;= 18</code></td><td dir="ltr"><code>True</code></td></tr><tr><td dir="ltr"><code>and</code></td><td>are both true?</td><td dir="ltr"><code>True and False</code></td><td dir="ltr"><code>False</code></td></tr><tr><td dir="ltr"><code>or</code></td><td>is at least one true?</td><td dir="ltr"><code>True or False</code></td><td dir="ltr"><code>True</code></td></tr><tr><td dir="ltr"><code>not</code></td><td>the opposite</td><td dir="ltr"><code>not True</code></td><td dir="ltr"><code>False</code></td></tr></tbody></table></div><h2>if — and why the next line must start with spaces</h2><p>This is the part that confuses nearly everyone at first, so we will go slowly. An if statement has two parts. The first line asks the question and ends with a colon. The colon means 'what follows belongs to me'. The lines after it that are pushed to the right — indented, by four spaces — are the lines that run only when the answer is True. Together they are called a block.</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="age%20%3D%2015%0Aif%20age%20%3E%3D%2018%3A%0A%20%20%20%20print(%22You%20can%20vote.%22)%0A%20%20%20%20print(%22You%20can%20drive.%22)%0Aprint(%22Thanks%20for%20coming.%22)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button></div><pre dir="ltr"><code>age = 15
+if age &gt;= 18:
+    print("You can vote.")
+    print("You can drive.")
+print("Thanks for coming.")</code></pre></figure><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">python3 block.py</span>
+<span class="o">Thanks for coming.</span></pre></div><figcaption>age is 15, so the two indented lines are skipped. The last line is not indented, so it is outside the if and always runs.</figcaption></figure><p>Why spaces? Python needs some way to know where the 'only if true' part begins and ends. Many other languages use curly brackets { } for this and treat the spaces as decoration. Python's designer chose the spaces themselves as the rule, because good programmers indent their code anyway — so in Python, the way the code looks is the way it works. The spaces are not style. They are grammar. Move a line four spaces to the left and you have changed what the program does.</p><p>Here is what Python says when you forget — first the spaces, then the colon. Read both messages: they tell you the line number and exactly what was expected.</p><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">python3 bad_indent.py</span>
+<span class="o">  File "bad_indent.py", line 3</span>
+<span class="o">    print("adult")</span>
+<span class="o">    ^^^^^</span>
+<span class="o">IndentationError: expected an indented block after 'if' statement on line 2</span>
+<span class="p">$</span> <span class="k">python3 no_colon.py</span>
+<span class="o">  File "no_colon.py", line 2</span>
+<span class="o">    if age &gt;= 18</span>
+<span class="o">                ^</span>
+<span class="o">SyntaxError: expected ':'</span></pre></div><figcaption>'Expected an indented block' means: after a line that ends with a colon, the next line must be pushed to the right.</figcaption></figure><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>The rule in one sentence: a line that ends with a colon is always followed by an indented block.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>This holds for every such line: if, elif, else, for, while, def, class, try, except and with.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Use four spaces for each level. Every line of the same block must have exactly the same number.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Do not mix the Tab key and spaces in one file. Good editors — and the practice lab — type four spaces when you press Tab.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>The block ends at the first line that goes back to the left. There is no 'end' word.</span></li></ul><h2>else, elif and blocks inside blocks</h2><p>else is the 'otherwise' branch: it runs when the question was False. elif (short for 'else if') asks another question when the first one failed. A block can contain another if, and then that inner block is indented by four more spaces — eight in total. You can always tell which if a line belongs to by looking straight up from its first character.</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="temperature%20%3D%2035%0Araining%20%3D%20False%0A%0Aif%20temperature%20%3E%2030%3A%0A%20%20%20%20print(%22It%20is%20hot.%22)%0A%20%20%20%20if%20raining%3A%0A%20%20%20%20%20%20%20%20print(%22Take%20an%20umbrella%20anyway.%22)%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20print(%22Take%20water.%22)%0Aelse%3A%0A%20%20%20%20print(%22It%20is%20not%20hot.%22)%0Aprint(%22Have%20a%20good%20day.%22)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button></div><pre dir="ltr"><code>temperature = 35
+raining = False
+
+if temperature &gt; 30:
+    print("It is hot.")
+    if raining:
+        print("Take an umbrella anyway.")
+    else:
+        print("Take water.")
+else:
+    print("It is not hot.")
+print("Have a good day.")</code></pre></figure><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">python3 nested.py</span>
+<span class="o">It is hot.</span>
+<span class="o">Take water.</span>
+<span class="o">Have a good day.</span></pre></div><figcaption>The inner else lines up with the inner if; the outer else lines up with the outer if.</figcaption></figure><h2>Repeating: for and while</h2><p>A loop runs the same block several times. for takes the items of a collection one by one; range(1, 4) produces the numbers 1, 2 and 3 — the last number is not included. The loop line ends with a colon, so the lines that repeat are indented, exactly as with if.</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="for%20n%20in%20range(1%2C%204)%3A%0A%20%20%20%20square%20%3D%20n%20*%20n%0A%20%20%20%20print(n%2C%20%22squared%20is%22%2C%20square)%0Aprint(%22done%22)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button></div><pre dir="ltr"><code>for n in range(1, 4):
+    square = n * n
+    print(n, "squared is", square)
+print("done")</code></pre></figure><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">python3 mixed.py</span>
+<span class="o">1 squared is 1</span>
+<span class="o">2 squared is 4</span>
+<span class="o">3 squared is 9</span>
+<span class="o">done</span></pre></div><figcaption>The two indented lines ran three times; 'done' is outside the loop and ran once.</figcaption></figure><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="count%20%3D%201%0Awhile%20count%20%3C%3D%203%3A%0A%20%20%20%20print(%22count%20is%22%2C%20count)%0A%20%20%20%20count%20%3D%20count%20%2B%201%0Aprint(%22finished%22)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button></div><pre dir="ltr"><code>count = 1
+while count &lt;= 3:
+    print("count is", count)
+    count = count + 1
+print("finished")</code></pre><figcaption>while repeats as long as its question stays True. The line count = count + 1 is what eventually makes it False; without it the loop would never stop (Ctrl+C stops a runaway program).</figcaption></figure><h2>Lists: many values under one name</h2><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="fruits%20%3D%20%5B%22apple%22%2C%20%22banana%22%2C%20%22cherry%22%5D%0Aprint(fruits%5B0%5D)%0Aprint(len(fruits))%0Afruits.append(%22date%22)%0Afor%20fruit%20in%20fruits%3A%0A%20%20%20%20print(%22I%20like%22%2C%20fruit)%0Aprint(fruits%5B10%5D)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button></div><pre dir="ltr"><code>fruits = ["apple", "banana", "cherry"]
+print(fruits[0])
+print(len(fruits))
+fruits.append("date")
+for fruit in fruits:
+    print("I like", fruit)
+print(fruits[10])</code></pre></figure><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">python3 listz.py</span>
+<span class="o">apple</span>
+<span class="o">3</span>
+<span class="o">I like apple</span>
+<span class="o">I like banana</span>
+<span class="o">I like cherry</span>
+<span class="o">I like date</span>
+<span class="o">Traceback (most recent call last):</span>
+<span class="o">  File "listz.py", line 7, in &lt;module&gt;</span>
+<span class="o">    print(fruits[10])</span>
+<span class="o">          ~~~~~~^^^^</span>
+<span class="o">IndexError: list index out of range</span></pre></div><figcaption>Square brackets make a list. Counting starts at 0, so fruits[0] is the first item. Asking for position 10 in a list of four gives an IndexError.</figcaption></figure><h2>Functions: def, and the same rule about spaces</h2><p>A function is a block of code with a name, so that you can use it again without writing it again. You define it with def. Look at the first line piece by piece: def says 'I am defining a function', greet is the name you chose, name inside the brackets is a parameter — a variable that receives whatever is handed in — and the colon at the end, as always, announces a block. So the lines of the function are indented by four spaces. Everything indented under def is the function; the first line that returns to the left margin is outside it.</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="def%20greet(name)%3A%0A%20%20%20%20message%20%3D%20%22Hello%2C%20%22%20%2B%20name%20%2B%20%22!%22%0A%20%20%20%20return%20message%0A%0Aprint(greet(%22Ali%22))%0Aprint(greet(%22Sara%22))%0A%0Adef%20add(a%2C%20b)%3A%0A%20%20%20%20return%20a%20%2B%20b%0A%0Atotal%20%3D%20add(2%2C%203)%0Aprint(total)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button></div><pre dir="ltr"><code>def greet(name):
+    message = "Hello, " + name + "!"
+    return message
+
+print(greet("Ali"))
+print(greet("Sara"))
+
+def add(a, b):
+    return a + b
+
+total = add(2, 3)
+print(total)</code></pre></figure><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">python3 func.py</span>
+<span class="o">Hello, Ali!</span>
+<span class="o">Hello, Sara!</span>
+<span class="o">5</span></pre></div><figcaption>Defining a function does nothing visible. It runs only when you call it by writing its name with brackets.</figcaption></figure><p>return hands a result back to the place that called the function, so you can store it or print it. print only shows something on the screen. They are not the same, and a function that calculates but forgets return gives back the special value None:</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="def%20add(a%2C%20b)%3A%0A%20%20%20%20a%20%2B%20b%20%20%20%20%20%20%20%20%20%20%23%20calculated%2C%20then%20thrown%20away%0A%0Aprint(add(2%2C%203))%20%20%20%23%20None"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button></div><pre dir="ltr"><code>def add(a, b):
+    a + b          # calculated, then thrown away
+
+print(add(2, 3))   # None</code></pre></figure><h2>Reading an error message</h2><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">python3 name_err.py</span>
+<span class="o">Traceback (most recent call last):</span>
+<span class="o">  File "name_err.py", line 2, in &lt;module&gt;</span>
+<span class="o">    print(totl)</span>
+<span class="o">          ^^^^</span>
+<span class="o">NameError: name 'totl' is not defined. Did you mean: 'total'?</span></pre></div><figcaption>Read from the bottom: the kind of error and a plain sentence; above it the exact line, with marks under the problem.</figcaption></figure><p>Errors are the normal state of programming, not a sign that you are bad at it. Professionals see dozens every day. The difference is only that they read the message calmly: which line, what kind of error, what was expected. Python often even suggests the fix, as it did here.</p><h2>Putting it all together</h2><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">python</span><button type="button" class="doc-copy" data-code="%23%20grades.py%20%E2%80%94%20tell%20each%20student%20whether%20they%20passed%0Adef%20result(grade)%3A%0A%20%20%20%20if%20grade%20%3E%3D%2010%3A%0A%20%20%20%20%20%20%20%20return%20%22passed%22%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20return%20%22failed%22%0A%0Agrades%20%3D%20%5B17%2C%208%2C%2012%2C%2019%2C%209%5D%0Apassed%20%3D%200%0A%0Afor%20grade%20in%20grades%3A%0A%20%20%20%20answer%20%3D%20result(grade)%0A%20%20%20%20print(grade%2C%20answer)%0A%20%20%20%20if%20answer%20%3D%3D%20%22passed%22%3A%0A%20%20%20%20%20%20%20%20passed%20%3D%20passed%20%2B%201%0A%0Aprint(passed%2C%20%22of%22%2C%20len(grades)%2C%20%22students%20passed%22)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button></div><pre dir="ltr"><code># grades.py — tell each student whether they passed
+def result(grade):
+    if grade &gt;= 10:
+        return "passed"
+    else:
+        return "failed"
+
+grades = [17, 8, 12, 19, 9]
+passed = 0
+
+for grade in grades:
+    answer = result(grade)
+    print(grade, answer)
+    if answer == "passed":
+        passed = passed + 1
+
+print(passed, "of", len(grades), "students passed")</code></pre><figcaption>Every idea of this lesson in seventeen lines: a comment, a function, if and else, a list, a loop, a block inside a block, and three levels of indentation. Type it, run it, then change the pass mark to 12.</figcaption></figure><h2>Common mistakes</h2><ul class="doc-list study-bad"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>Forgetting the colon at the end of if, else, for, while or def.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>Not indenting the line after a colon — or indenting some lines of a block by 4 spaces and others by 3.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>Writing = when asking a question. if age = 18 is an error; it must be if age == 18.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>Forgetting the quotation marks, so Python looks for a variable called Sara.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>Using print inside a function when you meant return.</span></li></ul>
+      <h2>Exercises</h2><p>Try each one yourself first, then open the answer.</p><ol class="study-q"><li><p>What does this print, and why?
+
+x = 5
+if x &gt; 10:
+    print("big")
+print("end")</p><details><summary>Show the answer</summary><pre dir="auto">Only: end
+x &gt; 10 is False, so the indented line is skipped. print("end") is not indented, so it is outside the if.</pre></details></li><li><p>Find the two mistakes:
+
+def double(n)
+return n * 2</p><details><summary>Show the answer</summary><pre dir="auto">The colon after def double(n) is missing, and return must be indented by four spaces:
+
+def double(n):
+    return n * 2</pre></details></li><li><p>Write a program that prints the numbers 1 to 10 and, next to each, the word even or odd. (Hint: n % 2 is 0 for even numbers.)</p><details><summary>Show the answer</summary><pre dir="auto">for n in range(1, 11):
+    if n % 2 == 0:
+        print(n, "even")
+    else:
+        print(n, "odd")</pre></details></li><li><p>Write a function biggest(a, b) that returns the larger of two numbers, and print biggest(7, 12).</p><details><summary>Show the answer</summary><pre dir="auto">def biggest(a, b):
+    if a &gt; b:
+        return a
+    else:
+        return b
+
+print(biggest(7, 12))</pre></details></li><li><p>Why does print("10" + 5) fail, and what are two ways to fix it?</p><details><summary>Show the answer</summary><pre dir="auto">"10" is text and 5 is a number. Either make both numbers — print(int("10") + 5) gives 15 — or both text — print("10" + str(5)) gives 105.</pre></details></li></ol>
+      <p><a class="btn primary sm" href="practice/">Practise this in the lab</a></p>
+      <div class="study-box recap"><b>Remember</b><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Python reads top to bottom, one instruction per line.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>A colon at the end of a line promises a block; the block is the lines indented by four spaces under it.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>= stores, == asks. Text lives in quotation marks.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>def makes a function, return gives its answer back.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Read errors from the bottom line up.</span></li></ul></div></div>
+      <nav class="adoc-nav">
+        <span></span>
+        <a class="adoc-navbtn next" href="en/python-10-minutes/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span><small>Next</small><b>Python: your first real programs</b></span></a>
+      </nav>
+      <a class="btn adoc-back" href="index.html#articles"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span>All articles</span></a>
+    </article>
+  </main>
+
+  <footer class="site-footer" id="site-footer"><div class="wrap">
+      <div class="foot-grid"><nav class="foot-col"><h4>Quick links</h4><ul><li><a href="index.html#tracks"><bdi>Tracks</bdi></a></li><li><a href="index.html#articles"><bdi>Articles</bdi></a></li><li><a href="index.html#library"><bdi>Books</bdi></a></li><li><a href="index.html#portfolio"><bdi>Tools</bdi></a></li><li><a href="index.html#lab"><bdi>Lab</bdi></a></li><li><a href="resume.html"><bdi>Résumé</bdi></a></li><li><a href="resume.html#contact"><bdi>Contact</bdi></a></li></ul></nav><nav class="foot-col"><h4>Learning topics</h4><ul><li><a href="index.html#topic/linux"><bdi>Linux</bdi></a></li><li><a href="index.html#topic/programming"><bdi>Programming</bdi></a></li><li><a href="index.html#topic/network"><bdi>Networking</bdi></a></li><li><a href="index.html#topic/security"><bdi>Security</bdi></a></li></ul></nav><nav class="foot-col"><h4>Latest articles</h4><ul><li><a href="en/authorised-testing/"><bdi>Authorised security testing: thinking like an attacker, legally</bdi></a></li><li><a href="en/firewalls-hardening/"><bdi>Firewalls and hardening</bdi></a></li><li><a href="en/reading-logs/"><bdi>Reading logs: finding an attack in the noise</bdi></a></li><li><a href="en/security-mindset/"><bdi>The security mindset</bdi></a></li></ul></nav><nav class="foot-col"><h4>Certificates</h4><ul><li><a href="resume.html#certifications"><bdi>Cyber Security Pack</bdi></a></li><li><a href="resume.html#certifications"><bdi>F5 Package</bdi></a></li><li><a href="resume.html#certifications"><bdi>Security+</bdi></a></li><li><a href="resume.html#certifications"><bdi>Cisco CCNA 200-301</bdi></a></li><li><a href="resume.html#certifications"><bdi>Duolingo English Test</bdi></a></li></ul></nav></div>
+      <div class="foot-card">
+        <a class="foot-id" href="resume.html">
+          <span class="foot-badge"><img src="assets/photo.jpg" alt="Sepehr Niaz" loading="lazy"></span>
+          <span class="foot-name"><b>Sepehr Niaz</b><small>IT Technician · Network &amp; Security</small></span>
+        </a>
+        <p class="foot-tag">IT technician in Shiraz. I write free, practical lessons on networking, security and Linux — and I'm available for IT and network work.</p>
+        <div class="foot-social"><a href="mailto:niazsepehr7@gmail.com" aria-label="Email" title="Email"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 5L2 7"></path></svg></a><a href="tel:+989177886291" aria-label="Call" title="Call"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a><a href="https://wa.me/989177886291" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg></a><a href="https://github.com/sepehrniaz" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a></div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 Sepehr Niaz · Shiraz, Iran</span>
+        <a href="tel:+989177886291">Phone: <bdi dir="ltr">0917 788 6291</bdi></a>
+      </div>
+    </div></footer>
+
+  <script src="config.js"></script>
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+  <script src="bot/nlu.js"></script>
+  <script src="bot/knowledge.js"></script>
+  <script src="bot/teacher.js"></script>
+  <script src="bot/engine.js"></script>
+  <script src="bot/guide.js"></script>
+  <script src="assistant.js"></script>
+</body></html>

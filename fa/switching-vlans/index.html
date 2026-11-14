@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="fa" dir="rtl"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="../../">
+  <title>سوئیچینگ و VLAN — سپهر نیاز</title>
+  <meta name="description" content="چطور یک مجموعه سوئیچ را به چند شبکه‌ی جدا تقسیم کنی، پورت Access و Trunk چیست و هر سوئیچ چه تنظیمات امنیتی‌ای باید داشته باشد — با دستورهای سیسکو.">
+  <meta name="author" content="Sepehr Niaz">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sepehrniaz.ir/fa/switching-vlans/">
+  <link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/switching-vlans/">
+  <link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/switching-vlans/">
+  <link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/switching-vlans/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/photo.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://sepehrniaz.ir/fa/switching-vlans/">
+  <meta property="og:site_name" content="Sepehr Niaz">
+  <meta property="og:locale" content="fa_IR">
+  <meta property="og:title" content="سوئیچینگ و VLAN">
+  <meta property="og:description" content="چطور یک مجموعه سوئیچ را به چند شبکه‌ی جدا تقسیم کنی، پورت Access و Trunk چیست و هر سوئیچ چه تنظیمات امنیتی‌ای باید داشته باشد — با دستورهای سیسکو.">
+  <meta property="og:image" content="https://sepehrniaz.ir/assets/og-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#070b14">
+  <script type="application/ld+json">[{"@context":"https://schema.org","@type":"TechArticle","headline":"سوئیچینگ و VLAN","description":"چطور یک مجموعه سوئیچ را به چند شبکه‌ی جدا تقسیم کنی، پورت Access و Trunk چیست و هر سوئیچ چه تنظیمات امنیتی‌ای باید داشته باشد — با دستورهای سیسکو.","inLanguage":"fa","url":"https://sepehrniaz.ir/fa/switching-vlans/","mainEntityOfPage":"https://sepehrniaz.ir/fa/switching-vlans/","image":"https://sepehrniaz.ir/assets/og-card.jpg","author":{"@type":"Person","name":"Sepehr Niaz","alternateName":"سپهر نیاز","url":"https://sepehrniaz.ir/resume"},"publisher":{"@type":"Person","name":"Sepehr Niaz","url":"https://sepehrniaz.ir/"},"datePublished":"2026-11-01","dateModified":"2026-11-01","timeRequired":"PT26M"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"آموزش","item":"https://sepehrniaz.ir/"},{"@type":"ListItem","position":2,"name":"شبکه","item":"https://sepehrniaz.ir/#articles"},{"@type":"ListItem","position":3,"name":"سوئیچینگ و VLAN","item":"https://sepehrniaz.ir/fa/switching-vlans/"}]}]</script>
+  <script>
+    (function () {
+      var d = document.documentElement;
+      try { var t = localStorage.getItem("theme"); if (t) d.dataset.theme = t; localStorage.setItem("lang", d.lang); } catch (e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Vazirmatn:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body data-page="article" data-article="switching-vlans">
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="logo" id="logo"></a>
+      <div class="nav-links">
+        <a href="index.html#tracks" data-i18n="navTracks">مسیرها</a>
+        <a href="index.html#articles" data-i18n="navArticles">مقاله‌ها</a>
+        <a href="index.html#lab" data-i18n="navLab">آزمایشگاه</a>
+        <a href="index.html#library" data-i18n="navBooks">کتاب‌ها</a>
+        <a href="index.html#portfolio" data-i18n="navTools">ابزارها</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn lang-btn" id="lang-toggle">EN</button>
+        <button class="icon-btn" id="theme-toggle"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></button>
+        <a href="resume.html" class="btn primary sm" data-i18n="navResume">رزومه</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="article-main">
+    <article class="wrap adoc-body adoc-page">
+      <nav class="crumbs" aria-label="breadcrumb">
+        <a href="index.html">آموزش</a><span aria-hidden="true">/</span>
+        <a href="index.html#topic/network">شبکه</a>
+      </nav>
+      <div class="adoc-hero"><img class="adoc-logo" src="assets/learn/logos/network.svg" alt="" width="88" height="88"><div>
+      <p class="adoc-kick">متوسط · ۲۶ دقیقه مطالعه · به‌روزرسانی ۲۰۲۶-۱۱</p>
+      <h1>سوئیچینگ و VLAN</h1></div></div>
+      <p class="adoc-summary">چطور یک مجموعه سوئیچ را به چند شبکه‌ی جدا تقسیم کنی، پورت Access و Trunk چیست و هر سوئیچ چه تنظیمات امنیتی‌ای باید داشته باشد — با دستورهای سیسکو.</p>
+      <div class="adoc-content"><div class="study-box goals"><b>بعد از این درس می‌توانی</b><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>توضیح بدهی VLAN چیست و چرا استفاده می‌شود</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>پورت Access را از Trunk تشخیص بدهی و هر دو را تنظیم کنی</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>بگویی VLANها چطور به هم می‌رسند و تنظیمات امنیتی پایه‌ی سوئیچ را فهرست کنی</span></li></ul></div><h2>مشکلی که VLAN حل می‌کند</h2><p>یک هتل می‌خواهد مهمان‌ها، کامپیوترهای کارمندان و دوربین‌ها در شبکه‌های جدا باشند تا مهمان هیچ‌وقت به سرور حسابداری نرسد. راه ساده سه دسته سوئیچ و سه دسته کابل است — سه برابر هزینه. VLAN (شبکه‌ی محلی مجازی) همین کار را با یک دسته انجام می‌دهد: به سوئیچ می‌گویی «پورت‌های ۱ تا ۱۲ شبکه‌ی ۱۰ هستند و پورت‌های ۱۳ تا ۲۰ شبکه‌ی ۲۰» و سوئیچ با آن‌ها طوری رفتار می‌کند که انگار سوئیچ‌های جدا هستند. دستگاهی در VLAN 10 حتی دستگاه VLAN 20 را نمی‌بیند؛ ترافیک بینشان باید از روتر یا فایروالی بگذرد که تو تعیین می‌کنی چه چیزی مجاز است.</p><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>امنیت: گروه‌هایی که نباید به هم برسند جدا می‌شوند.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>سروصدای کمتر: Broadcast داخل VLAN خودش می‌ماند.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>انعطاف: جابه‌جاکردن یک نفر به بخش دیگر یک تنظیم است، نه کابل جدید.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>هر VLAN شبکه‌ی IP خودش است، با زیرشبکه و گیت‌وی خودش — مثلاً VLAN 10 می‌تواند 192.168.10.0/24 باشد و VLAN 20 برابر 192.168.20.0/24.</span></li></ul><h2>پورت Access و پورت Trunk</h2><p>پورت سوئیچ یکی از این دو نوع است. پورت Access دقیقاً مال یک VLAN است و جایی است که یک دستگاه معمولی وصل می‌شود — کامپیوتر، پرینتر، دوربین. خود دستگاه از VLAN چیزی نمی‌داند. پورت Trunk چند VLAN را هم‌زمان حمل می‌کند و سوئیچ‌ها را به هم یا سوئیچ را به روتر وصل می‌کند. برای جدا نگه‌داشتن VLANها روی آن کابل مشترک، سوئیچ به هر فریم برچسب کوچکی اضافه می‌کند که می‌گوید مال کدام VLAN است. استاندارد این برچسب 802.1Q نام دارد و به خود برچسب «تگ» می‌گویند.</p><div class="doc-table"><table><thead><tr><th></th><th>پورت Access</th><th>پورت Trunk</th></tr></thead><tbody><tr><td>حمل می‌کند</td><td>یک VLAN</td><td>چند VLAN</td></tr><tr><td>فریم‌ها</td><td>بدون تگ</td><td>تگ‌دار (802.1Q)</td></tr><tr><td>وصل می‌شود به</td><td>کامپیوتر، پرینتر، دوربین</td><td>سوئیچ، روتر، اکسس‌پوینت</td></tr></tbody></table></div><h2>تنظیم آن روی سوئیچ سیسکو</h2><p>خط فرمان سیسکو سطح دارد. در حالت کاربر شروع می‌کنی (خط فرمان با &gt; تمام می‌شود). enable تو را به حالت ممتاز (#) می‌برد که همه‌چیز را می‌توانی ببینی. configure terminal تو را به حالت پیکربندی می‌برد که آنجا تغییر می‌دهی. دستورها را می‌شود کوتاه نوشت به شرطی که یکتا بمانند و علامت سؤال نشان می‌دهد بعدش چه می‌توانی تایپ کنی.</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">cisco</span><button type="button" class="doc-copy" data-code="Switch%3E%20enable%0ASwitch%23%20configure%20terminal%0A%0A!%201.%20create%20the%20VLANs%20and%20name%20them%0ASwitch(config)%23%20vlan%2010%0ASwitch(config-vlan)%23%20name%20STAFF%0ASwitch(config-vlan)%23%20vlan%2020%0ASwitch(config-vlan)%23%20name%20GUESTS%0ASwitch(config-vlan)%23%20exit%0A%0A!%202.%20put%20ports%201-12%20in%20VLAN%2010%20as%20access%20ports%0ASwitch(config)%23%20interface%20range%20GigabitEthernet1%2F0%2F1%20-%2012%0ASwitch(config-if-range)%23%20switchport%20mode%20access%0ASwitch(config-if-range)%23%20switchport%20access%20vlan%2010%0ASwitch(config-if-range)%23%20exit%0A%0A!%203.%20make%20port%2024%20a%20trunk%20to%20the%20next%20switch%0ASwitch(config)%23%20interface%20GigabitEthernet1%2F0%2F24%0ASwitch(config-if)%23%20switchport%20mode%20trunk%0ASwitch(config-if)%23%20switchport%20trunk%20allowed%20vlan%2010%2C20%0ASwitch(config-if)%23%20end%0A%0A!%204.%20look%2C%20then%20save%0ASwitch%23%20show%20vlan%20brief%0ASwitch%23%20show%20interfaces%20trunk%0ASwitch%23%20copy%20running-config%20startup-config"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code>Switch&gt; enable
+Switch# configure terminal
+
+! 1. create the VLANs and name them
+Switch(config)# vlan 10
+Switch(config-vlan)# name STAFF
+Switch(config-vlan)# vlan 20
+Switch(config-vlan)# name GUESTS
+Switch(config-vlan)# exit
+
+! 2. put ports 1-12 in VLAN 10 as access ports
+Switch(config)# interface range GigabitEthernet1/0/1 - 12
+Switch(config-if-range)# switchport mode access
+Switch(config-if-range)# switchport access vlan 10
+Switch(config-if-range)# exit
+
+! 3. make port 24 a trunk to the next switch
+Switch(config)# interface GigabitEthernet1/0/24
+Switch(config-if)# switchport mode trunk
+Switch(config-if)# switchport trunk allowed vlan 10,20
+Switch(config-if)# end
+
+! 4. look, then save
+Switch# show vlan brief
+Switch# show interfaces trunk
+Switch# copy running-config startup-config</code></pre><figcaption>خط‌هایی که با ! شروع می‌شوند توضیح‌اند. دستور آخر پیکربندی را ذخیره می‌کند؛ بدون آن با راه‌اندازی دوباره‌ی سوئیچ همه‌چیز از بین می‌رود.</figcaption></figure><h2>ارتباط بین VLANها: مسیریابی بین VLAN</h2><p>VLANهای جدا شبکه‌های جدا هستند، پس فقط روتر می‌تواند ترافیک را بینشان عبور بدهد. دو طراحی رایج هست. در «Router on a Stick» یک کابل Trunk به روتری می‌رود که برای هر VLAN یک رابط مجازی دارد. در سوئیچ لایه‌ی ۳ خودِ سوئیچ در هر VLAN آدرس دارد و بینشان مسیریابی می‌کند که سریع‌تر است و امروز بیشتر اداره‌ها از آن استفاده می‌کنند. در هر دو حالت، همان آدرس گیت‌وی پیش‌فرض دستگاه‌های آن VLAN می‌شود — و جایی که قانون‌هایی مثل «مهمان به اینترنت برسد ولی به شبکه‌ی کارمندان نه» را می‌گذاری.</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">cisco</span><button type="button" class="doc-copy" data-code="!%20on%20a%20layer%203%20switch%0ASwitch(config)%23%20ip%20routing%0ASwitch(config)%23%20interface%20vlan%2010%0ASwitch(config-if)%23%20ip%20address%20192.168.10.1%20255.255.255.0%0ASwitch(config-if)%23%20no%20shutdown%0ASwitch(config)%23%20interface%20vlan%2020%0ASwitch(config-if)%23%20ip%20address%20192.168.20.1%20255.255.255.0%0ASwitch(config-if)%23%20no%20shutdown"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code>! on a layer 3 switch
+Switch(config)# ip routing
+Switch(config)# interface vlan 10
+Switch(config-if)# ip address 192.168.10.1 255.255.255.0
+Switch(config-if)# no shutdown
+Switch(config)# interface vlan 20
+Switch(config-if)# ip address 192.168.20.1 255.255.255.0
+Switch(config-if)# no shutdown</code></pre></figure><h2>حلقه و Spanning Tree</h2><p>شبکه‌ها اغلب بین سوئیچ‌ها کابل یدکی دارند تا یک اتصال خراب یک طبقه را قطع نکند. ولی دو مسیر بین همان سوئیچ‌ها یک حلقه می‌سازد و فریم Broadcast تا ابد در آن می‌چرخد و آن‌قدر زیاد می‌شود که شبکه در چند ثانیه می‌ایستد — «طوفان Broadcast». پروتکل Spanning Tree (STP) خودکار جلوی این را می‌گیرد: سوئیچ‌ها با هم حرف می‌زنند، حلقه‌ها را پیدا می‌کنند و اتصال‌های یدکی را می‌بندند و فقط وقتی اتصال اصلی خراب شود دوباره بازشان می‌کنند. به‌طور پیش‌فرض روشن است. روشن بگذارش.</p><h2>تنظیمات امنیتی که هر سوئیچ باید داشته باشد</h2><div class="doc-table"><table><thead><tr><th>تنظیم</th><th>جلوی چه چیزی را می‌گیرد</th></tr></thead><tbody><tr><td dir="ltr"><code>Port security</code></td><td>اینکه کسی کامپیوتر را بکشد و دستگاه خودش یا یک سوئیچ کوچک وصل کند</td></tr><tr><td dir="ltr"><code>BPDU Guard</code></td><td>وصل‌شدن سوئیچ به پورت Access و به‌هم‌ریختن Spanning Tree</td></tr><tr><td dir="ltr"><code>DHCP snooping</code></td><td>سرور DHCP جعلی که تنظیمات اشتباه پخش می‌کند</td></tr><tr><td dir="ltr"><code>Storm control</code></td><td>طوفان Broadcast که کل شبکه را از کار می‌اندازد</td></tr><tr><td>خاموشی پورت‌های بلااستفاده</td><td>وصل‌شدن یک بازدیدکننده به پریز خالی دیوار</td></tr><tr><td>SSH به‌جای Telnet</td><td>خوانده‌شدن رمز مدیر از روی شبکه</td></tr><tr><td>Native VLAN بدون کاربر</td><td>حمله‌ی VLAN Hopping از راه Trunk</td></tr></tbody></table></div><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">cisco</span><button type="button" class="doc-copy" data-code="Switch(config)%23%20interface%20range%20GigabitEthernet1%2F0%2F1%20-%2012%0ASwitch(config-if-range)%23%20switchport%20port-security%0ASwitch(config-if-range)%23%20switchport%20port-security%20maximum%202%0ASwitch(config-if-range)%23%20switchport%20port-security%20violation%20restrict%0ASwitch(config-if-range)%23%20spanning-tree%20portfast%0ASwitch(config-if-range)%23%20spanning-tree%20bpduguard%20enable%0ASwitch(config-if-range)%23%20storm-control%20broadcast%20level%205.00%0A%0ASwitch(config)%23%20interface%20range%20GigabitEthernet1%2F0%2F21%20-%2023%0ASwitch(config-if-range)%23%20shutdown"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>کپی</span></button></div><pre dir="ltr"><code>Switch(config)# interface range GigabitEthernet1/0/1 - 12
+Switch(config-if-range)# switchport port-security
+Switch(config-if-range)# switchport port-security maximum 2
+Switch(config-if-range)# switchport port-security violation restrict
+Switch(config-if-range)# spanning-tree portfast
+Switch(config-if-range)# spanning-tree bpduguard enable
+Switch(config-if-range)# storm-control broadcast level 5.00
+
+Switch(config)# interface range GigabitEthernet1/0/21 - 23
+Switch(config-if-range)# shutdown</code></pre><figcaption>تایپ دستی این‌ها برای هر سوئیچ کند و پرخطاست. «تولیدکننده‌ی کانفیگ سوئیچ سیسکو» در بخش ابزارها کل فایل را از یک توصیف کوتاه می‌نویسد — آموزش ساختش نشان می‌دهد چطور.</figcaption></figure><h2>طرح، قبل از اولین دستور</h2><div class="doc-table"><table><thead><tr><th>VLAN</th><th>نام</th><th>زیرشبکه</th><th>گیت‌وی</th><th>چه کسانی</th></tr></thead><tbody><tr><td dir="ltr"><code>10</code></td><td dir="ltr"><code>STAFF</code></td><td dir="ltr"><code>192.168.10.0/24</code></td><td dir="ltr"><code>192.168.10.1</code></td><td>کامپیوترهای اداری</td></tr><tr><td dir="ltr"><code>20</code></td><td dir="ltr"><code>GUESTS</code></td><td dir="ltr"><code>192.168.20.0/23</code></td><td dir="ltr"><code>192.168.20.1</code></td><td>وای‌فای مهمان، فقط اینترنت</td></tr><tr><td dir="ltr"><code>30</code></td><td dir="ltr"><code>CAMERAS</code></td><td dir="ltr"><code>192.168.30.0/26</code></td><td dir="ltr"><code>192.168.30.1</code></td><td>دوربین‌ها و دستگاه ضبط</td></tr><tr><td dir="ltr"><code>40</code></td><td dir="ltr"><code>VOICE</code></td><td dir="ltr"><code>192.168.40.0/24</code></td><td dir="ltr"><code>192.168.40.1</code></td><td>تلفن‌های IP</td></tr><tr><td dir="ltr"><code>99</code></td><td dir="ltr"><code>MGMT</code></td><td dir="ltr"><code>192.168.99.0/27</code></td><td dir="ltr"><code>192.168.99.1</code></td><td>مدیریت سوئیچ‌ها و روترها</td></tr></tbody></table></div><p>کار اصلی همین جدول است و دستورها فقط آن را پیاده می‌کنند. سطح آزمون CCNA هم همین است: اگر بتوانی این جدول را طراحی کنی، پیاده‌اش کنی و توضیح بدهی هر خط چرا آنجاست، داری به‌عنوان تکنسین شبکه کار می‌کنی.</p><h2>اشتباه‌های رایج</h2><ul class="doc-list study-bad"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>فراموش‌کردن ذخیره: copy running-config startup-config.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>VLANی که روی یک سوئیچ هست ولی روی Trunk بینشان مجاز نشده.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>جاگذاشتن کاربران در VLAN 1، پیش‌فرضی که همه‌ی پورت‌ها از آن شروع می‌کنند.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>خاموش‌کردن Spanning Tree «برای سریع‌ترشدن».</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>گذاشتن دو VLAN در یک زیرشبکه‌ی IP.</span></li></ul>
+      <h2>تمرین</h2><p>اول خودت امتحان کن، بعد جواب را باز کن.</p><ol class="study-q"><li><p>کامپیوتری در VLAN 10 نمی‌تواند کامپیوتری در VLAN 20 روی همان سوئیچ را ping کند. خرابی است؟</p><details><summary>نمایش جواب</summary><pre dir="auto">نه — هدف VLAN همین است. فقط از راه روتر یا سوئیچ لایه‌ی ۳ می‌توانند حرف بزنند.</pre></details></li><li><p>دستورهایی را بنویس که پورت Gi1/0/5 را به‌عنوان Access در VLAN 30 قرار می‌دهد.</p><details><summary>نمایش جواب</summary><pre dir="auto">interface GigabitEthernet1/0/5
+ switchport mode access
+ switchport access vlan 30</pre></details></li><li><p>چه نوع پورتی دو سوئیچ را وصل می‌کند و به هر فریم چه چیزی اضافه می‌کند؟</p><details><summary>نمایش جواب</summary><pre dir="auto">پورت Trunk. یک تگ 802.1Q با شماره‌ی VLAN اضافه می‌کند.</pre></details></li><li><p>کسی یک روتر خانگی را به پریز دیوار وصل می‌کند و افراد آدرس اشتباه می‌گیرند. کدام قابلیت سوئیچ جلوی این را می‌گیرد؟</p><details><summary>نمایش جواب</summary><pre dir="auto">DHCP Snooping: فقط پورت‌هایی که «مورد اعتماد» علامت خورده‌اند می‌توانند پیشنهاد DHCP بفرستند.</pre></details></li></ol>
+      <p><a class="btn primary sm" href="practice/">همین را در آزمایشگاه تمرین کن</a></p>
+      <div class="study-box recap"><b>یادت بماند</b><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>VLAN یک شبکه‌ی جدا روی سوئیچ‌های مشترک است.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>پورت Access: یک VLAN، برای دستگاه‌ها. پورت Trunk: چند VLAN، تگ‌دار، بین سوئیچ‌ها.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>VLANها فقط در روتر یا سوئیچ لایه‌ی ۳ به هم می‌رسند.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Spanning Tree را روشن نگه دار، پورت‌های بلااستفاده را خاموش کن و پیکربندی را ذخیره کن.</span></li></ul></div></div>
+      <nav class="adoc-nav">
+        <a class="adoc-navbtn prev" href="fa/network-troubleshooting/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span><small>قبلی</small><b>عیب‌یابی شبکه: روشی که همیشه جواب می‌دهد</b></span></a>
+        <span></span>
+      </nav>
+      <a class="btn adoc-back" href="index.html#articles"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span>همه‌ی مقاله‌ها</span></a>
+    </article>
+  </main>
+
+  <footer class="site-footer" id="site-footer"><div class="wrap">
+      <div class="foot-grid"><nav class="foot-col"><h4>دسترسی سریع</h4><ul><li><a href="index.html#tracks"><bdi>مسیرها</bdi></a></li><li><a href="index.html#articles"><bdi>مقاله‌ها</bdi></a></li><li><a href="index.html#library"><bdi>کتاب‌ها</bdi></a></li><li><a href="index.html#portfolio"><bdi>ابزارها</bdi></a></li><li><a href="index.html#lab"><bdi>آزمایشگاه</bdi></a></li><li><a href="resume.html"><bdi>رزومه</bdi></a></li><li><a href="resume.html#contact"><bdi>تماس</bdi></a></li></ul></nav><nav class="foot-col"><h4>موضوعات آموزشی</h4><ul><li><a href="index.html#topic/linux"><bdi>لینوکس</bdi></a></li><li><a href="index.html#topic/programming"><bdi>برنامه‌نویسی</bdi></a></li><li><a href="index.html#topic/network"><bdi>شبکه</bdi></a></li><li><a href="index.html#topic/security"><bdi>امنیت</bdi></a></li></ul></nav><nav class="foot-col"><h4>تازه‌ترین مقاله‌ها</h4><ul><li><a href="fa/authorised-testing/"><bdi>آزمون امنیتی مجاز: مثل مهاجم فکر کن، ولی قانونی</bdi></a></li><li><a href="fa/firewalls-hardening/"><bdi>فایروال و مقاوم‌سازی</bdi></a></li><li><a href="fa/reading-logs/"><bdi>خواندن لاگ‌ها: پیداکردن حمله در میان شلوغی</bdi></a></li><li><a href="fa/security-mindset/"><bdi>طرز فکر امنیتی</bdi></a></li></ul></nav><nav class="foot-col"><h4>گواهینامه‌ها</h4><ul><li><a href="resume.html#certifications"><bdi>پکیج امنیت سایبری</bdi></a></li><li><a href="resume.html#certifications"><bdi>پکیج F5</bdi></a></li><li><a href="resume.html#certifications"><bdi>Security+</bdi></a></li><li><a href="resume.html#certifications"><bdi>Cisco CCNA 200-301</bdi></a></li><li><a href="resume.html#certifications"><bdi>آزمون زبان دولینگو</bdi></a></li></ul></nav></div>
+      <div class="foot-card">
+        <a class="foot-id" href="resume.html">
+          <span class="foot-badge"><img src="assets/photo.jpg" alt="سپهر نیاز" loading="lazy"></span>
+          <span class="foot-name"><b>سپهر نیاز</b><small>تکنسین IT · شبکه و امنیت</small></span>
+        </a>
+        <p class="foot-tag">تکنسین IT در شیراز. اینجا درس‌های رایگان و عملی شبکه، امنیت و لینوکس می‌نویسم — و برای کارهای IT و شبکه در دسترسم.</p>
+        <div class="foot-social"><a href="mailto:niazsepehr7@gmail.com" aria-label="ایمیل" title="ایمیل"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 5L2 7"></path></svg></a><a href="tel:+989177886291" aria-label="تماس تلفنی" title="تماس تلفنی"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a><a href="https://wa.me/989177886291" target="_blank" rel="noopener" aria-label="واتساپ" title="واتساپ"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg></a><a href="https://github.com/sepehrniaz" target="_blank" rel="noopener" aria-label="گیت‌هاب" title="گیت‌هاب"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a></div>
+      </div>
+      <div class="foot-bottom">
+        <span>© ۲۰۲۶ سپهر نیاز · شیراز، ایران</span>
+        <a href="tel:+989177886291">شماره تماس: <bdi dir="ltr">۰۹۱۷ ۷۸۸ ۶۲۹۱</bdi></a>
+      </div>
+    </div></footer>
+
+  <script src="config.js"></script>
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+  <script src="bot/nlu.js"></script>
+  <script src="bot/knowledge.js"></script>
+  <script src="bot/teacher.js"></script>
+  <script src="bot/engine.js"></script>
+  <script src="bot/guide.js"></script>
+  <script src="assistant.js"></script>
+</body></html>

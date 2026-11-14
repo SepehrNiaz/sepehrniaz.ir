@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en" dir="ltr"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="../../">
+  <title>Text tools and pipes: answers from any file — Sepehr Niaz</title>
+  <meta name="description" content="grep, cut, sort, uniq, wc, tr, sed and awk — and the pipe that joins them. Learn to turn a raw log into an answer with one line.">
+  <meta name="author" content="Sepehr Niaz">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sepehrniaz.ir/en/linux-text-tools/">
+  <link rel="alternate" hreflang="en" href="https://sepehrniaz.ir/en/linux-text-tools/">
+  <link rel="alternate" hreflang="fa" href="https://sepehrniaz.ir/fa/linux-text-tools/">
+  <link rel="alternate" hreflang="x-default" href="https://sepehrniaz.ir/en/linux-text-tools/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/photo.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://sepehrniaz.ir/en/linux-text-tools/">
+  <meta property="og:site_name" content="Sepehr Niaz">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Text tools and pipes: answers from any file">
+  <meta property="og:description" content="grep, cut, sort, uniq, wc, tr, sed and awk — and the pipe that joins them. Learn to turn a raw log into an answer with one line.">
+  <meta property="og:image" content="https://sepehrniaz.ir/assets/og-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#070b14">
+  <script type="application/ld+json">[{"@context":"https://schema.org","@type":"TechArticle","headline":"Text tools and pipes: answers from any file","description":"grep, cut, sort, uniq, wc, tr, sed and awk — and the pipe that joins them. Learn to turn a raw log into an answer with one line.","inLanguage":"en","url":"https://sepehrniaz.ir/en/linux-text-tools/","mainEntityOfPage":"https://sepehrniaz.ir/en/linux-text-tools/","image":"https://sepehrniaz.ir/assets/og-card.jpg","author":{"@type":"Person","name":"Sepehr Niaz","alternateName":"سپهر نیاز","url":"https://sepehrniaz.ir/resume"},"publisher":{"@type":"Person","name":"Sepehr Niaz","url":"https://sepehrniaz.ir/"},"datePublished":"2026-11-01","dateModified":"2026-11-01","timeRequired":"PT26M"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Learn","item":"https://sepehrniaz.ir/"},{"@type":"ListItem","position":2,"name":"Linux","item":"https://sepehrniaz.ir/#articles"},{"@type":"ListItem","position":3,"name":"Text tools and pipes: answers from any file","item":"https://sepehrniaz.ir/en/linux-text-tools/"}]}]</script>
+  <script>
+    (function () {
+      var d = document.documentElement;
+      try { var t = localStorage.getItem("theme"); if (t) d.dataset.theme = t; localStorage.setItem("lang", d.lang); } catch (e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Vazirmatn:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body data-page="article" data-article="linux-text-tools">
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="logo" id="logo"></a>
+      <div class="nav-links">
+        <a href="index.html#tracks" data-i18n="navTracks">Tracks</a>
+        <a href="index.html#articles" data-i18n="navArticles">Articles</a>
+        <a href="index.html#lab" data-i18n="navLab">Lab</a>
+        <a href="index.html#library" data-i18n="navBooks">Books</a>
+        <a href="index.html#portfolio" data-i18n="navTools">Tools</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn lang-btn" id="lang-toggle">فا</button>
+        <button class="icon-btn" id="theme-toggle"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></button>
+        <a href="resume.html" class="btn primary sm" data-i18n="navResume">Résumé</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="article-main">
+    <article class="wrap adoc-body adoc-page">
+      <nav class="crumbs" aria-label="breadcrumb">
+        <a href="index.html">Learn</a><span aria-hidden="true">/</span>
+        <a href="index.html#topic/linux">Linux</a>
+      </nav>
+      <div class="adoc-hero"><img class="adoc-logo" src="assets/learn/logos/linux.svg" alt="" width="88" height="88"><div>
+      <p class="adoc-kick">Intermediate · 26 min read · Updated 2026-11</p>
+      <h1>Text tools and pipes: answers from any file</h1></div></div>
+      <p class="adoc-summary">grep, cut, sort, uniq, wc, tr, sed and awk — and the pipe that joins them. Learn to turn a raw log into an answer with one line.</p>
+      <div class="adoc-content"><div class="study-box goals"><b>After this lesson you can</b><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Join commands with a pipe and read the result of each step</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Pick lines with grep, columns with cut and awk, and count with sort | uniq -c</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>Save results and errors to files with &gt;, &gt;&gt; and 2&gt;</span></li></ul></div><h2>The idea: small tools, joined together</h2><p>Linux does not have one giant program for analysing text. It has many small ones, each doing a single job well: one finds lines, one cuts columns, one sorts, one counts. The power comes from joining them. Each tool reads text, changes it a little and passes it on, like workers on a production line. Once you know eight of these tools, you can answer questions about any log, list or export file without opening a spreadsheet.</p><p>All the examples use two small files. auth.log is a login log with one event per line, and staff.csv is a list with commas between the fields.</p><figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">auth.log</span><button type="button" class="doc-copy" data-code="Nov%2010%2009%3A12%3A01%20srv%20sshd%5B811%5D%3A%20Accepted%20password%20for%20sara%20from%20192.168.1.20%0ANov%2010%2009%3A40%3A13%20srv%20sshd%5B902%5D%3A%20Failed%20password%20for%20root%20from%20203.0.113.45%0ANov%2010%2009%3A40%3A15%20srv%20sshd%5B902%5D%3A%20Failed%20password%20for%20root%20from%20203.0.113.45%0ANov%2010%2009%3A40%3A18%20srv%20sshd%5B902%5D%3A%20Failed%20password%20for%20admin%20from%20203.0.113.45%0ANov%2010%2010%3A02%3A44%20srv%20sshd%5B955%5D%3A%20Accepted%20password%20for%20ali%20from%20192.168.1.31%0ANov%2010%2011%3A30%3A09%20srv%20sshd%5B990%5D%3A%20Failed%20password%20for%20admin%20from%20198.51.100.77%0ANov%2010%2011%3A31%3A10%20srv%20sshd%5B991%5D%3A%20Failed%20password%20for%20root%20from%20198.51.100.77%0ANov%2010%2012%3A05%3A00%20srv%20sshd%5B1002%5D%3A%20Accepted%20password%20for%20sara%20from%20192.168.1.20"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button></div><pre dir="ltr"><code>Nov 10 09:12:01 srv sshd[811]: Accepted password for sara from 192.168.1.20
+Nov 10 09:40:13 srv sshd[902]: Failed password for root from 203.0.113.45
+Nov 10 09:40:15 srv sshd[902]: Failed password for root from 203.0.113.45
+Nov 10 09:40:18 srv sshd[902]: Failed password for admin from 203.0.113.45
+Nov 10 10:02:44 srv sshd[955]: Accepted password for ali from 192.168.1.31
+Nov 10 11:30:09 srv sshd[990]: Failed password for admin from 198.51.100.77
+Nov 10 11:31:10 srv sshd[991]: Failed password for root from 198.51.100.77
+Nov 10 12:05:00 srv sshd[1002]: Accepted password for sara from 192.168.1.20</code></pre></figure><h2>The pipe: |</h2><p>The vertical bar is called a pipe. It takes everything the command on its left prints and feeds it to the command on its right, instead of showing it on the screen. Read it as 'and then'.</p><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">wc -l auth.log</span>
+<span class="o">8 auth.log</span>
+<span class="p">$</span> <span class="k">grep Failed auth.log | wc -l</span>
+<span class="o">5</span></pre></div><figcaption>Find the lines with 'Failed', and then count them: 5 of the 8 logins failed.</figcaption></figure><h2>grep: keep the lines that match</h2><div class="doc-table"><table><thead><tr><th>Option</th><th>Effect</th></tr></thead><tbody><tr><td dir="ltr"><code>grep word file</code></td><td>lines that contain the word</td></tr><tr><td dir="ltr"><code>-i</code></td><td>ignore capital and small letters</td></tr><tr><td dir="ltr"><code>-v</code></td><td>lines that do NOT contain it</td></tr><tr><td dir="ltr"><code>-c</code></td><td>only count the matching lines</td></tr><tr><td dir="ltr"><code>-n</code></td><td>show line numbers</td></tr><tr><td dir="ltr"><code>-r</code></td><td>search every file under a folder</td></tr><tr><td dir="ltr"><code>-E "a|b"</code></td><td>this OR that</td></tr><tr><td dir="ltr"><code>-A 2 / -B 2</code></td><td>also show 2 lines after / before each match</td></tr></tbody></table></div><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">grep -E "root|admin" auth.log | wc -l</span>
+<span class="o">5</span>
+<span class="p">$</span> <span class="k">grep -n "ali" auth.log</span>
+<span class="o">5:Nov 10 10:02:44 srv sshd[955]: Accepted password for ali from 192.168.1.31</span></pre></div><figcaption>Five attempts used the names root or admin; ali logged in on line 5.</figcaption></figure><h2>cut and awk: take one column</h2><p>cut splits each line at a separator and keeps the fields you ask for: -d sets the separator and -f the field numbers. It is perfect for tidy files such as CSV.</p><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">cut -d, -f1,2 staff.csv</span>
+<span class="o">name,dept</span>
+<span class="o">Sara,Reception</span>
+<span class="o">Ali,IT</span>
+<span class="o">Mina,Accounting</span>
+<span class="o">Reza,IT</span>
+<span class="o">Neda,Reception</span></pre></div><figcaption>Fields 1 and 2, split at the comma.</figcaption></figure><p>Log lines are separated by a varying number of spaces, where cut struggles. awk handles them: it splits every line into words automatically and names them $1, $2, $3 …; $NF is always the last word. awk can also test a condition before printing.</p><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">grep Failed auth.log | awk '{print $NF}'</span>
+<span class="o">203.0.113.45</span>
+<span class="o">203.0.113.45</span>
+<span class="o">203.0.113.45</span>
+<span class="o">198.51.100.77</span>
+<span class="o">198.51.100.77</span>
+<span class="p">$</span> <span class="k">awk -F, '$2 == "IT" {print $1, $3}' staff.csv</span>
+<span class="o">Ali 102</span>
+<span class="o">Reza 104</span></pre></div><figcaption>The last word of each failed line is the attacker's address. In the second command -F, sets the separator, and only rows whose second field is IT are printed.</figcaption></figure><h2>sort and uniq: order and count</h2><p>sort puts lines in order. uniq removes repeated lines — but only when they are next to each other, which is why it nearly always follows sort. With -c, uniq writes how many times each line appeared. A final sort -rn puts the biggest number first. This four-part chain is the most useful sentence in all of log analysis.</p><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">grep Failed auth.log | awk '{print $NF}' | sort | uniq -c | sort -rn</span>
+<span class="o">      3 203.0.113.45</span>
+<span class="o">      2 198.51.100.77</span>
+<span class="p">$</span> <span class="k">cut -d, -f2 staff.csv | tail -n +2 | sort | uniq -c</span>
+<span class="o">      1 Accounting</span>
+<span class="o">      2 IT</span>
+<span class="o">      2 Reception</span></pre></div><figcaption>Who attacked most often, and how many people work in each department. tail -n +2 skips the header line.</figcaption></figure><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>sort -n  sorts as numbers (so 9 comes before 10);  -r  reverses;  -u  removes duplicates.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>sort -t, -k2  sorts a CSV by its second field.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>sort | uniq -c | sort -rn | head -5  gives a 'top five' of anything.</span></li></ul><h2>tr and sed: change the text</h2><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">echo "hello" | tr a-z A-Z</span>
+<span class="o">HELLO</span>
+<span class="p">$</span> <span class="k">echo "one two three" | tr " " "\n"</span>
+<span class="o">one</span>
+<span class="o">two</span>
+<span class="o">three</span>
+<span class="p">$</span> <span class="k">sed "s/Failed/FAILED/" auth.log | head -3</span>
+<span class="o">Nov 10 09:12:01 srv sshd[811]: Accepted password for sara from 192.168.1.20</span>
+<span class="o">Nov 10 09:40:13 srv sshd[902]: FAILED password for root from 203.0.113.45</span>
+<span class="o">Nov 10 09:40:15 srv sshd[902]: FAILED password for root from 203.0.113.45</span></pre></div><figcaption>tr swaps single characters. sed's s/old/new/ replaces text on every line.</figcaption></figure><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>s/old/new/g  replaces every occurrence on a line, not only the first.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>sed -n '5,10p' file  prints only lines 5 to 10.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>sed -i 's/old/new/g' file  changes the file itself. Make a copy first — there is no undo.</span></li></ul><h2>Sending output to a file: redirection</h2><p>Every command has two output channels: normal results, and error messages. &gt; sends the normal results to a file, &gt;&gt; adds to a file, and 2&gt; sends the errors. This lets you keep a clean result while collecting the errors somewhere else — or throw them away by sending them to /dev/null, the system's bottomless bin.</p><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">grep Failed auth.log &gt; failed.txt; wc -l &lt; failed.txt</span>
+<span class="o">5</span>
+<span class="p">$</span> <span class="k">ls nofile 2&gt; errors.txt; cat errors.txt</span>
+<span class="o">ls: cannot access 'nofile': No such file or directory</span></pre></div><figcaption>&gt; saved the result; 2&gt; saved the error message instead of showing it.</figcaption></figure><h2>Building a pipeline step by step</h2><p>Nobody writes a long pipeline in one go. You add one tool, look at the output, then add the next. Question: at which hours of the day do logins happen?</p><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>cat auth.log — look at the data. The time is the third word.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>… | awk '{print $3}' — keep only the time: 09:12:01.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>… | cut -d: -f1 — keep only the hour, the part before the first colon.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>… | sort | uniq -c — count each hour.</span></li></ul><figure class="doc-term"><div class="terminal"><div class="terminal-bar"><span></span><span></span><span></span><em>bash — real output</em></div><pre dir="ltr"><span class="p">$</span> <span class="k">cat auth.log | awk '{print $3}' | cut -d: -f1 | sort | uniq -c</span>
+<span class="o">      4 09</span>
+<span class="o">      1 10</span>
+<span class="o">      2 11</span>
+<span class="o">      1 12</span></pre></div><figcaption>Four events at nine o'clock — worth a closer look.</figcaption></figure><h2>For professionals</h2><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>journalctl -u ssh --since "1 hour ago"  reads the system journal on modern Linux; pipe it into the same tools.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>tail -f file | grep --line-buffered Failed  watches a log live and shows only what matters.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>xargs turns lines into arguments:  find . -name "*.tmp" | xargs rm .</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>tee writes to a file and to the screen at once:  command | tee result.txt .</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>For JSON logs use jq; for anything larger than a few gigabytes, look at ripgrep (rg), which is much faster than grep.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>When a pipeline grows past one line, move it into a script — the next lesson on the path.</span></li></ul><h2>Common mistakes</h2><ul class="doc-list study-bad"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>Using uniq without sort first — repeated lines that are not neighbours are not merged.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>Sorting numbers without -n, so 10 comes before 9.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>Using &gt; when you meant &gt;&gt;, and wiping the file.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><span>Writing awk programs in double quotes, so the shell replaces $1 before awk sees it. Use single quotes.</span></li></ul>
+      <h2>Exercises</h2><p>Try each one yourself first, then open the answer.</p><ol class="study-q"><li><p>How many successful logins are in auth.log?</p><details><summary>Show the answer</summary><pre dir="auto">grep -c Accepted auth.log</pre></details></li><li><p>List the user names that logged in successfully, each once. (The name is the 9th word.)</p><details><summary>Show the answer</summary><pre dir="auto">grep Accepted auth.log | awk '{print $9}' | sort -u</pre></details></li><li><p>Which user name was attacked most often?</p><details><summary>Show the answer</summary><pre dir="auto">grep Failed auth.log | awk '{print $9}' | sort | uniq -c | sort -rn | head -1</pre></details></li><li><p>Save the names and extensions of the Reception staff into reception.txt.</p><details><summary>Show the answer</summary><pre dir="auto">awk -F, '$2 == "Reception" {print $1, $3}' staff.csv &gt; reception.txt</pre></details></li></ol>
+      <p><a class="btn primary sm" href="practice/">Practise this in the lab</a></p>
+      <div class="study-box recap"><b>Remember</b><ul class="doc-list"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>| means 'and then'.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>grep picks lines, cut and awk pick columns, sort orders, uniq -c counts.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>sort | uniq -c | sort -rn is the top-N pattern.</span></li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg><span>&gt; replaces, &gt;&gt; adds, 2&gt; catches errors.</span></li></ul></div></div>
+      <nav class="adoc-nav">
+        <a class="adoc-navbtn prev" href="en/linux-permissions/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span><small>Previous</small><b>Understanding file permissions</b></span></a>
+        <a class="adoc-navbtn next" href="en/linux-server/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span><small>Next</small><b>Running a Linux server</b></span></a>
+      </nav>
+      <a class="btn adoc-back" href="index.html#articles"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg><span>All articles</span></a>
+    </article>
+  </main>
+
+  <footer class="site-footer" id="site-footer"><div class="wrap">
+      <div class="foot-grid"><nav class="foot-col"><h4>Quick links</h4><ul><li><a href="index.html#tracks"><bdi>Tracks</bdi></a></li><li><a href="index.html#articles"><bdi>Articles</bdi></a></li><li><a href="index.html#library"><bdi>Books</bdi></a></li><li><a href="index.html#portfolio"><bdi>Tools</bdi></a></li><li><a href="index.html#lab"><bdi>Lab</bdi></a></li><li><a href="resume.html"><bdi>Résumé</bdi></a></li><li><a href="resume.html#contact"><bdi>Contact</bdi></a></li></ul></nav><nav class="foot-col"><h4>Learning topics</h4><ul><li><a href="index.html#topic/linux"><bdi>Linux</bdi></a></li><li><a href="index.html#topic/programming"><bdi>Programming</bdi></a></li><li><a href="index.html#topic/network"><bdi>Networking</bdi></a></li><li><a href="index.html#topic/security"><bdi>Security</bdi></a></li></ul></nav><nav class="foot-col"><h4>Latest articles</h4><ul><li><a href="en/authorised-testing/"><bdi>Authorised security testing: thinking like an attacker, legally</bdi></a></li><li><a href="en/firewalls-hardening/"><bdi>Firewalls and hardening</bdi></a></li><li><a href="en/reading-logs/"><bdi>Reading logs: finding an attack in the noise</bdi></a></li><li><a href="en/security-mindset/"><bdi>The security mindset</bdi></a></li></ul></nav><nav class="foot-col"><h4>Certificates</h4><ul><li><a href="resume.html#certifications"><bdi>Cyber Security Pack</bdi></a></li><li><a href="resume.html#certifications"><bdi>F5 Package</bdi></a></li><li><a href="resume.html#certifications"><bdi>Security+</bdi></a></li><li><a href="resume.html#certifications"><bdi>Cisco CCNA 200-301</bdi></a></li><li><a href="resume.html#certifications"><bdi>Duolingo English Test</bdi></a></li></ul></nav></div>
+      <div class="foot-card">
+        <a class="foot-id" href="resume.html">
+          <span class="foot-badge"><img src="assets/photo.jpg" alt="Sepehr Niaz" loading="lazy"></span>
+          <span class="foot-name"><b>Sepehr Niaz</b><small>IT Technician · Network &amp; Security</small></span>
+        </a>
+        <p class="foot-tag">IT technician in Shiraz. I write free, practical lessons on networking, security and Linux — and I'm available for IT and network work.</p>
+        <div class="foot-social"><a href="mailto:niazsepehr7@gmail.com" aria-label="Email" title="Email"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 5L2 7"></path></svg></a><a href="tel:+989177886291" aria-label="Call" title="Call"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a><a href="https://wa.me/989177886291" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg></a><a href="https://github.com/sepehrniaz" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a></div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 Sepehr Niaz · Shiraz, Iran</span>
+        <a href="tel:+989177886291">Phone: <bdi dir="ltr">0917 788 6291</bdi></a>
+      </div>
+    </div></footer>
+
+  <script src="config.js"></script>
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+  <script src="bot/nlu.js"></script>
+  <script src="bot/knowledge.js"></script>
+  <script src="bot/teacher.js"></script>
+  <script src="bot/engine.js"></script>
+  <script src="bot/guide.js"></script>
+  <script src="assistant.js"></script>
+</body></html>
