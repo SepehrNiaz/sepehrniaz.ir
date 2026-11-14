@@ -1162,6 +1162,7 @@
       if (b.h) return `<h2>${esc(pick(b.h))}</h2>`;
       if (b.p) return `<p>${esc(pick(b.p))}</p>`;
       if (b.list) return `<ul class="doc-list">${(pick(b.list) || []).map((x) => `<li>${icon("check")}<span>${esc(x)}</span></li>`).join("")}</ul>`;
+      if (b.table) return `<div class="doc-table"><table><thead><tr>${(pick(b.table.head) || []).map((x) => `<th>${esc(x)}</th>`).join("")}</tr></thead><tbody>${b.table.rows.map((r) => `<tr>${r.map((x) => (typeof x === "string" ? `<td dir="ltr"><code>${esc(x)}</code></td>` : `<td>${esc(pick(x))}</td>`)).join("")}</tr>`).join("")}</tbody></table></div>`;
       if (b.note) return `<div class="doc-note ${b.kind === "warn" ? "warn" : "tip"}">${icon(b.kind === "warn" ? "alert" : "spark")}<div>${esc(pick(b.note))}</div></div>`;
       if (b.img) return `<figure class="doc-img"><img src="${esc(b.img)}" alt="${esc(b.alt || pick(b.cap) || "")}" loading="lazy">${b.cap ? `<figcaption>${esc(pick(b.cap))}</figcaption>` : ""}</figure>`;
       if (b.code) return `<figure class="doc-code"><div class="doc-code-bar"><span class="doc-lang">${esc(b.lang || "code")}</span><button type="button" class="doc-copy" data-code="${encodeURIComponent(b.code)}">${icon("copy")}<span>${esc(ui("copyCode"))}</span></button></div><pre dir="ltr"><code>${esc(b.code)}</code></pre>${b.cap ? `<figcaption>${esc(pick(b.cap))}</figcaption>` : ""}</figure>`;

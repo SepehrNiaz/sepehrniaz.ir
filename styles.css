@@ -1375,3 +1375,16 @@ img, svg { -webkit-user-drag: none; }
 .gm-duel i { font: 700 13px "Space Grotesk", sans-serif; color: #8d99b0; font-style: normal; }
 @media (max-width: 960px) { .gm-app .gm-score, .gm-app .gm-board { display: none; } }
 @media (max-width: 960px) { body:has(.vis-view.active) .ai-launcher, body:has(.vis-view.active) .ai-nudge { opacity: 0; pointer-events: none; } }
+
+/* ───────── Tables inside lessons ───────── */
+.doc-table { margin: 22px 0 0; overflow-x: auto; border: 1px solid var(--border); border-radius: 14px; }
+.doc-table table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.doc-table th, .doc-table td { padding: 11px 14px; text-align: start; vertical-align: top; line-height: 1.7; border-bottom: 1px solid var(--border); }
+.doc-table th { background: var(--surface-2); color: var(--c1); font-size: 13.5px; white-space: nowrap; }
+.doc-table tr:last-child td { border-bottom: 0; }
+.doc-table td[dir="ltr"] { text-align: start; white-space: nowrap; }
+[dir="rtl"] .doc-table td[dir="ltr"] { text-align: right; }
+.doc-table code { font: 600 13.5px "JetBrains Mono", monospace; color: var(--text); background: color-mix(in srgb, var(--c1) 12%, transparent); padding: 1px 7px; border-radius: 6px; }
+@media (max-width: 640px) { .doc-table th, .doc-table td { padding: 9px 10px; font-size: 14px; } .doc-table td[dir="ltr"] { white-space: normal; word-break: break-word; } }
+.adoc-body p, .adoc-body li, .adoc-body figcaption, .adoc-body h2 { overflow-wrap: anywhere; }
+.adoc-body figure, .adoc-body .study-box, .adoc-body .doc-note { min-width: 0; max-width: 100%; }
